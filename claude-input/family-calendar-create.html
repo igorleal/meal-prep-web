@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quick Calendar Meal Setup</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec4913",
+                        "background-light": "#fcf9f8",
+                        "background-dark": "#221510",
+                        "text-main": "#1b110d",
+                        "text-muted": "#9a5f4c",
+                        "border-color": "#f3eae7",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e7d5cf; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4b4aa; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main font-display antialiased">
+<div class="relative flex h-screen w-full flex-col overflow-hidden">
+<header class="flex-none z-20 bg-background-light dark:bg-background-dark border-b border-border-color px-6 py-3 lg:px-10">
+<div class="flex items-center justify-between max-w-[1440px] mx-auto w-full">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-text-main">
+<div class="size-8 flex items-center justify-center bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">restaurant_menu</span>
+</div>
+<h2 class="text-text-main text-lg font-bold leading-tight tracking-tight">Family Meal Calendar</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-text-main hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Plan</a>
+<a class="text-primary text-sm font-bold leading-normal relative after:content-[''] after:absolute after:-bottom-[22px] after:left-0 after:w-full after:h-[2px] after:bg-primary" href="#">Calendar</a>
+<a class="text-text-main hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Recipes</a>
+<a class="text-text-main hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center gap-4 lg:gap-6">
+<div class="hidden sm:flex items-center h-10 w-64 bg-[#f3eae7] dark:bg-[#332a26] rounded-lg px-3 gap-2 group focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-text-muted">search</span>
+<input class="bg-transparent border-none outline-none text-sm w-full placeholder:text-text-muted text-text-main focus:ring-0 p-0" placeholder="Search recipes..."/>
+</div>
+<button class="hidden lg:flex items-center justify-center h-10 px-4 bg-primary hover:bg-red-600 text-white text-sm font-bold rounded-lg transition-colors shadow-sm gap-2">
+<span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+<span>AI Plan</span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-white shadow-sm cursor-pointer" data-alt="User profile picture showing a smiling woman" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDRGMLet-3j936c8SCmk8ImyU5jyt0NPG42xBRwxLgJD6hHCo4Ro8hWBSuRcOD_0R3KdMXBco-0Izl7cCyWhLlFkW43s96zllSzfNb5IRyt11L_VrvPAb_Y3ry7MeoiR0m6OxpGqgb80nSbOn1UDz4fEEwXkLdR0XHEVsXamMRvgMxHL6i-LlE9GIejTDvtTGwa3ytfhySS9Q-nPWqGDmGqzLJeZzO05_IXGhnxOGFnwfiYSN4W7lzSrWQZOoksuLY_KdOtL9xAqm51");'>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-6 lg:p-10 flex justify-center">
+<div class="w-full max-w-3xl">
+<a class="inline-flex items-center text-text-muted hover:text-primary mb-8 transition-colors font-bold text-sm gap-2 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                Back to Monthly View
+            </a>
+<div class="space-y-2 mb-8">
+<h1 class="text-4xl md:text-5xl font-extrabold text-text-main tracking-tight font-display">Let's build your plan</h1>
+<p class="text-lg text-text-muted">Customize your meal for this slot. AI will generate options based on your preferences.</p>
+</div>
+<div class="bg-white dark:bg-[#2a201c] border border-border-color rounded-2xl p-6 shadow-sm mb-10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-2 h-full bg-primary"></div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 relative z-10">
+<div class="flex items-center gap-5">
+<div class="bg-[#fff0eb] dark:bg-primary/20 text-primary p-3 rounded-xl min-w-[70px] text-center border border-primary/10">
+<span class="block text-xs font-bold uppercase tracking-wider mb-0.5">Oct</span>
+<span class="block text-3xl font-extrabold leading-none">05</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h3 class="text-xl font-bold text-text-main">Thursday Dinner</h3>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">Editing</span>
+</div>
+<p class="text-text-muted font-medium flex items-center gap-2 text-sm">
+<span class="material-symbols-outlined text-[16px]">groups</span>
+                                4 Family Members
+                            </p>
+</div>
+</div>
+<button class="text-sm font-bold text-primary hover:text-red-600 underline decoration-2 underline-offset-4 transition-colors">
+                        Change Date
+                    </button>
+</div>
+<div class="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-primary/5 to-transparent pointer-events-none"></div>
+</div>
+<form class="space-y-10" onsubmit="event.preventDefault();">
+<div class="space-y-4">
+<label class="block text-text-main font-bold text-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">spa</span>
+                        Dietary Restrictions
+                    </label>
+<div class="flex flex-wrap gap-3">
+<label class="cursor-pointer group">
+<input checked="" class="peer sr-only" type="checkbox"/>
+<span class="inline-flex items-center px-5 py-2.5 rounded-full border-2 border-primary bg-primary/5 text-primary font-bold text-sm transition-all shadow-sm peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary hover:bg-white hover:border-primary/50">
+                                Gluten-Free
+                                <span class="material-symbols-outlined text-[16px] ml-2 scale-100 transition-transform">check</span>
+</span>
+</label>
+<label class="cursor-pointer group">
+<input class="peer sr-only" type="checkbox"/>
+<span class="inline-flex items-center px-5 py-2.5 rounded-full border border-border-color bg-white dark:bg-[#332a26] text-text-muted font-bold text-sm transition-all hover:border-primary/50 hover:text-primary peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary peer-checked:shadow-md">
+                                Vegetarian
+                            </span>
+</label>
+<label class="cursor-pointer group">
+<input class="peer sr-only" type="checkbox"/>
+<span class="inline-flex items-center px-5 py-2.5 rounded-full border border-border-color bg-white dark:bg-[#332a26] text-text-muted font-bold text-sm transition-all hover:border-primary/50 hover:text-primary peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary peer-checked:shadow-md">
+                                Vegan
+                            </span>
+</label>
+<label class="cursor-pointer group">
+<input class="peer sr-only" type="checkbox"/>
+<span class="inline-flex items-center px-5 py-2.5 rounded-full border border-border-color bg-white dark:bg-[#332a26] text-text-muted font-bold text-sm transition-all hover:border-primary/50 hover:text-primary peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary peer-checked:shadow-md">
+                                Keto
+                            </span>
+</label>
+<label class="cursor-pointer group">
+<input class="peer sr-only" type="checkbox"/>
+<span class="inline-flex items-center px-5 py-2.5 rounded-full border border-border-color bg-white dark:bg-[#332a26] text-text-muted font-bold text-sm transition-all hover:border-primary/50 hover:text-primary peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary peer-checked:shadow-md">
+                                Dairy-Free
+                            </span>
+</label>
+<label class="cursor-pointer group">
+<input class="peer sr-only" type="checkbox"/>
+<span class="inline-flex items-center px-5 py-2.5 rounded-full border border-border-color bg-white dark:bg-[#332a26] text-text-muted font-bold text-sm transition-all hover:border-primary/50 hover:text-primary peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary peer-checked:shadow-md">
+                                Paleo
+                            </span>
+</label>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-baseline">
+<label class="block text-text-main font-bold text-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">grocery</span>
+                            Must Have Ingredients
+                        </label>
+<span class="text-xs font-bold text-primary uppercase tracking-wide">Optional</span>
+</div>
+<div class="bg-white dark:bg-[#332a26] p-4 rounded-xl border border-border-color focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all shadow-sm">
+<div class="flex flex-wrap gap-2 mb-2">
+<span class="inline-flex items-center gap-1.5 bg-[#fff0eb] dark:bg-primary/20 text-primary border border-primary/20 px-3 py-1 rounded-full text-sm font-bold">
+                                Chicken Breast
+                                <button class="hover:bg-primary/20 rounded-full p-0.5 transition-colors" type="button"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 bg-[#fff0eb] dark:bg-primary/20 text-primary border border-primary/20 px-3 py-1 rounded-full text-sm font-bold">
+                                Fresh Basil
+                                <button class="hover:bg-primary/20 rounded-full p-0.5 transition-colors" type="button"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+</div>
+<input class="w-full bg-transparent border-none p-0 text-text-main placeholder:text-text-muted focus:ring-0 text-base" placeholder="Type an ingredient and press Enter..." type="text"/>
+</div>
+<p class="text-sm text-text-muted pl-1">Ingredients you want to use up or are specifically craving today.</p>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-baseline">
+<label class="block text-text-main font-bold text-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">block</span>
+                            Exclude Ingredients
+                        </label>
+<span class="text-xs font-bold text-primary uppercase tracking-wide">Optional</span>
+</div>
+<div class="relative">
+<input class="w-full bg-white dark:bg-[#332a26] border border-border-color rounded-xl py-4 pl-12 pr-4 text-text-main placeholder:text-text-muted/70 focus:ring-2 focus:ring-primary/20 focus:border-primary shadow-sm transition-all" placeholder="e.g. Peanuts, Mushrooms, Shellfish..." type="text"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 transform -translate-y-1/2 text-text-muted">search_off</span>
+</div>
+</div>
+<div class="pt-8 pb-10">
+<button class="group relative w-full bg-primary hover:bg-red-600 text-white font-extrabold text-lg py-4 px-8 rounded-xl shadow-lg shadow-primary/30 transition-all hover:-translate-y-1 overflow-hidden" type="submit">
+<div class="flex items-center justify-center gap-3 relative z-10">
+<span class="material-symbols-outlined text-[24px]">auto_awesome</span>
+                            Generate Recipe Suggestions
+                        </div>
+</button>
+<p class="text-center text-xs text-text-muted mt-4">AI will generate 3 personalized options based on your preferences.</p>
+</div>
+</form>
+</div>
+</main>
+</div>
+
+</body></html>

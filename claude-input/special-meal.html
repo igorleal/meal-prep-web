@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Special Occasion Events - MealAI</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec4913",
+                        "background-light": "#fcf9f8",
+                        "background-dark": "#221510",
+                        "accent-green": "#4CAF50",
+                        "accent-green-light": "#E8F5E9",
+                        "text-main": "#1b110d",
+                        "text-secondary": "#9a5f4c",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem",
+                        "md": "0.375rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-main dark:text-white antialiased transition-colors duration-200">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f3eae7] dark:border-b-neutral-800 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm px-6 py-3 lg:px-10">
+<div class="flex items-center gap-8">
+<!-- Logo -->
+<div class="flex items-center gap-4 text-text-main dark:text-white">
+<div class="size-8 text-primary">
+<svg class="h-full w-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M7.24189 26.4066C7.31369 26.4411 7.64204 26.5637 8.52504 26.3738C9.59462 26.1438 11.0343 25.5311 12.7183 24.4963C14.7583 23.2426 17.0256 21.4503 19.238 19.238C21.4503 17.0256 23.2426 14.7583 24.4963 12.7183C25.5311 11.0343 26.1438 9.59463 26.3738 8.52504C26.5637 7.64204 26.4411 7.31369 26.4066 7.24189C26.345 7.21246 26.143 7.14535 25.6664 7.1918C24.9745 7.25925 23.9954 7.5498 22.7699 8.14278C20.3369 9.32007 17.3369 11.4915 14.4142 14.4142C11.4915 17.3369 9.32007 20.3369 8.14278 22.7699C7.5498 23.9954 7.25925 24.9745 7.1918 25.6664C7.14534 26.143 7.21246 26.345 7.24189 26.4066ZM29.9001 10.7285C29.4519 12.0322 28.7617 13.4172 27.9042 14.8126C26.465 17.1544 24.4686 19.6641 22.0664 22.0664C19.6641 24.4686 17.1544 26.465 14.8126 27.9042C13.4172 28.7617 12.0322 29.4519 10.7285 29.9001L21.5754 40.747C21.6001 40.7606 21.8995 40.931 22.8729 40.7217C23.9424 40.4916 25.3821 39.879 27.0661 38.8441C29.1062 37.5904 31.3734 35.7982 33.5858 33.5858C35.7982 31.3734 37.5904 29.1062 38.8441 27.0661C39.879 25.3821 40.4916 23.9425 40.7216 22.8729C40.931 21.8995 40.7606 21.6001 40.747 21.5754L29.9001 10.7285ZM29.2403 4.41187L43.5881 18.7597C44.9757 20.1473 44.9743 22.1235 44.6322 23.7139C44.2714 25.3919 43.4158 27.2666 42.252 29.1604C40.8128 31.5022 38.8165 34.012 36.4142 36.4142C34.012 38.8165 31.5022 40.8128 29.1604 42.252C27.2666 43.4158 25.3919 44.2714 23.7139 44.6322C22.1235 44.9743 20.1473 44.9757 18.7597 43.5881L4.41187 29.2403C3.29027 28.1187 3.08209 26.5973 3.21067 25.2783C3.34099 23.9415 3.8369 22.4852 4.54214 21.0277C5.96129 18.0948 8.43335 14.7382 11.5858 11.5858C14.7382 8.43335 18.0948 5.9613 21.0277 4.54214C22.4852 3.8369 23.9415 3.34099 25.2783 3.21067C26.5973 3.08209 28.1187 3.29028 29.2403 4.41187Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-text-main dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">MealAI</h2>
+</div>
+<!-- Nav Links -->
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-text-main dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-text-main dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">Meal Plans</a>
+<a class="text-text-main dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">Recipes</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-0.5" href="#">Food with Friends</a>
+<a class="text-text-main dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">Grocery List</a>
+</nav>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-4">
+<label class="hidden lg:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-[#f3eae7] dark:bg-neutral-800 focus-within:ring-2 focus-within:ring-primary/50 transition-all">
+<div class="text-text-secondary dark:text-gray-400 flex items-center justify-center pl-4 pr-2">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="w-full bg-transparent border-none text-text-main dark:text-white placeholder:text-text-secondary dark:placeholder:text-gray-500 focus:ring-0 text-sm font-normal" placeholder="Search recipes..."/>
+</div>
+</label>
+<button class="relative bg-center bg-no-repeat bg-cover rounded-full size-10 ring-2 ring-transparent hover:ring-primary transition-all overflow-hidden" data-alt="User profile picture showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuADj6e5mX3T1CsFTwO8TcQldGiiacI-_U4snAlb27MpYAyVP7Kpt5EOTXOUCJw_WDA0rBw8Wphzt25n-wA1HAL1ODEplKzBCAVWyc9837CjCOP_quUl_qjUU4rOqhjWPsnXjTHfXU5nFdw2UmqNShcZZDylVUFKMFBPv6VNkMXMKYn5qR-0NJr9okZxNxuLkU6eqk9HWMa93lBuL67QlRz_SiD_nuOpoH2ouDXt0y0VApBPTIzjGLtynC3vkXYr0jmTdr_NeHb56Ajq");'>
+<div class="absolute bottom-0 right-0 size-2.5 bg-green-500 rounded-full border-2 border-white"></div>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 px-4 md:px-10 py-8 lg:px-40">
+<div class="mx-auto max-w-[1200px] flex flex-col gap-8">
+<!-- Page Heading & Primary Action -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 border-b border-[#f3eae7] dark:border-neutral-800">
+<div class="flex flex-col gap-2 max-w-2xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-accent-green" style="font-size: 32px; font-variation-settings: 'FILL' 1;">celebration</span>
+<h1 class="text-text-main dark:text-white text-3xl md:text-4xl font-extrabold tracking-tight">Your Special Occasions</h1>
+</div>
+<p class="text-text-secondary dark:text-gray-400 text-base md:text-lg">Plan memorable meals for the people who matter most with AI-powered suggestions.</p>
+</div>
+<button class="group flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white rounded-lg px-6 py-3 transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40 active:scale-95">
+<span class="material-symbols-outlined text-[20px] group-hover:animate-pulse">auto_awesome</span>
+<span class="text-sm font-bold tracking-wide">Plan New Gathering</span>
+</button>
+</div>
+<!-- Filters & Chips -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex gap-2 w-full overflow-x-auto pb-2 sm:pb-0 scrollbar-hide">
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-text-main text-white text-sm font-medium transition-colors whitespace-nowrap">
+                            Upcoming
+                            <span class="bg-white/20 px-1.5 py-0.5 rounded text-xs">3</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#f3eae7] dark:bg-neutral-800 text-text-main dark:text-gray-300 hover:bg-[#eaddd8] dark:hover:bg-neutral-700 text-sm font-medium transition-colors whitespace-nowrap">
+                            Past
+                        </button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#f3eae7] dark:bg-neutral-800 text-text-main dark:text-gray-300 hover:bg-[#eaddd8] dark:hover:bg-neutral-700 text-sm font-medium transition-colors whitespace-nowrap">
+                            Drafts
+                            <span class="bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded text-xs">1</span>
+</button>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-auto">
+<span class="text-xs font-semibold text-text-secondary dark:text-gray-500 uppercase tracking-wider">Sort by:</span>
+<div class="flex items-center gap-1 text-sm font-bold text-text-main dark:text-white cursor-pointer hover:text-primary">
+                            Date (Soonest)
+                            <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Events Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="group flex flex-col bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden border border-gray-100 dark:border-neutral-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="relative w-full aspect-video overflow-hidden">
+<div class="absolute top-3 left-3 z-10 bg-white/90 dark:bg-black/80 backdrop-blur px-2.5 py-1 rounded-md text-xs font-bold text-primary flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                                Oct 24
+                            </div>
+<div class="absolute top-3 right-3 z-10 bg-accent-green/90 backdrop-blur text-white px-2.5 py-1 rounded-md text-xs font-bold shadow-sm">
+                                Confirmed
+                            </div>
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" data-alt="Table spread with finger foods, sliders, and drinks for a casual party" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC03CXcWdTNiKPqsp8PLgs1seqBKOgvrp8G5n0uLwZLdE3yz78YO4lV4DmOYmRZM6cOgf0rZbhKkdgygHF8F7vsVzZ68tji1ErNXggzK6c9rMmXDaDsasdLqHv-HXMvdufY7FfjjRT-LIXneTmJZ6LSbITbE_5sTuzb3NflgcaruSpk79ovvFg0KrI_gSXUsAryj9856-d_dFrWaD1rQR-sPEhaW0GbvEYyJH6HaapB4v8pBAO5V6FIEbn8SG5KtsWZUNeK3tgd7VkA");'>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+</div>
+<div class="flex flex-col gap-3 p-5 flex-1">
+<div class="flex items-start justify-between">
+<h3 class="text-text-main dark:text-white text-xl font-bold leading-tight group-hover:text-primary transition-colors">Friday Game Night</h3>
+<button class="text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="flex flex-wrap gap-2 mt-1">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-[#f3eae7] dark:bg-neutral-800 text-text-secondary dark:text-gray-300 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]">restaurant_menu</span>
+                                    Finger Foods
+                                </span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-[#f3eae7] dark:bg-neutral-800 text-text-secondary dark:text-gray-300 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                    7:00 PM
+                                </span>
+</div>
+<div class="mt-auto pt-4 border-t border-gray-100 dark:border-neutral-800 flex items-center justify-between">
+<div class="flex items-center gap-2 text-sm text-text-secondary dark:text-gray-400">
+<span class="material-symbols-outlined text-[18px]">group</span>
+<span class="font-medium">6 Guests</span>
+</div>
+<div class="flex -space-x-2">
+<div class="size-7 rounded-full border-2 border-white dark:border-neutral-900 bg-gray-200 bg-cover" data-alt="Avatar of a guest" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAJtUt5oP-HleAsgHu9LzvDH3mIuysdXYi6yocE0uQBFBG0rddL9zYABxvN0ZQww-xXj4x62nORhKDQAo8Qe27wu088ntGcUbqbXQmo_BlHqNXhFLaGaxgktpL9ELQCe8Cf0VCsF6JueBJD01v5AK9VihU5fgB4tuZRmzqKvGZxohLPiNK7vFkZGQgUo0_TaNz2-Xk583xHbvTkyyd5n_rbR9J8EbwC0hwel6zxRuQV2beVYBNQl6ioGspKQnGoxMbg4rx0aVUwyKz1")'></div>
+<div class="size-7 rounded-full border-2 border-white dark:border-neutral-900 bg-gray-200 bg-cover" data-alt="Avatar of a guest" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDBMSYDcpDz0uWQytLf0Nlam7SsdAiQEeKf1GBl7bYDLcBmRvMJ421o0S3dEXidbZYkApStvzwm51S0BTHsccd_XeURO1N14o1xPxsUNGKfIT8miFGxwD5b44xuBbMAwR9cEIhO2teR6AqS-prq-5F5jesLZZ8EX8cf40lg01SOZANeW-R6Xv9xBCOqpUxgrOqluiG7BMS-89G_wZ2j0-PEianeRk2GPRQs4qkhKqTOZkjcS_6jO2A7SiZXZ0IEwbCEWx7eJIhcR_cU")'></div>
+<div class="flex items-center justify-center size-7 rounded-full border-2 border-white dark:border-neutral-900 bg-gray-100 dark:bg-neutral-800 text-[10px] font-bold text-text-secondary">+4</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group flex flex-col bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden border border-gray-100 dark:border-neutral-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="relative w-full aspect-video overflow-hidden">
+<div class="absolute top-3 left-3 z-10 bg-white/90 dark:bg-black/80 backdrop-blur px-2.5 py-1 rounded-md text-xs font-bold text-primary flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                                Nov 12
+                            </div>
+<div class="absolute top-3 right-3 z-10 bg-primary/90 backdrop-blur text-white px-2.5 py-1 rounded-md text-xs font-bold shadow-sm">
+                                Planning
+                            </div>
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" data-alt="Elegant brunch setup with croissants, coffee, and fresh fruits" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDlgEfuLkkyPgqpmZE05IqonPHwK-r7vHRG9B8-Xz9n_AeYF-mK5_TpxMBpHn4uspmeSWde5ZpI6XNa6SnJzssuv0lyy4ckwC9ubYkbjOytlPbpv6eCQl8pAnLVk_FDf5LJEaVBdSuI4t-iWYuuqntH3ZF5LFNEdgPic7NxggZrLJD8LCQQ54ke4VESDNRVuRE5WqApDMyH3HsmeHKpvQGAUrOP-eI2dsJngtBCzn9CAgCF5pEYPbRacLS-hGqSZLJni99YjIO0Clht");'>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+</div>
+<div class="flex flex-col gap-3 p-5 flex-1">
+<div class="flex items-start justify-between">
+<h3 class="text-text-main dark:text-white text-xl font-bold leading-tight group-hover:text-primary transition-colors">Mom's Birthday Brunch</h3>
+<button class="text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="flex flex-wrap gap-2 mt-1">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-[#f3eae7] dark:bg-neutral-800 text-text-secondary dark:text-gray-300 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]">restaurant_menu</span>
+                                    French Cuisine
+                                </span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-[#f3eae7] dark:bg-neutral-800 text-text-secondary dark:text-gray-300 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                    11:00 AM
+                                </span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-accent-green-light dark:bg-green-900/30 text-accent-green text-xs font-bold">
+<span class="material-symbols-outlined text-[14px]">eco</span>
+                                    Vegetarian Options
+                                </span>
+</div>
+<div class="mt-auto pt-4 border-t border-gray-100 dark:border-neutral-800 flex items-center justify-between">
+<div class="flex items-center gap-2 text-sm text-text-secondary dark:text-gray-400">
+<span class="material-symbols-outlined text-[18px]">group</span>
+<span class="font-medium">4 Guests</span>
+</div>
+<div class="flex -space-x-2">
+<div class="size-7 rounded-full border-2 border-white dark:border-neutral-900 bg-gray-200 bg-cover" data-alt="Avatar of a guest" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAah88JhNEcVaEdSc697HdKSujNtOHu8axluSG73-YGqToIka7xMfx2nH1tJTW9VnxmMMRRikm1BqdZXpxihybuQcXeelUA-0d8B-_GmZ6ClGWdzv7HkK4fvkuoupGxbSyyGa7OnGNS1J1Ps6ikjLdDobAexFWMFjJD1zTR_SsuIiposAwMHJBxo0Hi3gO6KBBbWOiXZIT-OzjnY8T2RF_iHNdxxLStEvnX-U_PBRzK5gTZaFElmEA-4AtGvWGyGILf7Zl5WSGlRdhF")'></div>
+<div class="size-7 rounded-full border-2 border-white dark:border-neutral-900 bg-gray-200 bg-cover" data-alt="Avatar of a guest" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBirhScip3bGYDompb7bp8l9BK2Qg3TdCIevYOA4WFLcyFQE5Lx5L87VLKF36N4GW1F5NIvRAQ6oyQMK5A76QN8I7BHaFevDmVRBAPWIcubEFgjNny-54p3I9lhBKYNTy7KLavOxXyujhdAOVbg33EVncDXLqriMtA971LTwyvAohVes1LgNoJtWj3IyZSI3R2E6WtPQ458E-fEPNPJ1KFvJ8_gOVCPqjIv99s7uKxK-QXynUGKQP5gx48bmnrJGLDXNgUriqGLjo2N")'></div>
+<div class="flex items-center justify-center size-7 rounded-full border-2 border-white dark:border-neutral-900 bg-gray-100 dark:bg-neutral-800 text-[10px] font-bold text-text-secondary">+2</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group flex flex-col bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden border border-gray-100 dark:border-neutral-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="relative w-full aspect-video overflow-hidden">
+<div class="absolute top-3 left-3 z-10 bg-white/90 dark:bg-black/80 backdrop-blur px-2.5 py-1 rounded-md text-xs font-bold text-primary flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                                Nov 24
+                            </div>
+<div class="absolute top-3 right-3 z-10 bg-primary/90 backdrop-blur text-white px-2.5 py-1 rounded-md text-xs font-bold shadow-sm">
+                                Planning
+                            </div>
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" data-alt="Traditional Thanksgiving turkey dinner spread with sides" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA3u84-3zt-QT0HdrgZS5Yo0MU63qWapPSKXW0veAwwRgX93WVBXbtC7rV6AxV18ox7rZHiDNSWPdFzaDA64n8gnMCLsE7ndqz_WO4XRCPuFWEuBiUC0FkM5aDO4ajr1_7_MU_UX_AHS0WV8MT5_-Tz94XCxlTNGHrXt8sNV4xnTAL0kCpPmXnFGOo4ZRoPKTPqEyp7DpGzmUgxRuZj3jRGU_ARlR7j6OAK87686ib1efrSM1mr7KVLpn4-QkoehmMSwDw0ewNVVldW");'>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+</div>
+<div class="flex flex-col gap-3 p-5 flex-1">
+<div class="flex items-start justify-between">
+<h3 class="text-text-main dark:text-white text-xl font-bold leading-tight group-hover:text-primary transition-colors">Thanksgiving Potluck</h3>
+<button class="text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="flex flex-wrap gap-2 mt-1">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-[#f3eae7] dark:bg-neutral-800 text-text-secondary dark:text-gray-300 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]">restaurant_menu</span>
+                                    Traditional
+                                </span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-[#f3eae7] dark:bg-neutral-800 text-text-secondary dark:text-gray-300 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                    4:00 PM
+                                </span>
+</div>
+<div class="mt-auto pt-4 border-t border-gray-100 dark:border-neutral-800 flex items-center justify-between">
+<div class="flex items-center gap-2 text-sm text-text-secondary dark:text-gray-400">
+<span class="material-symbols-outlined text-[18px]">group</span>
+<span class="font-medium">12 Guests</span>
+</div>
+<div class="flex -space-x-2">
+<div class="size-7 rounded-full border-2 border-white dark:border-neutral-900 bg-gray-200 bg-cover" data-alt="Avatar of a guest" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDSncpn9LlTfhhxvF0dU6EWRZQkinabPncQycBa6lB-DpS8kv1sVbvA0Y2Wg2J2hgcfO2hz8xljKVAt3raLWufUQxB5WffuVNs2PAzvRg3_0fxrwj4irNi_242usLEnXB6cNBrKyiaWvOPf1Xz8QaRz-E09moZdiP4htLpI7CFL3s86sONC6IMQfRcGkQcjXfNfZN7KKQRxd-WUVwD8f9AV0_JH4d1-GDcOuzOq6As5NxqOpUAAiF4c6XbWCHYTppFVfZR5geTn6I05")'></div>
+<div class="size-7 rounded-full border-2 border-white dark:border-neutral-900 bg-gray-200 bg-cover" data-alt="Avatar of a guest" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBYb8vCP-ph28kEXMIFwTe8KJIdAhaaLJiM65r2B6j4N7zKYWoJC6h1zVcYsVpAtMtki9EFgTr4w1RoCyEnjG8ym-YfXuqYGYLN4nJOZmd4d91drd2u8mzAx-rLykg0XQi9JRCpjdrber1JOvsx04wBKvcMgyK8mzg1w5eteOCHp8KkCOly278VZbXwjE5_ACo1QXaORFZvBANup7U_I0XKn30GyqUEYW40vTHAfb4WBIRfZSsOnlbetv80JVx9XS9Sx907Q8P5ctHo")'></div>
+<div class="flex items-center justify-center size-7 rounded-full border-2 border-white dark:border-neutral-900 bg-gray-100 dark:bg-neutral-800 text-[10px] font-bold text-text-secondary">+10</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Create New Promo Section (Optional, to fill space and encourage usage) -->
+<div class="mt-8 rounded-2xl bg-gradient-to-r from-accent-green-light to-[#f3eae7] dark:from-neutral-800 dark:to-neutral-900 p-8 flex flex-col md:flex-row items-center justify-between gap-6 border border-gray-100 dark:border-neutral-800">
+<div class="flex flex-col gap-2 text-center md:text-left">
+<h3 class="text-xl font-bold text-text-main dark:text-white">Need inspiration?</h3>
+<p class="text-text-secondary dark:text-gray-400 max-w-lg">Let our AI suggest a perfect menu based on your guests' dietary preferences and seasonal ingredients.</p>
+</div>
+<button class="bg-white dark:bg-neutral-800 text-primary hover:text-white hover:bg-primary border border-primary/20 dark:border-neutral-700 px-6 py-2.5 rounded-lg font-bold text-sm transition-all shadow-sm">
+                        Browse Inspiration
+                    </button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-auto border-t border-[#f3eae7] dark:border-neutral-800 bg-white dark:bg-neutral-900">
+<div class="px-6 md:px-10 py-12 lg:px-40">
+<div class="mx-auto max-w-[1200px] flex flex-col gap-8">
+<div class="flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-2 text-text-main dark:text-white">
+<div class="size-6 text-primary">
+<svg class="h-full w-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M7.24189 26.4066C7.31369 26.4411 7.64204 26.5637 8.52504 26.3738C9.59462 26.1438 11.0343 25.5311 12.7183 24.4963C14.7583 23.2426 17.0256 21.4503 19.238 19.238C21.4503 17.0256 23.2426 14.7583 24.4963 12.7183C25.5311 11.0343 26.1438 9.59463 26.3738 8.52504C26.5637 7.64204 26.4411 7.31369 26.4066 7.24189C26.345 7.21246 26.143 7.14535 25.6664 7.1918C24.9745 7.25925 23.9954 7.5498 22.7699 8.14278C20.3369 9.32007 17.3369 11.4915 14.4142 14.4142C11.4915 17.3369 9.32007 20.3369 8.14278 22.7699C7.5498 23.9954 7.25925 24.9745 7.1918 25.6664C7.14534 26.143 7.21246 26.345 7.24189 26.4066ZM29.9001 10.7285C29.4519 12.0322 28.7617 13.4172 27.9042 14.8126C26.465 17.1544 24.4686 19.6641 22.0664 22.0664C19.6641 24.4686 17.1544 26.465 14.8126 27.9042C13.4172 28.7617 12.0322 29.4519 10.7285 29.9001L21.5754 40.747C21.6001 40.7606 21.8995 40.931 22.8729 40.7217C23.9424 40.4916 25.3821 39.879 27.0661 38.8441C29.1062 37.5904 31.3734 35.7982 33.5858 33.5858C35.7982 31.3734 37.5904 29.1062 38.8441 27.0661C39.879 25.3821 40.4916 23.9425 40.7216 22.8729C40.931 21.8995 40.7606 21.6001 40.747 21.5754L29.9001 10.7285ZM29.2403 4.41187L43.5881 18.7597C44.9757 20.1473 44.9743 22.1235 44.6322 23.7139C44.2714 25.3919 43.4158 27.2666 42.252 29.1604C40.8128 31.5022 38.8165 34.012 36.4142 36.4142C34.012 38.8165 31.5022 40.8128 29.1604 42.252C27.2666 43.4158 25.3919 44.2714 23.7139 44.6322C22.1235 44.9743 20.1473 44.9757 18.7597 43.5881L4.41187 29.2403C3.29027 28.1187 3.08209 26.5973 3.21067 25.2783C3.34099 23.9415 3.8369 22.4852 4.54214 21.0277C5.96129 18.0948 8.43335 14.7382 11.5858 11.5858C14.7382 8.43335 18.0948 5.9613 21.0277 4.54214C22.4852 3.8369 23.9415 3.34099 25.2783 3.21067C26.5973 3.08209 28.1187 3.29028 29.2403 4.41187Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<span class="font-bold text-lg">MealAI</span>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-6">
+<a class="text-text-secondary dark:text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">About Us</a>
+<a class="text-text-secondary dark:text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Support</a>
+<a class="text-text-secondary dark:text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Privacy Policy</a>
+<a class="text-text-secondary dark:text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Terms of Service</a>
+</div>
+<div class="flex gap-4">
+<a class="text-text-secondary hover:text-primary dark:text-gray-400 transition-colors" href="#">
+<span class="material-symbols-outlined">photo_camera</span>
+</a>
+<a class="text-text-secondary hover:text-primary dark:text-gray-400 transition-colors" href="#">
+<span class="material-symbols-outlined">flutter_dash</span>
+</a>
+<a class="text-text-secondary hover:text-primary dark:text-gray-400 transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+</div>
+</div>
+<div class="text-center">
+<p class="text-text-secondary dark:text-gray-500 text-sm">© 2023 MealAI Inc. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

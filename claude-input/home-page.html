@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReceitAI Selection Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec4913",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221510",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+        /* Custom Hover Effect for Panels */
+        .panel-transition {
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+        .group:hover .panel-transition:not(:hover) {
+            filter: brightness(0.9);
+        }
+        .panel-item:hover .panel-bg {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#1b110d] overflow-hidden h-screen flex flex-col">
+<!-- Main Content Area: Split Panels -->
+<main class="flex-1 flex flex-col lg:flex-row w-full h-full relative group">
+<!-- Left Panel: Diet & ReceitAI -->
+<div class="panel-item relative flex-1 flex flex-col justify-center items-center overflow-hidden cursor-pointer border-b lg:border-b-0 lg:border-r border-white/20">
+<!-- Background Image/Color -->
+<div class="panel-bg absolute inset-0 bg-primary z-0 transition-transform duration-700 ease-out" data-alt="Abstract coral red gradient background" style="background-image: linear-gradient(135deg, #ec4913 0%, #ff6b3d 100%);"></div>
+<!-- Overlay Texture -->
+<div class="absolute inset-0 bg-black/5 z-0 pointer-events-none"></div>
+<!-- Content -->
+<div class="relative z-10 p-8 flex flex-col items-center text-center max-w-md panel-transition">
+<span class="material-symbols-outlined text-white text-7xl mb-6 opacity-90">restaurant_menu</span>
+<h2 class="text-white text-3xl lg:text-4xl font-extrabold tracking-tight mb-3">Diet &amp; ReceitAI</h2>
+<p class="text-white/90 text-lg font-medium leading-relaxed mb-8">Create a perfectly balanced weekly plan tailored to your nutritional needs.</p>
+<button class="bg-white text-primary hover:bg-white/90 transition-colors px-6 py-3 rounded-full font-bold text-sm tracking-wide uppercase flex items-center gap-2">
+                    Plan Now
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Middle Panel: Family Calendar -->
+<div class="panel-item relative flex-1 flex flex-col justify-center items-center overflow-hidden cursor-pointer border-b lg:border-b-0 lg:border-r border-white/20">
+<!-- Background Image/Color -->
+<div class="panel-bg absolute inset-0 bg-[#F08E66] z-0 transition-transform duration-700 ease-out" data-alt="Abstract warm orange gradient background" style="background-image: linear-gradient(135deg, #F08E66 0%, #f4a585 100%);"></div>
+<!-- Overlay Texture -->
+<div class="absolute inset-0 bg-black/5 z-0 pointer-events-none"></div>
+<!-- Content -->
+<div class="relative z-10 p-8 flex flex-col items-center text-center max-w-md panel-transition">
+<span class="material-symbols-outlined text-white text-7xl mb-6 opacity-90">calendar_month</span>
+<h2 class="text-white text-3xl lg:text-4xl font-extrabold tracking-tight mb-3">Family Calendar</h2>
+<p class="text-white/90 text-lg font-medium leading-relaxed mb-8">See what's cooking for the whole family this week.</p>
+<button class="bg-white/20 backdrop-blur-sm border-2 border-white text-white hover:bg-white hover:text-[#F08E66] transition-all px-6 py-3 rounded-full font-bold text-sm tracking-wide uppercase flex items-center gap-2">
+                    View Schedule
+                </button>
+</div>
+</div>
+<!-- Right Panel: One Special Meal -->
+<div class="panel-item relative flex-1 flex flex-col justify-center items-center overflow-hidden cursor-pointer">
+<!-- Background Image/Color -->
+<div class="panel-bg absolute inset-0 bg-[#5DAE63] z-0 transition-transform duration-700 ease-out" data-alt="Abstract fresh green gradient background" style="background-image: linear-gradient(135deg, #5DAE63 0%, #81c786 100%);"></div>
+<!-- Overlay Texture -->
+<div class="absolute inset-0 bg-black/5 z-0 pointer-events-none"></div>
+<!-- Content -->
+<div class="relative z-10 p-8 flex flex-col items-center text-center max-w-md panel-transition">
+<span class="material-symbols-outlined text-white text-7xl mb-6 opacity-90">temp_preferences_custom</span>
+<h2 class="text-white text-3xl lg:text-4xl font-extrabold tracking-tight mb-3">One Special Meal</h2>
+<p class="text-white/90 text-lg font-medium leading-relaxed mb-8">Impress your guests with a unique, one-off AI creation.</p>
+<button class="bg-white/20 backdrop-blur-sm border-2 border-white text-white hover:bg-white hover:text-[#5DAE63] transition-all px-6 py-3 rounded-full font-bold text-sm tracking-wide uppercase flex items-center gap-2">
+                    Generate
+                </button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="bg-white dark:bg-background-dark border-t border-[#e7d5cf] dark:border-white/10 relative z-20">
+<div class="max-w-7xl mx-auto px-4">
+<div class="flex justify-between items-center h-20">
+<!-- Home Tab (Active) -->
+<a class="flex flex-col items-center justify-center text-primary gap-1 flex-1 group" href="#">
+<div class="p-1 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">home</span>
+</div>
+<p class="text-primary text-xs font-bold leading-normal tracking-wide">Home</p>
+</a>
+<!-- Pantry Tab -->
+<a class="flex flex-col items-center justify-center text-[#9a5f4c] dark:text-gray-400 gap-1 flex-1 hover:text-primary dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">kitchen</span>
+<p class="text-xs font-bold leading-normal tracking-wide">Pantry</p>
+</a>
+<!-- Favorites Tab -->
+<a class="flex flex-col items-center justify-center text-[#9a5f4c] dark:text-gray-400 gap-1 flex-1 hover:text-primary dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<p class="text-xs font-bold leading-normal tracking-wide">Favorites</p>
+</a>
+<!-- Shopping List Tab -->
+<a class="flex flex-col items-center justify-center text-[#9a5f4c] dark:text-gray-400 gap-1 flex-1 hover:text-primary dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<p class="text-xs font-bold leading-normal tracking-wide">Shop</p>
+</a>
+<!-- Settings Tab -->
+<a class="flex flex-col items-center justify-center text-[#9a5f4c] dark:text-gray-400 gap-1 flex-1 hover:text-primary dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-xs font-bold leading-normal tracking-wide">Settings</p>
+</a>
+</div>
+</div>
+</nav>
+</body></html>

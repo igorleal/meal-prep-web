@@ -1,0 +1,5 @@
+export { authService } from './auth.service'
+export { userService } from './user.service'
+export { receitaiPlanService } from './receitai-plan.service'
+export { familyPlanService } from './family-plan.service'
+export { foodFriendsService } from './food-friends.service'

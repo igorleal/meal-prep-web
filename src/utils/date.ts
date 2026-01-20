@@ -45,4 +45,18 @@ export const prevMonth = (date: Date): Date => {
   return subMonths(date, 1)
 }
 
+export const formatDateWithOrdinal = (date: Date | string): string => {
+  const d = typeof date === 'string' ? parseISO(date) : date
+  const day = d.getDate()
+  const month = format(d, 'MMMM')
+
+  const ordinal = (n: number): string => {
+    const s = ['th', 'st', 'nd', 'rd']
+    const v = n % 100
+    return n + (s[(v - 20) % 10] || s[v] || s[0])
+  }
+
+  return `${ordinal(day)} of ${month}`
+}
+
 export { format, parseISO }

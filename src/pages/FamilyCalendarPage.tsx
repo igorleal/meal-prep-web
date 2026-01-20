@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon, Badge, LoadingOverlay } from '@/components/common'
 import { familyPlanService } from '@/api/services'
 import {
@@ -11,6 +11,7 @@ import {
   nextMonth,
   prevMonth,
   formatDateForApi,
+  formatDateWithOrdinal,
   startOfMonth,
   endOfMonth,
 } from '@/utils/date'
@@ -24,17 +25,22 @@ function CalendarDay({
   currentMonth,
   meals,
   onAddMeal,
+  onViewMeal,
+  onRequestRemove,
 }: {
   date: Date
   currentMonth: Date
   meals: FamilyPlanResponse[]
   onAddMeal: (date: Date) => void
+  onViewMeal: (meal: FamilyPlanResponse) => void
+  onRequestRemove: (meal: FamilyPlanResponse) => void
 }) {
   const isCurrentMonth = isSameMonthAs(date, currentMonth)
   const isTodayDate = isToday(date)
   const dayMeals = meals.filter(
     (m) => m.request.date === formatDateForApi(date)
   )
+  const hasMeals = dayMeals.length > 0
 
   return (
     <div
@@ -66,27 +72,39 @@ function CalendarDay({
       {/* Meals */}
       <div className="space-y-1">
         {dayMeals.map((meal) => (
-          <div
-            key={meal.request.id}
+          <button
+            key={meal.plan.id}
+            onClick={() => onViewMeal(meal)}
             className={cn(
-              'px-2 py-1 rounded text-xs truncate',
-              'bg-primary/10 text-primary border-l-2 border-primary'
+              'w-full px-2 py-1 rounded text-xs truncate text-left',
+              'bg-primary/10 text-primary border-l-2 border-primary',
+              'hover:bg-primary/20 transition-colors cursor-pointer'
             )}
           >
             {meal.recipe.name}
-          </div>
+          </button>
         ))}
       </div>
 
-      {/* Add button on hover */}
+      {/* Add or Remove button on hover */}
       {isCurrentMonth && (
-        <button
-          onClick={() => onAddMeal(date)}
-          className="w-full mt-2 py-1 opacity-0 hover:opacity-100 transition-opacity text-text-muted-light dark:text-text-muted-dark text-xs flex items-center justify-center gap-1 hover:text-primary rounded hover:bg-primary/5"
-        >
-          <Icon name="add" size="sm" />
-          Add meal
-        </button>
+        hasMeals ? (
+          <button
+            onClick={() => onRequestRemove(dayMeals[0])}
+            className="w-full mt-2 py-1 opacity-0 hover:opacity-100 transition-opacity text-text-muted-light dark:text-text-muted-dark text-xs flex items-center justify-center gap-1 hover:text-red-500 rounded hover:bg-red-500/5"
+          >
+            <Icon name="delete" size="sm" />
+            Remove meal
+          </button>
+        ) : (
+          <button
+            onClick={() => onAddMeal(date)}
+            className="w-full mt-2 py-1 opacity-0 hover:opacity-100 transition-opacity text-text-muted-light dark:text-text-muted-dark text-xs flex items-center justify-center gap-1 hover:text-primary rounded hover:bg-primary/5"
+          >
+            <Icon name="add" size="sm" />
+            Add meal
+          </button>
+        )
       )}
     </div>
   )
@@ -94,11 +112,24 @@ function CalendarDay({
 
 export default function FamilyCalendarPage() {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const [currentMonth, setCurrentMonth] = useState(new Date())
+  const [mealToDelete, setMealToDelete] = useState<FamilyPlanResponse | null>(null)
 
   const handleAddMeal = (date: Date) => {
     const dateStr = formatDateForApi(date)
     navigate(`/calendar/create?date=${dateStr}&meal=Dinner`)
+  }
+
+  const handleViewMeal = (meal: FamilyPlanResponse) => {
+    sessionStorage.setItem('viewingFamilyMeal', JSON.stringify(meal))
+    navigate('/calendar/recipe')
+  }
+
+  const handleConfirmDelete = () => {
+    if (mealToDelete) {
+      deleteMutation.mutate(mealToDelete.plan.id)
+    }
   }
 
   const calendarDays = useMemo(
@@ -112,6 +143,14 @@ export default function FamilyCalendarPage() {
   const { data: meals, isLoading } = useQuery({
     queryKey: ['familyPlans', startDate, endDate],
     queryFn: () => familyPlanService.getPlans(startDate, endDate),
+  })
+
+  const deleteMutation = useMutation({
+    mutationFn: familyPlanService.deletePlan,
+    onSuccess: () => {
+      setMealToDelete(null)
+      queryClient.invalidateQueries({ queryKey: ['familyPlans'] })
+    },
   })
 
   return (
@@ -188,8 +227,64 @@ export default function FamilyCalendarPage() {
                 currentMonth={currentMonth}
                 meals={meals || []}
                 onAddMeal={handleAddMeal}
+                onViewMeal={handleViewMeal}
+                onRequestRemove={setMealToDelete}
               />
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {mealToDelete && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+        >
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setMealToDelete(null)}
+          />
+
+          {/* Modal */}
+          <div className="relative bg-surface-light dark:bg-surface-dark rounded-2xl p-6 max-w-md w-full shadow-xl">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                <Icon name="delete" className="text-red-600 dark:text-red-400 text-2xl" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-text-main-light dark:text-white mb-2">
+                  Remove Recipe
+                </h3>
+                <p className="text-text-muted-light dark:text-text-muted-dark">
+                  Are you sure you want to remove the recipe for{' '}
+                  <strong className="text-text-main-light dark:text-white">
+                    {formatDateWithOrdinal(mealToDelete.request.date)}
+                  </strong>
+                  ?
+                </p>
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-3 mt-6">
+              <Button
+                variant="ghost"
+                onClick={() => setMealToDelete(null)}
+                disabled={deleteMutation.isPending}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="primary"
+                onClick={handleConfirmDelete}
+                loading={deleteMutation.isPending}
+                className="bg-red-600 hover:bg-red-700"
+              >
+                Remove
+              </Button>
+            </div>
           </div>
         </div>
       )}

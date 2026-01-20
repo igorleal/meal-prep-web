@@ -32,7 +32,15 @@ export interface ReceitAIPlanGenerationRequest {
   updatedAt?: string | null
 }
 
+export interface ReceitAIPlan {
+  id: string
+  requestId: string
+  recipeId: string
+  createdAt: string
+}
+
 export interface ReceitAIPlanResponse {
+  plan: ReceitAIPlan
   request: ReceitAIPlanGenerationRequest
   recipe: Recipe
 }
@@ -62,7 +70,15 @@ export interface FamilyPlanGenerationRequest {
   updatedAt?: string | null
 }
 
+export interface FamilyPlan {
+  id: string
+  requestId: string
+  recipeId: string
+  createdAt: string
+}
+
 export interface FamilyPlanResponse {
+  plan: FamilyPlan
   request: FamilyPlanGenerationRequest
   recipe: Recipe
 }
@@ -91,7 +107,15 @@ export interface FoodFriendsGenerationRequest {
   updatedAt?: string | null
 }
 
+export interface FoodFriendsPlan {
+  id: string
+  requestId: string
+  recipeId: string
+  createdAt: string
+}
+
 export interface FoodFriendsResponse {
+  plan: FoodFriendsPlan
   request: FoodFriendsGenerationRequest
   recipe: Recipe
 }

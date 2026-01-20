@@ -22,4 +22,8 @@ export const familyPlanService = {
     })
     return data
   },
+
+  deletePlan: async (planId: string): Promise<void> => {
+    await apiClient.delete(`/family-plan/${planId}`)
+  },
 }

@@ -20,4 +20,8 @@ export const receitaiPlanService = {
     const { data } = await apiClient.get<ReceitAIPlanResponse[]>('/meal-prep-plan')
     return data
   },
+
+  deletePlan: async (planId: string): Promise<void> => {
+    await apiClient.delete(`/meal-prep-plan/${planId}`)
+  },
 }

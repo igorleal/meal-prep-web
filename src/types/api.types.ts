@@ -43,6 +43,7 @@ export interface Recipe {
   createdAt: string
   tags?: string[]
   cookTime?: string
+  keywords?: string[]
 }
 
 // Auth types

@@ -20,4 +20,8 @@ export const foodFriendsService = {
     const { data } = await apiClient.get<FoodFriendsResponse[]>('/food-friends')
     return data
   },
+
+  deletePlan: async (planId: string): Promise<void> => {
+    await apiClient.delete(`/food-friends/${planId}`)
+  },
 }

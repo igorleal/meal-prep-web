@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
-import { Button, Icon, Card } from '@/components/common'
+import { Button, Icon, Card, DatePicker } from '@/components/common'
 import { foodFriendsService } from '@/api/services'
 import { cn } from '@/utils/cn'
 
@@ -16,10 +16,39 @@ const dietaryOptions = [
 export default function CreateSpecialMealPage() {
   const navigate = useNavigate()
   const [name, setName] = useState('')
+  const [eventDate, setEventDate] = useState('')
+  const [dateError, setDateError] = useState('')
   const [restrictions, setRestrictions] = useState<string[]>([])
   const [customRestriction, setCustomRestriction] = useState('')
   const [mustHaves, setMustHaves] = useState('')
   const [exclusions, setExclusions] = useState('')
+
+  const isValidDate = (dateString: string): boolean => {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+      return false
+    }
+    const [year, month, day] = dateString.split('-').map(Number)
+    const date = new Date(year, month - 1, day)
+    return (
+      date.getFullYear() === year &&
+      date.getMonth() === month - 1 &&
+      date.getDate() === day
+    )
+  }
+
+  const handleDateChange = (value: string) => {
+    setEventDate(value)
+    // Validate when complete
+    if (value.length === 10) {
+      if (!isValidDate(value)) {
+        setDateError('Please enter a valid date')
+      } else {
+        setDateError('')
+      }
+    } else {
+      setDateError('')
+    }
+  }
 
   const generateMutation = useMutation({
     mutationFn: foodFriendsService.generateRecipes,
@@ -28,6 +57,7 @@ export default function CreateSpecialMealPage() {
         'pendingSpecialMeal',
         JSON.stringify({
           name,
+          eventDate,
           recipes,
           restrictions,
           mustHaves: mustHaves.split(',').map((s) => s.trim()).filter(Boolean),
@@ -58,8 +88,16 @@ export default function CreateSpecialMealPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Validate date before submitting
+    if (!isValidDate(eventDate)) {
+      setDateError('Please enter a valid date')
+      return
+    }
+
     generateMutation.mutate({
       name,
+      eventDate,
       mustHaves: mustHaves.split(',').map((s) => s.trim()).filter(Boolean),
       restrictions,
       exclusions: exclusions.split(',').map((s) => s.trim()).filter(Boolean),
@@ -90,9 +128,6 @@ export default function CreateSpecialMealPage() {
               <span className="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
                 Food with Friends
               </span>
-              <span className="text-xs font-bold text-text-muted-light dark:text-text-muted-dark uppercase tracking-wider">
-                Step 1 of 3
-              </span>
             </div>
             <h1 className="text-3xl lg:text-4xl font-extrabold text-text-main-light dark:text-white mb-3">
               What are you planning?
@@ -114,8 +149,8 @@ export default function CreateSpecialMealPage() {
                 <span className="text-text-muted-light dark:text-text-muted-dark font-normal text-xs">Required</span>
               </label>
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Icon name="celebration" className="text-text-muted-light dark:text-text-muted-dark group-focus-within:text-primary" />
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Icon name="celebration" className="text-primary text-xl" />
                 </div>
                 <input
                   type="text"
@@ -123,9 +158,23 @@ export default function CreateSpecialMealPage() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Game Night, Birthday Brunch, Potluck"
                   required
-                  className="block w-full pl-10 pr-3 py-3 border border-border-light dark:border-border-dark rounded-xl text-text-main-light dark:text-white bg-background-light dark:bg-white/5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors placeholder:text-text-muted-light/60"
+                  className="block w-full pl-12 pr-4 py-4 border-2 border-border-light dark:border-border-dark rounded-xl text-lg font-semibold text-text-main-light dark:text-white bg-background-light dark:bg-white/5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors placeholder:text-text-muted-light/60 placeholder:font-normal"
                 />
               </div>
+            </div>
+
+            {/* Event Date */}
+            <div className="space-y-3">
+              <label className="block text-sm font-bold text-text-main-light dark:text-white flex justify-between">
+                Event Date
+                <span className="text-text-muted-light dark:text-text-muted-dark font-normal text-xs">Required</span>
+              </label>
+              <DatePicker
+                value={eventDate}
+                onChange={handleDateChange}
+                error={dateError}
+                required
+              />
             </div>
 
             {/* Dietary Restrictions */}
@@ -199,13 +248,8 @@ export default function CreateSpecialMealPage() {
             </div>
           </form>
 
-          {/* Progress and navigation */}
-          <div className="flex items-center justify-between pt-4">
-            <div className="flex items-center gap-2">
-              <div className="h-2 w-10 rounded-full bg-primary" />
-              <div className="h-2 w-2 rounded-full bg-gray-200 dark:bg-gray-700" />
-              <div className="h-2 w-2 rounded-full bg-gray-200 dark:bg-gray-700" />
-            </div>
+          {/* Navigation */}
+          <div className="flex items-center justify-end pt-4">
             <div className="flex items-center gap-4">
               <button
                 type="button"
@@ -255,28 +299,6 @@ export default function CreateSpecialMealPage() {
             </div>
           </Card>
 
-          {/* Recent Events */}
-          <Card className="opacity-60 pointer-events-none grayscale-[0.5]">
-            <h4 className="text-sm font-bold text-text-muted-light dark:text-text-muted-dark uppercase mb-4 tracking-wider">
-              Recent Events
-            </h4>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-border-light dark:border-border-dark">
-                <div>
-                  <p className="font-bold text-sm text-text-main-light dark:text-white">Sunday Roast</p>
-                  <p className="text-xs text-text-muted-light dark:text-text-muted-dark">Oct 12 4 Guests</p>
-                </div>
-                <Icon name="chevron_right" className="text-text-muted-light dark:text-text-muted-dark" size="sm" />
-              </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-bold text-sm text-text-main-light dark:text-white">Pizza Party</p>
-                  <p className="text-xs text-text-muted-light dark:text-text-muted-dark">Sep 28 8 Guests</p>
-                </div>
-                <Icon name="chevron_right" className="text-text-muted-light dark:text-text-muted-dark" size="sm" />
-              </div>
-            </div>
-          </Card>
         </div>
       </div>
     </div>

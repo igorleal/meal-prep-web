@@ -9,6 +9,7 @@ interface RangeSliderProps {
   step?: number
   showTicks?: boolean
   className?: string
+  disabled?: boolean
 }
 
 export function RangeSlider({
@@ -20,6 +21,7 @@ export function RangeSlider({
   step = 1,
   showTicks = true,
   className,
+  disabled = false,
 }: RangeSliderProps) {
   const ticks = Array.from({ length: max - min + 1 }, (_, i) => min + i)
 
@@ -40,7 +42,11 @@ export function RangeSlider({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full h-2 bg-gray-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+        disabled={disabled}
+        className={cn(
+          'w-full h-2 bg-gray-200 dark:bg-white/10 rounded-lg appearance-none accent-primary',
+          disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+        )}
       />
       {showTicks && (
         <div className="flex justify-between text-xs text-gray-400 px-1">

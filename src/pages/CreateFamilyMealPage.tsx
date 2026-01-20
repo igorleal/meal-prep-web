@@ -108,30 +108,14 @@ export default function CreateFamilyMealPage() {
         {/* Date Card */}
         <div className="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-2xl p-6 shadow-sm mb-10 relative overflow-hidden group">
           <div className="absolute top-0 left-0 w-2 h-full bg-primary" />
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 relative z-10">
-            <div className="flex items-center gap-5">
-              <div className="bg-primary/10 text-primary p-3 rounded-xl min-w-[70px] text-center border border-primary/10">
-                <span className="block text-xs font-bold uppercase tracking-wider mb-0.5">{month}</span>
-                <span className="block text-3xl font-extrabold leading-none">{dayNum.toString().padStart(2, '0')}</span>
-              </div>
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className="text-xl font-bold text-text-main-light dark:text-white">
-                    {dayName} {mealType}
-                  </h3>
-                  <span className="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
-                    Editing
-                  </span>
-                </div>
-                <p className="text-text-muted-light dark:text-text-muted-dark font-medium flex items-center gap-2 text-sm">
-                  <Icon name="groups" size="sm" />
-                  4 Family Members
-                </p>
-              </div>
+          <div className="flex items-center gap-5 relative z-10">
+            <div className="bg-primary/10 text-primary p-3 rounded-xl min-w-[70px] text-center border border-primary/10">
+              <span className="block text-xs font-bold uppercase tracking-wider mb-0.5">{month}</span>
+              <span className="block text-3xl font-extrabold leading-none">{dayNum.toString().padStart(2, '0')}</span>
             </div>
-            <button className="text-sm font-bold text-primary hover:text-red-600 underline decoration-2 underline-offset-4 transition-colors">
-              Change Date
-            </button>
+            <h3 className="text-xl font-bold text-text-main-light dark:text-white">
+              {dayName} {mealType}
+            </h3>
           </div>
           <div className="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-primary/5 to-transparent pointer-events-none" />
         </div>

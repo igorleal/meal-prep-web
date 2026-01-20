@@ -11,12 +11,15 @@ import HomePage from '@/pages/HomePage'
 import MealPlansPage from '@/pages/MealPlansPage'
 import CreateMealPlanPage from '@/pages/CreateMealPlanPage'
 import RecipeSelectionPage from '@/pages/RecipeSelectionPage'
+import MealPlanRecipeDetailPage from '@/pages/MealPlanRecipeDetailPage'
 import FamilyCalendarPage from '@/pages/FamilyCalendarPage'
 import CreateFamilyMealPage from '@/pages/CreateFamilyMealPage'
 import FamilyCalendarRecipeSelectionPage from '@/pages/FamilyCalendarRecipeSelectionPage'
+import FamilyCalendarRecipeDetailPage from '@/pages/FamilyCalendarRecipeDetailPage'
 import SpecialMealsPage from '@/pages/SpecialMealsPage'
 import CreateSpecialMealPage from '@/pages/CreateSpecialMealPage'
 import SpecialMealRecipeSelectionPage from '@/pages/SpecialMealRecipeSelectionPage'
+import SpecialMealRecipeDetailPage from '@/pages/SpecialMealRecipeDetailPage'
 import SettingsPage from '@/pages/SettingsPage'
 import ComingSoonPage from '@/pages/ComingSoonPage'
 import AuthCallbackPage from '@/pages/AuthCallbackPage'
@@ -42,16 +45,19 @@ function App() {
                 <Route path="/meal-plans" element={<MealPlansPage />} />
                 <Route path="/meal-plans/create" element={<CreateMealPlanPage />} />
                 <Route path="/meal-plans/recipes" element={<RecipeSelectionPage />} />
+                <Route path="/meal-plans/recipe" element={<MealPlanRecipeDetailPage />} />
 
                 {/* Family Calendar */}
                 <Route path="/calendar" element={<FamilyCalendarPage />} />
                 <Route path="/calendar/create" element={<CreateFamilyMealPage />} />
                 <Route path="/calendar/recipes" element={<FamilyCalendarRecipeSelectionPage />} />
+                <Route path="/calendar/recipe" element={<FamilyCalendarRecipeDetailPage />} />
 
                 {/* Special Meals */}
                 <Route path="/special-meals" element={<SpecialMealsPage />} />
                 <Route path="/special-meals/create" element={<CreateSpecialMealPage />} />
                 <Route path="/special-meals/recipes" element={<SpecialMealRecipeSelectionPage />} />
+                <Route path="/special-meals/recipe" element={<SpecialMealRecipeDetailPage />} />
 
                 {/* Settings */}
                 <Route path="/settings" element={<SettingsPage />} />

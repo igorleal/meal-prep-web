@@ -1,47 +1,45 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import {
   Button,
   Input,
   Accordion,
-  Chip,
   ChipInput,
   RangeSlider,
 } from '@/components/common'
-import { receitaiPlanService } from '@/api/services'
+import { receitaiPlanService, configService } from '@/api/services'
+import { useAuth } from '@/context/AuthContext'
+import { cn } from '@/utils/cn'
 import type { FocusArea, GenerateReceitAIPlanRequest } from '@/types'
 
-const dietaryRestrictions = [
-  'Vegan',
-  'Vegetarian',
-  'Keto',
-  'Paleo',
-  'Gluten-Free',
-  'Dairy-Free',
-  'Nut-Free',
-]
-
-const focusAreaLabels: Record<string, FocusArea> = {
-  'High Protein': 'HIGH_PROTEIN',
-  'Low Carb': 'LOW_CARB',
-  'Quick Prep': 'QUICK_MEALS',
-  'Budget Friendly': 'BUDGET_FRIENDLY',
-  'Long Lasting': 'LONG_LASTING',
-  'Eco Friendly': 'ECO_FRIENDLY',
+// Map from backend key to user-friendly label
+const focusAreaKeyToLabel: Record<string, string> = {
+  HIGH_PROTEIN: 'High Protein',
+  LOW_CARB: 'Low Carb',
+  KETO: 'Keto',
+  BALANCED: 'Balanced',
+  QUICK_MEALS: 'Quick Prep',
+  BUDGET_FRIENDLY: 'Budget Friendly',
+  LONG_LASTING: 'Long Lasting',
+  ECO_FRIENDLY: 'Eco Friendly',
 }
 
 export default function CreateMealPlanPage() {
   const navigate = useNavigate()
+  const { user } = useAuth()
+
+  // Fetch focus areas from backend
+  const { data: backendFocusAreas = [] } = useQuery({
+    queryKey: ['focusAreas'],
+    queryFn: configService.getFocusAreas,
+  })
 
   // Form state
-  const [planName, setPlanName] = useState('Summer Cut Plan')
+  const [planName, setPlanName] = useState('')
   const [selectedRestrictions, setSelectedRestrictions] = useState<string[]>([])
-  const [focusAreas, setFocusAreas] = useState({
-    'High Protein': 4,
-    'Low Carb': 2,
-    'Quick Prep': 5,
-  })
+  // Focus areas state: keyed by backend key (e.g., HIGH_PROTEIN)
+  const [focusAreas, setFocusAreas] = useState<Record<string, { enabled: boolean; value: number }>>({})
   const [macros, setMacros] = useState({
     calories: 2200,
     protein: 180,
@@ -53,15 +51,30 @@ export default function CreateMealPlanPage() {
   const [mealsPerDay, setMealsPerDay] = useState(3)
   const [days, setDays] = useState(7)
 
+  // Pre-fill dietary restrictions from user profile
+  useEffect(() => {
+    if (user?.restrictions) {
+      setSelectedRestrictions(user.restrictions)
+    }
+  }, [user?.restrictions])
+
+  // Initialize focus areas from backend
+  useEffect(() => {
+    if (backendFocusAreas.length > 0 && Object.keys(focusAreas).length === 0) {
+      const initialFocusAreas: Record<string, { enabled: boolean; value: number }> = {}
+      backendFocusAreas.forEach((key) => {
+        initialFocusAreas[key] = { enabled: false, value: 3 }
+      })
+      setFocusAreas(initialFocusAreas)
+    }
+  }, [backendFocusAreas, focusAreas])
+
   const generateMutation = useMutation({
     mutationFn: receitaiPlanService.generateRecipes,
     onSuccess: (recipes) => {
-      // Store recipes and request data in session storage for the next page
-      const requestId = `req-${Date.now()}`
       sessionStorage.setItem(
         'pendingMealPlan',
         JSON.stringify({
-          requestId,
           planName,
           recipes,
         })
@@ -74,9 +87,8 @@ export default function CreateMealPlanPage() {
     const request: GenerateReceitAIPlanRequest = {
       name: planName,
       focusAreas: Object.entries(focusAreas).reduce(
-        (acc, [label, value]) => {
-          const key = focusAreaLabels[label]
-          if (key) acc[key] = value
+        (acc, [key, { enabled, value }]) => {
+          if (enabled) acc[key as FocusArea] = value
           return acc
         },
         {} as Record<FocusArea, number>
@@ -91,40 +103,16 @@ export default function CreateMealPlanPage() {
     generateMutation.mutate(request)
   }
 
-  const toggleRestriction = (restriction: string) => {
-    setSelectedRestrictions((prev) =>
-      prev.includes(restriction)
-        ? prev.filter((r) => r !== restriction)
-        : [...prev, restriction]
-    )
-  }
-
-  const progress = 33 // Step 1 of 3
-
   return (
     <div className="max-w-3xl mx-auto px-4 md:px-8 py-8">
-      {/* Header & Progress */}
+      {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl md:text-4xl font-extrabold text-text-main-light dark:text-white mb-2">
           Let&apos;s build your plan
         </h1>
-        <p className="text-text-muted-light dark:text-primary/80 mb-6">
-          Step 1 of 3: Configuration
+        <p className="text-text-muted-light dark:text-text-muted-dark">
+          Configure your meal plan preferences and let AI generate personalized recipes.
         </p>
-
-        <div className="flex flex-col gap-2">
-          <div className="flex gap-6 justify-between text-sm font-medium">
-            <span className="text-text-main-light dark:text-white">Configuration</span>
-            <span className="text-gray-400">Preview</span>
-            <span className="text-gray-400">Confirm</span>
-          </div>
-          <div className="rounded-full bg-border-light dark:bg-white/10 h-2 overflow-hidden">
-            <div
-              className="h-full bg-primary transition-all duration-500"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </div>
       </div>
 
       {/* Form Sections */}
@@ -149,40 +137,56 @@ export default function CreateMealPlanPage() {
               : 'None selected'
           }
         >
-          <div className="flex flex-wrap gap-3">
-            {dietaryRestrictions.map((restriction) => (
-              <Chip
-                key={restriction}
-                selected={selectedRestrictions.includes(restriction)}
-                onSelect={() => toggleRestriction(restriction)}
-              >
-                {restriction}
-              </Chip>
-            ))}
-          </div>
+          <ChipInput
+            label="Dietary Restrictions"
+            values={selectedRestrictions}
+            onChange={setSelectedRestrictions}
+            placeholder="Type a restriction and press Enter..."
+          />
         </Accordion>
 
         {/* Focus Areas */}
         <Accordion number={3} title="Focus Areas" subtitle="Set priorities">
-          <div className="flex flex-col gap-6">
-            {Object.entries(focusAreas).map(([label, value]) => (
-              <RangeSlider
-                key={label}
-                label={label}
-                value={value}
-                onChange={(newValue) =>
-                  setFocusAreas((prev) => ({ ...prev, [label]: newValue }))
-                }
-              />
+          <div className="flex flex-col gap-4">
+            {Object.entries(focusAreas).map(([key, { enabled, value }]) => (
+              <div key={key} className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  checked={enabled}
+                  onChange={(e) =>
+                    setFocusAreas((prev) => ({
+                      ...prev,
+                      [key]: { ...prev[key], enabled: e.target.checked },
+                    }))
+                  }
+                  className="mt-1.5 w-4 h-4 accent-primary rounded"
+                />
+                <div className={cn('flex-1', !enabled && 'opacity-50')}>
+                  <RangeSlider
+                    label={focusAreaKeyToLabel[key] || key}
+                    value={value}
+                    onChange={(newValue) =>
+                      setFocusAreas((prev) => ({
+                        ...prev,
+                        [key]: { ...prev[key], value: newValue },
+                      }))
+                    }
+                    disabled={!enabled}
+                  />
+                </div>
+              </div>
             ))}
           </div>
         </Accordion>
 
         {/* Macros & Nutrition */}
-        <Accordion number={4} title="Macros & Nutrition" subtitle="Goals set">
+        <Accordion number={4} title="Macros & Nutrition (per meal)" subtitle="Goals set">
+          <p className="text-sm text-text-muted-light dark:text-text-muted-dark mb-4">
+            Set target macros per meal, not daily totals.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input
-              label="Daily Calories"
+              label="Calories"
               type="number"
               suffix="kcal"
               value={macros.calories}
@@ -269,6 +273,7 @@ export default function CreateMealPlanPage() {
           icon="arrow_forward"
           onClick={handleSubmit}
           loading={generateMutation.isPending}
+          disabled={!planName.trim()}
           className="shadow-lg shadow-primary/30"
         >
           Next: Generate Preview

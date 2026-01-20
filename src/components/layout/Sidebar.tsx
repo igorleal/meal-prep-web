@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { cn } from '@/utils/cn'
 import { Icon } from '@/components/common'
 import { useTheme } from '@/context/ThemeContext'
+import { useAuth } from '@/context/AuthContext'
 
 interface SidebarProps {
   isOpen: boolean
@@ -19,6 +20,12 @@ const navItems = [
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const location = useLocation()
   const { theme, toggleTheme } = useTheme()
+  const { logout } = useAuth()
+
+  const handleLogout = () => {
+    logout()
+    onClose()
+  }
 
   return (
     <>
@@ -91,6 +98,13 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             <span className="text-sm font-medium">
               {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
             </span>
+          </button>
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg w-full text-text-muted-light dark:text-gray-400 hover:text-text-main-light dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+          >
+            <Icon name="logout" />
+            <span className="text-sm font-medium">Logout</span>
           </button>
         </div>
       </aside>

@@ -9,6 +9,21 @@ import {
 } from './data'
 
 export const handlers = [
+  // Config handlers
+  http.get('/api/config/focus-areas', async () => {
+    await delay(200)
+    return HttpResponse.json([
+      'HIGH_PROTEIN',
+      'LOW_CARB',
+      'KETO',
+      'BALANCED',
+      'QUICK_MEALS',
+      'BUDGET_FRIENDLY',
+      'LONG_LASTING',
+      'ECO_FRIENDLY',
+    ])
+  }),
+
   // Auth handlers
   http.post('/api/dev-auth/login', async () => {
     await delay(500)
@@ -52,6 +67,11 @@ export const handlers = [
     return HttpResponse.json(mockMealPlans)
   }),
 
+  http.delete('/api/meal-prep-plan/:planId', async () => {
+    await delay(300)
+    return new HttpResponse(null, { status: 204 })
+  }),
+
   // Family Plan handlers
   http.post('/api/family-plan/generate-recipes', async () => {
     await delay(1500)
@@ -79,6 +99,11 @@ export const handlers = [
     return HttpResponse.json(filteredPlans)
   }),
 
+  http.delete('/api/family-plan/:planId', async () => {
+    await delay(300)
+    return new HttpResponse(null, { status: 204 })
+  }),
+
   // Food Friends handlers
   http.post('/api/food-friends/generate-recipes', async () => {
     await delay(1500)
@@ -94,5 +119,10 @@ export const handlers = [
   http.get('/api/food-friends', async () => {
     await delay(500)
     return HttpResponse.json(mockFoodFriends)
+  }),
+
+  http.delete('/api/food-friends/:planId', async () => {
+    await delay(300)
+    return new HttpResponse(null, { status: 204 })
   }),
 ]

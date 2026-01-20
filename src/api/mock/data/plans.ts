@@ -3,6 +3,12 @@ import { mockRecipes } from './recipes'
 
 export const mockMealPlans: ReceitAIPlanResponse[] = [
   {
+    plan: {
+      id: 'mp-001',
+      requestId: 'plan-001',
+      recipeId: mockRecipes[0].id,
+      createdAt: '2026-01-10T08:00:00Z',
+    },
     request: {
       id: 'plan-001',
       userId: 'user-001',
@@ -20,6 +26,12 @@ export const mockMealPlans: ReceitAIPlanResponse[] = [
     recipe: mockRecipes[0],
   },
   {
+    plan: {
+      id: 'mp-002',
+      requestId: 'plan-002',
+      recipeId: mockRecipes[2].id,
+      createdAt: '2026-01-08T14:30:00Z',
+    },
     request: {
       id: 'plan-002',
       userId: 'user-001',
@@ -37,6 +49,12 @@ export const mockMealPlans: ReceitAIPlanResponse[] = [
     recipe: mockRecipes[2],
   },
   {
+    plan: {
+      id: 'mp-003',
+      requestId: 'plan-003',
+      recipeId: mockRecipes[5].id,
+      createdAt: '2026-01-05T09:15:00Z',
+    },
     request: {
       id: 'plan-003',
       userId: 'user-001',
@@ -54,6 +72,12 @@ export const mockMealPlans: ReceitAIPlanResponse[] = [
     recipe: mockRecipes[5],
   },
   {
+    plan: {
+      id: 'mp-004',
+      requestId: 'plan-004',
+      recipeId: mockRecipes[3].id,
+      createdAt: '2026-01-02T16:45:00Z',
+    },
     request: {
       id: 'plan-004',
       userId: 'user-001',
@@ -74,6 +98,12 @@ export const mockMealPlans: ReceitAIPlanResponse[] = [
 
 export const mockFamilyPlans: FamilyPlanResponse[] = [
   {
+    plan: {
+      id: 'fp-001',
+      requestId: 'family-001',
+      recipeId: mockRecipes[0].id,
+      createdAt: '2026-01-15T10:00:00Z',
+    },
     request: {
       id: 'family-001',
       userId: 'user-001',
@@ -87,6 +117,12 @@ export const mockFamilyPlans: FamilyPlanResponse[] = [
     recipe: mockRecipes[0],
   },
   {
+    plan: {
+      id: 'fp-002',
+      requestId: 'family-002',
+      recipeId: mockRecipes[2].id,
+      createdAt: '2026-01-15T10:00:00Z',
+    },
     request: {
       id: 'family-002',
       userId: 'user-001',
@@ -100,6 +136,12 @@ export const mockFamilyPlans: FamilyPlanResponse[] = [
     recipe: mockRecipes[2],
   },
   {
+    plan: {
+      id: 'fp-003',
+      requestId: 'family-003',
+      recipeId: mockRecipes[3].id,
+      createdAt: '2026-01-15T10:00:00Z',
+    },
     request: {
       id: 'family-003',
       userId: 'user-001',
@@ -116,6 +158,12 @@ export const mockFamilyPlans: FamilyPlanResponse[] = [
 
 export const mockFoodFriends: FoodFriendsResponse[] = [
   {
+    plan: {
+      id: 'ff-001',
+      requestId: 'friends-001',
+      recipeId: mockRecipes[4].id,
+      createdAt: '2026-01-10T14:00:00Z',
+    },
     request: {
       id: 'friends-001',
       userId: 'user-001',
@@ -129,6 +177,12 @@ export const mockFoodFriends: FoodFriendsResponse[] = [
     recipe: mockRecipes[4],
   },
   {
+    plan: {
+      id: 'ff-002',
+      requestId: 'friends-002',
+      recipeId: mockRecipes[4].id,
+      createdAt: '2026-01-08T09:00:00Z',
+    },
     request: {
       id: 'friends-002',
       userId: 'user-001',
@@ -142,6 +196,12 @@ export const mockFoodFriends: FoodFriendsResponse[] = [
     recipe: mockRecipes[4],
   },
   {
+    plan: {
+      id: 'ff-003',
+      requestId: 'friends-003',
+      recipeId: mockRecipes[3].id,
+      createdAt: '2026-01-05T11:00:00Z',
+    },
     request: {
       id: 'friends-003',
       userId: 'user-001',

@@ -7,8 +7,10 @@ import {
   Accordion,
   ChipInput,
   RangeSlider,
+  WeeklyLimitBanner,
+  WeeklyLimitModal,
 } from '@/components/common'
-import { receitaiPlanService, configService } from '@/api/services'
+import { receitaiPlanService, configService, userService } from '@/api/services'
 import { useAuth } from '@/context/AuthContext'
 import { cn } from '@/utils/cn'
 import type { FocusArea, GenerateReceitAIPlanRequest } from '@/types'
@@ -28,6 +30,12 @@ const focusAreaKeyToLabel: Record<string, string> = {
 export default function CreateMealPlanPage() {
   const navigate = useNavigate()
   const { user } = useAuth()
+
+  // Fetch current user to check weekly limit
+  const { data: currentUser } = useQuery({
+    queryKey: ['currentUser'],
+    queryFn: userService.getMe,
+  })
 
   // Fetch focus areas from backend
   const { data: backendFocusAreas = [] } = useQuery({
@@ -50,6 +58,9 @@ export default function CreateMealPlanPage() {
   const [excludes, setExcludes] = useState(['Cilantro'])
   const [mealsPerDay, setMealsPerDay] = useState(3)
   const [days, setDays] = useState(7)
+  const [showLimitModal, setShowLimitModal] = useState(false)
+
+  const hasReachedLimit = currentUser?.hasReachedWeeklyLimit ?? false
 
   // Pre-fill dietary restrictions from user profile
   useEffect(() => {
@@ -81,6 +92,11 @@ export default function CreateMealPlanPage() {
       )
       navigate('/meal-plans/recipes')
     },
+    onError: (error: { response?: { status?: number } }) => {
+      if (error.response?.status === 429) {
+        setShowLimitModal(true)
+      }
+    },
   })
 
   const handleSubmit = () => {
@@ -105,6 +121,9 @@ export default function CreateMealPlanPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 md:px-8 py-8">
+      {/* Weekly Limit Banner */}
+      {hasReachedLimit && <WeeklyLimitBanner />}
+
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl md:text-4xl font-extrabold text-text-main-light dark:text-white mb-2">
@@ -273,12 +292,17 @@ export default function CreateMealPlanPage() {
           icon="arrow_forward"
           onClick={handleSubmit}
           loading={generateMutation.isPending}
-          disabled={!planName.trim()}
+          disabled={!planName.trim() || hasReachedLimit}
           className="shadow-lg shadow-primary/30"
         >
           Next: Generate Preview
         </Button>
       </div>
+
+      {/* Weekly Limit Modal */}
+      {showLimitModal && (
+        <WeeklyLimitModal onClose={() => setShowLimitModal(false)} />
+      )}
     </div>
   )
 }

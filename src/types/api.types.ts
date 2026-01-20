@@ -65,6 +65,7 @@ export interface User {
   avatarUrl?: string
   restrictions?: string[]
   preferences?: Record<string, unknown>
+  hasReachedWeeklyLimit?: boolean
 }
 
 export interface UpdateUserRequest {

@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useMutation } from '@tanstack/react-query'
-import { Button, Icon, Card, DatePicker } from '@/components/common'
-import { foodFriendsService } from '@/api/services'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { Button, Icon, Card, DatePicker, WeeklyLimitBanner, WeeklyLimitModal } from '@/components/common'
+import { foodFriendsService, userService } from '@/api/services'
 import { cn } from '@/utils/cn'
 
 const dietaryOptions = [
@@ -15,6 +15,13 @@ const dietaryOptions = [
 
 export default function CreateSpecialMealPage() {
   const navigate = useNavigate()
+
+  // Fetch current user to check weekly limit
+  const { data: currentUser } = useQuery({
+    queryKey: ['currentUser'],
+    queryFn: userService.getMe,
+  })
+
   const [name, setName] = useState('')
   const [eventDate, setEventDate] = useState('')
   const [dateError, setDateError] = useState('')
@@ -22,6 +29,9 @@ export default function CreateSpecialMealPage() {
   const [customRestriction, setCustomRestriction] = useState('')
   const [mustHaves, setMustHaves] = useState('')
   const [exclusions, setExclusions] = useState('')
+  const [showLimitModal, setShowLimitModal] = useState(false)
+
+  const hasReachedLimit = currentUser?.hasReachedWeeklyLimit ?? false
 
   const isValidDate = (dateString: string): boolean => {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
@@ -65,6 +75,11 @@ export default function CreateSpecialMealPage() {
         })
       )
       navigate('/special-meals/recipes')
+    },
+    onError: (error: { response?: { status?: number } }) => {
+      if (error.response?.status === 429) {
+        setShowLimitModal(true)
+      }
     },
   })
 
@@ -118,6 +133,9 @@ export default function CreateSpecialMealPage() {
         <span className="text-gray-300">/</span>
         <span className="text-text-main-light dark:text-white">Create Event</span>
       </div>
+
+      {/* Weekly Limit Banner */}
+      {hasReachedLimit && <WeeklyLimitBanner />}
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* Main form */}
@@ -263,7 +281,7 @@ export default function CreateSpecialMealPage() {
                 icon="arrow_forward"
                 iconPosition="right"
                 loading={generateMutation.isPending}
-                disabled={!name.trim()}
+                disabled={!name.trim() || hasReachedLimit}
               >
                 Next: Choose Theme
               </Button>
@@ -301,6 +319,11 @@ export default function CreateSpecialMealPage() {
 
         </div>
       </div>
+
+      {/* Weekly Limit Modal */}
+      {showLimitModal && (
+        <WeeklyLimitModal onClose={() => setShowLimitModal(false)} />
+      )}
     </div>
   )
 }

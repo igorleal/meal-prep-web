@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useMutation } from '@tanstack/react-query'
-import { Button, Icon } from '@/components/common'
-import { familyPlanService } from '@/api/services'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { Button, Icon, WeeklyLimitBanner, WeeklyLimitModal } from '@/components/common'
+import { familyPlanService, userService } from '@/api/services'
 import { cn } from '@/utils/cn'
 
 const dietaryOptions = [
@@ -18,6 +18,12 @@ export default function CreateFamilyMealPage() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
 
+  // Fetch current user to check weekly limit
+  const { data: currentUser } = useQuery({
+    queryKey: ['currentUser'],
+    queryFn: userService.getMe,
+  })
+
   // Parse date from URL params
   const dateParam = searchParams.get('date') || new Date().toISOString().split('T')[0]
   const mealType = searchParams.get('meal') || 'Dinner'
@@ -26,6 +32,9 @@ export default function CreateFamilyMealPage() {
   const [mustHaves, setMustHaves] = useState<string[]>([])
   const [mustHaveInput, setMustHaveInput] = useState('')
   const [exclusions, setExclusions] = useState('')
+  const [showLimitModal, setShowLimitModal] = useState(false)
+
+  const hasReachedLimit = currentUser?.hasReachedWeeklyLimit ?? false
 
   // Parse date for display
   const date = new Date(dateParam)
@@ -48,6 +57,11 @@ export default function CreateFamilyMealPage() {
         })
       )
       navigate('/calendar/recipes')
+    },
+    onError: (error: { response?: { status?: number } }) => {
+      if (error.response?.status === 429) {
+        setShowLimitModal(true)
+      }
     },
   })
 
@@ -94,6 +108,9 @@ export default function CreateFamilyMealPage() {
           <Icon name="arrow_back" size="sm" className="group-hover:-translate-x-1 transition-transform" />
           Back to Monthly View
         </button>
+
+        {/* Weekly Limit Banner */}
+        {hasReachedLimit && <WeeklyLimitBanner />}
 
         {/* Header */}
         <div className="space-y-2 mb-8">
@@ -227,6 +244,7 @@ export default function CreateFamilyMealPage() {
               className="w-full py-4 text-lg font-extrabold shadow-lg shadow-primary/30"
               icon="auto_awesome"
               loading={generateMutation.isPending}
+              disabled={hasReachedLimit}
             >
               Generate Recipe Suggestions
             </Button>
@@ -236,6 +254,11 @@ export default function CreateFamilyMealPage() {
           </div>
         </form>
       </div>
+
+      {/* Weekly Limit Modal */}
+      {showLimitModal && (
+        <WeeklyLimitModal onClose={() => setShowLimitModal(false)} />
+      )}
     </div>
   )
 }

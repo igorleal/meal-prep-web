@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Button, Icon, LoadingOverlay } from '@/components/common'
+import { Button, Icon, LoadingOverlay, WeeklyLimitBanner, WeeklyLimitModal } from '@/components/common'
 import { RecipeCard, RecipeDetailModal } from '@/components/features'
-import { receitaiPlanService, favoriteService } from '@/api/services'
+import { receitaiPlanService, favoriteService, userService } from '@/api/services'
 import type { Recipe } from '@/types'
 
 interface PendingMealPlan {
@@ -18,6 +18,15 @@ export default function RecipeSelectionPage() {
   const [selectedRecipeId, setSelectedRecipeId] = useState<string | null>(null)
   const [viewingRecipe, setViewingRecipe] = useState<Recipe | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [showLimitModal, setShowLimitModal] = useState(false)
+
+  // Fetch current user to check weekly limit
+  const { data: currentUser } = useQuery({
+    queryKey: ['currentUser'],
+    queryFn: userService.getMe,
+  })
+
+  const hasReachedLimit = currentUser?.hasReachedWeeklyLimit ?? false
 
   useEffect(() => {
     const stored = sessionStorage.getItem('pendingMealPlan')
@@ -84,6 +93,14 @@ export default function RecipeSelectionPage() {
       setPendingPlan(updatedPlan)
       sessionStorage.setItem('pendingMealPlan', JSON.stringify(updatedPlan))
       setSelectedRecipeId(null)
+      // Refetch user to check if limit was reached
+      queryClient.invalidateQueries({ queryKey: ['currentUser'] })
+    },
+    onError: (error: { response?: { status?: number } }) => {
+      if (error.response?.status === 429) {
+        setShowLimitModal(true)
+        queryClient.invalidateQueries({ queryKey: ['currentUser'] })
+      }
     },
   })
 
@@ -106,6 +123,9 @@ export default function RecipeSelectionPage() {
         Back to Plan Configuration
       </button>
 
+      {/* Weekly Limit Banner */}
+      {hasReachedLimit && <WeeklyLimitBanner />}
+
       {/* Header */}
       <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-3">
@@ -127,6 +147,7 @@ export default function RecipeSelectionPage() {
             iconPosition="left"
             className="rounded-xl"
             loading={regenerateMutation.isPending}
+            disabled={hasReachedLimit}
             onClick={() => regenerateMutation.mutate()}
           >
             Refresh Suggestions
@@ -165,6 +186,11 @@ export default function RecipeSelectionPage() {
           recipe={viewingRecipe}
           onClose={() => setViewingRecipe(null)}
         />
+      )}
+
+      {/* Weekly Limit Modal */}
+      {showLimitModal && (
+        <WeeklyLimitModal onClose={() => setShowLimitModal(false)} />
       )}
     </div>
   )

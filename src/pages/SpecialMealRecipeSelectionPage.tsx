@@ -77,6 +77,19 @@ export default function SpecialMealRecipeSelectionPage() {
     }
   }
 
+  const regenerateMutation = useMutation({
+    mutationFn: () => {
+      const requestId = pendingMeal!.recipes[0].requestId
+      return foodFriendsService.regenerateRecipes(requestId)
+    },
+    onSuccess: (newRecipes) => {
+      const updatedMeal = { ...pendingMeal!, recipes: newRecipes }
+      setPendingMeal(updatedMeal)
+      sessionStorage.setItem('pendingSpecialMeal', JSON.stringify(updatedMeal))
+      setSelectedRecipeId(null)
+    },
+  })
+
   if (!pendingMeal && isLoading) {
     return <LoadingOverlay message="Loading recipes..." />
   }
@@ -116,7 +129,8 @@ export default function SpecialMealRecipeSelectionPage() {
             icon="refresh"
             iconPosition="left"
             className="rounded-xl"
-            onClick={() => navigate('/special-meals/create')}
+            loading={regenerateMutation.isPending}
+            onClick={() => regenerateMutation.mutate()}
           >
             Refresh Suggestions
           </Button>

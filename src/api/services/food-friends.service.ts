@@ -24,4 +24,9 @@ export const foodFriendsService = {
   deletePlan: async (planId: string): Promise<void> => {
     await apiClient.delete(`/food-friends/${planId}`)
   },
+
+  regenerateRecipes: async (requestId: string): Promise<Recipe[]> => {
+    const { data } = await apiClient.post<Recipe[]>(`/food-friends/regenerate-recipes/${requestId}`)
+    return data
+  },
 }

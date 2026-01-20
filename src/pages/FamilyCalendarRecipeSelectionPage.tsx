@@ -79,6 +79,19 @@ export default function FamilyCalendarRecipeSelectionPage() {
     }
   }
 
+  const regenerateMutation = useMutation({
+    mutationFn: () => {
+      const requestId = pendingMeal!.recipes[0].requestId
+      return familyPlanService.regenerateRecipes(requestId)
+    },
+    onSuccess: (newRecipes) => {
+      const updatedMeal = { ...pendingMeal!, recipes: newRecipes }
+      setPendingMeal(updatedMeal)
+      sessionStorage.setItem('pendingFamilyMeal', JSON.stringify(updatedMeal))
+      setSelectedRecipeId(null)
+    },
+  })
+
   if (!pendingMeal && isLoading) {
     return <LoadingOverlay message="Loading recipes..." />
   }
@@ -124,7 +137,8 @@ export default function FamilyCalendarRecipeSelectionPage() {
             icon="refresh"
             iconPosition="left"
             className="rounded-xl"
-            onClick={() => navigate(`/calendar/create?date=${pendingMeal.date}&meal=${pendingMeal.mealType}`)}
+            loading={regenerateMutation.isPending}
+            onClick={() => regenerateMutation.mutate()}
           >
             Refresh Suggestions
           </Button>

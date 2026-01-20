@@ -74,6 +74,19 @@ export default function RecipeSelectionPage() {
     }
   }
 
+  const regenerateMutation = useMutation({
+    mutationFn: () => {
+      const requestId = pendingPlan!.recipes[0].requestId
+      return receitaiPlanService.regenerateRecipes(requestId)
+    },
+    onSuccess: (newRecipes) => {
+      const updatedPlan = { ...pendingPlan!, recipes: newRecipes }
+      setPendingPlan(updatedPlan)
+      sessionStorage.setItem('pendingMealPlan', JSON.stringify(updatedPlan))
+      setSelectedRecipeId(null)
+    },
+  })
+
   if (!pendingPlan && isLoading) {
     return <LoadingOverlay message="Loading recipes..." />
   }
@@ -113,6 +126,8 @@ export default function RecipeSelectionPage() {
             icon="refresh"
             iconPosition="left"
             className="rounded-xl"
+            loading={regenerateMutation.isPending}
+            onClick={() => regenerateMutation.mutate()}
           >
             Refresh Suggestions
           </Button>

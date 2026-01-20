@@ -44,6 +44,7 @@ export interface Recipe {
   tags?: string[]
   cookTime?: string
   keywords?: string[]
+  imageUrl?: string
 }
 
 // Auth types

@@ -1,4 +1,5 @@
 import { Icon } from '@/components/common'
+import { getRecipeImageUrl } from '@/utils/placeholders'
 import type { Recipe } from '@/types'
 
 interface RecipeDetailModalProps {
@@ -27,7 +28,7 @@ export function RecipeDetailModal({ recipe, onClose }: RecipeDetailModalProps) {
             <div
               className="absolute inset-0 bg-cover bg-center"
               style={{
-                backgroundImage: `url("https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1200&auto=format&fit=crop")`,
+                backgroundImage: `url("${getRecipeImageUrl(recipe.imageUrl, 'mealPlan')}")`,
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />

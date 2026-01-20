@@ -86,6 +86,7 @@ export interface FamilyPlanResponse {
 // Food Friends types
 export interface GenerateFoodFriendsRequest {
   name: string
+  eventDate: string
   mustHaves: string[]
   restrictions: string[]
   exclusions: string[]

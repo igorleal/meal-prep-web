@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon } from '@/components/common'
 import { favoriteService } from '@/api/services'
+import { getRecipeImageUrl } from '@/utils/placeholders'
 import type { Recipe } from '@/types'
 
 export default function FavoriteRecipeDetailPage() {
@@ -61,7 +62,7 @@ export default function FavoriteRecipeDetailPage() {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url("https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1200&auto=format&fit=crop")`,
+            backgroundImage: `url("${getRecipeImageUrl(recipe.imageUrl, 'mealPlan')}")`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />

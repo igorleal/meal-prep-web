@@ -1,5 +1,6 @@
 import { Icon } from '@/components/common'
 import { cn } from '@/utils/cn'
+import { getRecipeImageUrl } from '@/utils/placeholders'
 import type { Recipe } from '@/types'
 
 interface RecipeCardProps {
@@ -41,7 +42,7 @@ export function RecipeCard({
         <div
           className="h-full w-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
           style={{
-            backgroundImage: `url("https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop")`,
+            backgroundImage: `url("${getRecipeImageUrl(recipe.imageUrl, 'mealPlan')}")`,
           }}
         />
 

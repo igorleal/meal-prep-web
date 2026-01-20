@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon, Card, Badge, LoadingOverlay } from '@/components/common'
 import { receitaiPlanService } from '@/api/services'
+import { getRecipeImageUrl } from '@/utils/placeholders'
 import type { ReceitAIPlanResponse } from '@/types'
 
 function MealPlanCard({
@@ -22,7 +23,7 @@ function MealPlanCard({
         <div
           className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
           style={{
-            backgroundImage: `url("https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop")`,
+            backgroundImage: `url("${getRecipeImageUrl(recipe.imageUrl, 'mealPlan')}")`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

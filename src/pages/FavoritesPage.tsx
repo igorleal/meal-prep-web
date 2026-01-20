@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon, LoadingOverlay } from '@/components/common'
 import { favoriteService } from '@/api/services'
+import { getRecipeImageUrl } from '@/utils/placeholders'
 import type { Recipe } from '@/types'
 
 function FavoriteRecipeCard({
@@ -27,7 +28,7 @@ function FavoriteRecipeCard({
         <div
           className="h-full w-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
           style={{
-            backgroundImage: `url("https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop")`,
+            backgroundImage: `url("${getRecipeImageUrl(recipe.imageUrl, 'mealPlan')}")`,
           }}
         />
 

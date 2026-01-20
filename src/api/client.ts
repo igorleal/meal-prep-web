@@ -1,6 +1,7 @@
 import axios, { type AxiosError, type InternalAxiosRequestConfig } from 'axios'
 import { getBaseUrl, getApiMode } from './config'
 import { storage } from '@/utils/storage'
+import { triggerSessionExpired } from '@/context/AuthContext'
 
 const apiClient = axios.create({
   baseURL: getBaseUrl(),
@@ -35,11 +36,11 @@ apiClient.interceptors.response.use(
       data: error.response?.data,
     })
 
-    // Temporarily disabled auto-redirect to debug
-    // if (error.response?.status === 401) {
-    //   storage.clear()
-    //   window.location.href = '/login'
-    // }
+    // Handle 401 - session expired
+    if (error.response?.status === 401) {
+      triggerSessionExpired()
+    }
+
     return Promise.reject(error)
   }
 )

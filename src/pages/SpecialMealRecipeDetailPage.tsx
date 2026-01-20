@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon } from '@/components/common'
 import { favoriteService } from '@/api/services'
+import { getRecipeImageUrl } from '@/utils/placeholders'
 import type { FoodFriendsResponse } from '@/types'
 
 export default function SpecialMealRecipeDetailPage() {
@@ -51,7 +52,7 @@ export default function SpecialMealRecipeDetailPage() {
     }
   }
 
-  if (!event) {
+  if (!event || !recipe) {
     return null
   }
 
@@ -62,7 +63,7 @@ export default function SpecialMealRecipeDetailPage() {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url("https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1200&auto=format&fit=crop")`,
+            backgroundImage: `url("${getRecipeImageUrl(recipe?.imageUrl, 'specialMeal')}")`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />

@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react'
 import { storage } from '@/utils/storage'
+import { SessionExpiredModal } from '@/components/common'
 import type { User } from '@/types'
 
 interface AuthContextType {
@@ -14,10 +15,19 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
+// Event name for session expiry
+const SESSION_EXPIRED_EVENT = 'auth:session-expired'
+
+// Function to trigger session expired from outside React (e.g., API interceptor)
+export function triggerSessionExpired() {
+  window.dispatchEvent(new CustomEvent(SESSION_EXPIRED_EVENT))
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [token, setToken] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [showSessionExpiredModal, setShowSessionExpiredModal] = useState(false)
 
   useEffect(() => {
     // Check for existing auth on mount
@@ -29,6 +39,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(storedUser)
     }
     setIsLoading(false)
+  }, [])
+
+  // Listen for session expired events from API interceptor
+  useEffect(() => {
+    const handleSessionExpired = () => {
+      // Only show modal if user was authenticated
+      if (token) {
+        setShowSessionExpiredModal(true)
+      }
+    }
+
+    window.addEventListener(SESSION_EXPIRED_EVENT, handleSessionExpired)
+    return () => {
+      window.removeEventListener(SESSION_EXPIRED_EVENT, handleSessionExpired)
+    }
+  }, [token])
+
+  const handleSessionExpiredClose = useCallback(() => {
+    storage.clear()
+    setToken(null)
+    setUser(null)
+    setShowSessionExpiredModal(false)
+    window.location.href = '/login'
   }, [])
 
   const login = (newToken: string, newUser: User) => {
@@ -62,6 +95,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }}
     >
       {children}
+      {showSessionExpiredModal && (
+        <SessionExpiredModal onClose={handleSessionExpiredClose} />
+      )}
     </AuthContext.Provider>
   )
 }

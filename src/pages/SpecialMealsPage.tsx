@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon, Card, LoadingOverlay } from '@/components/common'
 import { foodFriendsService } from '@/api/services'
+import { getRecipeImageUrl } from '@/utils/placeholders'
 import type { FoodFriendsResponse } from '@/types'
 
 function EventCard({
@@ -23,7 +24,7 @@ function EventCard({
         <div
           className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
           style={{
-            backgroundImage: `url("https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&auto=format&fit=crop")`,
+            backgroundImage: `url("${getRecipeImageUrl(recipe.imageUrl, 'specialMeal')}")`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />

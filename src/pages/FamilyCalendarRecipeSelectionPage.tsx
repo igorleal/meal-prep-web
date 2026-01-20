@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon, LoadingOverlay } from '@/components/common'
 import { RecipeCard, RecipeDetailModal } from '@/components/features'
-import { familyPlanService } from '@/api/services'
+import { familyPlanService, favoriteService } from '@/api/services'
 import type { Recipe } from '@/types'
 
 interface PendingFamilyMeal {
@@ -33,6 +33,14 @@ export default function FamilyCalendarRecipeSelectionPage() {
     }
   }, [navigate])
 
+  // Fetch favorites to check which recipes are favorited
+  const { data: favorites = [] } = useQuery({
+    queryKey: ['favorites'],
+    queryFn: favoriteService.getFavorites,
+  })
+
+  const favoriteIds = new Set(favorites.map((f) => f.id))
+
   const saveMutation = useMutation({
     mutationFn: () => {
       const selectedRecipe = pendingMeal!.recipes.find((r) => r.id === selectedRecipeId)
@@ -48,6 +56,28 @@ export default function FamilyCalendarRecipeSelectionPage() {
       navigate('/calendar')
     },
   })
+
+  const addFavoriteMutation = useMutation({
+    mutationFn: favoriteService.addFavorite,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['favorites'] })
+    },
+  })
+
+  const removeFavoriteMutation = useMutation({
+    mutationFn: favoriteService.removeFavorite,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['favorites'] })
+    },
+  })
+
+  const handleToggleFavorite = (recipeId: string) => {
+    if (favoriteIds.has(recipeId)) {
+      removeFavoriteMutation.mutate(recipeId)
+    } else {
+      addFavoriteMutation.mutate(recipeId)
+    }
+  }
 
   if (!pendingMeal && isLoading) {
     return <LoadingOverlay message="Loading recipes..." />
@@ -118,9 +148,10 @@ export default function FamilyCalendarRecipeSelectionPage() {
             key={recipe.id}
             recipe={recipe}
             isSelected={selectedRecipeId === recipe.id}
+            isFavorite={favoriteIds.has(recipe.id)}
             onSelect={() => setSelectedRecipeId(prev => prev === recipe.id ? null : recipe.id)}
             onViewDetails={() => setViewingRecipe(recipe)}
-            onFavorite={() => {}}
+            onFavorite={() => handleToggleFavorite(recipe.id)}
           />
         ))}
       </div>

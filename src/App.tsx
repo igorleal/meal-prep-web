@@ -21,6 +21,8 @@ import CreateSpecialMealPage from '@/pages/CreateSpecialMealPage'
 import SpecialMealRecipeSelectionPage from '@/pages/SpecialMealRecipeSelectionPage'
 import SpecialMealRecipeDetailPage from '@/pages/SpecialMealRecipeDetailPage'
 import SettingsPage from '@/pages/SettingsPage'
+import FavoritesPage from '@/pages/FavoritesPage'
+import FavoriteRecipeDetailPage from '@/pages/FavoriteRecipeDetailPage'
 import ComingSoonPage from '@/pages/ComingSoonPage'
 import AuthCallbackPage from '@/pages/AuthCallbackPage'
 
@@ -62,9 +64,12 @@ function App() {
                 {/* Settings */}
                 <Route path="/settings" element={<SettingsPage />} />
 
+                {/* Favorites */}
+                <Route path="/favorites" element={<FavoritesPage />} />
+                <Route path="/favorites/recipe" element={<FavoriteRecipeDetailPage />} />
+
                 {/* Coming Soon */}
                 <Route path="/pantry" element={<ComingSoonPage title="Pantry" icon="kitchen" />} />
-                <Route path="/favorites" element={<ComingSoonPage title="Favorites" icon="favorite" />} />
                 <Route path="/shopping-list" element={<ComingSoonPage title="Shopping List" icon="shopping_cart" />} />
               </Route>
             </Route>

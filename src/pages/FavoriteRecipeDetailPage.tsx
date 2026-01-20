@@ -3,19 +3,19 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon } from '@/components/common'
 import { favoriteService } from '@/api/services'
-import type { FamilyPlanResponse } from '@/types'
+import type { Recipe } from '@/types'
 
-export default function FamilyCalendarRecipeDetailPage() {
+export default function FavoriteRecipeDetailPage() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
-  const [meal, setMeal] = useState<FamilyPlanResponse | null>(null)
+  const [recipe, setRecipe] = useState<Recipe | null>(null)
 
   useEffect(() => {
-    const stored = sessionStorage.getItem('viewingFamilyMeal')
+    const stored = sessionStorage.getItem('viewingFavoriteRecipe')
     if (stored) {
-      setMeal(JSON.parse(stored))
+      setRecipe(JSON.parse(stored))
     } else {
-      navigate('/calendar')
+      navigate('/favorites')
     }
   }, [navigate])
 
@@ -25,7 +25,6 @@ export default function FamilyCalendarRecipeDetailPage() {
     queryFn: favoriteService.getFavorites,
   })
 
-  const recipe = meal?.recipe
   const isFavorite = recipe ? favorites.some((f) => f.id === recipe.id) : false
 
   const addFavoriteMutation = useMutation({
@@ -51,7 +50,7 @@ export default function FamilyCalendarRecipeDetailPage() {
     }
   }
 
-  if (!meal) {
+  if (!recipe) {
     return null
   }
 
@@ -74,12 +73,12 @@ export default function FamilyCalendarRecipeDetailPage() {
             icon="arrow_back"
             iconPosition="left"
             onClick={() => {
-              sessionStorage.removeItem('viewingFamilyMeal')
-              navigate('/calendar')
+              sessionStorage.removeItem('viewingFavoriteRecipe')
+              navigate('/favorites')
             }}
             className="bg-white/20 backdrop-blur-md border-0 text-white hover:bg-white hover:text-primary"
           >
-            Back to Calendar
+            Back to Favorites
           </Button>
         </div>
 
@@ -88,19 +87,19 @@ export default function FamilyCalendarRecipeDetailPage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
               <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-2">
-                {recipe!.name}
+                {recipe.name}
               </h1>
               <div className="flex items-center gap-6 text-white/90 text-sm font-medium">
-                {recipe!.cookTime && (
-                  <div className="flex items-center gap-1.5">
-                    <Icon name="schedule" className="text-[18px]" />
-                    <span>{recipe!.cookTime}</span>
-                  </div>
-                )}
                 <div className="flex items-center gap-1.5">
                   <Icon name="restaurant" className="text-[18px]" />
-                  <span>{recipe!.servings} Servings</span>
+                  <span>{recipe.servings} Servings</span>
                 </div>
+                {recipe.cookTime && (
+                  <div className="flex items-center gap-1.5">
+                    <Icon name="schedule" className="text-[18px]" />
+                    <span>{recipe.cookTime}</span>
+                  </div>
+                )}
               </div>
             </div>
             <div className="flex gap-3">
@@ -125,6 +124,13 @@ export default function FamilyCalendarRecipeDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Left column - Nutrition & Info */}
           <div className="lg:col-span-4 space-y-6">
+            {/* Description */}
+            <div className="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl border border-border-light dark:border-border-dark shadow-sm">
+              <p className="text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+                {recipe.description}
+              </p>
+            </div>
+
             {/* Nutrition Facts */}
             <div className="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl border border-border-light dark:border-border-dark shadow-sm">
               <div className="flex items-center justify-between mb-6">
@@ -171,22 +177,24 @@ export default function FamilyCalendarRecipeDetailPage() {
               </div>
             </div>
 
-            {/* Servings info */}
-            <div className="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl border border-border-light dark:border-border-dark shadow-sm">
-              <div className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-none">
-                  <Icon name="group" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-text-muted-light dark:text-text-muted-dark uppercase tracking-wide mb-1">
-                    Servings
-                  </p>
-                  <p className="font-bold text-text-main-light dark:text-white text-lg">
-                    {recipe.servings} People
-                  </p>
+            {/* Keywords */}
+            {recipe.keywords && recipe.keywords.length > 0 && (
+              <div className="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl border border-border-light dark:border-border-dark shadow-sm">
+                <h3 className="text-lg font-bold text-text-main-light dark:text-white mb-4">
+                  Tags
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {recipe.keywords.map((keyword, i) => (
+                    <span
+                      key={i}
+                      className="inline-flex items-center rounded-lg bg-primary/10 border border-primary/20 px-3 py-1.5 text-sm font-bold text-primary"
+                    >
+                      {keyword}
+                    </span>
+                  ))}
                 </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Right column - Ingredients & Instructions */}

@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon } from '@/components/common'
+import { favoriteService } from '@/api/services'
 import type { FoodFriendsResponse } from '@/types'
 
 export default function SpecialMealRecipeDetailPage() {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const [event, setEvent] = useState<FoodFriendsResponse | null>(null)
 
   useEffect(() => {
@@ -16,11 +19,41 @@ export default function SpecialMealRecipeDetailPage() {
     }
   }, [navigate])
 
+  // Fetch favorites to check if this recipe is favorited
+  const { data: favorites = [] } = useQuery({
+    queryKey: ['favorites'],
+    queryFn: favoriteService.getFavorites,
+  })
+
+  const recipe = event?.recipe
+  const isFavorite = recipe ? favorites.some((f) => f.id === recipe.id) : false
+
+  const addFavoriteMutation = useMutation({
+    mutationFn: favoriteService.addFavorite,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['favorites'] })
+    },
+  })
+
+  const removeFavoriteMutation = useMutation({
+    mutationFn: favoriteService.removeFavorite,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['favorites'] })
+    },
+  })
+
+  const handleToggleFavorite = () => {
+    if (!recipe) return
+    if (isFavorite) {
+      removeFavoriteMutation.mutate(recipe.id)
+    } else {
+      addFavoriteMutation.mutate(recipe.id)
+    }
+  }
+
   if (!event) {
     return null
   }
-
-  const { recipe } = event
 
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark">
@@ -52,19 +85,36 @@ export default function SpecialMealRecipeDetailPage() {
 
         {/* Title overlay */}
         <div className="absolute bottom-0 left-0 w-full p-6 lg:p-10">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-2">
-            {recipe.name}
-          </h1>
-          <div className="flex items-center gap-6 text-white/90 text-sm font-medium">
-            {recipe.cookTime && (
-              <div className="flex items-center gap-1.5">
-                <Icon name="schedule" className="text-[18px]" />
-                <span>{recipe.cookTime}</span>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-2">
+                {recipe!.name}
+              </h1>
+              <div className="flex items-center gap-6 text-white/90 text-sm font-medium">
+                {recipe!.cookTime && (
+                  <div className="flex items-center gap-1.5">
+                    <Icon name="schedule" className="text-[18px]" />
+                    <span>{recipe!.cookTime}</span>
+                  </div>
+                )}
+                <div className="flex items-center gap-1.5">
+                  <Icon name="restaurant" className="text-[18px]" />
+                  <span>{recipe!.servings} Servings</span>
+                </div>
               </div>
-            )}
-            <div className="flex items-center gap-1.5">
-              <Icon name="restaurant" className="text-[18px]" />
-              <span>{recipe.servings} Servings</span>
+            </div>
+            <div className="flex gap-3">
+              <button
+                onClick={handleToggleFavorite}
+                className={`size-10 flex items-center justify-center rounded-full backdrop-blur-md transition-all ${
+                  isFavorite
+                    ? 'bg-primary text-white hover:bg-primary/80'
+                    : 'bg-white/20 text-white hover:bg-white hover:text-primary'
+                }`}
+                title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+              >
+                <Icon name={isFavorite ? 'favorite' : 'favorite_border'} className="text-[20px]" />
+              </button>
             </div>
           </div>
         </div>

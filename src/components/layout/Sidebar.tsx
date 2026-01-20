@@ -14,6 +14,7 @@ const navItems = [
   { id: 'planner', path: '/meal-plans', icon: 'calendar_month', label: 'Meal Planner' },
   { id: 'calendar', path: '/calendar', icon: 'event', label: 'Family Calendar' },
   { id: 'special', path: '/special-meals', icon: 'local_dining', label: 'Special Meals' },
+  { id: 'favorites', path: '/favorites', icon: 'favorite', label: 'Favorite Recipes' },
   { id: 'profile', path: '/settings', icon: 'person', label: 'Profile' },
 ]
 

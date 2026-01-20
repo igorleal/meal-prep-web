@@ -5,6 +5,7 @@ import type { Recipe } from '@/types'
 interface RecipeCardProps {
   recipe: Recipe
   isSelected: boolean
+  isFavorite?: boolean
   onSelect: () => void
   onViewDetails: () => void
   onFavorite?: () => void
@@ -13,6 +14,7 @@ interface RecipeCardProps {
 export function RecipeCard({
   recipe,
   isSelected,
+  isFavorite = false,
   onSelect,
   onViewDetails,
   onFavorite,
@@ -51,9 +53,14 @@ export function RecipeCard({
                 e.stopPropagation()
                 onFavorite()
               }}
-              className="rounded-full bg-white/20 p-2.5 text-white backdrop-blur-md transition-all hover:bg-white hover:text-primary"
+              className={cn(
+                "size-10 rounded-full backdrop-blur-md transition-all flex items-center justify-center",
+                isFavorite
+                  ? "bg-primary text-white hover:bg-primary/80"
+                  : "bg-white/20 text-white hover:bg-white hover:text-primary"
+              )}
             >
-              <Icon name="favorite" className="text-[24px]" />
+              <Icon name={isFavorite ? "favorite" : "favorite_border"} className="text-[20px]" />
             </button>
           </div>
         )}

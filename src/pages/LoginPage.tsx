@@ -20,12 +20,12 @@ export default function LoginPage() {
 
     const apiMode = getApiMode()
 
-    if (apiMode === 'local') {
+    if (apiMode === 'local' || apiMode === 'production') {
       // Redirect to backend OAuth endpoint
       const baseUrl = getBaseUrl()
       window.location.href = `${baseUrl}/oauth2/authorization/google`
     } else {
-      // Mock mode: simulate login
+      // Mock mode only: simulate login
       try {
         const { token, user } = await authService.login('demo@example.com', 'password')
         login(token, user)

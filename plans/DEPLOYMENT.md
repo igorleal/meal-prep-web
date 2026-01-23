@@ -63,13 +63,32 @@ In the GCP Console:
 1. Go to **IAM & Admin > Service Accounts**
 2. Click **Create Service Account**
 3. Fill in:
-   - **Name:** `meal-prep-frontend`
+   - **Name:** `receitai-web-sa`
    - **Description:** `Service account for meal-prep-web frontend`
 4. Click **Create and Continue**
 5. Skip the optional steps (we'll add permissions later)
 6. Click **Done**
 
-Note the email: `meal-prep-frontend@YOUR_PROJECT_ID.iam.gserviceaccount.com`
+Note the email: `receitai-web-sa@meal-prep-483519.iam.gserviceaccount.com`
+
+### Grant Yourself Permission to Use This Service Account
+
+Before you can deploy a service that runs as this service account, you need the **Service Account User** role:
+
+```bash
+gcloud iam service-accounts add-iam-policy-binding \
+  receitai-web-sa@meal-prep-483519.iam.gserviceaccount.com \
+  --member="user:YOUR_EMAIL@gmail.com" \
+  --role="roles/iam.serviceAccountUser" \
+  --project=meal-prep-483519
+```
+
+Or via Console:
+1. Go to **IAM & Admin > Service Accounts**
+2. Click on `receitai-web-sa`
+3. Go to the **Permissions** tab
+4. Click **Grant Access**
+5. Add your email with role **Service Account User**
 
 ## Step 3: Grant Frontend Permission to Invoke Backend
 
@@ -104,7 +123,7 @@ Example: `projects/meal-prep-483519/locations/europe-west1/services/receitai`
    ```
    YOUR_FRONTEND_SA@PROJECT_ID.iam.gserviceaccount.com
    ```
-   Example: `meal-prep-frontend@meal-prep-483519.iam.gserviceaccount.com`
+   Example: `receitai-web-sa@meal-prep-483519.iam.gserviceaccount.com`
 4. In "Select a role", choose **Cloud Run > Cloud Run Invoker**
 5. Click **Add IAM Condition**
    - **Title:** `Backend only`
@@ -147,29 +166,41 @@ In the GCP Console:
    To find your backend URL: Go to Cloud Run, click on your backend service (`receitai`), and copy the URL shown at the top.
 7. Under **Security**:
    - **Authentication:** `Allow unauthenticated invocations` (frontend is public)
-   - **Service account:** Select `meal-prep-frontend@meal-prep-483519.iam.gserviceaccount.com`
+   - **Service account:** Select `receitai-web-sa@meal-prep-483519.iam.gserviceaccount.com`
 8. Click **Create**
 
-### Option B: Deploy via gcloud CLI
+### Option B: Deploy via gcloud CLI (Recommended)
 
+Run these commands from Cloud Shell or your local terminal (must be in the project directory with the Dockerfile).
+
+#### Prerequisites
+Make sure `proxy/package-lock.json` exists. If not, generate it:
 ```bash
-# Set your variables
-PROJECT_ID="meal-prep-483519"
-REGION="europe-west1"
-BACKEND_URL="https://receitai-<hash>.europe-west1.run.app"  # Get from Cloud Run console
+cd proxy && npm install && cd ..
+```
 
-# Deploy from source
+#### Step 1: Build the Docker image
+```bash
+gcloud builds submit \
+  --tag europe-west1-docker.pkg.dev/meal-prep-483519/cloud-run-source-deploy/receitai-web \
+  --project meal-prep-483519
+```
+
+#### Step 2: Deploy to Cloud Run
+```bash
 gcloud run deploy receitai-web \
-  --source . \
-  --region $REGION \
+  --image europe-west1-docker.pkg.dev/meal-prep-483519/cloud-run-source-deploy/receitai-web \
+  --region europe-west1 \
   --platform managed \
   --allow-unauthenticated \
   --port 8080 \
-  --service-account meal-prep-frontend@${PROJECT_ID}.iam.gserviceaccount.com \
-  --set-env-vars "BACKEND_URL=$BACKEND_URL" \
+  --service-account receitai-web-sa@meal-prep-483519.iam.gserviceaccount.com \
+  --set-env-vars "BACKEND_URL=https://receitai-dfmgj462ha-ew.a.run.app" \
   --memory 512Mi \
-  --project $PROJECT_ID
+  --project meal-prep-483519
 ```
+
+Replace `BACKEND_URL` with your actual backend URL if different.
 
 ## Step 6: Update Backend URL (If Needed)
 

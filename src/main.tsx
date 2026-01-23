@@ -19,7 +19,6 @@ async function enableMocking() {
 
   // Only enable mocking in mock mode
   if (apiMode !== 'mock') {
-    console.log(`[API] Mode: ${apiMode} - mocking disabled`)
     return
   }
 

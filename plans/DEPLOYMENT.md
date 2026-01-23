@@ -195,7 +195,7 @@ gcloud run deploy receitai-web \
   --allow-unauthenticated \
   --port 8080 \
   --service-account receitai-web-sa@meal-prep-483519.iam.gserviceaccount.com \
-  --set-env-vars "BACKEND_URL=https://receitai-dfmgj462ha-ew.a.run.app" \
+  --set-env-vars "BACKEND_URL=https://receitai-744258893644.europe-west1.run.app" \
   --memory 512Mi \
   --project meal-prep-483519
 ```
@@ -421,3 +421,55 @@ If you also want a custom domain for the backend (e.g., `api.receit.ai`):
 | `env-config.template.js` | Template for runtime environment config |
 | `.dockerignore` | Excludes unnecessary files from Docker build |
 | `public/env-config.js` | Development placeholder |
+
+---
+
+## How to Redeploy After a New Change
+
+After making code changes, follow these steps to redeploy the frontend.
+
+### 1. Commit and Push Your Changes
+
+```bash
+git add .
+git commit -m "Your commit message"
+git push
+```
+
+### 2. Pull Changes in Cloud Shell
+
+Open [Cloud Shell](https://console.cloud.google.com/cloudshell) and navigate to your project:
+
+```bash
+cd meal-prep-web
+git pull
+```
+
+### 3. Rebuild the Docker Image
+
+```bash
+gcloud builds submit \
+  --tag europe-west1-docker.pkg.dev/meal-prep-483519/cloud-run-source-deploy/receitai-web \
+  --project meal-prep-483519
+```
+
+### 4. Deploy the New Image
+
+```bash
+gcloud run deploy receitai-web \
+  --image europe-west1-docker.pkg.dev/meal-prep-483519/cloud-run-source-deploy/receitai-web \
+  --region europe-west1 \
+  --platform managed \
+  --allow-unauthenticated \
+  --port 8080 \
+  --service-account receitai-web-sa@meal-prep-483519.iam.gserviceaccount.com \
+  --set-env-vars "BACKEND_URL=https://receitai-744258893644.europe-west1.run.app" \
+  --memory 512Mi \
+  --project meal-prep-483519
+```
+
+### 5. Verify the Deployment
+
+1. Open your frontend URL: `https://receitai-web-744258893644.europe-west1.run.app`
+2. Or your custom domain: `https://www.receit.ai`
+3. Test the changes you made

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import App from './App'
 import './styles/globals.css'
+import { getApiMode } from './api/config'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -14,9 +15,11 @@ const queryClient = new QueryClient({
 })
 
 async function enableMocking() {
-  const apiMode = import.meta.env.VITE_API_MODE || 'mock'
+  const apiMode = getApiMode()
 
+  // Only enable mocking in mock mode
   if (apiMode !== 'mock') {
+    console.log(`[API] Mode: ${apiMode} - mocking disabled`)
     return
   }
 

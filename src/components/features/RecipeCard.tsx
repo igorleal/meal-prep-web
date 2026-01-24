@@ -1,25 +1,37 @@
-import { Icon } from '@/components/common'
+import { Icon, LoadingSpinner } from '@/components/common'
 import { cn } from '@/utils/cn'
 import { getRecipeImageUrl } from '@/utils/placeholders'
+import { useRecipeImagePolling } from '@/hooks'
 import type { Recipe } from '@/types'
+
+type ImageType = 'mealPlan' | 'familyMeal' | 'specialMeal'
 
 interface RecipeCardProps {
   recipe: Recipe
   isSelected: boolean
   isFavorite?: boolean
+  imageType?: ImageType
   onSelect: () => void
   onViewDetails: () => void
   onFavorite?: () => void
+  onImageLoaded?: (updatedRecipe: Recipe) => void
 }
 
 export function RecipeCard({
   recipe,
   isSelected,
   isFavorite = false,
+  imageType = 'mealPlan',
   onSelect,
   onViewDetails,
   onFavorite,
+  onImageLoaded,
 }: RecipeCardProps) {
+  const { imageUrl, isPolling } = useRecipeImagePolling({
+    recipe,
+    onImageLoaded,
+  })
+
   return (
     <article
       className={cn(
@@ -39,12 +51,22 @@ export function RecipeCard({
         onClick={onViewDetails}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
-        <div
-          className="h-full w-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
-          style={{
-            backgroundImage: `url("${getRecipeImageUrl(recipe.imageUrl, 'mealPlan')}")`,
-          }}
-        />
+
+        {isPolling ? (
+          <div className="h-full w-full bg-gray-200 dark:bg-gray-700 flex flex-col items-center justify-center gap-3">
+            <LoadingSpinner size="lg" />
+            <span className="text-sm text-text-muted-light dark:text-text-muted-dark font-medium">
+              Generating image...
+            </span>
+          </div>
+        ) : (
+          <div
+            className="h-full w-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
+            style={{
+              backgroundImage: `url("${getRecipeImageUrl(imageUrl, imageType)}")`,
+            }}
+          />
+        )}
 
         {/* Favorite button */}
         {onFavorite && (

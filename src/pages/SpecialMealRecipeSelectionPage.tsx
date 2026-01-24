@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon, LoadingOverlay, WeeklyLimitBanner, WeeklyLimitModal } from '@/components/common'
@@ -107,6 +107,21 @@ export default function SpecialMealRecipeSelectionPage() {
     },
   })
 
+  const handleRecipeImageLoaded = useCallback((updatedRecipe: Recipe) => {
+    setPendingMeal((prev) => {
+      if (!prev) return prev
+      const updatedRecipes = prev.recipes.map((r) =>
+        r.id === updatedRecipe.id ? { ...r, imageUrl: updatedRecipe.imageUrl } : r
+      )
+      const updatedMeal = { ...prev, recipes: updatedRecipes }
+      sessionStorage.setItem('pendingSpecialMeal', JSON.stringify(updatedMeal))
+      return updatedMeal
+    })
+    setViewingRecipe((prev) =>
+      prev?.id === updatedRecipe.id ? { ...prev, imageUrl: updatedRecipe.imageUrl } : prev
+    )
+  }, [])
+
   if (!pendingMeal && isLoading) {
     return <LoadingOverlay message="Loading recipes..." />
   }
@@ -176,9 +191,11 @@ export default function SpecialMealRecipeSelectionPage() {
             recipe={recipe}
             isSelected={selectedRecipeId === recipe.id}
             isFavorite={favoriteIds.has(recipe.id)}
+            imageType="specialMeal"
             onSelect={() => setSelectedRecipeId(prev => prev === recipe.id ? null : recipe.id)}
             onViewDetails={() => setViewingRecipe(recipe)}
             onFavorite={() => handleToggleFavorite(recipe.id)}
+            onImageLoaded={handleRecipeImageLoaded}
           />
         ))}
       </div>
@@ -187,7 +204,9 @@ export default function SpecialMealRecipeSelectionPage() {
       {viewingRecipe && (
         <RecipeDetailModal
           recipe={viewingRecipe}
+          imageType="specialMeal"
           onClose={() => setViewingRecipe(null)}
+          onImageLoaded={handleRecipeImageLoaded}
         />
       )}
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon, LoadingOverlay, WeeklyLimitBanner, WeeklyLimitModal } from '@/components/common'
@@ -104,6 +104,21 @@ export default function RecipeSelectionPage() {
     },
   })
 
+  const handleRecipeImageLoaded = useCallback((updatedRecipe: Recipe) => {
+    setPendingPlan((prev) => {
+      if (!prev) return prev
+      const updatedRecipes = prev.recipes.map((r) =>
+        r.id === updatedRecipe.id ? { ...r, imageUrl: updatedRecipe.imageUrl } : r
+      )
+      const updatedPlan = { ...prev, recipes: updatedRecipes }
+      sessionStorage.setItem('pendingMealPlan', JSON.stringify(updatedPlan))
+      return updatedPlan
+    })
+    setViewingRecipe((prev) =>
+      prev?.id === updatedRecipe.id ? { ...prev, imageUrl: updatedRecipe.imageUrl } : prev
+    )
+  }, [])
+
   if (!pendingPlan && isLoading) {
     return <LoadingOverlay message="Loading recipes..." />
   }
@@ -173,9 +188,11 @@ export default function RecipeSelectionPage() {
             recipe={recipe}
             isSelected={selectedRecipeId === recipe.id}
             isFavorite={favoriteIds.has(recipe.id)}
+            imageType="mealPlan"
             onSelect={() => setSelectedRecipeId(prev => prev === recipe.id ? null : recipe.id)}
             onViewDetails={() => setViewingRecipe(recipe)}
             onFavorite={() => handleToggleFavorite(recipe.id)}
+            onImageLoaded={handleRecipeImageLoaded}
           />
         ))}
       </div>
@@ -184,7 +201,9 @@ export default function RecipeSelectionPage() {
       {viewingRecipe && (
         <RecipeDetailModal
           recipe={viewingRecipe}
+          imageType="mealPlan"
           onClose={() => setViewingRecipe(null)}
+          onImageLoaded={handleRecipeImageLoaded}
         />
       )}
 

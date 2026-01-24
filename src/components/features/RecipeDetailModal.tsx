@@ -1,13 +1,28 @@
-import { Icon } from '@/components/common'
+import { Icon, LoadingSpinner } from '@/components/common'
 import { getRecipeImageUrl } from '@/utils/placeholders'
+import { useRecipeImagePolling } from '@/hooks'
 import type { Recipe } from '@/types'
+
+type ImageType = 'mealPlan' | 'familyMeal' | 'specialMeal'
 
 interface RecipeDetailModalProps {
   recipe: Recipe
+  imageType?: ImageType
   onClose: () => void
+  onImageLoaded?: (updatedRecipe: Recipe) => void
 }
 
-export function RecipeDetailModal({ recipe, onClose }: RecipeDetailModalProps) {
+export function RecipeDetailModal({
+  recipe,
+  imageType = 'mealPlan',
+  onClose,
+  onImageLoaded,
+}: RecipeDetailModalProps) {
+  const { imageUrl, isPolling } = useRecipeImagePolling({
+    recipe,
+    onImageLoaded,
+  })
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto"
@@ -25,12 +40,21 @@ export function RecipeDetailModal({ recipe, onClose }: RecipeDetailModalProps) {
         <div className="relative bg-background-light dark:bg-background-dark rounded-2xl overflow-hidden shadow-2xl">
           {/* Hero image */}
           <div className="relative h-72 lg:h-96 w-full">
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{
-                backgroundImage: `url("${getRecipeImageUrl(recipe.imageUrl, 'mealPlan')}")`,
-              }}
-            />
+            {isPolling ? (
+              <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 flex flex-col items-center justify-center gap-3">
+                <LoadingSpinner size="lg" />
+                <span className="text-sm text-text-muted-light dark:text-text-muted-dark font-medium">
+                  Generating image...
+                </span>
+              </div>
+            ) : (
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{
+                  backgroundImage: `url("${getRecipeImageUrl(imageUrl, imageType)}")`,
+                }}
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
             {/* Close button */}

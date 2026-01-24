@@ -65,6 +65,8 @@ export default function SpecialMealRecipeDetailPage() {
   const { imageUrl, isPolling } = useRecipeImagePolling({
     recipe: recipe!,
     onImageLoaded: handleImageLoaded,
+    pollingInterval: 2000,
+    maxRetries: 2,
   })
 
   if (!event || !recipe) {
@@ -207,7 +209,7 @@ export default function SpecialMealRecipeDetailPage() {
                     Servings
                   </p>
                   <p className="font-bold text-text-main-light dark:text-white text-lg">
-                    {recipe.servings} People
+                    {recipe.servings}
                   </p>
                 </div>
               </div>

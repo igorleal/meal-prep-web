@@ -66,6 +66,8 @@ export default function MealPlanRecipeDetailPage() {
   const { imageUrl, isPolling } = useRecipeImagePolling({
     recipe: recipe!,
     onImageLoaded: handleImageLoaded,
+    pollingInterval: 2000,
+    maxRetries: 2,
   })
 
   if (!plan || !recipe || !request) {
@@ -229,7 +231,7 @@ export default function MealPlanRecipeDetailPage() {
                     Servings
                   </p>
                   <p className="font-bold text-text-main-light dark:text-white text-lg">
-                    {recipe.servings} People
+                    {recipe.servings}
                   </p>
                 </div>
               </div>

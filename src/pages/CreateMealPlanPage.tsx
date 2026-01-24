@@ -47,16 +47,21 @@ export default function CreateMealPlanPage() {
   const [selectedRestrictions, setSelectedRestrictions] = useState<string[]>([])
   // Focus areas state: keyed by backend key (e.g., HIGH_PROTEIN)
   const [focusAreas, setFocusAreas] = useState<Record<string, { enabled: boolean; value: number }>>({})
-  const [macros, setMacros] = useState({
-    calories: 0,
-    protein: 0,
-    carbs: 0,
-    fats: 0,
+  const [macros, setMacros] = useState<{
+    calories: number | null
+    protein: number | null
+    carbs: number | null
+    fats: number | null
+  }>({
+    calories: null,
+    protein: null,
+    carbs: null,
+    fats: null,
   })
   const [mustHaves, setMustHaves] = useState<string[]>([])
   const [excludes, setExcludes] = useState<string[]>([])
-  const [mealsPerDay, setMealsPerDay] = useState(3)
-  const [days, setDays] = useState(7)
+  const [mealsPerDay, setMealsPerDay] = useState(1)
+  const [days, setDays] = useState(5)
 
   const hasReachedLimit = currentUser?.hasReachedWeeklyLimit ?? false
 
@@ -197,36 +202,36 @@ export default function CreateMealPlanPage() {
               label="Calories"
               type="number"
               suffix="kcal"
-              value={macros.calories}
+              value={macros.calories ?? ''}
               onChange={(e) =>
-                setMacros((prev) => ({ ...prev, calories: Number(e.target.value) }))
+                setMacros((prev) => ({ ...prev, calories: e.target.value === '' ? null : Number(e.target.value) }))
               }
             />
             <Input
               label="Protein"
               type="number"
               suffix="g"
-              value={macros.protein}
+              value={macros.protein ?? ''}
               onChange={(e) =>
-                setMacros((prev) => ({ ...prev, protein: Number(e.target.value) }))
+                setMacros((prev) => ({ ...prev, protein: e.target.value === '' ? null : Number(e.target.value) }))
               }
             />
             <Input
               label="Carbohydrates"
               type="number"
               suffix="g"
-              value={macros.carbs}
+              value={macros.carbs ?? ''}
               onChange={(e) =>
-                setMacros((prev) => ({ ...prev, carbs: Number(e.target.value) }))
+                setMacros((prev) => ({ ...prev, carbs: e.target.value === '' ? null : Number(e.target.value) }))
               }
             />
             <Input
               label="Fats"
               type="number"
               suffix="g"
-              value={macros.fats}
+              value={macros.fats ?? ''}
               onChange={(e) =>
-                setMacros((prev) => ({ ...prev, fats: Number(e.target.value) }))
+                setMacros((prev) => ({ ...prev, fats: e.target.value === '' ? null : Number(e.target.value) }))
               }
             />
           </div>

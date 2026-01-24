@@ -7,6 +7,8 @@ interface UseRecipeImagePollingOptions {
   onImageLoaded?: (updatedRecipe: Recipe) => void
   pollingInterval?: number
   maxPollingTime?: number
+  /** If set, only fetch this many times (including initial fetch) instead of continuous polling */
+  maxRetries?: number
 }
 
 interface UseRecipeImagePollingResult {
@@ -20,12 +22,14 @@ export function useRecipeImagePolling({
   onImageLoaded,
   pollingInterval = 1000,
   maxPollingTime = 10000,
+  maxRetries,
 }: UseRecipeImagePollingOptions): UseRecipeImagePollingResult {
   const [imageUrl, setImageUrl] = useState<string | undefined>(recipe.imageUrl)
   const [isPolling, setIsPolling] = useState(!recipe.imageUrl)
   const [hasTimedOut, setHasTimedOut] = useState(false)
   const startTimeRef = useRef<number | null>(null)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const retryCountRef = useRef(0)
 
   const stopPolling = useCallback(() => {
     if (intervalRef.current) {
@@ -45,10 +49,13 @@ export function useRecipeImagePolling({
 
     // Start polling
     startTimeRef.current = Date.now()
+    retryCountRef.current = 0
     setIsPolling(true)
     setHasTimedOut(false)
 
     const poll = async () => {
+      retryCountRef.current++
+
       try {
         const updatedRecipe = await recipeService.getRecipe(recipe.id)
 
@@ -59,8 +66,15 @@ export function useRecipeImagePolling({
           return
         }
 
-        // Check if we've exceeded max polling time
-        if (startTimeRef.current && Date.now() - startTimeRef.current >= maxPollingTime) {
+        // Check if we've exceeded max retries (if using retry-based polling)
+        if (maxRetries !== undefined && retryCountRef.current >= maxRetries) {
+          stopPolling()
+          setHasTimedOut(true)
+          return
+        }
+
+        // Check if we've exceeded max polling time (if using time-based polling)
+        if (maxRetries === undefined && startTimeRef.current && Date.now() - startTimeRef.current >= maxPollingTime) {
           stopPolling()
           setHasTimedOut(true)
         }
@@ -68,14 +82,25 @@ export function useRecipeImagePolling({
         // Continue polling on error, don't stop
         console.error('Error polling for recipe image:', error)
 
-        // Still check timeout
-        if (startTimeRef.current && Date.now() - startTimeRef.current >= maxPollingTime) {
+        // Check if we've exceeded max retries
+        if (maxRetries !== undefined && retryCountRef.current >= maxRetries) {
+          stopPolling()
+          setHasTimedOut(true)
+          return
+        }
+
+        // Still check timeout for time-based polling
+        if (maxRetries === undefined && startTimeRef.current && Date.now() - startTimeRef.current >= maxPollingTime) {
           stopPolling()
           setHasTimedOut(true)
         }
       }
     }
 
+    // Fetch immediately on mount
+    poll()
+
+    // Then set up interval for subsequent fetches
     intervalRef.current = setInterval(poll, pollingInterval)
 
     // Cleanup
@@ -85,7 +110,7 @@ export function useRecipeImagePolling({
         intervalRef.current = null
       }
     }
-  }, [recipe.id, recipe.imageUrl, pollingInterval, maxPollingTime, onImageLoaded, stopPolling])
+  }, [recipe.id, recipe.imageUrl, pollingInterval, maxPollingTime, maxRetries, onImageLoaded, stopPolling])
 
   return { imageUrl, isPolling, hasTimedOut }
 }

@@ -21,6 +21,8 @@ export function RecipeDetailModal({
   const { imageUrl, isPolling } = useRecipeImagePolling({
     recipe,
     onImageLoaded,
+    pollingInterval: 2000,
+    maxRetries: 2,
   })
 
   return (
@@ -147,7 +149,7 @@ export function RecipeDetailModal({
                         Servings
                       </p>
                       <p className="font-bold text-text-main-light dark:text-white text-lg">
-                        {recipe.servings} People
+                        {recipe.servings}
                       </p>
                     </div>
                   </div>

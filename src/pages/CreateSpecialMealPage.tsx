@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { Button, Icon, Card, DatePicker, WeeklyLimitBanner, WeeklyLimitModal } from '@/components/common'
-import { foodFriendsService, userService } from '@/api/services'
+import { useQuery } from '@tanstack/react-query'
+import { Button, Icon, Card, DatePicker, WeeklyLimitBanner } from '@/components/common'
+import { userService } from '@/api/services'
 import { cn } from '@/utils/cn'
 
 const dietaryOptions = [
@@ -29,7 +29,6 @@ export default function CreateSpecialMealPage() {
   const [customRestriction, setCustomRestriction] = useState('')
   const [mustHaves, setMustHaves] = useState('')
   const [exclusions, setExclusions] = useState('')
-  const [showLimitModal, setShowLimitModal] = useState(false)
 
   const hasReachedLimit = currentUser?.hasReachedWeeklyLimit ?? false
 
@@ -60,29 +59,6 @@ export default function CreateSpecialMealPage() {
     }
   }
 
-  const generateMutation = useMutation({
-    mutationFn: foodFriendsService.generateRecipes,
-    onSuccess: (recipes) => {
-      sessionStorage.setItem(
-        'pendingSpecialMeal',
-        JSON.stringify({
-          name,
-          eventDate,
-          recipes,
-          restrictions,
-          mustHaves: mustHaves.split(',').map((s) => s.trim()).filter(Boolean),
-          exclusions: exclusions.split(',').map((s) => s.trim()).filter(Boolean),
-        })
-      )
-      navigate('/special-meals/recipes')
-    },
-    onError: (error: { response?: { status?: number } }) => {
-      if (error.response?.status === 429) {
-        setShowLimitModal(true)
-      }
-    },
-  })
-
   const toggleRestriction = (id: string) => {
     setRestrictions((prev) =>
       prev.includes(id)
@@ -110,13 +86,29 @@ export default function CreateSpecialMealPage() {
       return
     }
 
-    generateMutation.mutate({
+    const request = {
       name,
       eventDate,
       mustHaves: mustHaves.split(',').map((s) => s.trim()).filter(Boolean),
       restrictions,
       exclusions: exclusions.split(',').map((s) => s.trim()).filter(Boolean),
-    })
+    }
+
+    // Store request and navigate immediately - the selection page will make the API call
+    sessionStorage.setItem(
+      'pendingSpecialMealRequest',
+      JSON.stringify({
+        name,
+        eventDate,
+        restrictions,
+        mustHaves: mustHaves.split(',').map((s) => s.trim()).filter(Boolean),
+        exclusions: exclusions.split(',').map((s) => s.trim()).filter(Boolean),
+        request,
+      })
+    )
+    // Clear any previous recipes
+    sessionStorage.removeItem('pendingSpecialMeal')
+    navigate('/special-meals/recipes')
   }
 
   return (
@@ -280,7 +272,6 @@ export default function CreateSpecialMealPage() {
                 onClick={handleSubmit}
                 icon="arrow_forward"
                 iconPosition="right"
-                loading={generateMutation.isPending}
                 disabled={!name.trim() || hasReachedLimit}
               >
                 Next: Choose Theme
@@ -319,11 +310,6 @@ export default function CreateSpecialMealPage() {
 
         </div>
       </div>
-
-      {/* Weekly Limit Modal */}
-      {showLimitModal && (
-        <WeeklyLimitModal onClose={() => setShowLimitModal(false)} />
-      )}
     </div>
   )
 }

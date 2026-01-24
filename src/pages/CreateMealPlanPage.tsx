@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import {
   Button,
   Input,
@@ -8,9 +8,8 @@ import {
   ChipInput,
   RangeSlider,
   WeeklyLimitBanner,
-  WeeklyLimitModal,
 } from '@/components/common'
-import { receitaiPlanService, configService, userService } from '@/api/services'
+import { configService, userService } from '@/api/services'
 import { useAuth } from '@/context/AuthContext'
 import { cn } from '@/utils/cn'
 import type { FocusArea, GenerateReceitAIPlanRequest } from '@/types'
@@ -49,16 +48,15 @@ export default function CreateMealPlanPage() {
   // Focus areas state: keyed by backend key (e.g., HIGH_PROTEIN)
   const [focusAreas, setFocusAreas] = useState<Record<string, { enabled: boolean; value: number }>>({})
   const [macros, setMacros] = useState({
-    calories: 2200,
-    protein: 180,
-    carbs: 200,
-    fats: 75,
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fats: 0,
   })
-  const [mustHaves, setMustHaves] = useState(['Avocado', 'Chicken Breast'])
-  const [excludes, setExcludes] = useState(['Cilantro'])
+  const [mustHaves, setMustHaves] = useState<string[]>([])
+  const [excludes, setExcludes] = useState<string[]>([])
   const [mealsPerDay, setMealsPerDay] = useState(3)
   const [days, setDays] = useState(7)
-  const [showLimitModal, setShowLimitModal] = useState(false)
 
   const hasReachedLimit = currentUser?.hasReachedWeeklyLimit ?? false
 
@@ -80,25 +78,6 @@ export default function CreateMealPlanPage() {
     }
   }, [backendFocusAreas, focusAreas])
 
-  const generateMutation = useMutation({
-    mutationFn: receitaiPlanService.generateRecipes,
-    onSuccess: (recipes) => {
-      sessionStorage.setItem(
-        'pendingMealPlan',
-        JSON.stringify({
-          planName,
-          recipes,
-        })
-      )
-      navigate('/meal-plans/recipes')
-    },
-    onError: (error: { response?: { status?: number } }) => {
-      if (error.response?.status === 429) {
-        setShowLimitModal(true)
-      }
-    },
-  })
-
   const handleSubmit = () => {
     const request: GenerateReceitAIPlanRequest = {
       name: planName,
@@ -116,7 +95,17 @@ export default function CreateMealPlanPage() {
       mealsPerDay,
       days,
     }
-    generateMutation.mutate(request)
+    // Store request and navigate immediately - the selection page will make the API call
+    sessionStorage.setItem(
+      'pendingMealPlanRequest',
+      JSON.stringify({
+        planName,
+        request,
+      })
+    )
+    // Clear any previous recipes
+    sessionStorage.removeItem('pendingMealPlan')
+    navigate('/meal-plans/recipes')
   }
 
   return (
@@ -291,18 +280,12 @@ export default function CreateMealPlanPage() {
         <Button
           icon="arrow_forward"
           onClick={handleSubmit}
-          loading={generateMutation.isPending}
           disabled={!planName.trim() || hasReachedLimit}
           className="shadow-lg shadow-primary/30"
         >
           Next: Generate Preview
         </Button>
       </div>
-
-      {/* Weekly Limit Modal */}
-      {showLimitModal && (
-        <WeeklyLimitModal onClose={() => setShowLimitModal(false)} />
-      )}
     </div>
   )
 }

@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { Button, Icon, WeeklyLimitBanner, WeeklyLimitModal } from '@/components/common'
-import { familyPlanService, userService } from '@/api/services'
+import { useQuery } from '@tanstack/react-query'
+import { Button, Icon, WeeklyLimitBanner } from '@/components/common'
+import { userService } from '@/api/services'
 import { cn } from '@/utils/cn'
 
 const dietaryOptions = [
@@ -32,7 +32,6 @@ export default function CreateFamilyMealPage() {
   const [mustHaves, setMustHaves] = useState<string[]>([])
   const [mustHaveInput, setMustHaveInput] = useState('')
   const [exclusions, setExclusions] = useState('')
-  const [showLimitModal, setShowLimitModal] = useState(false)
 
   const hasReachedLimit = currentUser?.hasReachedWeeklyLimit ?? false
 
@@ -41,29 +40,6 @@ export default function CreateFamilyMealPage() {
   const dayName = date.toLocaleDateString('en-US', { weekday: 'long' })
   const month = date.toLocaleDateString('en-US', { month: 'short' })
   const dayNum = date.getDate()
-
-  const generateMutation = useMutation({
-    mutationFn: familyPlanService.generateRecipes,
-    onSuccess: (recipes) => {
-      sessionStorage.setItem(
-        'pendingFamilyMeal',
-        JSON.stringify({
-          date: dateParam,
-          mealType,
-          restrictions,
-          mustHaves,
-          exclusions: exclusions.split(',').map((s) => s.trim()).filter(Boolean),
-          recipes,
-        })
-      )
-      navigate('/calendar/recipes')
-    },
-    onError: (error: { response?: { status?: number } }) => {
-      if (error.response?.status === 429) {
-        setShowLimitModal(true)
-      }
-    },
-  })
 
   const toggleRestriction = (id: string) => {
     setRestrictions((prev) =>
@@ -89,12 +65,27 @@ export default function CreateFamilyMealPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    generateMutation.mutate({
+    const request = {
       date: dateParam,
       restrictions,
       mustHaves,
       exclusions: exclusions.split(',').map((s) => s.trim()).filter(Boolean),
-    })
+    }
+    // Store request and navigate immediately - the selection page will make the API call
+    sessionStorage.setItem(
+      'pendingFamilyMealRequest',
+      JSON.stringify({
+        date: dateParam,
+        mealType,
+        restrictions,
+        mustHaves,
+        exclusions: exclusions.split(',').map((s) => s.trim()).filter(Boolean),
+        request,
+      })
+    )
+    // Clear any previous recipes
+    sessionStorage.removeItem('pendingFamilyMeal')
+    navigate('/calendar/recipes')
   }
 
   return (
@@ -243,7 +234,6 @@ export default function CreateFamilyMealPage() {
               type="submit"
               className="w-full py-4 text-lg font-extrabold shadow-lg shadow-primary/30"
               icon="auto_awesome"
-              loading={generateMutation.isPending}
               disabled={hasReachedLimit}
             >
               Generate Recipe Suggestions
@@ -254,11 +244,6 @@ export default function CreateFamilyMealPage() {
           </div>
         </form>
       </div>
-
-      {/* Weekly Limit Modal */}
-      {showLimitModal && (
-        <WeeklyLimitModal onClose={() => setShowLimitModal(false)} />
-      )}
     </div>
   )
 }

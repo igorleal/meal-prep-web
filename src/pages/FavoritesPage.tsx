@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Button, Icon, LoadingOverlay } from '@/components/common'
+import { Button, Icon, LoadingOverlay, MobileCarousel } from '@/components/common'
 import { favoriteService } from '@/api/services'
 import { getRecipeImageUrl } from '@/utils/placeholders'
 import type { Recipe } from '@/types'
@@ -133,13 +133,13 @@ export default function FavoritesPage() {
   })
 
   return (
-    <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-8">
         <div>
           <div className="flex items-center gap-3 mb-2">
             <Icon name="favorite" className="text-primary" size="lg" />
-            <h1 className="text-3xl font-extrabold text-text-main-light dark:text-white">
+            <h1 className="text-2xl md:text-3xl font-extrabold text-text-main-light dark:text-white">
               Favorite Recipes
             </h1>
           </div>
@@ -153,19 +153,40 @@ export default function FavoritesPage() {
       {isLoading ? (
         <LoadingOverlay message="Loading favorites..." />
       ) : favorites.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {favorites.map((recipe) => (
-            <FavoriteRecipeCard
-              key={recipe.id}
-              recipe={recipe}
-              onUnfavorite={() => unfavoriteMutation.mutate(recipe.id)}
-              onViewDetails={() => {
-                sessionStorage.setItem('viewingFavoriteRecipe', JSON.stringify(recipe))
-                navigate('/favorites/recipe')
-              }}
+        <>
+          {/* Mobile carousel */}
+          <div className="md:hidden">
+            <MobileCarousel
+              items={favorites}
+              keyExtractor={(recipe) => recipe.id}
+              renderItem={(recipe) => (
+                <FavoriteRecipeCard
+                  recipe={recipe}
+                  onUnfavorite={() => unfavoriteMutation.mutate(recipe.id)}
+                  onViewDetails={() => {
+                    sessionStorage.setItem('viewingFavoriteRecipe', JSON.stringify(recipe))
+                    navigate('/favorites/recipe')
+                  }}
+                />
+              )}
             />
-          ))}
-        </div>
+          </div>
+
+          {/* Desktop grid */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {favorites.map((recipe) => (
+              <FavoriteRecipeCard
+                key={recipe.id}
+                recipe={recipe}
+                onUnfavorite={() => unfavoriteMutation.mutate(recipe.id)}
+                onViewDetails={() => {
+                  sessionStorage.setItem('viewingFavoriteRecipe', JSON.stringify(recipe))
+                  navigate('/favorites/recipe')
+                }}
+              />
+            ))}
+          </div>
+        </>
       ) : (
         <div className="text-center py-16">
           <Icon

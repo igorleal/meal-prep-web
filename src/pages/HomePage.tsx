@@ -63,16 +63,16 @@ function HomePanel({ panel, index }: { panel: PanelConfig; index: number }) {
       <div className="absolute inset-0 bg-black/5 z-0 pointer-events-none" />
 
       {/* Content */}
-      <div className="relative z-10 p-8 flex flex-col items-center text-center max-w-md panel-transition">
+      <div className="relative z-10 p-4 md:p-8 flex flex-col items-center text-center max-w-md panel-transition">
         <Icon
           name={panel.icon}
           className="text-white text-7xl mb-6 opacity-90"
           size="xl"
         />
-        <h2 className="text-white text-3xl lg:text-4xl font-extrabold tracking-tight mb-3">
+        <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight mb-3">
           {panel.title}
         </h2>
-        <p className="text-white/90 text-lg font-medium leading-relaxed mb-8">
+        <p className="text-white/90 text-base md:text-lg font-medium leading-relaxed mb-6 md:mb-8">
           {panel.description}
         </p>
         <Button

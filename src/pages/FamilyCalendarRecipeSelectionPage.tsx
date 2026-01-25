@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Button, Icon, WeeklyLimitBanner, WeeklyLimitModal } from '@/components/common'
+import { Button, Icon, WeeklyLimitBanner, WeeklyLimitModal, MobileCarousel } from '@/components/common'
 import { RecipeCard, RecipeDetailModal } from '@/components/features'
 import { familyPlanService, favoriteService, userService } from '@/api/services'
 import type { Recipe, GenerateFamilyPlanRequest } from '@/types'
@@ -28,7 +28,7 @@ function LoadingCard() {
   return (
     <div className="relative flex flex-col overflow-hidden rounded-2xl bg-surface-light dark:bg-surface-dark shadow-xl animate-pulse">
       <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-primary/30 z-30" />
-      <div className="h-64 w-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+      <div className="h-48 md:h-64 w-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
           <div className="w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-600 border-t-primary animate-spin" />
           <span className="text-sm text-text-muted-light dark:text-text-muted-dark font-medium">
@@ -36,7 +36,7 @@ function LoadingCard() {
           </span>
         </div>
       </div>
-      <div className="flex flex-1 flex-col p-8 pt-6">
+      <div className="flex flex-1 flex-col p-4 md:p-8 pt-4 md:pt-6">
         <div className="h-7 bg-gray-200 dark:bg-gray-700 rounded-lg w-3/4 mb-3" />
         <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2" />
         <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-6" />
@@ -255,7 +255,7 @@ export default function FamilyCalendarRecipeSelectionPage() {
   }
 
   return (
-    <div className="max-w-[1280px] mx-auto px-4 md:px-8 lg:px-12 py-12">
+    <div className="max-w-[1280px] mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-12">
       {/* Back button */}
       <button
         onClick={() => navigate(`/calendar/create?date=${mealInfo?.date || ''}&meal=${mealInfo?.mealType || ''}`)}
@@ -269,13 +269,13 @@ export default function FamilyCalendarRecipeSelectionPage() {
       {hasReachedLimit && <WeeklyLimitBanner />}
 
       {/* Header */}
-      <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <div className="mb-6 md:mb-12 flex flex-col gap-4 md:gap-6 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2 text-primary text-sm font-bold uppercase tracking-widest">
             <Icon name="auto_awesome" className="text-lg" />
             AI Recommended For You
           </div>
-          <h1 className="text-text-main-light dark:text-white text-4xl md:text-5xl font-black leading-tight tracking-tight">
+          <h1 className="text-text-main-light dark:text-white text-2xl md:text-4xl lg:text-5xl font-black leading-tight tracking-tight">
             Personalized Menu Selection
           </h1>
           <p className="text-text-muted-light dark:text-text-muted-dark text-lg max-w-2xl">
@@ -309,30 +309,55 @@ export default function FamilyCalendarRecipeSelectionPage() {
         </div>
       </div>
 
-      {/* Recipe grid */}
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {isGenerating ? (
-          <>
-            <LoadingCard />
-            <LoadingCard />
-            <LoadingCard />
-          </>
-        ) : (
-          pendingMeal?.recipes.map((recipe) => (
-            <RecipeCard
-              key={recipe.id}
-              recipe={recipe}
-              isSelected={selectedRecipeId === recipe.id}
-              isFavorite={favoriteIds.has(recipe.id)}
-              imageType="familyMeal"
-              onSelect={() => setSelectedRecipeId(prev => prev === recipe.id ? null : recipe.id)}
-              onViewDetails={() => setViewingRecipe(recipe)}
-              onFavorite={() => handleToggleFavorite(recipe.id)}
-              onImageLoaded={handleRecipeImageLoaded}
+      {/* Recipe grid - Loading state */}
+      {(isGenerating || regenerateMutation.isPending) && (
+        <div className="grid gap-4 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <LoadingCard />
+          <LoadingCard />
+          <LoadingCard />
+        </div>
+      )}
+
+      {/* Recipe grid - Mobile carousel */}
+      {!isGenerating && !regenerateMutation.isPending && pendingMeal?.recipes && (
+        <>
+          <div className="md:hidden">
+            <MobileCarousel
+              items={pendingMeal.recipes}
+              keyExtractor={(recipe) => recipe.id}
+              renderItem={(recipe) => (
+                <RecipeCard
+                  recipe={recipe}
+                  isSelected={selectedRecipeId === recipe.id}
+                  isFavorite={favoriteIds.has(recipe.id)}
+                  imageType="familyMeal"
+                  onSelect={() => setSelectedRecipeId(prev => prev === recipe.id ? null : recipe.id)}
+                  onViewDetails={() => setViewingRecipe(recipe)}
+                  onFavorite={() => handleToggleFavorite(recipe.id)}
+                  onImageLoaded={handleRecipeImageLoaded}
+                />
+              )}
             />
-          ))
-        )}
-      </div>
+          </div>
+
+          {/* Recipe grid - Desktop */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {pendingMeal.recipes.map((recipe) => (
+              <RecipeCard
+                key={recipe.id}
+                recipe={recipe}
+                isSelected={selectedRecipeId === recipe.id}
+                isFavorite={favoriteIds.has(recipe.id)}
+                imageType="familyMeal"
+                onSelect={() => setSelectedRecipeId(prev => prev === recipe.id ? null : recipe.id)}
+                onViewDetails={() => setViewingRecipe(recipe)}
+                onFavorite={() => handleToggleFavorite(recipe.id)}
+                onImageLoaded={handleRecipeImageLoaded}
+              />
+            ))}
+          </div>
+        </>
+      )}
 
       {/* Recipe Detail Modal */}
       {viewingRecipe && (

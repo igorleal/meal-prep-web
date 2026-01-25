@@ -47,7 +47,7 @@ export function RecipeCard({
 
       {/* Image section */}
       <div
-        className="relative h-64 w-full overflow-hidden cursor-pointer"
+        className="relative h-48 md:h-64 w-full overflow-hidden cursor-pointer"
         onClick={onViewDetails}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
@@ -91,19 +91,19 @@ export function RecipeCard({
 
       {/* Content section */}
       <div
-        className="flex flex-1 flex-col p-8 pt-6 cursor-pointer"
+        className="flex flex-1 flex-col p-4 md:p-8 pt-4 md:pt-6 cursor-pointer"
         onClick={onViewDetails}
       >
-        <h3 className="mb-3 text-2xl font-black text-text-main-light dark:text-white leading-tight">
+        <h3 className="mb-2 md:mb-3 text-xl md:text-2xl font-black text-text-main-light dark:text-white leading-tight">
           {recipe.name}
         </h3>
-        <p className="mb-6 text-base text-text-muted-light dark:text-text-muted-dark leading-relaxed line-clamp-2">
+        <p className="mb-4 md:mb-6 text-sm md:text-base text-text-muted-light dark:text-text-muted-dark leading-relaxed line-clamp-2">
           {recipe.description}
         </p>
 
         {/* Keywords */}
         {recipe.keywords && recipe.keywords.length > 0 && (
-          <div className="mb-8 flex flex-wrap gap-2">
+          <div className="mb-4 md:mb-8 flex flex-wrap gap-2">
             {recipe.keywords.map((keyword, i) => (
               <span
                 key={i}
@@ -118,7 +118,7 @@ export function RecipeCard({
         {/* Macros and button */}
         <div className="mt-auto">
           {/* Macros grid */}
-          <div className="mb-6 grid grid-cols-4 divide-x divide-gray-100 dark:divide-white/10 rounded-xl border border-gray-100 dark:border-white/10 bg-background-light dark:bg-white/5 py-4">
+          <div className="mb-4 md:mb-6 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-0 md:divide-x divide-gray-100 dark:divide-white/10 rounded-xl border border-gray-100 dark:border-white/10 bg-background-light dark:bg-white/5 py-3 md:py-4">
             <div className="text-center px-1">
               <span className="block text-[10px] uppercase text-text-muted-light dark:text-text-muted-dark font-black tracking-widest mb-1">
                 Cal

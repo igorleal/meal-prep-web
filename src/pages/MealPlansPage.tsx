@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Button, Icon, Card, Badge, LoadingOverlay } from '@/components/common'
+import { Button, Icon, Card, Badge, LoadingOverlay, MobileCarousel } from '@/components/common'
 import { receitaiPlanService } from '@/api/services'
 import { getRecipeImageUrl } from '@/utils/placeholders'
 import type { ReceitAIPlanResponse } from '@/types'
@@ -99,11 +99,11 @@ export default function MealPlansPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-extrabold text-text-main-light dark:text-white mb-2">
+          <h1 className="text-2xl md:text-3xl font-extrabold text-text-main-light dark:text-white mb-2">
             My Meal Plans
           </h1>
           <p className="text-text-muted-light dark:text-text-muted-dark">
@@ -123,16 +123,34 @@ export default function MealPlansPage() {
       {isLoading ? (
         <LoadingOverlay message="Loading meal plans..." />
       ) : plans && plans.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {plans.map((plan) => (
-            <MealPlanCard
-              key={plan.plan.id}
-              plan={plan}
-              onDelete={setPlanToDelete}
-              onClick={handleViewPlan}
+        <>
+          {/* Mobile carousel */}
+          <div className="md:hidden">
+            <MobileCarousel
+              items={plans}
+              keyExtractor={(plan) => plan.plan.id}
+              renderItem={(plan) => (
+                <MealPlanCard
+                  plan={plan}
+                  onDelete={setPlanToDelete}
+                  onClick={handleViewPlan}
+                />
+              )}
             />
-          ))}
-        </div>
+          </div>
+
+          {/* Desktop grid */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {plans.map((plan) => (
+              <MealPlanCard
+                key={plan.plan.id}
+                plan={plan}
+                onDelete={setPlanToDelete}
+                onClick={handleViewPlan}
+              />
+            ))}
+          </div>
+        </>
       ) : (
         <div className="text-center py-16">
           <Icon

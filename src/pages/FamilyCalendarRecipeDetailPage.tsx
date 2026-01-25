@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon, LoadingSpinner } from '@/components/common'
 import { favoriteService } from '@/api/services'
 import { getRecipeImageUrl } from '@/utils/placeholders'
+import { formatUnit, stripInstructionPrefix } from '@/utils/recipe'
 import { useRecipeImagePolling } from '@/hooks'
 import type { FamilyPlanResponse, Recipe } from '@/types'
 
@@ -55,7 +56,7 @@ export default function FamilyCalendarRecipeDetailPage() {
 
   const handleImageLoaded = useCallback((updatedRecipe: Recipe) => {
     setMeal((prev) => {
-      if (!prev) return prev
+      if (!prev || !prev.recipe) return prev
       const updated = { ...prev, recipe: { ...prev.recipe, imageUrl: updatedRecipe.imageUrl } }
       sessionStorage.setItem('viewingFamilyMeal', JSON.stringify(updated))
       return updated
@@ -237,7 +238,7 @@ export default function FamilyCalendarRecipeDetailPage() {
                       />
                       <span>
                         <strong className="font-bold">
-                          {ing.quantity} {ing.unit}
+                          {ing.quantity} {formatUnit(ing.unit)}
                         </strong>{' '}
                         {ing.name}
                       </span>
@@ -266,7 +267,7 @@ export default function FamilyCalendarRecipeDetailPage() {
                     </div>
                     <div className="pb-8">
                       <p className="text-text-main-light dark:text-white/80 leading-relaxed text-base">
-                        {step}
+                        {stripInstructionPrefix(step)}
                       </p>
                     </div>
                   </div>

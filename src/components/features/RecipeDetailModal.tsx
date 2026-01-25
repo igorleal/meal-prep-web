@@ -1,5 +1,6 @@
 import { Icon, LoadingSpinner } from '@/components/common'
 import { getRecipeImageUrl } from '@/utils/placeholders'
+import { formatUnit, stripInstructionPrefix } from '@/utils/recipe'
 import { useRecipeImagePolling } from '@/hooks'
 import type { Recipe } from '@/types'
 
@@ -177,7 +178,7 @@ export function RecipeDetailModal({
                           />
                           <span>
                             <strong className="font-bold">
-                              {ing.quantity} {ing.unit}
+                              {ing.quantity} {formatUnit(ing.unit)}
                             </strong>{' '}
                             {ing.name}
                           </span>
@@ -206,7 +207,7 @@ export function RecipeDetailModal({
                         </div>
                         <div className="pb-8">
                           <p className="text-text-main-light dark:text-white/80 leading-relaxed text-base">
-                            {step}
+                            {stripInstructionPrefix(step)}
                           </p>
                         </div>
                       </div>

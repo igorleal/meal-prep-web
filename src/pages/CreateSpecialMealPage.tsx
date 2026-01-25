@@ -27,8 +27,10 @@ export default function CreateSpecialMealPage() {
   const [dateError, setDateError] = useState('')
   const [restrictions, setRestrictions] = useState<string[]>([])
   const [customRestriction, setCustomRestriction] = useState('')
-  const [mustHaves, setMustHaves] = useState('')
-  const [exclusions, setExclusions] = useState('')
+  const [mustHaves, setMustHaves] = useState<string[]>([])
+  const [mustHaveInput, setMustHaveInput] = useState('')
+  const [exclusions, setExclusions] = useState<string[]>([])
+  const [exclusionInput, setExclusionInput] = useState('')
 
   const hasReachedLimit = currentUser?.hasReachedWeeklyLimit ?? false
 
@@ -77,6 +79,38 @@ export default function CreateSpecialMealPage() {
     }
   }
 
+  const removeRestriction = (item: string) => {
+    setRestrictions(restrictions.filter((r) => r !== item))
+  }
+
+  const handleAddMustHave = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && mustHaveInput.trim()) {
+      e.preventDefault()
+      if (!mustHaves.includes(mustHaveInput.trim())) {
+        setMustHaves([...mustHaves, mustHaveInput.trim()])
+      }
+      setMustHaveInput('')
+    }
+  }
+
+  const removeMustHave = (item: string) => {
+    setMustHaves(mustHaves.filter((h) => h !== item))
+  }
+
+  const handleAddExclusion = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && exclusionInput.trim()) {
+      e.preventDefault()
+      if (!exclusions.includes(exclusionInput.trim())) {
+        setExclusions([...exclusions, exclusionInput.trim()])
+      }
+      setExclusionInput('')
+    }
+  }
+
+  const removeExclusion = (item: string) => {
+    setExclusions(exclusions.filter((e) => e !== item))
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -89,9 +123,9 @@ export default function CreateSpecialMealPage() {
     const request = {
       name,
       eventDate,
-      mustHaves: mustHaves.split(',').map((s) => s.trim()).filter(Boolean),
+      mustHaves,
       restrictions,
-      exclusions: exclusions.split(',').map((s) => s.trim()).filter(Boolean),
+      exclusions,
     }
 
     // Store request and navigate immediately - the selection page will make the API call
@@ -101,8 +135,8 @@ export default function CreateSpecialMealPage() {
         name,
         eventDate,
         restrictions,
-        mustHaves: mustHaves.split(',').map((s) => s.trim()).filter(Boolean),
-        exclusions: exclusions.split(',').map((s) => s.trim()).filter(Boolean),
+        mustHaves,
+        exclusions,
         request,
       })
     )
@@ -214,15 +248,33 @@ export default function CreateSpecialMealPage() {
                     </span>
                   </label>
                 ))}
+                {/* Custom restrictions as chips */}
+                {restrictions
+                  .filter((r) => !dietaryOptions.some((opt) => opt.id === r))
+                  .map((item) => (
+                    <span
+                      key={item}
+                      className="inline-flex items-center gap-1.5 bg-primary text-white border border-primary px-4 py-2 rounded-full text-sm font-medium"
+                    >
+                      {item}
+                      <button
+                        type="button"
+                        onClick={() => removeRestriction(item)}
+                        className="hover:bg-white/20 rounded-full p-0.5 transition-colors"
+                      >
+                        <Icon name="close" size="sm" />
+                      </button>
+                    </span>
+                  ))}
               </div>
-              <div className="relative mt-2">
+              <div className="bg-surface-light dark:bg-white/5 p-4 rounded-xl border border-border-light dark:border-border-dark focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all shadow-sm">
                 <input
                   type="text"
                   value={customRestriction}
                   onChange={(e) => setCustomRestriction(e.target.value)}
                   onKeyDown={handleAddCustomRestriction}
-                  placeholder="+ Add other restrictions..."
-                  className="block w-full text-sm py-2 px-3 border-b-2 border-transparent border-border-light dark:border-border-dark bg-transparent focus:border-primary focus:ring-0 transition-colors placeholder:text-text-muted-light/60"
+                  placeholder="Type a custom restriction and press Enter..."
+                  className="w-full bg-transparent border-none p-0 text-text-main-light dark:text-white placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:ring-0 text-sm"
                 />
               </div>
             </div>
@@ -234,26 +286,66 @@ export default function CreateSpecialMealPage() {
                   <Icon name="check_circle" className="text-primary" size="sm" />
                   Must-haves
                 </label>
-                <textarea
-                  value={mustHaves}
-                  onChange={(e) => setMustHaves(e.target.value)}
-                  placeholder="e.g. Finger foods, Italian theme, Spicy salsa"
-                  rows={3}
-                  className="block w-full p-3 border border-border-light dark:border-border-dark rounded-xl text-text-main-light dark:text-white bg-background-light dark:bg-white/5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors placeholder:text-text-muted-light/60 text-sm resize-none"
-                />
+                <div className="bg-surface-light dark:bg-white/5 p-3 rounded-xl border border-border-light dark:border-border-dark focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all shadow-sm min-h-[100px]">
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {mustHaves.map((item) => (
+                      <span
+                        key={item}
+                        className="inline-flex items-center gap-1.5 bg-primary/10 text-primary border border-primary/20 px-3 py-1 rounded-full text-sm font-bold"
+                      >
+                        {item}
+                        <button
+                          type="button"
+                          onClick={() => removeMustHave(item)}
+                          className="hover:bg-primary/20 rounded-full p-0.5 transition-colors"
+                        >
+                          <Icon name="close" size="sm" />
+                        </button>
+                      </span>
+                    ))}
+                  </div>
+                  <input
+                    type="text"
+                    value={mustHaveInput}
+                    onChange={(e) => setMustHaveInput(e.target.value)}
+                    onKeyDown={handleAddMustHave}
+                    placeholder="Type and press Enter..."
+                    className="w-full bg-transparent border-none p-0 text-text-main-light dark:text-white placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:ring-0 text-sm"
+                  />
+                </div>
               </div>
               <div className="space-y-2">
                 <label className="block text-sm font-bold text-text-main-light dark:text-white flex items-center gap-2">
                   <Icon name="block" className="text-red-500" size="sm" />
                   Excludes
                 </label>
-                <textarea
-                  value={exclusions}
-                  onChange={(e) => setExclusions(e.target.value)}
-                  placeholder="e.g. Mushrooms, Cilantro, Shellfish"
-                  rows={3}
-                  className="block w-full p-3 border border-border-light dark:border-border-dark rounded-xl text-text-main-light dark:text-white bg-background-light dark:bg-white/5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors placeholder:text-text-muted-light/60 text-sm resize-none"
-                />
+                <div className="bg-surface-light dark:bg-white/5 p-3 rounded-xl border border-border-light dark:border-border-dark focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all shadow-sm min-h-[100px]">
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {exclusions.map((item) => (
+                      <span
+                        key={item}
+                        className="inline-flex items-center gap-1.5 bg-primary/10 text-primary border border-primary/20 px-3 py-1 rounded-full text-sm font-bold"
+                      >
+                        {item}
+                        <button
+                          type="button"
+                          onClick={() => removeExclusion(item)}
+                          className="hover:bg-primary/20 rounded-full p-0.5 transition-colors"
+                        >
+                          <Icon name="close" size="sm" />
+                        </button>
+                      </span>
+                    ))}
+                  </div>
+                  <input
+                    type="text"
+                    value={exclusionInput}
+                    onChange={(e) => setExclusionInput(e.target.value)}
+                    onKeyDown={handleAddExclusion}
+                    placeholder="Type and press Enter..."
+                    className="w-full bg-transparent border-none p-0 text-text-main-light dark:text-white placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:ring-0 text-sm"
+                  />
+                </div>
               </div>
             </div>
           </form>

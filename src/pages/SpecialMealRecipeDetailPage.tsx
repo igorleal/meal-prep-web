@@ -1,12 +1,11 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Button, Icon, LoadingSpinner, IngredientConversionModal } from '@/components/common'
+import { Button, Icon, IngredientConversionModal } from '@/components/common'
 import { favoriteService } from '@/api/services'
 import { getRecipeImageUrl } from '@/utils/placeholders'
 import { formatUnit, stripInstructionPrefix } from '@/utils/recipe'
-import { useRecipeImagePolling } from '@/hooks'
-import type { FoodFriendsResponse, Recipe, RecipeIngredient } from '@/types'
+import type { FoodFriendsResponse, RecipeIngredient } from '@/types'
 
 export default function SpecialMealRecipeDetailPage() {
   const navigate = useNavigate()
@@ -55,22 +54,6 @@ export default function SpecialMealRecipeDetailPage() {
     }
   }
 
-  const handleImageLoaded = useCallback((updatedRecipe: Recipe) => {
-    setEvent((prev) => {
-      if (!prev) return prev
-      const updated = { ...prev, recipe: { ...prev.recipe, imageUrl: updatedRecipe.imageUrl } }
-      sessionStorage.setItem('viewingSpecialMeal', JSON.stringify(updated))
-      return updated
-    })
-  }, [])
-
-  const { imageUrl, isPolling } = useRecipeImagePolling({
-    recipe: recipe!,
-    onImageLoaded: handleImageLoaded,
-    pollingInterval: 2000,
-    maxRetries: 2,
-  })
-
   if (!event || !recipe) {
     return null
   }
@@ -79,21 +62,12 @@ export default function SpecialMealRecipeDetailPage() {
     <div className="min-h-screen bg-background-light dark:bg-background-dark">
       {/* Hero image */}
       <div className="relative h-72 lg:h-96 w-full">
-        {isPolling ? (
-          <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 flex flex-col items-center justify-center gap-3">
-            <LoadingSpinner size="lg" />
-            <span className="text-sm text-text-muted-light dark:text-text-muted-dark font-medium">
-              Generating image...
-            </span>
-          </div>
-        ) : (
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `url("${getRecipeImageUrl(imageUrl, 'specialMeal')}")`,
-            }}
-          />
-        )}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url("${getRecipeImageUrl(recipe.imageUrl, 'specialMeal')}")`,
+          }}
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
         {/* Back button */}

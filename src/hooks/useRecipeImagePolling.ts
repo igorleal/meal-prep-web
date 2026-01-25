@@ -3,7 +3,7 @@ import { recipeService } from '@/api/services'
 import type { Recipe } from '@/types'
 
 interface UseRecipeImagePollingOptions {
-  recipe: Recipe
+  recipe: Recipe | null | undefined
   onImageLoaded?: (updatedRecipe: Recipe) => void
   pollingInterval?: number
   maxPollingTime?: number
@@ -24,8 +24,8 @@ export function useRecipeImagePolling({
   maxPollingTime = 10000,
   maxRetries,
 }: UseRecipeImagePollingOptions): UseRecipeImagePollingResult {
-  const [imageUrl, setImageUrl] = useState<string | undefined>(recipe.imageUrl)
-  const [isPolling, setIsPolling] = useState(!recipe.imageUrl)
+  const [imageUrl, setImageUrl] = useState<string | undefined>(recipe?.imageUrl)
+  const [isPolling, setIsPolling] = useState(!recipe?.imageUrl)
   const [hasTimedOut, setHasTimedOut] = useState(false)
   const startTimeRef = useRef<number | null>(null)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -40,6 +40,11 @@ export function useRecipeImagePolling({
   }, [])
 
   useEffect(() => {
+    // If no recipe, do nothing
+    if (!recipe) {
+      return
+    }
+
     // If recipe already has an imageUrl, no polling needed
     if (recipe.imageUrl) {
       setImageUrl(recipe.imageUrl)
@@ -110,7 +115,7 @@ export function useRecipeImagePolling({
         intervalRef.current = null
       }
     }
-  }, [recipe.id, recipe.imageUrl, pollingInterval, maxPollingTime, maxRetries, onImageLoaded, stopPolling])
+  }, [recipe?.id, recipe?.imageUrl, pollingInterval, maxPollingTime, maxRetries, onImageLoaded, stopPolling])
 
   return { imageUrl, isPolling, hasTimedOut }
 }

@@ -4,7 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon, IngredientConversionModal } from '@/components/common'
 import { favoriteService } from '@/api/services'
 import { getRecipeImageUrl } from '@/utils/placeholders'
-import { formatUnit, stripInstructionPrefix } from '@/utils/recipe'
+import { formatUnit, parseInstructions } from '@/utils/recipe'
 import type { ReceitAIPlanResponse, RecipeIngredient } from '@/types'
 
 export default function MealPlanRecipeDetailPage() {
@@ -259,19 +259,19 @@ export default function MealPlanRecipeDetailPage() {
                 <span className="h-px flex-1 bg-border-light dark:bg-border-dark ml-4" />
               </h3>
               <div className="space-y-6">
-                {recipe.instructions.split('\n').filter(Boolean).map((step, i) => (
+                {parseInstructions(recipe.instructions).map((step, i, steps) => (
                   <div key={i} className="flex gap-4 md:gap-6 group">
                     <div className="flex-none flex flex-col items-center">
                       <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg shadow-md">
                         {i + 1}
                       </div>
-                      {i < recipe.instructions.split('\n').filter(Boolean).length - 1 && (
+                      {i < steps.length - 1 && (
                         <div className="w-0.5 h-full bg-border-light dark:bg-border-dark mt-2" />
                       )}
                     </div>
                     <div className="pb-8">
                       <p className="text-text-main-light dark:text-white/80 leading-relaxed text-base">
-                        {stripInstructionPrefix(step)}
+                        {step}
                       </p>
                     </div>
                   </div>

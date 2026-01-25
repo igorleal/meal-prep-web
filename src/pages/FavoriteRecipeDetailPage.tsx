@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Button, Icon } from '@/components/common'
+import { Button, Icon, IngredientConversionModal } from '@/components/common'
 import { favoriteService } from '@/api/services'
 import { getRecipeImageUrl } from '@/utils/placeholders'
 import { formatUnit, stripInstructionPrefix } from '@/utils/recipe'
-import type { Recipe } from '@/types'
+import type { Recipe, RecipeIngredient } from '@/types'
 
 export default function FavoriteRecipeDetailPage() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const [recipe, setRecipe] = useState<Recipe | null>(null)
+  const [conversionIngredient, setConversionIngredient] = useState<RecipeIngredient | null>(null)
 
   useEffect(() => {
     const stored = sessionStorage.getItem('viewingFavoriteRecipe')
@@ -212,18 +213,25 @@ export default function FavoriteRecipeDetailPage() {
                   {recipe.ingredients.map((ing, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-3 text-text-main-light dark:text-white"
+                      className="flex items-start gap-3 text-text-main-light dark:text-white group"
                     >
                       <Icon
                         name="radio_button_unchecked"
                         className="text-border-light dark:text-border-dark text-[20px] mt-0.5"
                       />
-                      <span>
+                      <span className="flex-1">
                         <strong className="font-bold">
                           {ing.quantity} {formatUnit(ing.unit)}
                         </strong>{' '}
                         {ing.name}
                       </span>
+                      <button
+                        onClick={() => setConversionIngredient(ing)}
+                        className="opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity h-6 w-6 flex items-center justify-center rounded-full hover:bg-primary/10 text-primary"
+                        title="Convert units"
+                      >
+                        <Icon name="scale" className="text-[16px]" />
+                      </button>
                     </li>
                   ))}
                 </ul>
@@ -259,6 +267,13 @@ export default function FavoriteRecipeDetailPage() {
           </div>
         </div>
       </div>
+
+      {conversionIngredient && (
+        <IngredientConversionModal
+          ingredient={conversionIngredient}
+          onClose={() => setConversionIngredient(null)}
+        />
+      )}
     </div>
   )
 }

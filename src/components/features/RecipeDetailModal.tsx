@@ -1,8 +1,9 @@
-import { Icon, LoadingSpinner } from '@/components/common'
+import { useState } from 'react'
+import { Icon, LoadingSpinner, IngredientConversionModal } from '@/components/common'
 import { getRecipeImageUrl } from '@/utils/placeholders'
 import { formatUnit, stripInstructionPrefix } from '@/utils/recipe'
 import { useRecipeImagePolling } from '@/hooks'
-import type { Recipe } from '@/types'
+import type { Recipe, RecipeIngredient } from '@/types'
 
 type ImageType = 'mealPlan' | 'familyMeal' | 'specialMeal'
 
@@ -19,6 +20,7 @@ export function RecipeDetailModal({
   onClose,
   onImageLoaded,
 }: RecipeDetailModalProps) {
+  const [conversionIngredient, setConversionIngredient] = useState<RecipeIngredient | null>(null)
   const { imageUrl, isPolling } = useRecipeImagePolling({
     recipe,
     onImageLoaded,
@@ -170,18 +172,25 @@ export function RecipeDetailModal({
                       {recipe.ingredients.map((ing, i) => (
                         <li
                           key={i}
-                          className="flex items-start gap-3 text-text-main-light dark:text-white"
+                          className="flex items-start gap-3 text-text-main-light dark:text-white group"
                         >
                           <Icon
                             name="radio_button_unchecked"
                             className="text-border-light dark:text-border-dark text-[20px] mt-0.5"
                           />
-                          <span>
+                          <span className="flex-1">
                             <strong className="font-bold">
                               {ing.quantity} {formatUnit(ing.unit)}
                             </strong>{' '}
                             {ing.name}
                           </span>
+                          <button
+                            onClick={() => setConversionIngredient(ing)}
+                            className="opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity h-6 w-6 flex items-center justify-center rounded-full hover:bg-primary/10 text-primary"
+                            title="Convert units"
+                          >
+                            <Icon name="scale" className="text-[16px]" />
+                          </button>
                         </li>
                       ))}
                     </ul>
@@ -219,6 +228,13 @@ export function RecipeDetailModal({
           </div>
         </div>
       </div>
+
+      {conversionIngredient && (
+        <IngredientConversionModal
+          ingredient={conversionIngredient}
+          onClose={() => setConversionIngredient(null)}
+        />
+      )}
     </div>
   )
 }

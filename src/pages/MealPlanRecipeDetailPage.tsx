@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Button, Icon, IngredientConversionModal } from '@/components/common'
+import { Button, Icon, IngredientConversionModal, MarkdownText } from '@/components/common'
 import { favoriteService } from '@/api/services'
 import { getRecipeImageUrl } from '@/utils/placeholders'
 import { formatUnit, parseInstructions } from '@/utils/recipe'
@@ -270,9 +270,9 @@ export default function MealPlanRecipeDetailPage() {
                       )}
                     </div>
                     <div className="pb-8">
-                      <p className="text-text-main-light dark:text-white/80 leading-relaxed text-base">
+                      <MarkdownText className="text-text-main-light dark:text-white/80 leading-relaxed text-base">
                         {step}
-                      </p>
+                      </MarkdownText>
                     </div>
                   </div>
                 ))}

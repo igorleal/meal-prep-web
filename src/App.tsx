@@ -26,6 +26,8 @@ import FavoritesPage from '@/pages/FavoritesPage'
 import FavoriteRecipeDetailPage from '@/pages/FavoriteRecipeDetailPage'
 import ComingSoonPage from '@/pages/ComingSoonPage'
 import AuthCallbackPage from '@/pages/AuthCallbackPage'
+import TermsOfService from '@/pages/TermsOfService'
+import PrivacyPolicy from '@/pages/PrivacyPolicy'
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
             {/* Public routes */}
             <Route element={<AuthLayout />}>
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/terms" element={<TermsOfService />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
             </Route>
             <Route path="/auth/callback" element={<AuthCallbackPage />} />
 

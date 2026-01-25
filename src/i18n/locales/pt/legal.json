@@ -1,0 +1,304 @@
+{
+  "backToSettings": "Voltar para Configurações",
+  "terms": {
+    "title": "Termos de Serviço",
+    "lastUpdated": "Última atualização: {{date}}",
+    "seeAlso": "Veja também nossa",
+    "sections": {
+      "about": {
+        "title": "Sobre o ReceitAI",
+        "content": "ReceitAI é um aplicativo de planejamento de refeições com inteligência artificial que gera receitas personalizadas com base em suas preferências alimentares e objetivos."
+      },
+      "acceptance": {
+        "title": "Aceitação dos Termos",
+        "content": "Ao criar uma conta ou usar o ReceitAI, você concorda com estes Termos de Serviço e nossa Política de Privacidade."
+      },
+      "account": {
+        "title": "Registro de Conta",
+        "items": {
+          "oauth": "Você deve fazer login usando autenticação do Google ou Apple",
+          "age": "Você deve ter pelo menos 16 anos para usar este serviço",
+          "security": "Você é responsável por manter a segurança da sua conta",
+          "accuracy": "Você deve fornecer informações precisas sobre restrições alimentares"
+        }
+      },
+      "service": {
+        "title": "Descrição do Serviço",
+        "intro": "O ReceitAI oferece:",
+        "items": {
+          "recipes": "Receitas personalizadas geradas por IA",
+          "mealPlanning": "Ferramentas de planejamento de refeições (planos semanais, calendário familiar, eventos especiais)",
+          "saving": "Salvamento de receitas e favoritos",
+          "conversion": "Conversão de unidades de ingredientes"
+        }
+      },
+      "limits": {
+        "title": "Limites de Uso",
+        "items": {
+          "freeTier": "Plano gratuito: 15 receitas geradas por IA por semana",
+          "maxRecipes": "Máximo de 3 receitas por solicitação de geração",
+          "reset": "Os limites são renovados semanalmente"
+        }
+      },
+      "aiDisclaimer": {
+        "title": "Aviso sobre Conteúdo Gerado por IA",
+        "important": "IMPORTANTE: As receitas são geradas por inteligência artificial (Google Vertex AI).",
+        "items": {
+          "accuracy": "NÃO garantimos a precisão nutricional das receitas geradas",
+          "allergies": "NÃO garantimos que as receitas sejam seguras para suas alergias específicas",
+          "verify": "Você DEVE verificar todos os ingredientes antes de consumir qualquer receita",
+          "risk": "Você usa as receitas inteiramente por sua conta e risco",
+          "liability": "Não somos responsáveis por quaisquer reações adversas às receitas"
+        }
+      },
+      "responsibilities": {
+        "title": "Suas Responsabilidades",
+        "intro": "Você concorda em:",
+        "items": {
+          "accurate": "Fornecer informações precisas sobre restrições alimentares e alergias",
+          "verify": "Verificar os ingredientes das receitas antes da preparação e consumo",
+          "medical": "Não depender exclusivamente do ReceitAI para necessidades dietéticas médicas",
+          "misuse": "Não usar indevidamente ou abusar do serviço",
+          "limits": "Não tentar contornar os limites de uso"
+        }
+      },
+      "ip": {
+        "title": "Propriedade Intelectual",
+        "items": {
+          "personal": "As receitas geradas são fornecidas para seu uso pessoal e não comercial",
+          "share": "Você pode salvar e compartilhar receitas para fins pessoais",
+          "ownership": "O aplicativo ReceitAI, design e código permanecem nossa propriedade",
+          "copy": "Você não pode copiar, modificar ou distribuir nosso aplicativo"
+        }
+      },
+      "availability": {
+        "title": "Disponibilidade do Serviço",
+        "items": {
+          "asIs": "O ReceitAI é fornecido \"como está\" sem garantias",
+          "uptime": "Não garantimos disponibilidade ininterrupta",
+          "modify": "Podemos modificar, suspender ou descontinuar recursos a qualquer momento",
+          "notify": "Tentaremos notificar os usuários sobre mudanças significativas"
+        }
+      },
+      "termination": {
+        "title": "Encerramento",
+        "items": {
+          "delete": "Você pode excluir sua conta a qualquer momento",
+          "violate": "Podemos encerrar contas que violem estes termos",
+          "data": "Após o encerramento, seus dados serão excluídos conforme nossa Política de Privacidade"
+        }
+      },
+      "liability": {
+        "title": "Limitação de Responsabilidade",
+        "content": "Na máxima extensão permitida por lei, o ReceitAI e seus operadores não serão responsáveis por quaisquer danos indiretos, incidentais, especiais ou consequentes decorrentes do uso do serviço."
+      },
+      "changes": {
+        "title": "Alterações nos Termos",
+        "content": "Podemos atualizar estes termos. O uso continuado após as alterações constitui aceitação. Notificaremos os usuários sobre mudanças significativas."
+      },
+      "governing": {
+        "title": "Lei Aplicável",
+        "content": "Estes termos são regidos pela lei aplicável em sua jurisdição."
+      },
+      "contact": {
+        "title": "Contato",
+        "content": "Para dúvidas sobre estes termos:"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Política de Privacidade",
+    "lastUpdated": "Última atualização: {{date}}",
+    "gdprCompliant": "Compatível com GDPR",
+    "intro": "Esta Política de Privacidade explica como o ReceitAI coleta, usa e protege seus dados pessoais em conformidade com o Regulamento Geral de Proteção de Dados (GDPR) e outras leis de privacidade aplicáveis.",
+    "seeAlso": "Veja também nossos",
+    "sections": {
+      "controller": {
+        "title": "Controlador de Dados",
+        "contact": "Contato:"
+      },
+      "collection": {
+        "title": "Informações que Coletamos",
+        "account": {
+          "title": "Informações da Conta (do Google/Apple OAuth)",
+          "items": {
+            "email": "Endereço de email",
+            "name": "Nome de exibição",
+            "id": "Identificador de perfil"
+          }
+        },
+        "provided": {
+          "title": "Informações que Você Fornece",
+          "items": {
+            "dietary": "Restrições alimentares (ex: vegano, sem glúten, sem nozes)",
+            "preferences": "Preferências e objetivos de refeições",
+            "macros": "Metas de macros (calorias, proteínas, carboidratos, gorduras)",
+            "recipes": "Receitas salvas e planos de refeições",
+            "language": "Preferência de idioma"
+          }
+        },
+        "automatic": {
+          "title": "Coletadas Automaticamente",
+          "items": {
+            "browser": "Configurações de idioma do navegador (para localização)",
+            "theme": "Preferência de tema (modo claro/escuro)"
+          }
+        }
+      },
+      "legalBasis": {
+        "title": "Base Legal para Processamento (GDPR)",
+        "intro": "Processamos seus dados com base em:",
+        "items": {
+          "contract": {
+            "label": "Contrato",
+            "desc": "Para fornecer o serviço de planejamento de refeições que você solicitou"
+          },
+          "consent": {
+            "label": "Consentimento",
+            "desc": "Para recursos opcionais (você pode retirar a qualquer momento)"
+          },
+          "legitimate": {
+            "label": "Interesse Legítimo",
+            "desc": "Para melhorar e proteger nosso serviço"
+          }
+        }
+      },
+      "usage": {
+        "title": "Como Usamos Suas Informações",
+        "items": {
+          "generate": "Gerar receitas personalizadas usando IA",
+          "save": "Salvar seus planos de refeições e preferências",
+          "auth": "Autenticar sua conta",
+          "language": "Fornecer o serviço no seu idioma preferido",
+          "improve": "Melhorar nosso serviço"
+        }
+      },
+      "thirdParty": {
+        "title": "Serviços de Terceiros",
+        "intro": "Usamos os seguintes serviços:",
+        "table": {
+          "service": "Serviço",
+          "purpose": "Finalidade",
+          "data": "Dados Compartilhados"
+        },
+        "services": {
+          "googleOauth": {
+            "purpose": "Autenticação",
+            "data": "Email, nome"
+          },
+          "appleOauth": {
+            "purpose": "Autenticação",
+            "data": "Email, nome"
+          },
+          "vertexAi": {
+            "purpose": "Geração de receitas",
+            "data": "Preferências de refeições, restrições"
+          },
+          "cloudStorage": {
+            "purpose": "Hospedagem de imagens",
+            "data": "Imagens de receitas"
+          },
+          "cloudSql": {
+            "purpose": "Banco de dados",
+            "data": "Todos os dados do usuário"
+          }
+        },
+        "location": "Os dados são processados nos Estados Unidos (região do Google Cloud: us-central1).",
+        "euUsers": "Para usuários da UE: O Google LLC está em conformidade com o EU-U.S. Data Privacy Framework."
+      },
+      "retention": {
+        "title": "Retenção de Dados",
+        "items": {
+          "active": "Contas ativas: Dados retidos enquanto sua conta estiver ativa",
+          "deleted": "Contas excluídas: Dados excluídos em até 30 dias após a exclusão da conta",
+          "tokens": "Tokens de autenticação revogados: Excluídos após expiração"
+        }
+      },
+      "rights": {
+        "title": "Seus Direitos (GDPR)",
+        "intro": "Você tem o direito de:",
+        "items": {
+          "access": {
+            "label": "Acesso",
+            "desc": "Visualizar seus dados pessoais através das configurações do aplicativo"
+          },
+          "rectification": {
+            "label": "Retificação",
+            "desc": "Atualizar suas informações a qualquer momento"
+          },
+          "erasure": {
+            "label": "Exclusão",
+            "desc": "Solicitar a exclusão de sua conta e dados"
+          },
+          "portability": {
+            "label": "Portabilidade",
+            "desc": "Solicitar uma cópia de seus dados"
+          },
+          "restriction": {
+            "label": "Restrição",
+            "desc": "Solicitar que limitemos o processamento de seus dados"
+          },
+          "objection": {
+            "label": "Objeção",
+            "desc": "Opor-se ao processamento baseado em interesse legítimo"
+          },
+          "withdraw": {
+            "label": "Retirar Consentimento",
+            "desc": "Retirar o consentimento a qualquer momento"
+          }
+        },
+        "contact": "Para exercer esses direitos, entre em contato conosco em"
+      },
+      "security": {
+        "title": "Segurança de Dados",
+        "intro": "Protegemos seus dados através de:",
+        "items": {
+          "https": "Criptografia HTTPS para todas as comunicações",
+          "jwt": "Autenticação baseada em token JWT",
+          "cloud": "Infraestrutura de nuvem segura (Google Cloud)",
+          "validation": "Validação de conteúdo para prevenir abusos"
+        }
+      },
+      "cookies": {
+        "title": "Cookies e Armazenamento Local",
+        "intro": "Usamos o localStorage do navegador para:",
+        "items": {
+          "tokens": "Tokens de autenticação (para manter você conectado)",
+          "theme": "Preferência de tema (modo claro/escuro)",
+          "language": "Configurações de idioma"
+        },
+        "notUsed": "NÃO usamos:",
+        "notUsedItems": {
+          "tracking": "Cookies de rastreamento",
+          "analytics": "Serviços de análise",
+          "advertising": "Pixels de publicidade",
+          "thirdParty": "Rastreadores de terceiros"
+        }
+      },
+      "children": {
+        "title": "Privacidade de Crianças",
+        "content": "O ReceitAI não é destinado a usuários menores de 16 anos. Não coletamos conscientemente dados de crianças menores de 16 anos."
+      },
+      "transfers": {
+        "title": "Transferências Internacionais de Dados",
+        "content": "Seus dados são armazenados e processados nos Estados Unidos usando serviços do Google Cloud. Para usuários da UE, salvaguardas apropriadas estão em vigor sob o EU-U.S. Data Privacy Framework."
+      },
+      "changes": {
+        "title": "Alterações nesta Política",
+        "content": "Podemos atualizar esta Política de Privacidade. Notificaremos você sobre mudanças significativas através do aplicativo ou email. O uso continuado após as alterações constitui aceitação."
+      },
+      "contact": {
+        "title": "Contato e Reclamações",
+        "content": "Para questões de privacidade ou para exercer seus direitos:",
+        "euComplaint": "Usuários da UE também podem apresentar uma reclamação à sua Autoridade de Proteção de Dados local."
+      }
+    }
+  },
+  "settings": {
+    "legal": {
+      "title": "Legal",
+      "termsOfService": "Termos de Serviço",
+      "privacyPolicy": "Política de Privacidade"
+    }
+  }
+}

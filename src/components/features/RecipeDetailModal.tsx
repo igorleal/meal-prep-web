@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Icon, LoadingSpinner, IngredientConversionModal } from '@/components/common'
+import { Icon, LoadingSpinner, IngredientConversionModal, MarkdownText } from '@/components/common'
 import { getRecipeImageUrl } from '@/utils/placeholders'
 import { formatUnit, parseInstructions } from '@/utils/recipe'
 import { useRecipeImagePolling } from '@/hooks'
@@ -213,9 +213,9 @@ export function RecipeDetailModal({
                           )}
                         </div>
                         <div className="pb-8">
-                          <p className="text-text-main-light dark:text-white/80 leading-relaxed text-base">
+                          <MarkdownText className="text-text-main-light dark:text-white/80 leading-relaxed text-base">
                             {step}
-                          </p>
+                          </MarkdownText>
                         </div>
                       </div>
                     ))}

@@ -1,0 +1,304 @@
+{
+  "backToSettings": "Tillbaka till Inställningar",
+  "terms": {
+    "title": "Användarvillkor",
+    "lastUpdated": "Senast uppdaterad: {{date}}",
+    "seeAlso": "Se även vår",
+    "sections": {
+      "about": {
+        "title": "Om ReceitAI",
+        "content": "ReceitAI är en AI-driven måltidsplaneringsapplikation som genererar personliga recept baserat på dina kostpreferenser och mål."
+      },
+      "acceptance": {
+        "title": "Godkännande av Villkor",
+        "content": "Genom att skapa ett konto eller använda ReceitAI godkänner du dessa Användarvillkor och vår Integritetspolicy."
+      },
+      "account": {
+        "title": "Kontoregistrering",
+        "items": {
+          "oauth": "Du måste logga in med Google- eller Apple-autentisering",
+          "age": "Du måste vara minst 16 år för att använda denna tjänst",
+          "security": "Du ansvarar för att upprätthålla säkerheten för ditt konto",
+          "accuracy": "Du måste tillhandahålla korrekt information om kostrestriktioner"
+        }
+      },
+      "service": {
+        "title": "Tjänstebeskrivning",
+        "intro": "ReceitAI erbjuder:",
+        "items": {
+          "recipes": "AI-genererade personliga recept",
+          "mealPlanning": "Måltidsplaneringsverktyg (veckoplaner, familjekalender, specialtillfällen)",
+          "saving": "Spara recept och favoriter",
+          "conversion": "Enhetsomvandling för ingredienser"
+        }
+      },
+      "limits": {
+        "title": "Användningsgränser",
+        "items": {
+          "freeTier": "Gratisnivå: 15 AI-genererade recept per vecka",
+          "maxRecipes": "Maximalt 3 recept per genereringsförfrågan",
+          "reset": "Gränserna återställs varje vecka"
+        }
+      },
+      "aiDisclaimer": {
+        "title": "Ansvarsfriskrivning för AI-genererat Innehåll",
+        "important": "VIKTIGT: Recept genereras av artificiell intelligens (Google Vertex AI).",
+        "items": {
+          "accuracy": "Vi garanterar INTE näringsnoggrannheten för genererade recept",
+          "allergies": "Vi garanterar INTE att recept är säkra för dina specifika allergier",
+          "verify": "Du MÅSTE verifiera alla ingredienser innan du konsumerar något recept",
+          "risk": "Du använder recept helt på egen risk",
+          "liability": "Vi ansvarar inte för några negativa reaktioner på recept"
+        }
+      },
+      "responsibilities": {
+        "title": "Ditt Ansvar",
+        "intro": "Du godkänner att:",
+        "items": {
+          "accurate": "Tillhandahålla korrekt information om kostrestriktioner och allergier",
+          "verify": "Verifiera receptingredienser innan tillagning och konsumtion",
+          "medical": "Inte enbart förlita dig på ReceitAI för medicinska kostbehov",
+          "misuse": "Inte missbruka tjänsten",
+          "limits": "Inte försöka kringgå användningsgränser"
+        }
+      },
+      "ip": {
+        "title": "Immateriella Rättigheter",
+        "items": {
+          "personal": "Genererade recept tillhandahålls för ditt personliga, icke-kommersiella bruk",
+          "share": "Du får spara och dela recept för personliga ändamål",
+          "ownership": "ReceitAI-applikationen, design och kod förblir vår egendom",
+          "copy": "Du får inte kopiera, modifiera eller distribuera vår applikation"
+        }
+      },
+      "availability": {
+        "title": "Tjänstetillgänglighet",
+        "items": {
+          "asIs": "ReceitAI tillhandahålls \"i befintligt skick\" utan garantier",
+          "uptime": "Vi garanterar inte oavbruten tillgänglighet",
+          "modify": "Vi kan modifiera, avbryta eller avsluta funktioner när som helst",
+          "notify": "Vi kommer att försöka meddela användare om betydande ändringar"
+        }
+      },
+      "termination": {
+        "title": "Uppsägning",
+        "items": {
+          "delete": "Du kan radera ditt konto när som helst",
+          "violate": "Vi kan avsluta konton som bryter mot dessa villkor",
+          "data": "Vid uppsägning raderas dina data enligt vår Integritetspolicy"
+        }
+      },
+      "liability": {
+        "title": "Ansvarsbegränsning",
+        "content": "I den utsträckning lagen tillåter ska ReceitAI och dess operatörer inte hållas ansvariga för några indirekta, tillfälliga, speciella eller följdskador som uppstår från din användning av tjänsten."
+      },
+      "changes": {
+        "title": "Ändringar av Villkor",
+        "content": "Vi kan uppdatera dessa villkor. Fortsatt användning efter ändringar utgör godkännande. Vi kommer att meddela användare om betydande ändringar."
+      },
+      "governing": {
+        "title": "Tillämplig Lag",
+        "content": "Dessa villkor regleras av tillämplig lag i din jurisdiktion."
+      },
+      "contact": {
+        "title": "Kontakt",
+        "content": "För frågor om dessa villkor:"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Integritetspolicy",
+    "lastUpdated": "Senast uppdaterad: {{date}}",
+    "gdprCompliant": "GDPR-kompatibel",
+    "intro": "Denna Integritetspolicy förklarar hur ReceitAI samlar in, använder och skyddar dina personuppgifter i enlighet med den allmänna dataskyddsförordningen (GDPR) och andra tillämpliga integritetslagar.",
+    "seeAlso": "Se även våra",
+    "sections": {
+      "controller": {
+        "title": "Personuppgiftsansvarig",
+        "contact": "Kontakt:"
+      },
+      "collection": {
+        "title": "Information Vi Samlar In",
+        "account": {
+          "title": "Kontoinformation (från Google/Apple OAuth)",
+          "items": {
+            "email": "E-postadress",
+            "name": "Visningsnamn",
+            "id": "Profilidentifierare"
+          }
+        },
+        "provided": {
+          "title": "Information Du Tillhandahåller",
+          "items": {
+            "dietary": "Kostrestriktioner (t.ex. vegan, glutenfri, nötfri)",
+            "preferences": "Måltidspreferenser och mål",
+            "macros": "Makromål (kalorier, protein, kolhydrater, fett)",
+            "recipes": "Sparade recept och måltidsplaner",
+            "language": "Språkpreferens"
+          }
+        },
+        "automatic": {
+          "title": "Automatiskt Insamlad",
+          "items": {
+            "browser": "Webbläsarens språkinställningar (för lokalisering)",
+            "theme": "Temapreferens (ljust/mörkt läge)"
+          }
+        }
+      },
+      "legalBasis": {
+        "title": "Rättslig Grund för Behandling (GDPR)",
+        "intro": "Vi behandlar dina uppgifter baserat på:",
+        "items": {
+          "contract": {
+            "label": "Avtal",
+            "desc": "För att tillhandahålla den måltidsplaneringstjänst du begärt"
+          },
+          "consent": {
+            "label": "Samtycke",
+            "desc": "För valfria funktioner (du kan återkalla när som helst)"
+          },
+          "legitimate": {
+            "label": "Berättigat Intresse",
+            "desc": "För att förbättra och säkra vår tjänst"
+          }
+        }
+      },
+      "usage": {
+        "title": "Hur Vi Använder Din Information",
+        "items": {
+          "generate": "Generera personliga recept med hjälp av AI",
+          "save": "Spara dina måltidsplaner och preferenser",
+          "auth": "Autentisera ditt konto",
+          "language": "Tillhandahålla tjänsten på ditt föredragna språk",
+          "improve": "Förbättra vår tjänst"
+        }
+      },
+      "thirdParty": {
+        "title": "Tredjepartstjänster",
+        "intro": "Vi använder följande tjänster:",
+        "table": {
+          "service": "Tjänst",
+          "purpose": "Syfte",
+          "data": "Delad Data"
+        },
+        "services": {
+          "googleOauth": {
+            "purpose": "Autentisering",
+            "data": "E-post, namn"
+          },
+          "appleOauth": {
+            "purpose": "Autentisering",
+            "data": "E-post, namn"
+          },
+          "vertexAi": {
+            "purpose": "Receptgenerering",
+            "data": "Måltidspreferenser, restriktioner"
+          },
+          "cloudStorage": {
+            "purpose": "Bildvärd",
+            "data": "Receptbilder"
+          },
+          "cloudSql": {
+            "purpose": "Databas",
+            "data": "Alla användardata"
+          }
+        },
+        "location": "Data behandlas i USA (Google Cloud-region: us-central1).",
+        "euUsers": "För EU-användare: Google LLC följer EU-U.S. Data Privacy Framework."
+      },
+      "retention": {
+        "title": "Datalagring",
+        "items": {
+          "active": "Aktiva konton: Data behålls medan ditt konto är aktivt",
+          "deleted": "Raderade konton: Data raderas inom 30 dagar efter kontoradering",
+          "tokens": "Återkallade autentiseringstoken: Raderas efter utgång"
+        }
+      },
+      "rights": {
+        "title": "Dina Rättigheter (GDPR)",
+        "intro": "Du har rätt att:",
+        "items": {
+          "access": {
+            "label": "Tillgång",
+            "desc": "Se dina personuppgifter genom appinställningarna"
+          },
+          "rectification": {
+            "label": "Rättelse",
+            "desc": "Uppdatera din information när som helst"
+          },
+          "erasure": {
+            "label": "Radering",
+            "desc": "Begära radering av ditt konto och data"
+          },
+          "portability": {
+            "label": "Portabilitet",
+            "desc": "Begära en kopia av dina data"
+          },
+          "restriction": {
+            "label": "Begränsning",
+            "desc": "Begära att vi begränsar behandlingen av dina data"
+          },
+          "objection": {
+            "label": "Invändning",
+            "desc": "Invända mot behandling baserad på berättigat intresse"
+          },
+          "withdraw": {
+            "label": "Återkalla Samtycke",
+            "desc": "Återkalla samtycke när som helst"
+          }
+        },
+        "contact": "För att utöva dessa rättigheter, kontakta oss på"
+      },
+      "security": {
+        "title": "Datasäkerhet",
+        "intro": "Vi skyddar dina data genom:",
+        "items": {
+          "https": "HTTPS-kryptering för all kommunikation",
+          "jwt": "JWT-tokenbaserad autentisering",
+          "cloud": "Säker molninfrastruktur (Google Cloud)",
+          "validation": "Innehållsvalidering för att förhindra missbruk"
+        }
+      },
+      "cookies": {
+        "title": "Cookies och Lokal Lagring",
+        "intro": "Vi använder webbläsarens localStorage för:",
+        "items": {
+          "tokens": "Autentiseringstoken (för att hålla dig inloggad)",
+          "theme": "Temapreferens (ljust/mörkt läge)",
+          "language": "Språkinställningar"
+        },
+        "notUsed": "Vi använder INTE:",
+        "notUsedItems": {
+          "tracking": "Spårningscookies",
+          "analytics": "Analystjänster",
+          "advertising": "Reklampixlar",
+          "thirdParty": "Tredjepartsspårare"
+        }
+      },
+      "children": {
+        "title": "Barns Integritet",
+        "content": "ReceitAI är inte avsett för användare under 16 år. Vi samlar inte medvetet in data från barn under 16 år."
+      },
+      "transfers": {
+        "title": "Internationella Dataöverföringar",
+        "content": "Dina data lagras och behandlas i USA med hjälp av Google Cloud-tjänster. För EU-användare finns lämpliga skyddsåtgärder på plats enligt EU-U.S. Data Privacy Framework."
+      },
+      "changes": {
+        "title": "Ändringar av Denna Policy",
+        "content": "Vi kan uppdatera denna Integritetspolicy. Vi kommer att meddela dig om betydande ändringar via appen eller e-post. Fortsatt användning efter ändringar utgör godkännande."
+      },
+      "contact": {
+        "title": "Kontakt och Klagomål",
+        "content": "För integritetsfrågor eller för att utöva dina rättigheter:",
+        "euComplaint": "EU-användare kan även lämna in ett klagomål till din lokala dataskyddsmyndighet."
+      }
+    }
+  },
+  "settings": {
+    "legal": {
+      "title": "Juridiskt",
+      "termsOfService": "Användarvillkor",
+      "privacyPolicy": "Integritetspolicy"
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Icon } from '@/components/common'
 import { useAuth } from '@/context/AuthContext'
@@ -131,9 +131,9 @@ export default function LoginPage() {
 
           <p className="text-center text-text-muted-light dark:text-text-muted-dark text-xs mt-8">
             {t('login.terms')}{' '}
-            <a href="#" className="underline hover:text-primary">{t('login.termsOfService')}</a>{' '}
+            <Link to="/terms" className="underline hover:text-primary">{t('login.termsOfService')}</Link>{' '}
             {t('login.and')}{' '}
-            <a href="#" className="underline hover:text-primary">{t('login.privacyPolicy')}</a>
+            <Link to="/privacy" className="underline hover:text-primary">{t('login.privacyPolicy')}</Link>
           </p>
         </div>
       </div>

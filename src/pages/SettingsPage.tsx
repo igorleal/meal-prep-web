@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { Button, Icon, Card, ChipInput, LoadingOverlay } from '@/components/common'
@@ -17,6 +17,7 @@ export default function SettingsPage() {
   const { logout, updateUser } = useAuth()
   const { currentLanguage, changeLanguage, supportedLanguages } = useLanguage()
   const { t } = useTranslation('settings')
+  const { t: tLegal } = useTranslation('legal')
   const [restrictions, setRestrictions] = useState<string[]>([])
   const [hasChanges, setHasChanges] = useState(false)
 
@@ -164,6 +165,46 @@ export default function SettingsPage() {
                     ))}
                 </div>
               </div>
+            </div>
+          </Card>
+
+          {/* Legal */}
+          <Card className="mb-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-primary/10 rounded-lg text-primary">
+                <Icon name="gavel" />
+              </div>
+              <h3 className="text-xl font-bold text-text-main-light dark:text-white">
+                {tLegal('settings.legal.title')}
+              </h3>
+            </div>
+
+            <div className="space-y-3">
+              <Link
+                to="/terms"
+                className="flex items-center justify-between p-4 rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors group"
+              >
+                <div className="flex items-center gap-3">
+                  <Icon name="description" className="text-text-muted-light dark:text-text-muted-dark" />
+                  <span className="font-medium text-text-main-light dark:text-white">
+                    {tLegal('settings.legal.termsOfService')}
+                  </span>
+                </div>
+                <Icon name="chevron_right" className="text-text-muted-light dark:text-text-muted-dark group-hover:text-primary transition-colors" />
+              </Link>
+
+              <Link
+                to="/privacy"
+                className="flex items-center justify-between p-4 rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors group"
+              >
+                <div className="flex items-center gap-3">
+                  <Icon name="shield" className="text-text-muted-light dark:text-text-muted-dark" />
+                  <span className="font-medium text-text-main-light dark:text-white">
+                    {tLegal('settings.legal.privacyPolicy')}
+                  </span>
+                </div>
+                <Icon name="chevron_right" className="text-text-muted-light dark:text-text-muted-dark group-hover:text-primary transition-colors" />
+              </Link>
             </div>
           </Card>
 

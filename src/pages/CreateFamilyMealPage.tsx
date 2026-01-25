@@ -1,16 +1,21 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { Button, Icon, WeeklyLimitBanner, ChipInput } from '@/components/common'
 import { userService } from '@/api/services'
 import { useAuth } from '@/context/AuthContext'
+import { useLanguage } from '@/context/LanguageContext'
 
-const suggestedRestrictions = ['Gluten-Free', 'Vegetarian', 'Vegan', 'Keto', 'Dairy-Free', 'Paleo']
+const restrictionKeys = ['glutenFree', 'vegetarian', 'vegan', 'keto', 'dairyFree', 'paleo'] as const
 
 export default function CreateFamilyMealPage() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const { user } = useAuth()
+  const { t } = useTranslation('familyCalendar')
+  const { t: tCommon } = useTranslation('common')
+  const { currentLanguage } = useLanguage()
 
   // Fetch current user to check weekly limit
   const { data: currentUser } = useQuery({
@@ -30,6 +35,15 @@ export default function CreateFamilyMealPage() {
 
   const hasReachedLimit = currentUser?.hasReachedWeeklyLimit ?? false
 
+  // Get locale for date formatting
+  const getDateLocale = () => {
+    switch (currentLanguage) {
+      case 'pt': return 'pt-BR'
+      case 'sv': return 'sv-SE'
+      default: return 'en-US'
+    }
+  }
+
   // Pre-fill dietary restrictions from user profile
   useEffect(() => {
     if (user?.restrictions) {
@@ -37,17 +51,34 @@ export default function CreateFamilyMealPage() {
     }
   }, [user?.restrictions])
 
-  const addSuggestedRestriction = (restriction: string) => {
-    if (!restrictions.includes(restriction)) {
-      setRestrictions([...restrictions, restriction])
+  // Get translated restriction options
+  const getSuggestedRestrictions = () => {
+    return restrictionKeys.map((key) => ({
+      key,
+      label: t(`create.sections.restrictions.options.${key}`),
+    }))
+  }
+
+  const addSuggestedRestriction = (label: string) => {
+    if (!restrictions.includes(label)) {
+      setRestrictions([...restrictions, label])
     }
   }
 
-  // Parse date for display
+  // Parse date for display with locale
   const date = new Date(dateParam)
-  const dayName = date.toLocaleDateString('en-US', { weekday: 'long' })
-  const month = date.toLocaleDateString('en-US', { month: 'short' })
+  const dayName = date.toLocaleDateString(getDateLocale(), { weekday: 'long' })
+  const month = date.toLocaleDateString(getDateLocale(), { month: 'short' })
   const dayNum = date.getDate()
+
+  // Get translated meal type
+  const getMealTypeLabel = () => {
+    const mealTypeLower = mealType.toLowerCase()
+    if (['breakfast', 'lunch', 'dinner', 'snack'].includes(mealTypeLower)) {
+      return t(`create.sections.mealDetails.types.${mealTypeLower}`)
+    }
+    return mealType
+  }
 
   const handleAddMustHave = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && mustHaveInput.trim()) {
@@ -102,6 +133,8 @@ export default function CreateFamilyMealPage() {
     navigate('/calendar/recipes')
   }
 
+  const suggestedRestrictions = getSuggestedRestrictions()
+
   return (
     <div className="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-6 lg:p-10 flex justify-center">
       <div className="w-full max-w-3xl">
@@ -111,7 +144,7 @@ export default function CreateFamilyMealPage() {
           className="inline-flex items-center text-text-muted-light dark:text-text-muted-dark hover:text-primary mb-8 transition-colors font-bold text-sm gap-2 group"
         >
           <Icon name="arrow_back" size="sm" className="group-hover:-translate-x-1 transition-transform" />
-          Back to Monthly View
+          {t('create.backButton')}
         </button>
 
         {/* Weekly Limit Banner */}
@@ -120,10 +153,10 @@ export default function CreateFamilyMealPage() {
         {/* Header */}
         <div className="space-y-2 mb-8">
           <h1 className="text-4xl md:text-5xl font-extrabold text-text-main-light dark:text-white tracking-tight">
-            Let&apos;s build your plan
+            {t('create.title')}
           </h1>
           <p className="text-lg text-text-muted-light dark:text-text-muted-dark">
-            Customize your meal for this slot. AI will generate options based on your preferences.
+            {t('create.subtitle')}
           </p>
         </div>
 
@@ -136,7 +169,7 @@ export default function CreateFamilyMealPage() {
               <span className="block text-3xl font-extrabold leading-none">{dayNum.toString().padStart(2, '0')}</span>
             </div>
             <h3 className="text-xl font-bold text-text-main-light dark:text-white">
-              {dayName} {mealType}
+              {dayName} {getMealTypeLabel()}
             </h3>
           </div>
           <div className="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-primary/5 to-transparent pointer-events-none" />
@@ -148,28 +181,28 @@ export default function CreateFamilyMealPage() {
           <div className="space-y-4">
             <label className="text-text-main-light dark:text-white font-bold text-lg flex items-center gap-2">
               <Icon name="spa" className="text-primary" />
-              Dietary Restrictions
+              {t('create.sections.restrictions.title')}
             </label>
             <ChipInput
               values={restrictions}
               onChange={setRestrictions}
-              placeholder="Type a restriction and press Enter..."
+              placeholder={t('create.sections.restrictions.placeholder')}
             />
             {/* Suggested restrictions */}
             <div className="flex flex-wrap gap-2">
               <span className="text-xs text-text-muted-light dark:text-text-muted-dark py-1">
-                Suggestions:
+                {t('create.sections.restrictions.suggestionsLabel')}
               </span>
               {suggestedRestrictions
-                .filter((r) => !restrictions.includes(r))
+                .filter((r) => !restrictions.includes(r.label))
                 .map((restriction) => (
                   <button
-                    key={restriction}
+                    key={restriction.key}
                     type="button"
-                    onClick={() => addSuggestedRestriction(restriction)}
+                    onClick={() => addSuggestedRestriction(restriction.label)}
                     className="px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                   >
-                    {restriction}
+                    {restriction.label}
                   </button>
                 ))}
             </div>
@@ -180,9 +213,9 @@ export default function CreateFamilyMealPage() {
             <div className="flex justify-between items-baseline">
               <label className="text-text-main-light dark:text-white font-bold text-lg flex items-center gap-2">
                 <Icon name="grocery" className="text-primary" />
-                Must Have Ingredients
+                {t('create.sections.preferences.mustHaves')}
               </label>
-              <span className="text-xs font-bold text-primary uppercase tracking-wide">Optional</span>
+              <span className="text-xs font-bold text-primary uppercase tracking-wide">{tCommon('labels.optional')}</span>
             </div>
             <div className="bg-surface-light dark:bg-white/5 p-4 rounded-xl border border-border-light dark:border-border-dark focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all shadow-sm">
               <div className="flex flex-wrap gap-2 mb-2">
@@ -207,12 +240,12 @@ export default function CreateFamilyMealPage() {
                 value={mustHaveInput}
                 onChange={(e) => setMustHaveInput(e.target.value)}
                 onKeyDown={handleAddMustHave}
-                placeholder="Type an ingredient and press Enter..."
+                placeholder={t('create.sections.preferences.placeholder')}
                 className="w-full bg-transparent border-none p-0 text-text-main-light dark:text-white placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:ring-0 text-base"
               />
             </div>
             <p className="text-sm text-text-muted-light dark:text-text-muted-dark pl-1">
-              Ingredients you want to use up or are specifically craving today.
+              {t('create.sections.preferences.mustHavesDescription')}
             </p>
           </div>
 
@@ -221,9 +254,9 @@ export default function CreateFamilyMealPage() {
             <div className="flex justify-between items-baseline">
               <label className="text-text-main-light dark:text-white font-bold text-lg flex items-center gap-2">
                 <Icon name="block" className="text-primary" />
-                Exclude Ingredients
+                {t('create.sections.preferences.excludes')}
               </label>
-              <span className="text-xs font-bold text-primary uppercase tracking-wide">Optional</span>
+              <span className="text-xs font-bold text-primary uppercase tracking-wide">{tCommon('labels.optional')}</span>
             </div>
             <div className="bg-surface-light dark:bg-white/5 p-4 rounded-xl border border-border-light dark:border-border-dark focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all shadow-sm">
               <div className="flex flex-wrap gap-2 mb-2">
@@ -248,12 +281,12 @@ export default function CreateFamilyMealPage() {
                 value={exclusionInput}
                 onChange={(e) => setExclusionInput(e.target.value)}
                 onKeyDown={handleAddExclusion}
-                placeholder="Type an ingredient and press Enter..."
+                placeholder={t('create.sections.preferences.placeholder')}
                 className="w-full bg-transparent border-none p-0 text-text-main-light dark:text-white placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:ring-0 text-base"
               />
             </div>
             <p className="text-sm text-text-muted-light dark:text-text-muted-dark pl-1">
-              Ingredients you want to avoid in today&apos;s meal.
+              {t('create.sections.preferences.excludesDescription')}
             </p>
           </div>
 
@@ -265,10 +298,10 @@ export default function CreateFamilyMealPage() {
               icon="auto_awesome"
               disabled={hasReachedLimit}
             >
-              Generate Recipe Suggestions
+              {t('create.nextButton')}
             </Button>
             <p className="text-center text-xs text-text-muted-light dark:text-text-muted-dark mt-4">
-              AI will generate 3 personalized options based on your preferences.
+              {t('create.aiNote')}
             </p>
           </div>
         </form>

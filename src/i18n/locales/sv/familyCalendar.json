@@ -1,40 +1,41 @@
 {
   "page": {
     "title": "Familjekalender",
-    "subtitle": "Planera och visa familjens maltider for manaden"
+    "subtitle": "Planera och visa familjens måltider för månaden"
   },
   "toolbar": {
-    "jumpToToday": "Ga till idag"
+    "jumpToToday": "Gå till idag"
   },
   "weekDays": {
-    "mon": "Man",
+    "mon": "Mån",
     "tue": "Tis",
     "wed": "Ons",
     "thu": "Tor",
     "fri": "Fre",
-    "sat": "Lor",
-    "sun": "Son"
+    "sat": "Lör",
+    "sun": "Sön"
   },
   "day": {
-    "addMeal": "Lagg till maltid",
-    "removeMeal": "Ta bort maltid"
+    "addMeal": "Lägg till måltid",
+    "removeMeal": "Ta bort måltid"
   },
   "loading": "Laddar kalender...",
   "create": {
-    "title": "Planera en familjemaltid",
-    "subtitle": "Skapa en lacker maltid for din familj",
+    "title": "Låt oss bygga din plan",
+    "subtitle": "Anpassa din måltid för denna tid. AI kommer att generera alternativ baserat på dina preferenser.",
+    "backButton": "Tillbaka till månadsvy",
     "sections": {
       "mealDetails": {
-        "title": "Maltidsdetaljer",
-        "mealName": "Maltidsnamn",
-        "placeholder": "t.ex. Sondagsstek, Tacofredag",
+        "title": "Måltidsdetaljer",
+        "mealName": "Måltidsnamn",
+        "placeholder": "t.ex. Söndagsstek, Tacofredag",
         "date": "Datum",
-        "mealType": "Maltidstyp",
+        "mealType": "Måltidstyp",
         "types": {
           "breakfast": "Frukost",
           "lunch": "Lunch",
           "dinner": "Middag",
-          "snack": "Mellanmal"
+          "snack": "Mellanmål"
         }
       },
       "servings": {
@@ -43,25 +44,38 @@
       },
       "restrictions": {
         "title": "Kostrestriktioner",
-        "placeholder": "Skriv en restriktion och tryck Enter..."
+        "placeholder": "Skriv en restriktion och tryck Enter...",
+        "suggestionsLabel": "Förslag:",
+        "options": {
+          "glutenFree": "Glutenfri",
+          "vegetarian": "Vegetarisk",
+          "vegan": "Vegansk",
+          "keto": "Keto",
+          "dairyFree": "Mjölkfri",
+          "paleo": "Paleo"
+        }
       },
       "preferences": {
         "title": "Preferenser",
-        "mustHaves": "Maste inkludera",
-        "excludes": "Exkludera"
+        "mustHaves": "Måste inkludera ingredienser",
+        "mustHavesDescription": "Ingredienser du vill använda upp eller längtar efter idag.",
+        "excludes": "Exkludera ingredienser",
+        "excludesDescription": "Ingredienser du vill undvika i dagens måltid.",
+        "placeholder": "Skriv en ingrediens och tryck Enter..."
       }
     },
-    "nextButton": "Generera recept"
+    "nextButton": "Generera receptförslag",
+    "aiNote": "AI kommer att generera 3 personliga alternativ baserat på dina preferenser."
   },
   "selection": {
-    "title": "Valj ditt recept",
-    "subtitle": "Valj det perfekta receptet for din familjemaltid",
-    "generating": "Skapar familjevanliga recept...",
-    "confirmSelection": "Anvand detta recept"
+    "title": "Välj ditt recept",
+    "subtitle": "Välj det perfekta receptet för din familjemåltid",
+    "generating": "Skapar familjevänliga recept...",
+    "confirmSelection": "Använd detta recept"
   },
   "delete": {
     "title": "Ta bort recept",
-    "message": "Ar du saker pa att du vill ta bort receptet for",
+    "message": "Är du säker på att du vill ta bort receptet för",
     "confirmButton": "Ta bort"
   }
 }

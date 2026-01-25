@@ -11,20 +11,30 @@
     }
   },
   "create": {
-    "title": "Plan a Special Meal",
-    "subtitle": "Create a memorable dining experience for your guests",
+    "title": "What are you planning?",
+    "subtitle": "Let's start with the basics to curate the perfect menu for your guests.",
+    "backButton": "Back to Dashboard",
+    "breadcrumb": "Create Event",
+    "badge": "Food with Friends",
     "sections": {
       "eventDetails": {
         "title": "Event Details",
         "eventName": "Event Name",
-        "placeholder": "e.g., Birthday Dinner, Anniversary",
+        "placeholder": "e.g., Game Night, Birthday Brunch, Potluck",
         "date": "Date",
         "guests": "Number of Guests"
       },
       "restrictions": {
-        "title": "Dietary Restrictions",
+        "title": "Dietary Restrictions for Guests",
         "noneSelected": "None selected",
-        "placeholder": "Type a restriction and press Enter..."
+        "placeholder": "Type a custom restriction and press Enter...",
+        "options": {
+          "vegetarian": "Vegetarian",
+          "vegan": "Vegan",
+          "glutenFree": "Gluten-Free",
+          "dairyFree": "Dairy-Free",
+          "nutFree": "Nut-Free"
+        }
       },
       "cuisine": {
         "title": "Cuisine Preferences",
@@ -32,11 +42,20 @@
       },
       "preferences": {
         "title": "Additional Preferences",
-        "mustHaves": "Must Include",
-        "excludes": "Exclude"
+        "mustHaves": "Must-haves",
+        "excludes": "Excludes",
+        "inputPlaceholder": "Type and press Enter..."
       }
     },
-    "nextButton": "Generate Recipe Ideas"
+    "nextButton": "Next: Choose Theme",
+    "cancelButton": "Cancel",
+    "aiAssistant": {
+      "badge": "AI Assistant",
+      "title": "Planning for a group?",
+      "description": "Be sure to list all known allergies. I'll automatically filter out recipes that contain unsafe ingredients and suggest safe alternatives!",
+      "tipTitle": "Tip: Mix it up!",
+      "tipDescription": "Try adding \"Finger foods\" to Must-haves for easier hosting."
+    }
   },
   "selection": {
     "title": "Choose Your Recipe",

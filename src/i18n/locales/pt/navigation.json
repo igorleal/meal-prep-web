@@ -1,9 +1,9 @@
 {
   "sidebar": {
     "dashboard": "Painel",
-    "mealPlanner": "Planejador de Refeicoes",
-    "familyCalendar": "Calendario Familiar",
-    "specialMeals": "Refeicoes Especiais",
+    "mealPlanner": "Planejador de Refeições",
+    "familyCalendar": "Calendário Familiar",
+    "specialMeals": "Refeições Especiais",
     "favorites": "Receitas Favoritas",
     "profile": "Perfil",
     "pantry": "Despensa",
@@ -21,6 +21,6 @@
   },
   "brand": {
     "name": "ReceitAI",
-    "tagline": "Planeje com inteligencia"
+    "tagline": "Planeje com inteligência"
   }
 }

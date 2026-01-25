@@ -1,20 +1,20 @@
 {
   "buttons": {
-    "save": "Spara andringar",
+    "save": "Spara ändringar",
     "cancel": "Avbryt",
     "delete": "Ta bort",
-    "confirm": "Bekrafta",
+    "confirm": "Bekräfta",
     "back": "Tillbaka",
-    "next": "Nasta",
-    "close": "Stang",
-    "add": "Lagg till",
+    "next": "Nästa",
+    "close": "Stäng",
+    "add": "Lägg till",
     "remove": "Ta bort",
     "edit": "Redigera",
     "view": "Visa",
     "create": "Skapa",
     "generate": "Generera",
-    "retry": "Forsok igen",
-    "continue": "Fortsatt"
+    "retry": "Försök igen",
+    "continue": "Fortsätt"
   },
   "labels": {
     "loading": "Laddar...",
@@ -26,14 +26,15 @@
     "optional": "Valfritt"
   },
   "errors": {
-    "generic": "Nagot gick fel. Forsok igen.",
-    "network": "Natverksfel. Kontrollera din anslutning.",
+    "generic": "Något gick fel. Försök igen.",
+    "network": "Nätverksfel. Kontrollera din anslutning.",
     "notFound": "Hittades inte",
-    "unauthorized": "Ej behorig. Logga in igen."
+    "unauthorized": "Ej behörig. Logga in igen.",
+    "invalidDate": "Vänligen ange ett giltigt datum"
   },
   "units": {
-    "meals": "{{count}} maltid",
-    "meals_other": "{{count}} maltider",
+    "meals": "{{count}} måltid",
+    "meals_other": "{{count}} måltider",
     "days": "{{count}} dag",
     "days_other": "{{count}} dagar",
     "servings": "{{count}} Portion",
@@ -53,7 +54,7 @@
   },
   "time": {
     "today": "IDAG",
-    "yesterday": "Igar",
+    "yesterday": "Igår",
     "tomorrow": "Imorgon"
   }
 }

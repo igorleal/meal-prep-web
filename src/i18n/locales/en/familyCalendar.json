@@ -21,8 +21,9 @@
   },
   "loading": "Loading calendar...",
   "create": {
-    "title": "Plan a Family Meal",
-    "subtitle": "Create a delicious meal for your family",
+    "title": "Let's build your plan",
+    "subtitle": "Customize your meal for this slot. AI will generate options based on your preferences.",
+    "backButton": "Back to Monthly View",
     "sections": {
       "mealDetails": {
         "title": "Meal Details",
@@ -43,15 +44,28 @@
       },
       "restrictions": {
         "title": "Dietary Restrictions",
-        "placeholder": "Type a restriction and press Enter..."
+        "placeholder": "Type a restriction and press Enter...",
+        "suggestionsLabel": "Suggestions:",
+        "options": {
+          "glutenFree": "Gluten-Free",
+          "vegetarian": "Vegetarian",
+          "vegan": "Vegan",
+          "keto": "Keto",
+          "dairyFree": "Dairy-Free",
+          "paleo": "Paleo"
+        }
       },
       "preferences": {
         "title": "Preferences",
-        "mustHaves": "Must Include",
-        "excludes": "Exclude"
+        "mustHaves": "Must Have Ingredients",
+        "mustHavesDescription": "Ingredients you want to use up or are specifically craving today.",
+        "excludes": "Exclude Ingredients",
+        "excludesDescription": "Ingredients you want to avoid in today's meal.",
+        "placeholder": "Type an ingredient and press Enter..."
       }
     },
-    "nextButton": "Generate Recipes"
+    "nextButton": "Generate Recipe Suggestions",
+    "aiNote": "AI will generate 3 personalized options based on your preferences."
   },
   "selection": {
     "title": "Choose Your Recipe",

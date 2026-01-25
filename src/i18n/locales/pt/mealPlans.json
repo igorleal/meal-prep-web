@@ -2,28 +2,28 @@
   "home": {
     "dietReceitai": {
       "title": "Dieta & ReceitAI",
-      "description": "Crie um plano semanal perfeitamente equilibrado, adaptado as suas necessidades nutricionais.",
+      "description": "Crie um plano semanal perfeitamente equilibrado, adaptado às suas necessidades nutricionais.",
       "button": "Planejar Agora"
     },
     "familyCalendar": {
-      "title": "Calendario Familiar",
-      "description": "Veja o que esta preparado para toda a familia esta semana.",
+      "title": "Calendário Familiar",
+      "description": "Veja o que está preparado para toda a família esta semana.",
       "button": "Ver Agenda"
     },
     "specialMeal": {
-      "title": "Uma Refeicao Especial",
-      "description": "Impressione seus convidados com uma criacao unica da IA.",
+      "title": "Uma Refeição Especial",
+      "description": "Impressione seus convidados com uma criação única da IA.",
       "button": "Gerar"
     }
   },
   "list": {
-    "title": "Meus Planos de Refeicao",
-    "subtitle": "Navegue e gerencie seus planos de refeicao gerados por IA",
+    "title": "Meus Planos de Refeição",
+    "subtitle": "Navegue e gerencie seus planos de refeição gerados por IA",
     "createNew": "Criar Novo Plano",
-    "loading": "Carregando planos de refeicao...",
+    "loading": "Carregando planos de refeição...",
     "empty": {
-      "title": "Nenhum plano de refeicao ainda",
-      "description": "Crie seu primeiro plano de refeicao com IA para comecar",
+      "title": "Nenhum plano de refeição ainda",
+      "description": "Crie seu primeiro plano de refeição com IA para começar",
       "button": "Criar Seu Primeiro Plano"
     },
     "card": {
@@ -33,65 +33,65 @@
   },
   "create": {
     "title": "Vamos criar seu plano",
-    "subtitle": "Configure suas preferencias de refeicao e deixe a IA gerar receitas personalizadas.",
+    "subtitle": "Configure suas preferências de refeição e deixe a IA gerar receitas personalizadas.",
     "sections": {
       "basicInfo": {
-        "title": "Informacoes Basicas",
+        "title": "Informações Básicas",
         "planName": "Nome do Plano",
-        "placeholder": "ex., Verao Fitness, Inverno Bulk"
+        "placeholder": "ex., Verão Fitness, Inverno Bulk"
       },
       "restrictions": {
-        "title": "Restricoes Alimentares",
+        "title": "Restrições Alimentares",
         "noneSelected": "Nenhuma selecionada",
-        "label": "Restricoes Alimentares",
-        "placeholder": "Digite uma restricao e pressione Enter..."
+        "label": "Restrições Alimentares",
+        "placeholder": "Digite uma restrição e pressione Enter..."
       },
       "focusAreas": {
-        "title": "Areas de Foco",
+        "title": "Áreas de Foco",
         "subtitle": "Defina prioridades",
-        "highProtein": "Alta Proteina",
+        "highProtein": "Alta Proteína",
         "lowCarb": "Baixo Carb",
         "keto": "Keto",
         "balanced": "Equilibrado",
-        "quickMeals": "Preparo Rapido",
-        "budgetFriendly": "Economico",
-        "longLasting": "Longa Duracao",
-        "ecoFriendly": "Ecologico"
+        "quickMeals": "Preparo Rápido",
+        "budgetFriendly": "Econômico",
+        "longLasting": "Longa Duração",
+        "ecoFriendly": "Ecológico"
       },
       "macros": {
-        "title": "Macros e Nutricao (por refeicao)",
+        "title": "Macros e Nutrição (por refeição)",
         "subtitle": "Metas definidas",
-        "description": "Defina macros alvo por refeicao, nao totais diarios.",
+        "description": "Defina macros alvo por refeição, não totais diários.",
         "calories": "Calorias",
-        "protein": "Proteina",
+        "protein": "Proteína",
         "carbs": "Carboidratos",
         "fats": "Gorduras"
       },
       "preferences": {
-        "title": "Preferencias",
-        "subtitle": "{{included}} incluidos, {{excluded}} excluidos",
+        "title": "Preferências",
+        "subtitle": "{{included}} incluídos, {{excluded}} excluídos",
         "mustHaves": "Deve Ter",
         "excludes": "Excluir"
       },
       "schedule": {
         "title": "Agenda Semanal",
-        "subtitle": "Configure refeicoes",
-        "mealsPerDay": "Refeicoes por Dia",
-        "numberOfDays": "Numero de Dias"
+        "subtitle": "Configure refeições",
+        "mealsPerDay": "Refeições por Dia",
+        "numberOfDays": "Número de Dias"
       }
     },
-    "nextButton": "Proximo: Gerar Preview"
+    "nextButton": "Próximo: Gerar Preview"
   },
   "selection": {
     "title": "Escolha Suas Receitas",
     "subtitle": "Selecione as receitas que deseja incluir no seu plano",
-    "generating": "A IA esta preparando suas receitas...",
+    "generating": "A IA está preparando suas receitas...",
     "generatingSubtitle": "Isso pode levar um momento",
     "selected": "{{count}} de {{total}} selecionadas",
     "confirmPlan": "Confirmar Plano",
     "regenerate": "Regenerar",
     "error": {
-      "title": "Nao foi possivel gerar receitas",
+      "title": "Não foi possível gerar receitas",
       "description": "Algo deu errado. Por favor, tente novamente."
     }
   },
@@ -106,6 +106,6 @@
   "delete": {
     "title": "Excluir Plano",
     "message": "Tem certeza que deseja excluir",
-    "warning": "Esta acao nao pode ser desfeita."
+    "warning": "Esta ação não pode ser desfeita."
   }
 }

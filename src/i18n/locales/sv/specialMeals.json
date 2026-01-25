@@ -1,52 +1,71 @@
 {
   "list": {
-    "title": "Dina specialtillfallen",
-    "subtitle": "Planera minnesvarda maltider for de som betyder mest",
+    "title": "Dina specialtillfällen",
+    "subtitle": "Planera minnesvärda måltider för de som betyder mest",
     "createNew": "Planera ny sammankomst",
     "loading": "Laddar evenemang...",
     "empty": {
-      "title": "Inga specialtillfallen planerade",
-      "description": "Skapa din forsta sammankomst for att borja",
-      "button": "Planera din forsta sammankomst"
+      "title": "Inga specialtillfällen planerade",
+      "description": "Skapa din första sammankomst för att börja",
+      "button": "Planera din första sammankomst"
     }
   },
   "create": {
-    "title": "Planera en specialmaltid",
-    "subtitle": "Skapa en minnesvärd matupplevelse för dina gäster",
+    "title": "Vad planerar du?",
+    "subtitle": "Låt oss börja med grunderna för att skapa den perfekta menyn för dina gäster.",
+    "backButton": "Tillbaka till instrumentpanelen",
+    "breadcrumb": "Skapa evenemang",
+    "badge": "Mat med vänner",
     "sections": {
       "eventDetails": {
         "title": "Evenemangsdetaljer",
         "eventName": "Evenemangsnamn",
-        "placeholder": "t.ex. Fodelsedagsmiddag, Arsdagsfirande",
+        "placeholder": "t.ex. Spelkväll, Födelsedagsbrunch, Knytkalas",
         "date": "Datum",
-        "guests": "Antal gaster"
+        "guests": "Antal gäster"
       },
       "restrictions": {
-        "title": "Kostrestriktioner",
+        "title": "Kostrestriktioner för gäster",
         "noneSelected": "Ingen vald",
-        "placeholder": "Skriv en restriktion och tryck Enter..."
+        "placeholder": "Skriv en anpassad restriktion och tryck Enter...",
+        "options": {
+          "vegetarian": "Vegetarisk",
+          "vegan": "Vegansk",
+          "glutenFree": "Glutenfri",
+          "dairyFree": "Mjölkfri",
+          "nutFree": "Nötfri"
+        }
       },
       "cuisine": {
-        "title": "Kokspreferenser",
+        "title": "Kökspreférenser",
         "placeholder": "t.ex. Italienskt, Japanskt, Mexikanskt"
       },
       "preferences": {
         "title": "Ytterligare preferenser",
-        "mustHaves": "Maste inkludera",
-        "excludes": "Exkludera"
+        "mustHaves": "Måste ha",
+        "excludes": "Exkludera",
+        "inputPlaceholder": "Skriv och tryck Enter..."
       }
     },
-    "nextButton": "Generera receptideer"
+    "nextButton": "Nästa: Välj tema",
+    "cancelButton": "Avbryt",
+    "aiAssistant": {
+      "badge": "AI-assistent",
+      "title": "Planerar du för en grupp?",
+      "description": "Se till att lista alla kända allergier. Jag filtrerar automatiskt bort recept som innehåller osäkra ingredienser och föreslår säkra alternativ!",
+      "tipTitle": "Tips: Variera!",
+      "tipDescription": "Prova att lägga till \"Fingerfood\" i Måste ha för enklare värdskap."
+    }
   },
   "selection": {
-    "title": "Valj ditt recept",
-    "subtitle": "Valj det perfekta receptet for ditt specialtillfalle",
-    "generating": "Skapar specialrecept at dig...",
-    "confirmSelection": "Anvand detta recept"
+    "title": "Välj ditt recept",
+    "subtitle": "Välj det perfekta receptet för ditt specialtillfälle",
+    "generating": "Skapar specialrecept åt dig...",
+    "confirmSelection": "Använd detta recept"
   },
   "delete": {
     "title": "Ta bort evenemang",
-    "message": "Ar du saker pa att du vill ta bort",
-    "warning": "Denna atgard kan inte angras."
+    "message": "Är du säker på att du vill ta bort",
+    "warning": "Denna åtgärd kan inte ångras."
   }
 }

@@ -1,13 +1,13 @@
 {
   "card": {
     "viewRecipe": "Ver Receita",
-    "servings": "Porcoes"
+    "servings": "Porções"
   },
   "detail": {
     "ingredients": "Ingredientes",
-    "instructions": "Instrucoes",
-    "nutrition": "Informacoes Nutricionais",
-    "perServing": "Por Porcao",
+    "instructions": "Instruções",
+    "nutrition": "Informações Nutricionais",
+    "perServing": "Por Porção",
     "cookTime": "Tempo de Cozimento",
     "prepTime": "Tempo de Preparo",
     "totalTime": "Tempo Total",
@@ -15,17 +15,17 @@
   },
   "weeklyLimit": {
     "title": "Limite Semanal Atingido",
-    "message": "Voce atingiu seu limite semanal de geracao de receitas. Faca upgrade para o Pro para receitas ilimitadas!",
+    "message": "Você atingiu seu limite semanal de geração de receitas. Faça upgrade para o Pro para receitas ilimitadas!",
     "bannerTitle": "Limite Semanal Atingido",
-    "bannerMessage": "Voce usou todas as suas geracoes de receitas gratuitas esta semana.",
+    "bannerMessage": "Você usou todas as suas gerações de receitas gratuitas esta semana.",
     "upgradeButton": "Fazer Upgrade para Pro",
-    "waitMessage": "Seu limite sera resetado em {{date}}"
+    "waitMessage": "Seu limite será resetado em {{date}}"
   },
   "actions": {
     "favorite": "Adicionar aos Favoritos",
     "unfavorite": "Remover dos Favoritos",
     "share": "Compartilhar Receita",
     "print": "Imprimir Receita",
-    "addToCalendar": "Adicionar ao Calendario"
+    "addToCalendar": "Adicionar ao Calendário"
   }
 }

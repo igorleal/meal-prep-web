@@ -29,7 +29,8 @@
     "generic": "Something went wrong. Please try again.",
     "network": "Network error. Please check your connection.",
     "notFound": "Not found",
-    "unauthorized": "Unauthorized. Please log in again."
+    "unauthorized": "Unauthorized. Please log in again.",
+    "invalidDate": "Please enter a valid date"
   },
   "units": {
     "meals": "{{count}} meal",

@@ -1,7 +1,7 @@
 {
   "page": {
-    "title": "Calendario Familiar",
-    "subtitle": "Planeje e visualize as refeicoes da sua familia para o mes"
+    "title": "Calendário Familiar",
+    "subtitle": "Planeje e visualize as refeições da sua família para o mês"
   },
   "toolbar": {
     "jumpToToday": "Ir para Hoje"
@@ -12,51 +12,65 @@
     "wed": "Qua",
     "thu": "Qui",
     "fri": "Sex",
-    "sat": "Sab",
+    "sat": "Sáb",
     "sun": "Dom"
   },
   "day": {
-    "addMeal": "Adicionar refeicao",
-    "removeMeal": "Remover refeicao"
+    "addMeal": "Adicionar refeição",
+    "removeMeal": "Remover refeição"
   },
-  "loading": "Carregando calendario...",
+  "loading": "Carregando calendário...",
   "create": {
-    "title": "Planejar uma Refeicao Familiar",
-    "subtitle": "Crie uma refeicao deliciosa para sua familia",
+    "title": "Vamos montar seu plano",
+    "subtitle": "Personalize sua refeição para este horário. A IA gerará opções com base nas suas preferências.",
+    "backButton": "Voltar para Visualização Mensal",
     "sections": {
       "mealDetails": {
-        "title": "Detalhes da Refeicao",
-        "mealName": "Nome da Refeicao",
-        "placeholder": "ex., Almoco de Domingo, Terca do Taco",
+        "title": "Detalhes da Refeição",
+        "mealName": "Nome da Refeição",
+        "placeholder": "ex., Almoço de Domingo, Terça do Taco",
         "date": "Data",
-        "mealType": "Tipo de Refeicao",
+        "mealType": "Tipo de Refeição",
         "types": {
-          "breakfast": "Cafe da Manha",
-          "lunch": "Almoco",
+          "breakfast": "Café da Manhã",
+          "lunch": "Almoço",
           "dinner": "Jantar",
           "snack": "Lanche"
         }
       },
       "servings": {
-        "title": "Porcoes",
-        "label": "Numero de Porcoes"
+        "title": "Porções",
+        "label": "Número de Porções"
       },
       "restrictions": {
-        "title": "Restricoes Alimentares",
-        "placeholder": "Digite uma restricao e pressione Enter..."
+        "title": "Restrições Alimentares",
+        "placeholder": "Digite uma restrição e pressione Enter...",
+        "suggestionsLabel": "Sugestões:",
+        "options": {
+          "glutenFree": "Sem Glúten",
+          "vegetarian": "Vegetariano",
+          "vegan": "Vegano",
+          "keto": "Keto",
+          "dairyFree": "Sem Lactose",
+          "paleo": "Paleo"
+        }
       },
       "preferences": {
-        "title": "Preferencias",
-        "mustHaves": "Deve Incluir",
-        "excludes": "Excluir"
+        "title": "Preferências",
+        "mustHaves": "Ingredientes Obrigatórios",
+        "mustHavesDescription": "Ingredientes que você quer usar ou está com vontade de comer hoje.",
+        "excludes": "Excluir Ingredientes",
+        "excludesDescription": "Ingredientes que você quer evitar na refeição de hoje.",
+        "placeholder": "Digite um ingrediente e pressione Enter..."
       }
     },
-    "nextButton": "Gerar Receitas"
+    "nextButton": "Gerar Sugestões de Receitas",
+    "aiNote": "A IA gerará 3 opções personalizadas com base nas suas preferências."
   },
   "selection": {
     "title": "Escolha Sua Receita",
-    "subtitle": "Selecione a receita perfeita para sua refeicao familiar",
-    "generating": "Criando receitas para a familia...",
+    "subtitle": "Selecione a receita perfeita para sua refeição familiar",
+    "generating": "Criando receitas para a família...",
     "confirmSelection": "Usar Esta Receita"
   },
   "delete": {

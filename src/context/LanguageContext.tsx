@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useRef, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from './AuthContext'
 import { userService } from '@/api/services'
@@ -13,11 +13,33 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
+// Detect browser language and return matching supported language
+function detectBrowserLanguage(): SupportedLanguage {
+  const browserLang = navigator.language.split('-')[0]
+  if (SUPPORTED_LANGUAGES.includes(browserLang as SupportedLanguage)) {
+    return browserLang as SupportedLanguage
+  }
+  return DEFAULT_LANGUAGE
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const { i18n } = useTranslation()
   const { user, updateUser } = useAuth()
+  const hasSetBrowserLanguage = useRef(false)
 
-  // Sync i18n language with user's language preference
+  // For public pages (no user), use browser locale
+  // This runs once on mount when there's no user
+  useEffect(() => {
+    if (!user && !hasSetBrowserLanguage.current) {
+      const browserLang = detectBrowserLanguage()
+      if (browserLang !== i18n.language) {
+        i18n.changeLanguage(browserLang)
+      }
+      hasSetBrowserLanguage.current = true
+    }
+  }, [user, i18n])
+
+  // Sync i18n language with user's language preference when logged in
   useEffect(() => {
     if (user?.language && user.language !== i18n.language) {
       i18n.changeLanguage(user.language)

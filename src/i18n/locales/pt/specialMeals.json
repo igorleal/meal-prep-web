@@ -1,52 +1,71 @@
 {
   "list": {
-    "title": "Suas Ocasioes Especiais",
-    "subtitle": "Planeje refeicoes memoraveis para as pessoas que mais importam",
+    "title": "Suas Ocasiões Especiais",
+    "subtitle": "Planeje refeições memoráveis para as pessoas que mais importam",
     "createNew": "Planejar Novo Encontro",
     "loading": "Carregando eventos...",
     "empty": {
-      "title": "Nenhuma ocasiao especial planejada",
-      "description": "Crie seu primeiro encontro para comecar",
+      "title": "Nenhuma ocasião especial planejada",
+      "description": "Crie seu primeiro encontro para começar",
       "button": "Planejar Seu Primeiro Encontro"
     }
   },
   "create": {
-    "title": "Planejar uma Refeicao Especial",
-    "subtitle": "Crie uma experiencia gastronomica memoravel para seus convidados",
+    "title": "O que você está planejando?",
+    "subtitle": "Vamos começar com o básico para criar o menu perfeito para seus convidados.",
+    "backButton": "Voltar para o Painel",
+    "breadcrumb": "Criar Evento",
+    "badge": "Comida com Amigos",
     "sections": {
       "eventDetails": {
         "title": "Detalhes do Evento",
         "eventName": "Nome do Evento",
-        "placeholder": "ex., Jantar de Aniversario, Comemoracao",
+        "placeholder": "ex., Noite de Jogos, Brunch de Aniversário, Confraternização",
         "date": "Data",
-        "guests": "Numero de Convidados"
+        "guests": "Número de Convidados"
       },
       "restrictions": {
-        "title": "Restricoes Alimentares",
+        "title": "Restrições Alimentares dos Convidados",
         "noneSelected": "Nenhuma selecionada",
-        "placeholder": "Digite uma restricao e pressione Enter..."
+        "placeholder": "Digite uma restrição personalizada e pressione Enter...",
+        "options": {
+          "vegetarian": "Vegetariano",
+          "vegan": "Vegano",
+          "glutenFree": "Sem Glúten",
+          "dairyFree": "Sem Lactose",
+          "nutFree": "Sem Nozes"
+        }
       },
       "cuisine": {
-        "title": "Preferencias de Cozinha",
+        "title": "Preferências de Cozinha",
         "placeholder": "ex., Italiana, Japonesa, Mexicana"
       },
       "preferences": {
-        "title": "Preferencias Adicionais",
+        "title": "Preferências Adicionais",
         "mustHaves": "Deve Incluir",
-        "excludes": "Excluir"
+        "excludes": "Excluir",
+        "inputPlaceholder": "Digite e pressione Enter..."
       }
     },
-    "nextButton": "Gerar Ideias de Receitas"
+    "nextButton": "Próximo: Escolher Tema",
+    "cancelButton": "Cancelar",
+    "aiAssistant": {
+      "badge": "Assistente IA",
+      "title": "Planejando para um grupo?",
+      "description": "Certifique-se de listar todas as alergias conhecidas. Eu filtro automaticamente receitas que contêm ingredientes inseguros e sugiro alternativas seguras!",
+      "tipTitle": "Dica: Varie!",
+      "tipDescription": "Tente adicionar \"Petiscos\" em Deve Incluir para facilitar a recepção."
+    }
   },
   "selection": {
     "title": "Escolha Sua Receita",
-    "subtitle": "Selecione a receita perfeita para sua ocasiao especial",
-    "generating": "Criando receitas especiais para voce...",
+    "subtitle": "Selecione a receita perfeita para sua ocasião especial",
+    "generating": "Criando receitas especiais para você...",
     "confirmSelection": "Usar Esta Receita"
   },
   "delete": {
     "title": "Excluir Evento",
     "message": "Tem certeza que deseja excluir",
-    "warning": "Esta acao nao pode ser desfeita."
+    "warning": "Esta ação não pode ser desfeita."
   }
 }

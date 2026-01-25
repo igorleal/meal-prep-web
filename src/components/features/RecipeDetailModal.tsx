@@ -24,8 +24,6 @@ export function RecipeDetailModal({
   const { imageUrl, isPolling } = useRecipeImagePolling({
     recipe,
     onImageLoaded,
-    pollingInterval: 2000,
-    maxRetries: 2,
   })
 
   return (

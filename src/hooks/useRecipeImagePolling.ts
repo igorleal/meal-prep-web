@@ -5,10 +5,6 @@ import type { Recipe } from '@/types'
 interface UseRecipeImagePollingOptions {
   recipe: Recipe | null | undefined
   onImageLoaded?: (updatedRecipe: Recipe) => void
-  pollingInterval?: number
-  maxPollingTime?: number
-  /** If set, only fetch this many times (including initial fetch) instead of continuous polling */
-  maxRetries?: number
 }
 
 interface UseRecipeImagePollingResult {
@@ -17,24 +13,28 @@ interface UseRecipeImagePollingResult {
   hasTimedOut: boolean
 }
 
+// Polling schedule: poll at T5, T10, then every second from T11-T20
+const INITIAL_DELAY = 5000 // First poll at 5 seconds
+const SECOND_POLL_DELAY = 5000 // Second poll at 10 seconds (5s after first)
+const RAPID_POLL_INTERVAL = 1000 // Then every 1 second
+const MAX_POLLING_TIME = 20000 // Stop at 20 seconds
+
 export function useRecipeImagePolling({
   recipe,
   onImageLoaded,
-  pollingInterval = 1000,
-  maxPollingTime = 10000,
-  maxRetries,
 }: UseRecipeImagePollingOptions): UseRecipeImagePollingResult {
   const [imageUrl, setImageUrl] = useState<string | undefined>(recipe?.imageUrl)
   const [isPolling, setIsPolling] = useState(!recipe?.imageUrl)
   const [hasTimedOut, setHasTimedOut] = useState(false)
   const startTimeRef = useRef<number | null>(null)
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
-  const retryCountRef = useRef(0)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const isStoppedRef = useRef(false)
 
   const stopPolling = useCallback(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-      intervalRef.current = null
+    isStoppedRef.current = true
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
     }
     setIsPolling(false)
   }, [])
@@ -53,13 +53,14 @@ export function useRecipeImagePolling({
     }
 
     // Start polling
-    startTimeRef.current = Date.now()
-    retryCountRef.current = 0
+    const startTime = Date.now()
+    startTimeRef.current = startTime
+    isStoppedRef.current = false
     setIsPolling(true)
     setHasTimedOut(false)
 
     const poll = async () => {
-      retryCountRef.current++
+      if (isStoppedRef.current) return
 
       try {
         const updatedRecipe = await recipeService.getRecipe(recipe.id)
@@ -70,52 +71,57 @@ export function useRecipeImagePolling({
           onImageLoaded?.(updatedRecipe)
           return
         }
-
-        // Check if we've exceeded max retries (if using retry-based polling)
-        if (maxRetries !== undefined && retryCountRef.current >= maxRetries) {
-          stopPolling()
-          setHasTimedOut(true)
-          return
-        }
-
-        // Check if we've exceeded max polling time (if using time-based polling)
-        if (maxRetries === undefined && startTimeRef.current && Date.now() - startTimeRef.current >= maxPollingTime) {
-          stopPolling()
-          setHasTimedOut(true)
-        }
       } catch (error) {
         // Continue polling on error, don't stop
         console.error('Error polling for recipe image:', error)
+      }
 
-        // Check if we've exceeded max retries
-        if (maxRetries !== undefined && retryCountRef.current >= maxRetries) {
-          stopPolling()
-          setHasTimedOut(true)
-          return
-        }
-
-        // Still check timeout for time-based polling
-        if (maxRetries === undefined && startTimeRef.current && Date.now() - startTimeRef.current >= maxPollingTime) {
-          stopPolling()
-          setHasTimedOut(true)
-        }
+      // Schedule next poll if not stopped
+      if (!isStoppedRef.current) {
+        scheduleNextPoll()
       }
     }
 
-    // Fetch immediately on mount
-    poll()
+    const scheduleNextPoll = () => {
+      if (isStoppedRef.current) return
 
-    // Then set up interval for subsequent fetches
-    intervalRef.current = setInterval(poll, pollingInterval)
+      const elapsed = Date.now() - startTime
+
+      // Check if we've exceeded max polling time
+      if (elapsed >= MAX_POLLING_TIME) {
+        stopPolling()
+        setHasTimedOut(true)
+        return
+      }
+
+      let nextDelay: number
+
+      if (elapsed < INITIAL_DELAY) {
+        // Before T5: wait until T5
+        nextDelay = INITIAL_DELAY - elapsed
+      } else if (elapsed < INITIAL_DELAY + SECOND_POLL_DELAY) {
+        // Between T5 and T10: wait until T10
+        nextDelay = INITIAL_DELAY + SECOND_POLL_DELAY - elapsed
+      } else {
+        // After T10: poll every second
+        nextDelay = RAPID_POLL_INTERVAL
+      }
+
+      timeoutRef.current = setTimeout(poll, nextDelay)
+    }
+
+    // Schedule the first poll at T5
+    timeoutRef.current = setTimeout(poll, INITIAL_DELAY)
 
     // Cleanup
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-        intervalRef.current = null
+      isStoppedRef.current = true
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+        timeoutRef.current = null
       }
     }
-  }, [recipe?.id, recipe?.imageUrl, pollingInterval, maxPollingTime, maxRetries, onImageLoaded, stopPolling])
+  }, [recipe?.id, recipe?.imageUrl, onImageLoaded, stopPolling])
 
   return { imageUrl, isPolling, hasTimedOut }
 }

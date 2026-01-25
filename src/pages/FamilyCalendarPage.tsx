@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { Button, Icon, Badge, LoadingOverlay } from '@/components/common'
 import { familyPlanService } from '@/api/services'
 import {
@@ -18,8 +19,6 @@ import {
 import { cn } from '@/utils/cn'
 import type { FamilyPlanResponse } from '@/types'
 
-const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-
 function CalendarDay({
   date,
   currentMonth,
@@ -35,6 +34,8 @@ function CalendarDay({
   onViewMeal: (meal: FamilyPlanResponse) => void
   onRequestRemove: (meal: FamilyPlanResponse) => void
 }) {
+  const { t } = useTranslation('familyCalendar')
+  const { t: tCommon } = useTranslation('common')
   const isCurrentMonth = isSameMonthAs(date, currentMonth)
   const isTodayDate = isToday(date)
   const dayMeals = meals.filter(
@@ -64,7 +65,7 @@ function CalendarDay({
         </span>
         {isTodayDate && (
           <Badge variant="primary" className="text-xs">
-            TODAY
+            {tCommon('time.today')}
           </Badge>
         )}
       </div>
@@ -94,7 +95,7 @@ function CalendarDay({
             className="w-full mt-2 py-1 opacity-0 hover:opacity-100 transition-opacity text-text-muted-light dark:text-text-muted-dark text-xs flex items-center justify-center gap-1 hover:text-red-500 rounded hover:bg-red-500/5"
           >
             <Icon name="delete" size="sm" />
-            Remove meal
+            {t('day.removeMeal')}
           </button>
         ) : (
           <button
@@ -102,7 +103,7 @@ function CalendarDay({
             className="w-full mt-2 py-1 opacity-0 hover:opacity-100 transition-opacity text-text-muted-light dark:text-text-muted-dark text-xs flex items-center justify-center gap-1 hover:text-primary rounded hover:bg-primary/5"
           >
             <Icon name="add" size="sm" />
-            Add meal
+            {t('day.addMeal')}
           </button>
         )
       )}
@@ -110,9 +111,13 @@ function CalendarDay({
   )
 }
 
+const weekDayKeys = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'] as const
+
 export default function FamilyCalendarPage() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const { t } = useTranslation('familyCalendar')
+  const { t: tCommon } = useTranslation('common')
   const [currentMonth, setCurrentMonth] = useState(new Date())
   const [mealToDelete, setMealToDelete] = useState<FamilyPlanResponse | null>(null)
 
@@ -159,10 +164,10 @@ export default function FamilyCalendarPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-extrabold text-text-main-light dark:text-white mb-2">
-            Family Calendar
+            {t('page.title')}
           </h1>
           <p className="text-text-muted-light dark:text-text-muted-dark">
-            Plan and view your family&apos;s meals for the month
+            {t('page.subtitle')}
           </p>
         </div>
       </div>
@@ -191,18 +196,18 @@ export default function FamilyCalendarPage() {
           size="sm"
           onClick={() => setCurrentMonth(new Date())}
         >
-          Jump to Today
+          {t('toolbar.jumpToToday')}
         </Button>
       </div>
 
       {/* Calendar Grid */}
       {isLoading ? (
-        <LoadingOverlay message="Loading calendar..." />
+        <LoadingOverlay message={t('loading')} />
       ) : (
         <div className="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark overflow-hidden">
           {/* Week day headers */}
           <div className="grid grid-cols-7 border-b border-border-light dark:border-border-dark">
-            {weekDays.map((day, index) => (
+            {weekDayKeys.map((day, index) => (
               <div
                 key={day}
                 className={cn(
@@ -213,7 +218,7 @@ export default function FamilyCalendarPage() {
                     : 'text-text-main-light dark:text-white'
                 )}
               >
-                {day}
+                {t(`weekDays.${day}`)}
               </div>
             ))}
           </div>
@@ -256,10 +261,10 @@ export default function FamilyCalendarPage() {
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-bold text-text-main-light dark:text-white mb-2">
-                  Remove Recipe
+                  {t('delete.title')}
                 </h3>
                 <p className="text-text-muted-light dark:text-text-muted-dark">
-                  Are you sure you want to remove the recipe for{' '}
+                  {t('delete.message')}{' '}
                   <strong className="text-text-main-light dark:text-white">
                     {formatDateWithOrdinal(mealToDelete.request.date)}
                   </strong>
@@ -274,7 +279,7 @@ export default function FamilyCalendarPage() {
                 onClick={() => setMealToDelete(null)}
                 disabled={deleteMutation.isPending}
               >
-                Cancel
+                {tCommon('buttons.cancel')}
               </Button>
               <Button
                 variant="primary"
@@ -282,7 +287,7 @@ export default function FamilyCalendarPage() {
                 loading={deleteMutation.isPending}
                 className="bg-red-600 hover:bg-red-700"
               >
-                Remove
+                {t('delete.confirmButton')}
               </Button>
             </div>
           </div>

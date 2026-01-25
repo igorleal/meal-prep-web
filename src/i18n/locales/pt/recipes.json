@@ -1,0 +1,31 @@
+{
+  "card": {
+    "viewRecipe": "Ver Receita",
+    "servings": "Porcoes"
+  },
+  "detail": {
+    "ingredients": "Ingredientes",
+    "instructions": "Instrucoes",
+    "nutrition": "Informacoes Nutricionais",
+    "perServing": "Por Porcao",
+    "cookTime": "Tempo de Cozimento",
+    "prepTime": "Tempo de Preparo",
+    "totalTime": "Tempo Total",
+    "tags": "Tags"
+  },
+  "weeklyLimit": {
+    "title": "Limite Semanal Atingido",
+    "message": "Voce atingiu seu limite semanal de geracao de receitas. Faca upgrade para o Pro para receitas ilimitadas!",
+    "bannerTitle": "Limite Semanal Atingido",
+    "bannerMessage": "Voce usou todas as suas geracoes de receitas gratuitas esta semana.",
+    "upgradeButton": "Fazer Upgrade para Pro",
+    "waitMessage": "Seu limite sera resetado em {{date}}"
+  },
+  "actions": {
+    "favorite": "Adicionar aos Favoritos",
+    "unfavorite": "Remover dos Favoritos",
+    "share": "Compartilhar Receita",
+    "print": "Imprimir Receita",
+    "addToCalendar": "Adicionar ao Calendario"
+  }
+}

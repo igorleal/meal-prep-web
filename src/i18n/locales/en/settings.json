@@ -1,0 +1,28 @@
+{
+  "page": {
+    "title": "Profile & Settings",
+    "subtitle": "Manage your account details and personalize your AI meal preferences."
+  },
+  "profile": {
+    "proPlan": "Pro Plan Active"
+  },
+  "preferences": {
+    "title": "Preferences",
+    "language": {
+      "label": "Language Preference",
+      "placeholder": "Select language"
+    },
+    "restrictions": {
+      "label": "Dietary Restrictions",
+      "description": "Add dietary requirements to help our AI curate better recipes for you.",
+      "placeholder": "Type a restriction and press Enter...",
+      "suggestions": "Suggestions:"
+    }
+  },
+  "actions": {
+    "logOut": "Log Out",
+    "saveChanges": "Save Changes",
+    "allSaved": "All changes saved automatically"
+  },
+  "loading": "Loading settings..."
+}

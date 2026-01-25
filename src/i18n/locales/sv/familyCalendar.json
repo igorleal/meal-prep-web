@@ -1,0 +1,67 @@
+{
+  "page": {
+    "title": "Familjekalender",
+    "subtitle": "Planera och visa familjens maltider for manaden"
+  },
+  "toolbar": {
+    "jumpToToday": "Ga till idag"
+  },
+  "weekDays": {
+    "mon": "Man",
+    "tue": "Tis",
+    "wed": "Ons",
+    "thu": "Tor",
+    "fri": "Fre",
+    "sat": "Lor",
+    "sun": "Son"
+  },
+  "day": {
+    "addMeal": "Lagg till maltid",
+    "removeMeal": "Ta bort maltid"
+  },
+  "loading": "Laddar kalender...",
+  "create": {
+    "title": "Planera en familjemaltid",
+    "subtitle": "Skapa en lacker maltid for din familj",
+    "sections": {
+      "mealDetails": {
+        "title": "Maltidsdetaljer",
+        "mealName": "Maltidsnamn",
+        "placeholder": "t.ex. Sondagsstek, Tacofredag",
+        "date": "Datum",
+        "mealType": "Maltidstyp",
+        "types": {
+          "breakfast": "Frukost",
+          "lunch": "Lunch",
+          "dinner": "Middag",
+          "snack": "Mellanmal"
+        }
+      },
+      "servings": {
+        "title": "Portioner",
+        "label": "Antal portioner"
+      },
+      "restrictions": {
+        "title": "Kostrestriktioner",
+        "placeholder": "Skriv en restriktion och tryck Enter..."
+      },
+      "preferences": {
+        "title": "Preferenser",
+        "mustHaves": "Maste inkludera",
+        "excludes": "Exkludera"
+      }
+    },
+    "nextButton": "Generera recept"
+  },
+  "selection": {
+    "title": "Valj ditt recept",
+    "subtitle": "Valj det perfekta receptet for din familjemaltid",
+    "generating": "Skapar familjevanliga recept...",
+    "confirmSelection": "Anvand detta recept"
+  },
+  "delete": {
+    "title": "Ta bort recept",
+    "message": "Ar du saker pa att du vill ta bort receptet for",
+    "confirmButton": "Ta bort"
+  }
+}

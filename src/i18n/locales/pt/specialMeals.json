@@ -1,0 +1,52 @@
+{
+  "list": {
+    "title": "Suas Ocasioes Especiais",
+    "subtitle": "Planeje refeicoes memoraveis para as pessoas que mais importam",
+    "createNew": "Planejar Novo Encontro",
+    "loading": "Carregando eventos...",
+    "empty": {
+      "title": "Nenhuma ocasiao especial planejada",
+      "description": "Crie seu primeiro encontro para comecar",
+      "button": "Planejar Seu Primeiro Encontro"
+    }
+  },
+  "create": {
+    "title": "Planejar uma Refeicao Especial",
+    "subtitle": "Crie uma experiencia gastronomica memoravel para seus convidados",
+    "sections": {
+      "eventDetails": {
+        "title": "Detalhes do Evento",
+        "eventName": "Nome do Evento",
+        "placeholder": "ex., Jantar de Aniversario, Comemoracao",
+        "date": "Data",
+        "guests": "Numero de Convidados"
+      },
+      "restrictions": {
+        "title": "Restricoes Alimentares",
+        "noneSelected": "Nenhuma selecionada",
+        "placeholder": "Digite uma restricao e pressione Enter..."
+      },
+      "cuisine": {
+        "title": "Preferencias de Cozinha",
+        "placeholder": "ex., Italiana, Japonesa, Mexicana"
+      },
+      "preferences": {
+        "title": "Preferencias Adicionais",
+        "mustHaves": "Deve Incluir",
+        "excludes": "Excluir"
+      }
+    },
+    "nextButton": "Gerar Ideias de Receitas"
+  },
+  "selection": {
+    "title": "Escolha Sua Receita",
+    "subtitle": "Selecione a receita perfeita para sua ocasiao especial",
+    "generating": "Criando receitas especiais para voce...",
+    "confirmSelection": "Usar Esta Receita"
+  },
+  "delete": {
+    "title": "Excluir Evento",
+    "message": "Tem certeza que deseja excluir",
+    "warning": "Esta acao nao pode ser desfeita."
+  }
+}

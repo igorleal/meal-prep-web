@@ -1,0 +1,59 @@
+{
+  "buttons": {
+    "save": "Spara andringar",
+    "cancel": "Avbryt",
+    "delete": "Ta bort",
+    "confirm": "Bekrafta",
+    "back": "Tillbaka",
+    "next": "Nasta",
+    "close": "Stang",
+    "add": "Lagg till",
+    "remove": "Ta bort",
+    "edit": "Redigera",
+    "view": "Visa",
+    "create": "Skapa",
+    "generate": "Generera",
+    "retry": "Forsok igen",
+    "continue": "Fortsatt"
+  },
+  "labels": {
+    "loading": "Laddar...",
+    "saving": "Sparar...",
+    "deleting": "Tar bort...",
+    "generating": "Genererar...",
+    "noResults": "Inga resultat hittades",
+    "required": "Obligatoriskt",
+    "optional": "Valfritt"
+  },
+  "errors": {
+    "generic": "Nagot gick fel. Forsok igen.",
+    "network": "Natverksfel. Kontrollera din anslutning.",
+    "notFound": "Hittades inte",
+    "unauthorized": "Ej behorig. Logga in igen."
+  },
+  "units": {
+    "meals": "{{count}} maltid",
+    "meals_other": "{{count}} maltider",
+    "days": "{{count}} dag",
+    "days_other": "{{count}} dagar",
+    "servings": "{{count}} Portion",
+    "servings_other": "{{count}} Portioner",
+    "calories": "kcal",
+    "grams": "g"
+  },
+  "macros": {
+    "calories": "Kalorier",
+    "protein": "Protein",
+    "carbs": "Kolhydrater",
+    "fats": "Fett",
+    "cal": "Kal",
+    "pro": "Pro",
+    "carb": "Kolh",
+    "fat": "Fett"
+  },
+  "time": {
+    "today": "IDAG",
+    "yesterday": "Igar",
+    "tomorrow": "Imorgon"
+  }
+}

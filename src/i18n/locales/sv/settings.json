@@ -1,0 +1,28 @@
+{
+  "page": {
+    "title": "Profil och installningar",
+    "subtitle": "Hantera dina kontouppgifter och anpassa dina AI-maltidspreferenser."
+  },
+  "profile": {
+    "proPlan": "Pro-plan aktiv"
+  },
+  "preferences": {
+    "title": "Preferenser",
+    "language": {
+      "label": "Sprakpreferens",
+      "placeholder": "Valj sprak"
+    },
+    "restrictions": {
+      "label": "Kostrestriktioner",
+      "description": "Lagg till kostrestriktioner for att hjalpa var AI att valja battre recept at dig.",
+      "placeholder": "Skriv en restriktion och tryck Enter...",
+      "suggestions": "Forslag:"
+    }
+  },
+  "actions": {
+    "logOut": "Logga ut",
+    "saveChanges": "Spara andringar",
+    "allSaved": "Alla andringar sparade automatiskt"
+  },
+  "loading": "Laddar installningar..."
+}

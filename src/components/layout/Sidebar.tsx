@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { cn } from '@/utils/cn'
 import { Icon } from '@/components/common'
 import { useTheme } from '@/context/ThemeContext'
@@ -9,19 +10,20 @@ interface SidebarProps {
   onClose: () => void
 }
 
-const navItems = [
-  { id: 'dashboard', path: '/', icon: 'dashboard', label: 'Dashboard' },
-  { id: 'planner', path: '/meal-plans', icon: 'calendar_month', label: 'Meal Planner' },
-  { id: 'calendar', path: '/calendar', icon: 'event', label: 'Family Calendar' },
-  { id: 'special', path: '/special-meals', icon: 'local_dining', label: 'Special Meals' },
-  { id: 'favorites', path: '/favorites', icon: 'favorite', label: 'Favorite Recipes' },
-  { id: 'profile', path: '/settings', icon: 'person', label: 'Profile' },
+const navItemKeys = [
+  { id: 'dashboard', path: '/', icon: 'dashboard', labelKey: 'sidebar.dashboard' },
+  { id: 'planner', path: '/meal-plans', icon: 'calendar_month', labelKey: 'sidebar.mealPlanner' },
+  { id: 'calendar', path: '/calendar', icon: 'event', labelKey: 'sidebar.familyCalendar' },
+  { id: 'special', path: '/special-meals', icon: 'local_dining', labelKey: 'sidebar.specialMeals' },
+  { id: 'favorites', path: '/favorites', icon: 'favorite', labelKey: 'sidebar.favorites' },
+  { id: 'profile', path: '/settings', icon: 'person', labelKey: 'sidebar.profile' },
 ]
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const location = useLocation()
   const { theme, toggleTheme } = useTheme()
   const { logout } = useAuth()
+  const { t } = useTranslation('navigation')
 
   const handleLogout = () => {
     logout()
@@ -55,14 +57,14 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <Icon name="restaurant_menu" className="text-primary" />
             </div>
             <div>
-              <h1 className="text-lg font-bold leading-none">ReceitAI</h1>
-              <p className="text-text-muted-light dark:text-gray-400 text-xs">Plan smart</p>
+              <h1 className="text-lg font-bold leading-none">{t('brand.name')}</h1>
+              <p className="text-text-muted-light dark:text-gray-400 text-xs">{t('brand.tagline')}</p>
             </div>
           </div>
 
           {/* Nav links */}
           <nav className="flex flex-col gap-2">
-            {navItems.map((item) => {
+            {navItemKeys.map((item) => {
               const isActive = location.pathname === item.path
               return (
                 <Link
@@ -81,7 +83,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                     className={isActive ? 'text-primary' : 'text-gray-400'}
                   />
                   <span className={cn('text-sm', isActive ? 'font-bold' : 'font-medium')}>
-                    {item.label}
+                    {t(item.labelKey)}
                   </span>
                 </Link>
               )
@@ -97,7 +99,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           >
             <Icon name={theme === 'light' ? 'dark_mode' : 'light_mode'} />
             <span className="text-sm font-medium">
-              {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
+              {theme === 'light' ? t('theme.darkMode') : t('theme.lightMode')}
             </span>
           </button>
           <button
@@ -105,7 +107,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             className="flex items-center gap-3 px-3 py-2.5 rounded-lg w-full text-text-muted-light dark:text-gray-400 hover:text-text-main-light dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
           >
             <Icon name="logout" />
-            <span className="text-sm font-medium">Logout</span>
+            <span className="text-sm font-medium">{t('auth.logout')}</span>
           </button>
         </div>
       </aside>

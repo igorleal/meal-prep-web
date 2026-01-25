@@ -1,0 +1,31 @@
+{
+  "card": {
+    "viewRecipe": "View Recipe",
+    "servings": "Servings"
+  },
+  "detail": {
+    "ingredients": "Ingredients",
+    "instructions": "Instructions",
+    "nutrition": "Nutrition Facts",
+    "perServing": "Per Serving",
+    "cookTime": "Cook Time",
+    "prepTime": "Prep Time",
+    "totalTime": "Total Time",
+    "tags": "Tags"
+  },
+  "weeklyLimit": {
+    "title": "Weekly Limit Reached",
+    "message": "You've reached your weekly recipe generation limit. Upgrade to Pro for unlimited recipes!",
+    "bannerTitle": "Weekly Limit Reached",
+    "bannerMessage": "You've used all your free recipe generations this week.",
+    "upgradeButton": "Upgrade to Pro",
+    "waitMessage": "Your limit will reset on {{date}}"
+  },
+  "actions": {
+    "favorite": "Add to Favorites",
+    "unfavorite": "Remove from Favorites",
+    "share": "Share Recipe",
+    "print": "Print Recipe",
+    "addToCalendar": "Add to Calendar"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "mealPlanner": "Meal Planner",
+    "familyCalendar": "Family Calendar",
+    "specialMeals": "Special Meals",
+    "favorites": "Favorite Recipes",
+    "profile": "Profile",
+    "pantry": "Pantry",
+    "shoppingList": "Shopping List"
+  },
+  "header": {
+    "openMenu": "Open menu"
+  },
+  "theme": {
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode"
+  },
+  "auth": {
+    "logout": "Logout"
+  },
+  "brand": {
+    "name": "ReceitAI",
+    "tagline": "Plan smart"
+  }
+}

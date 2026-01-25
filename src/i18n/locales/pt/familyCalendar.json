@@ -1,0 +1,67 @@
+{
+  "page": {
+    "title": "Calendario Familiar",
+    "subtitle": "Planeje e visualize as refeicoes da sua familia para o mes"
+  },
+  "toolbar": {
+    "jumpToToday": "Ir para Hoje"
+  },
+  "weekDays": {
+    "mon": "Seg",
+    "tue": "Ter",
+    "wed": "Qua",
+    "thu": "Qui",
+    "fri": "Sex",
+    "sat": "Sab",
+    "sun": "Dom"
+  },
+  "day": {
+    "addMeal": "Adicionar refeicao",
+    "removeMeal": "Remover refeicao"
+  },
+  "loading": "Carregando calendario...",
+  "create": {
+    "title": "Planejar uma Refeicao Familiar",
+    "subtitle": "Crie uma refeicao deliciosa para sua familia",
+    "sections": {
+      "mealDetails": {
+        "title": "Detalhes da Refeicao",
+        "mealName": "Nome da Refeicao",
+        "placeholder": "ex., Almoco de Domingo, Terca do Taco",
+        "date": "Data",
+        "mealType": "Tipo de Refeicao",
+        "types": {
+          "breakfast": "Cafe da Manha",
+          "lunch": "Almoco",
+          "dinner": "Jantar",
+          "snack": "Lanche"
+        }
+      },
+      "servings": {
+        "title": "Porcoes",
+        "label": "Numero de Porcoes"
+      },
+      "restrictions": {
+        "title": "Restricoes Alimentares",
+        "placeholder": "Digite uma restricao e pressione Enter..."
+      },
+      "preferences": {
+        "title": "Preferencias",
+        "mustHaves": "Deve Incluir",
+        "excludes": "Excluir"
+      }
+    },
+    "nextButton": "Gerar Receitas"
+  },
+  "selection": {
+    "title": "Escolha Sua Receita",
+    "subtitle": "Selecione a receita perfeita para sua refeicao familiar",
+    "generating": "Criando receitas para a familia...",
+    "confirmSelection": "Usar Esta Receita"
+  },
+  "delete": {
+    "title": "Remover Receita",
+    "message": "Tem certeza que deseja remover a receita de",
+    "confirmButton": "Remover"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "home": {
+    "dietReceitai": {
+      "title": "Dieta & ReceitAI",
+      "description": "Crie um plano semanal perfeitamente equilibrado, adaptado as suas necessidades nutricionais.",
+      "button": "Planejar Agora"
+    },
+    "familyCalendar": {
+      "title": "Calendario Familiar",
+      "description": "Veja o que esta preparado para toda a familia esta semana.",
+      "button": "Ver Agenda"
+    },
+    "specialMeal": {
+      "title": "Uma Refeicao Especial",
+      "description": "Impressione seus convidados com uma criacao unica da IA.",
+      "button": "Gerar"
+    }
+  },
+  "list": {
+    "title": "Meus Planos de Refeicao",
+    "subtitle": "Navegue e gerencie seus planos de refeicao gerados por IA",
+    "createNew": "Criar Novo Plano",
+    "loading": "Carregando planos de refeicao...",
+    "empty": {
+      "title": "Nenhum plano de refeicao ainda",
+      "description": "Crie seu primeiro plano de refeicao com IA para comecar",
+      "button": "Criar Seu Primeiro Plano"
+    },
+    "card": {
+      "aiGenerated": "Gerado por IA",
+      "deletePlan": "Excluir plano"
+    }
+  },
+  "create": {
+    "title": "Vamos criar seu plano",
+    "subtitle": "Configure suas preferencias de refeicao e deixe a IA gerar receitas personalizadas.",
+    "sections": {
+      "basicInfo": {
+        "title": "Informacoes Basicas",
+        "planName": "Nome do Plano",
+        "placeholder": "ex., Verao Fitness, Inverno Bulk"
+      },
+      "restrictions": {
+        "title": "Restricoes Alimentares",
+        "noneSelected": "Nenhuma selecionada",
+        "label": "Restricoes Alimentares",
+        "placeholder": "Digite uma restricao e pressione Enter..."
+      },
+      "focusAreas": {
+        "title": "Areas de Foco",
+        "subtitle": "Defina prioridades",
+        "highProtein": "Alta Proteina",
+        "lowCarb": "Baixo Carb",
+        "keto": "Keto",
+        "balanced": "Equilibrado",
+        "quickMeals": "Preparo Rapido",
+        "budgetFriendly": "Economico",
+        "longLasting": "Longa Duracao",
+        "ecoFriendly": "Ecologico"
+      },
+      "macros": {
+        "title": "Macros e Nutricao (por refeicao)",
+        "subtitle": "Metas definidas",
+        "description": "Defina macros alvo por refeicao, nao totais diarios.",
+        "calories": "Calorias",
+        "protein": "Proteina",
+        "carbs": "Carboidratos",
+        "fats": "Gorduras"
+      },
+      "preferences": {
+        "title": "Preferencias",
+        "subtitle": "{{included}} incluidos, {{excluded}} excluidos",
+        "mustHaves": "Deve Ter",
+        "excludes": "Excluir"
+      },
+      "schedule": {
+        "title": "Agenda Semanal",
+        "subtitle": "Configure refeicoes",
+        "mealsPerDay": "Refeicoes por Dia",
+        "numberOfDays": "Numero de Dias"
+      }
+    },
+    "nextButton": "Proximo: Gerar Preview"
+  },
+  "selection": {
+    "title": "Escolha Suas Receitas",
+    "subtitle": "Selecione as receitas que deseja incluir no seu plano",
+    "generating": "A IA esta preparando suas receitas...",
+    "generatingSubtitle": "Isso pode levar um momento",
+    "selected": "{{count}} de {{total}} selecionadas",
+    "confirmPlan": "Confirmar Plano",
+    "regenerate": "Regenerar",
+    "error": {
+      "title": "Nao foi possivel gerar receitas",
+      "description": "Algo deu errado. Por favor, tente novamente."
+    }
+  },
+  "detail": {
+    "loading": "Carregando receita...",
+    "backToPlans": "Voltar aos Planos",
+    "saveToFavorites": "Salvar nos Favoritos",
+    "removeFromFavorites": "Remover dos Favoritos",
+    "addedToFavorites": "Adicionado aos favoritos!",
+    "removedFromFavorites": "Removido dos favoritos"
+  },
+  "delete": {
+    "title": "Excluir Plano",
+    "message": "Tem certeza que deseja excluir",
+    "warning": "Esta acao nao pode ser desfeita."
+  }
+}

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Icon } from '@/components/common'
 
 interface HeaderProps {
@@ -6,6 +7,8 @@ interface HeaderProps {
 }
 
 export function Header({ onMenuClick }: HeaderProps) {
+  const { t } = useTranslation('navigation')
+
   return (
     <header className="flex items-center justify-between border-b border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark px-6 py-3 sticky top-0 z-30 md:hidden">
       <Link to="/" className="flex items-center gap-3">
@@ -21,14 +24,14 @@ export function Header({ onMenuClick }: HeaderProps) {
           </svg>
         </div>
         <h2 className="text-text-main-light dark:text-white text-lg font-bold tracking-tight">
-          ReceitAI
+          {t('brand.name')}
         </h2>
       </Link>
 
       <button
         onClick={onMenuClick}
         className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
-        aria-label="Open menu"
+        aria-label={t('header.openMenu')}
       >
         <Icon name="menu" />
       </button>

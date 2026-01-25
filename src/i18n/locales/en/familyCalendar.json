@@ -1,0 +1,67 @@
+{
+  "page": {
+    "title": "Family Calendar",
+    "subtitle": "Plan and view your family's meals for the month"
+  },
+  "toolbar": {
+    "jumpToToday": "Jump to Today"
+  },
+  "weekDays": {
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat",
+    "sun": "Sun"
+  },
+  "day": {
+    "addMeal": "Add meal",
+    "removeMeal": "Remove meal"
+  },
+  "loading": "Loading calendar...",
+  "create": {
+    "title": "Plan a Family Meal",
+    "subtitle": "Create a delicious meal for your family",
+    "sections": {
+      "mealDetails": {
+        "title": "Meal Details",
+        "mealName": "Meal Name",
+        "placeholder": "e.g., Sunday Roast, Taco Tuesday",
+        "date": "Date",
+        "mealType": "Meal Type",
+        "types": {
+          "breakfast": "Breakfast",
+          "lunch": "Lunch",
+          "dinner": "Dinner",
+          "snack": "Snack"
+        }
+      },
+      "servings": {
+        "title": "Servings",
+        "label": "Number of Servings"
+      },
+      "restrictions": {
+        "title": "Dietary Restrictions",
+        "placeholder": "Type a restriction and press Enter..."
+      },
+      "preferences": {
+        "title": "Preferences",
+        "mustHaves": "Must Include",
+        "excludes": "Exclude"
+      }
+    },
+    "nextButton": "Generate Recipes"
+  },
+  "selection": {
+    "title": "Choose Your Recipe",
+    "subtitle": "Select the perfect recipe for your family meal",
+    "generating": "Creating family-friendly recipes...",
+    "confirmSelection": "Use This Recipe"
+  },
+  "delete": {
+    "title": "Remove Recipe",
+    "message": "Are you sure you want to remove the recipe for",
+    "confirmButton": "Remove"
+  }
+}

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from '@/context/AuthContext'
 import { ThemeProvider } from '@/context/ThemeContext'
+import { LanguageProvider } from '@/context/LanguageContext'
 import ProtectedRoute from '@/components/navigation/ProtectedRoute'
 import AppLayout from '@/components/layout/AppLayout'
 import AuthLayout from '@/components/layout/AuthLayout'
@@ -30,7 +31,8 @@ function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <BrowserRouter>
+        <LanguageProvider>
+          <BrowserRouter>
           <Routes>
             {/* Public routes */}
             <Route element={<AuthLayout />}>
@@ -77,7 +79,8 @@ function App() {
             {/* Catch-all */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
-        </BrowserRouter>
+          </BrowserRouter>
+        </LanguageProvider>
       </AuthProvider>
     </ThemeProvider>
   )

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import {
   Button,
   Input,
@@ -14,21 +15,22 @@ import { useAuth } from '@/context/AuthContext'
 import { cn } from '@/utils/cn'
 import type { FocusArea, GenerateReceitAIPlanRequest } from '@/types'
 
-// Map from backend key to user-friendly label
-const focusAreaKeyToLabel: Record<string, string> = {
-  HIGH_PROTEIN: 'High Protein',
-  LOW_CARB: 'Low Carb',
-  KETO: 'Keto',
-  BALANCED: 'Balanced',
-  QUICK_MEALS: 'Quick Prep',
-  BUDGET_FRIENDLY: 'Budget Friendly',
-  LONG_LASTING: 'Long Lasting',
-  ECO_FRIENDLY: 'Eco Friendly',
-}
-
 export default function CreateMealPlanPage() {
   const navigate = useNavigate()
   const { user } = useAuth()
+  const { t } = useTranslation('mealPlans')
+
+  // Map from backend key to user-friendly label
+  const focusAreaKeyToLabel: Record<string, string> = {
+    HIGH_PROTEIN: t('create.sections.focusAreas.highProtein'),
+    LOW_CARB: t('create.sections.focusAreas.lowCarb'),
+    KETO: t('create.sections.focusAreas.keto'),
+    BALANCED: t('create.sections.focusAreas.balanced'),
+    QUICK_MEALS: t('create.sections.focusAreas.quickMeals'),
+    BUDGET_FRIENDLY: t('create.sections.focusAreas.budgetFriendly'),
+    LONG_LASTING: t('create.sections.focusAreas.longLasting'),
+    ECO_FRIENDLY: t('create.sections.focusAreas.ecoFriendly'),
+  }
 
   // Fetch current user to check weekly limit
   const { data: currentUser } = useQuery({
@@ -121,45 +123,45 @@ export default function CreateMealPlanPage() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl md:text-4xl font-extrabold text-text-main-light dark:text-white mb-2">
-          Let&apos;s build your plan
+          {t('create.title')}
         </h1>
         <p className="text-text-muted-light dark:text-text-muted-dark">
-          Configure your meal plan preferences and let AI generate personalized recipes.
+          {t('create.subtitle')}
         </p>
       </div>
 
       {/* Form Sections */}
       <div className="flex flex-col gap-4">
         {/* Basic Info */}
-        <Accordion number={1} title="Basic Info" subtitle={planName} defaultOpen>
+        <Accordion number={1} title={t('create.sections.basicInfo.title')} subtitle={planName} defaultOpen>
           <Input
-            label="Plan Name"
+            label={t('create.sections.basicInfo.planName')}
             value={planName}
             onChange={(e) => setPlanName(e.target.value)}
-            placeholder="e.g., Summer Shred, Winter Bulk"
+            placeholder={t('create.sections.basicInfo.placeholder')}
           />
         </Accordion>
 
         {/* Dietary Restrictions */}
         <Accordion
           number={2}
-          title="Dietary Restrictions"
+          title={t('create.sections.restrictions.title')}
           subtitle={
             selectedRestrictions.length > 0
               ? selectedRestrictions.join(', ')
-              : 'None selected'
+              : t('create.sections.restrictions.noneSelected')
           }
         >
           <ChipInput
-            label="Dietary Restrictions"
+            label={t('create.sections.restrictions.label')}
             values={selectedRestrictions}
             onChange={setSelectedRestrictions}
-            placeholder="Type a restriction and press Enter..."
+            placeholder={t('create.sections.restrictions.placeholder')}
           />
         </Accordion>
 
         {/* Focus Areas */}
-        <Accordion number={3} title="Focus Areas" subtitle="Set priorities">
+        <Accordion number={3} title={t('create.sections.focusAreas.title')} subtitle={t('create.sections.focusAreas.subtitle')}>
           <div className="flex flex-col gap-4">
             {Object.entries(focusAreas).map(([key, { enabled, value }]) => (
               <div key={key} className="flex items-start gap-3">
@@ -193,13 +195,13 @@ export default function CreateMealPlanPage() {
         </Accordion>
 
         {/* Macros & Nutrition */}
-        <Accordion number={4} title="Macros & Nutrition (per meal)" subtitle="Goals set">
+        <Accordion number={4} title={t('create.sections.macros.title')} subtitle={t('create.sections.macros.subtitle')}>
           <p className="text-sm text-text-muted-light dark:text-text-muted-dark mb-4">
-            Set target macros per meal, not daily totals.
+            {t('create.sections.macros.description')}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input
-              label="Calories"
+              label={t('create.sections.macros.calories')}
               type="number"
               suffix="kcal"
               value={macros.calories ?? ''}
@@ -208,7 +210,7 @@ export default function CreateMealPlanPage() {
               }
             />
             <Input
-              label="Protein"
+              label={t('create.sections.macros.protein')}
               type="number"
               suffix="g"
               value={macros.protein ?? ''}
@@ -217,7 +219,7 @@ export default function CreateMealPlanPage() {
               }
             />
             <Input
-              label="Carbohydrates"
+              label={t('create.sections.macros.carbs')}
               type="number"
               suffix="g"
               value={macros.carbs ?? ''}
@@ -226,7 +228,7 @@ export default function CreateMealPlanPage() {
               }
             />
             <Input
-              label="Fats"
+              label={t('create.sections.macros.fats')}
               type="number"
               suffix="g"
               value={macros.fats ?? ''}
@@ -240,18 +242,18 @@ export default function CreateMealPlanPage() {
         {/* Preferences */}
         <Accordion
           number={5}
-          title="Preferences"
-          subtitle={`${mustHaves.length} included, ${excludes.length} excluded`}
+          title={t('create.sections.preferences.title')}
+          subtitle={t('create.sections.preferences.subtitle', { included: mustHaves.length, excluded: excludes.length })}
         >
           <div className="flex flex-col gap-6">
             <ChipInput
-              label="Must Haves"
+              label={t('create.sections.preferences.mustHaves')}
               values={mustHaves}
               onChange={setMustHaves}
               variant="success"
             />
             <ChipInput
-              label="Excludes"
+              label={t('create.sections.preferences.excludes')}
               values={excludes}
               onChange={setExcludes}
               variant="danger"
@@ -260,17 +262,17 @@ export default function CreateMealPlanPage() {
         </Accordion>
 
         {/* Weekly Schedule (Simplified) */}
-        <Accordion number={6} title="Weekly Schedule" subtitle="Configure meals">
+        <Accordion number={6} title={t('create.sections.schedule.title')} subtitle={t('create.sections.schedule.subtitle')}>
           <div className="flex flex-col gap-6">
             <RangeSlider
-              label="Meals per Day"
+              label={t('create.sections.schedule.mealsPerDay')}
               value={mealsPerDay}
               onChange={setMealsPerDay}
               min={1}
               max={6}
             />
             <RangeSlider
-              label="Number of Days"
+              label={t('create.sections.schedule.numberOfDays')}
               value={days}
               onChange={setDays}
               min={1}
@@ -288,7 +290,7 @@ export default function CreateMealPlanPage() {
           disabled={!planName.trim() || hasReachedLimit}
           className="shadow-lg shadow-primary/30"
         >
-          Next: Generate Preview
+          {t('create.nextButton')}
         </Button>
       </div>
     </div>

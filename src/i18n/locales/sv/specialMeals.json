@@ -1,0 +1,52 @@
+{
+  "list": {
+    "title": "Dina specialtillfallen",
+    "subtitle": "Planera minnesvarda maltider for de som betyder mest",
+    "createNew": "Planera ny sammankomst",
+    "loading": "Laddar evenemang...",
+    "empty": {
+      "title": "Inga specialtillfallen planerade",
+      "description": "Skapa din forsta sammankomst for att borja",
+      "button": "Planera din forsta sammankomst"
+    }
+  },
+  "create": {
+    "title": "Planera en specialmaltid",
+    "subtitle": "Skapa en minnesvärd matupplevelse för dina gäster",
+    "sections": {
+      "eventDetails": {
+        "title": "Evenemangsdetaljer",
+        "eventName": "Evenemangsnamn",
+        "placeholder": "t.ex. Fodelsedagsmiddag, Arsdagsfirande",
+        "date": "Datum",
+        "guests": "Antal gaster"
+      },
+      "restrictions": {
+        "title": "Kostrestriktioner",
+        "noneSelected": "Ingen vald",
+        "placeholder": "Skriv en restriktion och tryck Enter..."
+      },
+      "cuisine": {
+        "title": "Kokspreferenser",
+        "placeholder": "t.ex. Italienskt, Japanskt, Mexikanskt"
+      },
+      "preferences": {
+        "title": "Ytterligare preferenser",
+        "mustHaves": "Maste inkludera",
+        "excludes": "Exkludera"
+      }
+    },
+    "nextButton": "Generera receptideer"
+  },
+  "selection": {
+    "title": "Valj ditt recept",
+    "subtitle": "Valj det perfekta receptet for ditt specialtillfalle",
+    "generating": "Skapar specialrecept at dig...",
+    "confirmSelection": "Anvand detta recept"
+  },
+  "delete": {
+    "title": "Ta bort evenemang",
+    "message": "Ar du saker pa att du vill ta bort",
+    "warning": "Denna atgard kan inte angras."
+  }
+}

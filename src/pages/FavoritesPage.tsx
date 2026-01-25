@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { Button, Icon, LoadingOverlay, MobileCarousel } from '@/components/common'
 import { favoriteService } from '@/api/services'
 import { getRecipeImageUrl } from '@/utils/placeholders'
@@ -14,6 +15,9 @@ function FavoriteRecipeCard({
   onUnfavorite: () => void
   onViewDetails: () => void
 }) {
+  const { t } = useTranslation('favorites')
+  const { t: tCommon } = useTranslation('common')
+
   return (
     <article
       className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface-light dark:bg-surface-dark shadow-xl shadow-black/5 dark:shadow-black/40 transition-all hover:-translate-y-2 hover:shadow-2xl cursor-pointer"
@@ -40,7 +44,7 @@ function FavoriteRecipeCard({
               onUnfavorite()
             }}
             className="size-10 rounded-full bg-primary text-white backdrop-blur-md transition-all hover:bg-red-500 flex items-center justify-center"
-            title="Remove from favorites"
+            title={t('card.removeFromFavorites')}
           >
             <Icon name="favorite" className="text-[20px]" />
           </button>
@@ -49,7 +53,7 @@ function FavoriteRecipeCard({
         {/* Servings badge */}
         <div className="absolute bottom-4 left-6 z-20 flex items-center gap-2 text-white text-sm font-bold bg-black/40 px-3 py-1.5 rounded-full backdrop-blur-md">
           <Icon name="restaurant" className="text-[18px]" />
-          {recipe.servings} Servings
+          {tCommon('units.servings', { count: recipe.servings })}
         </div>
       </div>
 
@@ -80,7 +84,7 @@ function FavoriteRecipeCard({
         <div className="mt-auto grid grid-cols-4 divide-x divide-gray-100 dark:divide-white/10 rounded-xl border border-gray-100 dark:border-white/10 bg-background-light dark:bg-white/5 py-3">
           <div className="text-center px-1">
             <span className="block text-[10px] uppercase text-text-muted-light dark:text-text-muted-dark font-black tracking-widest mb-0.5">
-              Cal
+              {tCommon('macros.cal')}
             </span>
             <span className="block text-base font-black text-text-main-light dark:text-white">
               {recipe.macros.calories || '-'}
@@ -88,7 +92,7 @@ function FavoriteRecipeCard({
           </div>
           <div className="text-center px-1">
             <span className="block text-[10px] uppercase text-text-muted-light dark:text-text-muted-dark font-black tracking-widest mb-0.5">
-              Pro
+              {tCommon('macros.pro')}
             </span>
             <span className="block text-base font-black text-primary">
               {recipe.macros.protein || '-'}g
@@ -96,7 +100,7 @@ function FavoriteRecipeCard({
           </div>
           <div className="text-center px-1">
             <span className="block text-[10px] uppercase text-text-muted-light dark:text-text-muted-dark font-black tracking-widest mb-0.5">
-              Carb
+              {tCommon('macros.carb')}
             </span>
             <span className="block text-base font-black text-text-main-light dark:text-white">
               {recipe.macros.carbs || '-'}g
@@ -104,7 +108,7 @@ function FavoriteRecipeCard({
           </div>
           <div className="text-center px-1">
             <span className="block text-[10px] uppercase text-text-muted-light dark:text-text-muted-dark font-black tracking-widest mb-0.5">
-              Fat
+              {tCommon('macros.fat')}
             </span>
             <span className="block text-base font-black text-text-main-light dark:text-white">
               {recipe.macros.fats || '-'}g
@@ -119,6 +123,7 @@ function FavoriteRecipeCard({
 export default function FavoritesPage() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const { t } = useTranslation('favorites')
 
   const { data: favorites = [], isLoading } = useQuery({
     queryKey: ['favorites'],
@@ -140,18 +145,18 @@ export default function FavoritesPage() {
           <div className="flex items-center gap-3 mb-2">
             <Icon name="favorite" className="text-primary" size="lg" />
             <h1 className="text-2xl md:text-3xl font-extrabold text-text-main-light dark:text-white">
-              Favorite Recipes
+              {t('page.title')}
             </h1>
           </div>
           <p className="text-text-muted-light dark:text-text-muted-dark">
-            Your collection of saved recipes for quick access
+            {t('page.subtitle')}
           </p>
         </div>
       </div>
 
       {/* Content */}
       {isLoading ? (
-        <LoadingOverlay message="Loading favorites..." />
+        <LoadingOverlay message={t('loading')} />
       ) : favorites.length > 0 ? (
         <>
           {/* Mobile carousel */}
@@ -195,13 +200,13 @@ export default function FavoritesPage() {
             size="xl"
           />
           <h3 className="text-lg font-semibold text-text-main-light dark:text-white mb-2">
-            No favorite recipes yet
+            {t('empty.title')}
           </h3>
           <p className="text-text-muted-light dark:text-text-muted-dark mb-6">
-            Start exploring and save recipes you love
+            {t('empty.description')}
           </p>
           <Button onClick={() => navigate('/meal-plans')}>
-            Browse Meal Plans
+            {t('empty.button')}
           </Button>
         </div>
       )}

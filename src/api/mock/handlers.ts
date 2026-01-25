@@ -49,6 +49,13 @@ export const handlers = [
     return new HttpResponse(null, { status: 204 })
   }),
 
+  http.put('/api/user/language', async ({ request }) => {
+    await delay(300)
+    const { language } = (await request.json()) as { language: string }
+    mockUser.language = language as 'en' | 'pt' | 'sv'
+    return new HttpResponse(null, { status: 204 })
+  }),
+
   // ReceitAI Plan handlers
   http.post('/api/meal-prep-plan/generate-recipes', async () => {
     // Simulate AI generation time

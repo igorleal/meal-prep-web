@@ -1,0 +1,59 @@
+{
+  "buttons": {
+    "save": "Salvar Alteracoes",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "confirm": "Confirmar",
+    "back": "Voltar",
+    "next": "Proximo",
+    "close": "Fechar",
+    "add": "Adicionar",
+    "remove": "Remover",
+    "edit": "Editar",
+    "view": "Ver",
+    "create": "Criar",
+    "generate": "Gerar",
+    "retry": "Tentar Novamente",
+    "continue": "Continuar"
+  },
+  "labels": {
+    "loading": "Carregando...",
+    "saving": "Salvando...",
+    "deleting": "Excluindo...",
+    "generating": "Gerando...",
+    "noResults": "Nenhum resultado encontrado",
+    "required": "Obrigatorio",
+    "optional": "Opcional"
+  },
+  "errors": {
+    "generic": "Algo deu errado. Por favor, tente novamente.",
+    "network": "Erro de rede. Verifique sua conexao.",
+    "notFound": "Nao encontrado",
+    "unauthorized": "Nao autorizado. Por favor, faca login novamente."
+  },
+  "units": {
+    "meals": "{{count}} refeicao",
+    "meals_other": "{{count}} refeicoes",
+    "days": "{{count}} dia",
+    "days_other": "{{count}} dias",
+    "servings": "{{count}} Porcao",
+    "servings_other": "{{count}} Porcoes",
+    "calories": "kcal",
+    "grams": "g"
+  },
+  "macros": {
+    "calories": "Calorias",
+    "protein": "Proteina",
+    "carbs": "Carboidratos",
+    "fats": "Gorduras",
+    "cal": "Cal",
+    "pro": "Pro",
+    "carb": "Carb",
+    "fat": "Gord"
+  },
+  "time": {
+    "today": "HOJE",
+    "yesterday": "Ontem",
+    "tomorrow": "Amanha"
+  }
+}

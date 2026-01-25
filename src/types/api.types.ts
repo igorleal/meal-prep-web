@@ -1,5 +1,7 @@
 // Common API types
 
+export type SupportedLanguage = 'en' | 'pt' | 'sv'
+
 export type Unit =
   | 'GRAMS'
   | 'MILLILITERS'
@@ -66,10 +68,12 @@ export interface User {
   restrictions?: string[]
   preferences?: Record<string, unknown>
   hasReachedWeeklyLimit?: boolean
+  language?: SupportedLanguage
 }
 
 export interface UpdateUserRequest {
   name?: string
   restrictions?: string[]
   preferences?: Record<string, unknown>
+  language?: SupportedLanguage
 }

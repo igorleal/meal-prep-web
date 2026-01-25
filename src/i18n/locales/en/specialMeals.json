@@ -1,0 +1,52 @@
+{
+  "list": {
+    "title": "Your Special Occasions",
+    "subtitle": "Plan memorable meals for the people who matter most",
+    "createNew": "Plan New Gathering",
+    "loading": "Loading events...",
+    "empty": {
+      "title": "No special occasions planned",
+      "description": "Create your first gathering to get started",
+      "button": "Plan Your First Gathering"
+    }
+  },
+  "create": {
+    "title": "Plan a Special Meal",
+    "subtitle": "Create a memorable dining experience for your guests",
+    "sections": {
+      "eventDetails": {
+        "title": "Event Details",
+        "eventName": "Event Name",
+        "placeholder": "e.g., Birthday Dinner, Anniversary",
+        "date": "Date",
+        "guests": "Number of Guests"
+      },
+      "restrictions": {
+        "title": "Dietary Restrictions",
+        "noneSelected": "None selected",
+        "placeholder": "Type a restriction and press Enter..."
+      },
+      "cuisine": {
+        "title": "Cuisine Preferences",
+        "placeholder": "e.g., Italian, Japanese, Mexican"
+      },
+      "preferences": {
+        "title": "Additional Preferences",
+        "mustHaves": "Must Include",
+        "excludes": "Exclude"
+      }
+    },
+    "nextButton": "Generate Recipe Ideas"
+  },
+  "selection": {
+    "title": "Choose Your Recipe",
+    "subtitle": "Select the perfect recipe for your special occasion",
+    "generating": "Creating special recipes for you...",
+    "confirmSelection": "Use This Recipe"
+  },
+  "delete": {
+    "title": "Delete Event",
+    "message": "Are you sure you want to delete",
+    "warning": "This action cannot be undone."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "card": {
+    "viewRecipe": "Visa recept",
+    "servings": "Portioner"
+  },
+  "detail": {
+    "ingredients": "Ingredienser",
+    "instructions": "Instruktioner",
+    "nutrition": "Naringsfakta",
+    "perServing": "Per portion",
+    "cookTime": "Tillagningstid",
+    "prepTime": "Forberedtid",
+    "totalTime": "Total tid",
+    "tags": "Taggar"
+  },
+  "weeklyLimit": {
+    "title": "Veckograns uppnadd",
+    "message": "Du har natt din veckograns for receptgenerering. Uppgradera till Pro for obegransade recept!",
+    "bannerTitle": "Veckograns uppnadd",
+    "bannerMessage": "Du har anvant alla dina gratis receptgenereringar den har veckan.",
+    "upgradeButton": "Uppgradera till Pro",
+    "waitMessage": "Din grans aterstalls den {{date}}"
+  },
+  "actions": {
+    "favorite": "Lagg till i favoriter",
+    "unfavorite": "Ta bort fran favoriter",
+    "share": "Dela recept",
+    "print": "Skriv ut recept",
+    "addToCalendar": "Lagg till i kalender"
+  }
+}

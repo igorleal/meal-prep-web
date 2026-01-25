@@ -1,0 +1,26 @@
+{
+  "sidebar": {
+    "dashboard": "Oversikt",
+    "mealPlanner": "Maltidsplanerare",
+    "familyCalendar": "Familjekalender",
+    "specialMeals": "Specialmaltider",
+    "favorites": "Favoritrecept",
+    "profile": "Profil",
+    "pantry": "Skafferi",
+    "shoppingList": "Inkopslista"
+  },
+  "header": {
+    "openMenu": "Oppna meny"
+  },
+  "theme": {
+    "darkMode": "Morkt lage",
+    "lightMode": "Ljust lage"
+  },
+  "auth": {
+    "logout": "Logga ut"
+  },
+  "brand": {
+    "name": "ReceitAI",
+    "tagline": "Planera smart"
+  }
+}

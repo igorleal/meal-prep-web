@@ -1,0 +1,28 @@
+{
+  "page": {
+    "title": "Perfil e Configuracoes",
+    "subtitle": "Gerencie os detalhes da sua conta e personalize suas preferencias de refeicoes com IA."
+  },
+  "profile": {
+    "proPlan": "Plano Pro Ativo"
+  },
+  "preferences": {
+    "title": "Preferencias",
+    "language": {
+      "label": "Preferencia de Idioma",
+      "placeholder": "Selecione o idioma"
+    },
+    "restrictions": {
+      "label": "Restricoes Alimentares",
+      "description": "Adicione restricoes alimentares para ajudar nossa IA a selecionar melhores receitas para voce.",
+      "placeholder": "Digite uma restricao e pressione Enter...",
+      "suggestions": "Sugestoes:"
+    }
+  },
+  "actions": {
+    "logOut": "Sair",
+    "saveChanges": "Salvar Alteracoes",
+    "allSaved": "Todas as alteracoes salvas automaticamente"
+  },
+  "loading": "Carregando configuracoes..."
+}

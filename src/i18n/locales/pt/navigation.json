@@ -1,0 +1,26 @@
+{
+  "sidebar": {
+    "dashboard": "Painel",
+    "mealPlanner": "Planejador de Refeicoes",
+    "familyCalendar": "Calendario Familiar",
+    "specialMeals": "Refeicoes Especiais",
+    "favorites": "Receitas Favoritas",
+    "profile": "Perfil",
+    "pantry": "Despensa",
+    "shoppingList": "Lista de Compras"
+  },
+  "header": {
+    "openMenu": "Abrir menu"
+  },
+  "theme": {
+    "darkMode": "Modo Escuro",
+    "lightMode": "Modo Claro"
+  },
+  "auth": {
+    "logout": "Sair"
+  },
+  "brand": {
+    "name": "ReceitAI",
+    "tagline": "Planeje com inteligencia"
+  }
+}

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { Button, Icon, Card, Badge, LoadingOverlay, MobileCarousel } from '@/components/common'
 import { receitaiPlanService } from '@/api/services'
 import { getRecipeImageUrl } from '@/utils/placeholders'
@@ -16,6 +17,8 @@ function MealPlanCard({
   onClick: (plan: ReceitAIPlanResponse) => void
 }) {
   const { request, recipe } = plan
+  const { t } = useTranslation('mealPlans')
+  const { t: tCommon } = useTranslation('common')
 
   return (
     <Card padding="none" hover className="overflow-hidden group cursor-pointer" onClick={() => onClick(plan)}>
@@ -32,7 +35,7 @@ function MealPlanCard({
           icon="auto_awesome"
           className="absolute top-3 left-3"
         >
-          AI Generated
+          {t('list.card.aiGenerated')}
         </Badge>
       </div>
       <div className="p-5">
@@ -46,11 +49,11 @@ function MealPlanCard({
           <div className="flex items-center gap-4 text-sm text-text-muted-light dark:text-text-muted-dark">
             <span className="flex items-center gap-1">
               <Icon name="restaurant" size="sm" />
-              {request.mealsPerDay * request.days} meals
+              {tCommon('units.meals', { count: request.mealsPerDay * request.days })}
             </span>
             <span className="flex items-center gap-1">
               <Icon name="calendar_today" size="sm" />
-              {request.days} days
+              {tCommon('units.days', { count: request.days })}
             </span>
           </div>
           <button
@@ -59,7 +62,7 @@ function MealPlanCard({
               onDelete(plan)
             }}
             className="w-8 h-8 rounded-full hover:bg-red-100 dark:hover:bg-red-900/30 text-text-muted-light dark:text-text-muted-dark hover:text-red-500 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all"
-            title="Delete plan"
+            title={t('list.card.deletePlan')}
           >
             <Icon name="delete" size="sm" />
           </button>
@@ -72,6 +75,8 @@ function MealPlanCard({
 export default function MealPlansPage() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const { t } = useTranslation('mealPlans')
+  const { t: tCommon } = useTranslation('common')
   const [planToDelete, setPlanToDelete] = useState<ReceitAIPlanResponse | null>(null)
 
   const { data: plans, isLoading } = useQuery({
@@ -104,10 +109,10 @@ export default function MealPlansPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-2xl md:text-3xl font-extrabold text-text-main-light dark:text-white mb-2">
-            My Meal Plans
+            {t('list.title')}
           </h1>
           <p className="text-text-muted-light dark:text-text-muted-dark">
-            Browse and manage your AI-generated meal plans
+            {t('list.subtitle')}
           </p>
         </div>
         <Button
@@ -115,13 +120,13 @@ export default function MealPlansPage() {
           iconPosition="left"
           onClick={() => navigate('/meal-plans/create')}
         >
-          Create New Plan
+          {t('list.createNew')}
         </Button>
       </div>
 
       {/* Content */}
       {isLoading ? (
-        <LoadingOverlay message="Loading meal plans..." />
+        <LoadingOverlay message={t('list.loading')} />
       ) : plans && plans.length > 0 ? (
         <>
           {/* Mobile carousel */}
@@ -159,13 +164,13 @@ export default function MealPlansPage() {
             size="xl"
           />
           <h3 className="text-lg font-semibold text-text-main-light dark:text-white mb-2">
-            No meal plans yet
+            {t('list.empty.title')}
           </h3>
           <p className="text-text-muted-light dark:text-text-muted-dark mb-6">
-            Create your first AI-powered meal plan to get started
+            {t('list.empty.description')}
           </p>
           <Button onClick={() => navigate('/meal-plans/create')}>
-            Create Your First Plan
+            {t('list.empty.button')}
           </Button>
         </div>
       )}
@@ -191,14 +196,14 @@ export default function MealPlansPage() {
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-bold text-text-main-light dark:text-white mb-2">
-                  Delete Plan
+                  {t('delete.title')}
                 </h3>
                 <p className="text-text-muted-light dark:text-text-muted-dark">
-                  Are you sure you want to delete{' '}
+                  {t('delete.message')}{' '}
                   <strong className="text-text-main-light dark:text-white">
                     "{planToDelete.request.name}"
                   </strong>
-                  ? This action cannot be undone.
+                  ? {t('delete.warning')}
                 </p>
               </div>
             </div>
@@ -209,7 +214,7 @@ export default function MealPlansPage() {
                 onClick={() => setPlanToDelete(null)}
                 disabled={deleteMutation.isPending}
               >
-                Cancel
+                {tCommon('buttons.cancel')}
               </Button>
               <Button
                 variant="primary"
@@ -217,7 +222,7 @@ export default function MealPlansPage() {
                 loading={deleteMutation.isPending}
                 className="bg-red-600 hover:bg-red-700"
               >
-                Delete
+                {tCommon('buttons.delete')}
               </Button>
             </div>
           </div>

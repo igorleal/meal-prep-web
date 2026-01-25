@@ -1,0 +1,15 @@
+{
+  "page": {
+    "title": "Favoritrecept",
+    "subtitle": "Din samling av sparade recept for snabb atkomst"
+  },
+  "loading": "Laddar favoriter...",
+  "empty": {
+    "title": "Inga favoritrecept annu",
+    "description": "Borja utforska och spara recept du alskar",
+    "button": "Blaadra maltidsplaner"
+  },
+  "card": {
+    "removeFromFavorites": "Ta bort fran favoriter"
+  }
+}

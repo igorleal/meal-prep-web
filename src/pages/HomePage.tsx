@@ -1,42 +1,43 @@
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Icon, Button } from '@/components/common'
 import { cn } from '@/utils/cn'
 
 interface PanelConfig {
-  title: string
-  description: string
+  titleKey: string
+  descriptionKey: string
   icon: string
   path: string
-  buttonText: string
+  buttonTextKey: string
   gradient: string
   buttonStyle: 'solid' | 'outline'
 }
 
 const panels: PanelConfig[] = [
   {
-    title: 'Diet & ReceitAI',
-    description: 'Create a perfectly balanced weekly plan tailored to your nutritional needs.',
+    titleKey: 'home.dietReceitai.title',
+    descriptionKey: 'home.dietReceitai.description',
     icon: 'restaurant_menu',
     path: '/meal-plans',
-    buttonText: 'Plan Now',
+    buttonTextKey: 'home.dietReceitai.button',
     gradient: 'linear-gradient(135deg, #ec4913 0%, #ff6b3d 100%)',
     buttonStyle: 'solid',
   },
   {
-    title: 'Family Calendar',
-    description: "See what's cooking for the whole family this week.",
+    titleKey: 'home.familyCalendar.title',
+    descriptionKey: 'home.familyCalendar.description',
     icon: 'calendar_month',
     path: '/calendar',
-    buttonText: 'View Schedule',
+    buttonTextKey: 'home.familyCalendar.button',
     gradient: 'linear-gradient(135deg, #F08E66 0%, #f4a585 100%)',
     buttonStyle: 'outline',
   },
   {
-    title: 'One Special Meal',
-    description: 'Impress your guests with a unique, one-off AI creation.',
+    titleKey: 'home.specialMeal.title',
+    descriptionKey: 'home.specialMeal.description',
     icon: 'temp_preferences_custom',
     path: '/special-meals',
-    buttonText: 'Generate',
+    buttonTextKey: 'home.specialMeal.button',
     gradient: 'linear-gradient(135deg, #5DAE63 0%, #81c786 100%)',
     buttonStyle: 'outline',
   },
@@ -44,6 +45,7 @@ const panels: PanelConfig[] = [
 
 function HomePanel({ panel, index }: { panel: PanelConfig; index: number }) {
   const navigate = useNavigate()
+  const { t } = useTranslation('mealPlans')
 
   return (
     <div
@@ -70,10 +72,10 @@ function HomePanel({ panel, index }: { panel: PanelConfig; index: number }) {
           size="xl"
         />
         <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight mb-3">
-          {panel.title}
+          {t(panel.titleKey)}
         </h2>
         <p className="text-white/90 text-base md:text-lg font-medium leading-relaxed mb-6 md:mb-8">
-          {panel.description}
+          {t(panel.descriptionKey)}
         </p>
         <Button
           variant={panel.buttonStyle === 'solid' ? 'secondary' : 'outline'}
@@ -89,7 +91,7 @@ function HomePanel({ panel, index }: { panel: PanelConfig; index: number }) {
             navigate(panel.path)
           }}
         >
-          {panel.buttonText}
+          {t(panel.buttonTextKey)}
         </Button>
       </div>
     </div>
@@ -100,7 +102,7 @@ export default function HomePage() {
   return (
     <div className="flex-1 flex flex-col lg:flex-row h-[calc(100vh-4rem)] md:h-[calc(100vh-4rem)]">
       {panels.map((panel, index) => (
-        <HomePanel key={panel.title} panel={panel} index={index} />
+        <HomePanel key={panel.titleKey} panel={panel} index={index} />
       ))}
     </div>
   )

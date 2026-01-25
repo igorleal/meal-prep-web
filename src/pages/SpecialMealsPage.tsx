@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { Button, Icon, Card, LoadingOverlay, MobileCarousel } from '@/components/common'
 import { foodFriendsService } from '@/api/services'
 import { getRecipeImageUrl } from '@/utils/placeholders'
@@ -74,6 +75,8 @@ function EventCard({
 export default function SpecialMealsPage() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const { t } = useTranslation('specialMeals')
+  const { t: tCommon } = useTranslation('common')
   const [eventToDelete, setEventToDelete] = useState<FoodFriendsResponse | null>(null)
 
   const { data: events, isLoading } = useQuery({
@@ -108,11 +111,11 @@ export default function SpecialMealsPage() {
           <div className="flex items-center gap-3 mb-2">
             <Icon name="celebration" className="text-primary" size="lg" />
             <h1 className="text-2xl md:text-3xl font-extrabold text-text-main-light dark:text-white">
-              Your Special Occasions
+              {t('list.title')}
             </h1>
           </div>
           <p className="text-text-muted-light dark:text-text-muted-dark">
-            Plan memorable meals for the people who matter most
+            {t('list.subtitle')}
           </p>
         </div>
         <Button
@@ -120,13 +123,13 @@ export default function SpecialMealsPage() {
           iconPosition="left"
           onClick={() => navigate('/special-meals/create')}
         >
-          Plan New Gathering
+          {t('list.createNew')}
         </Button>
       </div>
 
       {/* Events grid */}
       {isLoading ? (
-        <LoadingOverlay message="Loading events..." />
+        <LoadingOverlay message={t('list.loading')} />
       ) : events && events.length > 0 ? (
         <>
           {/* Mobile carousel */}
@@ -164,13 +167,13 @@ export default function SpecialMealsPage() {
             size="xl"
           />
           <h3 className="text-lg font-semibold text-text-main-light dark:text-white mb-2">
-            No special occasions planned
+            {t('list.empty.title')}
           </h3>
           <p className="text-text-muted-light dark:text-text-muted-dark mb-6">
-            Create your first gathering to get started
+            {t('list.empty.description')}
           </p>
           <Button onClick={() => navigate('/special-meals/create')}>
-            Plan Your First Gathering
+            {t('list.empty.button')}
           </Button>
         </div>
       )}
@@ -196,14 +199,14 @@ export default function SpecialMealsPage() {
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-bold text-text-main-light dark:text-white mb-2">
-                  Delete Event
+                  {t('delete.title')}
                 </h3>
                 <p className="text-text-muted-light dark:text-text-muted-dark">
-                  Are you sure you want to delete{' '}
+                  {t('delete.message')}{' '}
                   <strong className="text-text-main-light dark:text-white">
                     "{eventToDelete.request.name}"
                   </strong>
-                  ? This action cannot be undone.
+                  ? {t('delete.warning')}
                 </p>
               </div>
             </div>
@@ -214,7 +217,7 @@ export default function SpecialMealsPage() {
                 onClick={() => setEventToDelete(null)}
                 disabled={deleteMutation.isPending}
               >
-                Cancel
+                {tCommon('buttons.cancel')}
               </Button>
               <Button
                 variant="primary"
@@ -222,7 +225,7 @@ export default function SpecialMealsPage() {
                 loading={deleteMutation.isPending}
                 className="bg-red-600 hover:bg-red-700"
               >
-                Delete
+                {tCommon('buttons.delete')}
               </Button>
             </div>
           </div>

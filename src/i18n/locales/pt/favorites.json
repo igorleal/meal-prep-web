@@ -1,0 +1,15 @@
+{
+  "page": {
+    "title": "Receitas Favoritas",
+    "subtitle": "Sua colecao de receitas salvas para acesso rapido"
+  },
+  "loading": "Carregando favoritos...",
+  "empty": {
+    "title": "Nenhuma receita favorita ainda",
+    "description": "Comece a explorar e salve as receitas que voce ama",
+    "button": "Explorar Planos de Refeicao"
+  },
+  "card": {
+    "removeFromFavorites": "Remover dos favoritos"
+  }
+}

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Icon } from '@/components/common'
 import { useAuth } from '@/context/AuthContext'
 import { authService } from '@/api/services'
@@ -9,6 +10,7 @@ export default function LoginPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const { login } = useAuth()
+  const { t } = useTranslation('auth')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -31,7 +33,7 @@ export default function LoginPage() {
         login(token, user)
         navigate(from, { replace: true })
       } catch {
-        setError('Unable to sign in. Please try again.')
+        setError(t('login.error'))
       } finally {
         setIsLoading(false)
       }
@@ -58,15 +60,15 @@ export default function LoginPage() {
 
           <div className="max-w-md">
             <h1 className="text-4xl font-extrabold mb-4 leading-tight">
-              Your AI-Powered Kitchen Companion
+              {t('hero.title')}
             </h1>
             <p className="text-white/90 text-lg">
-              Plan smarter meals, track nutrition, and cook with confidence. Let AI do the heavy lifting.
+              {t('hero.subtitle')}
             </p>
           </div>
 
           <p className="text-white/60 text-sm">
-            &copy; 2026 ReceitAI. All rights reserved.
+            &copy; {t('hero.copyright')}
           </p>
         </div>
       </div>
@@ -83,10 +85,10 @@ export default function LoginPage() {
           </div>
 
           <h2 className="text-3xl font-extrabold text-text-main-light dark:text-white mb-2">
-            Get Started
+            {t('login.title')}
           </h2>
           <p className="text-text-muted-light dark:text-text-muted-dark mb-8">
-            Sign in with your Google account to continue
+            {t('login.subtitle')}
           </p>
 
           {error && (
@@ -123,15 +125,15 @@ export default function LoginPage() {
               </svg>
             )}
             <span className="font-semibold text-text-main-light dark:text-white">
-              {isLoading ? 'Signing in...' : 'Continue with Google'}
+              {isLoading ? t('login.signingIn') : t('login.continueWithGoogle')}
             </span>
           </button>
 
           <p className="text-center text-text-muted-light dark:text-text-muted-dark text-xs mt-8">
-            By continuing, you agree to our{' '}
-            <a href="#" className="underline hover:text-primary">Terms of Service</a>{' '}
-            and{' '}
-            <a href="#" className="underline hover:text-primary">Privacy Policy</a>
+            {t('login.terms')}{' '}
+            <a href="#" className="underline hover:text-primary">{t('login.termsOfService')}</a>{' '}
+            {t('login.and')}{' '}
+            <a href="#" className="underline hover:text-primary">{t('login.privacyPolicy')}</a>
           </p>
         </div>
       </div>

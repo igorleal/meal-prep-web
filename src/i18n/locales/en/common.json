@@ -1,0 +1,59 @@
+{
+  "buttons": {
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "close": "Close",
+    "add": "Add",
+    "remove": "Remove",
+    "edit": "Edit",
+    "view": "View",
+    "create": "Create",
+    "generate": "Generate",
+    "retry": "Retry",
+    "continue": "Continue"
+  },
+  "labels": {
+    "loading": "Loading...",
+    "saving": "Saving...",
+    "deleting": "Deleting...",
+    "generating": "Generating...",
+    "noResults": "No results found",
+    "required": "Required",
+    "optional": "Optional"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "network": "Network error. Please check your connection.",
+    "notFound": "Not found",
+    "unauthorized": "Unauthorized. Please log in again."
+  },
+  "units": {
+    "meals": "{{count}} meal",
+    "meals_other": "{{count}} meals",
+    "days": "{{count}} day",
+    "days_other": "{{count}} days",
+    "servings": "{{count}} Serving",
+    "servings_other": "{{count}} Servings",
+    "calories": "kcal",
+    "grams": "g"
+  },
+  "macros": {
+    "calories": "Calories",
+    "protein": "Protein",
+    "carbs": "Carbs",
+    "fats": "Fats",
+    "cal": "Cal",
+    "pro": "Pro",
+    "carb": "Carb",
+    "fat": "Fat"
+  },
+  "time": {
+    "today": "TODAY",
+    "yesterday": "Yesterday",
+    "tomorrow": "Tomorrow"
+  }
+}

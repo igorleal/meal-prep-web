@@ -1,0 +1,111 @@
+{
+  "home": {
+    "dietReceitai": {
+      "title": "Diet & ReceitAI",
+      "description": "Create a perfectly balanced weekly plan tailored to your nutritional needs.",
+      "button": "Plan Now"
+    },
+    "familyCalendar": {
+      "title": "Family Calendar",
+      "description": "See what's cooking for the whole family this week.",
+      "button": "View Schedule"
+    },
+    "specialMeal": {
+      "title": "One Special Meal",
+      "description": "Impress your guests with a unique, one-off AI creation.",
+      "button": "Generate"
+    }
+  },
+  "list": {
+    "title": "My Meal Plans",
+    "subtitle": "Browse and manage your AI-generated meal plans",
+    "createNew": "Create New Plan",
+    "loading": "Loading meal plans...",
+    "empty": {
+      "title": "No meal plans yet",
+      "description": "Create your first AI-powered meal plan to get started",
+      "button": "Create Your First Plan"
+    },
+    "card": {
+      "aiGenerated": "AI Generated",
+      "deletePlan": "Delete plan"
+    }
+  },
+  "create": {
+    "title": "Let's build your plan",
+    "subtitle": "Configure your meal plan preferences and let AI generate personalized recipes.",
+    "sections": {
+      "basicInfo": {
+        "title": "Basic Info",
+        "planName": "Plan Name",
+        "placeholder": "e.g., Summer Shred, Winter Bulk"
+      },
+      "restrictions": {
+        "title": "Dietary Restrictions",
+        "noneSelected": "None selected",
+        "label": "Dietary Restrictions",
+        "placeholder": "Type a restriction and press Enter..."
+      },
+      "focusAreas": {
+        "title": "Focus Areas",
+        "subtitle": "Set priorities",
+        "highProtein": "High Protein",
+        "lowCarb": "Low Carb",
+        "keto": "Keto",
+        "balanced": "Balanced",
+        "quickMeals": "Quick Prep",
+        "budgetFriendly": "Budget Friendly",
+        "longLasting": "Long Lasting",
+        "ecoFriendly": "Eco Friendly"
+      },
+      "macros": {
+        "title": "Macros & Nutrition (per meal)",
+        "subtitle": "Goals set",
+        "description": "Set target macros per meal, not daily totals.",
+        "calories": "Calories",
+        "protein": "Protein",
+        "carbs": "Carbohydrates",
+        "fats": "Fats"
+      },
+      "preferences": {
+        "title": "Preferences",
+        "subtitle": "{{included}} included, {{excluded}} excluded",
+        "mustHaves": "Must Haves",
+        "excludes": "Excludes"
+      },
+      "schedule": {
+        "title": "Weekly Schedule",
+        "subtitle": "Configure meals",
+        "mealsPerDay": "Meals per Day",
+        "numberOfDays": "Number of Days"
+      }
+    },
+    "nextButton": "Next: Generate Preview"
+  },
+  "selection": {
+    "title": "Pick Your Recipes",
+    "subtitle": "Select recipes you'd like to include in your plan",
+    "generating": "AI is cooking up your recipes...",
+    "generatingSubtitle": "This may take a moment",
+    "selected": "{{count}} of {{total}} selected",
+    "confirmPlan": "Confirm Plan",
+    "regenerate": "Regenerate",
+    "error": {
+      "title": "Unable to generate recipes",
+      "description": "Something went wrong. Please try again."
+    }
+  },
+  "detail": {
+    "loading": "Loading recipe...",
+    "backToPlans": "Back to Plans",
+    "saveToFavorites": "Save to Favorites",
+    "removeFromFavorites": "Remove from Favorites",
+    "addedToFavorites": "Added to favorites!",
+    "removedFromFavorites": "Removed from favorites"
+  },
+  "delete": {
+    "title": "Delete Plan",
+    "message": "Are you sure you want to delete",
+    "warning": "This action cannot be undone."
+  }
+}

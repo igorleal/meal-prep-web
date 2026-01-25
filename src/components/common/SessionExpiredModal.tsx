@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Icon } from './Icon'
 import { Button } from './Button'
 
@@ -6,6 +7,8 @@ interface SessionExpiredModalProps {
 }
 
 export function SessionExpiredModal({ onClose }: SessionExpiredModalProps) {
+  const { t } = useTranslation('auth')
+
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
       {/* Backdrop */}
@@ -20,17 +23,17 @@ export function SessionExpiredModal({ onClose }: SessionExpiredModalProps) {
 
         {/* Title */}
         <h2 className="text-2xl font-bold text-text-main-light dark:text-white mb-3">
-          Session Expired
+          {t('session.expired')}
         </h2>
 
         {/* Message */}
         <p className="text-text-muted-light dark:text-text-muted-dark mb-8">
-          Your session has expired. Please log in again to continue.
+          {t('session.expiredMessage')}
         </p>
 
         {/* Button */}
         <Button onClick={onClose} className="w-full">
-          Go to Login
+          {t('session.loginAgain')}
         </Button>
       </div>
     </div>

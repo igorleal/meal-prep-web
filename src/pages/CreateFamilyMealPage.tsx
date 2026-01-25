@@ -1,22 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { Button, Icon, WeeklyLimitBanner } from '@/components/common'
+import { Button, Icon, WeeklyLimitBanner, ChipInput } from '@/components/common'
 import { userService } from '@/api/services'
-import { cn } from '@/utils/cn'
+import { useAuth } from '@/context/AuthContext'
 
-const dietaryOptions = [
-  { id: 'gluten-free', label: 'Gluten-Free' },
-  { id: 'vegetarian', label: 'Vegetarian' },
-  { id: 'vegan', label: 'Vegan' },
-  { id: 'keto', label: 'Keto' },
-  { id: 'dairy-free', label: 'Dairy-Free' },
-  { id: 'paleo', label: 'Paleo' },
-]
+const suggestedRestrictions = ['Gluten-Free', 'Vegetarian', 'Vegan', 'Keto', 'Dairy-Free', 'Paleo']
 
 export default function CreateFamilyMealPage() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
+  const { user } = useAuth()
 
   // Fetch current user to check weekly limit
   const { data: currentUser } = useQuery({
@@ -35,19 +29,24 @@ export default function CreateFamilyMealPage() {
 
   const hasReachedLimit = currentUser?.hasReachedWeeklyLimit ?? false
 
+  // Pre-fill dietary restrictions from user profile
+  useEffect(() => {
+    if (user?.restrictions) {
+      setRestrictions(user.restrictions)
+    }
+  }, [user?.restrictions])
+
+  const addSuggestedRestriction = (restriction: string) => {
+    if (!restrictions.includes(restriction)) {
+      setRestrictions([...restrictions, restriction])
+    }
+  }
+
   // Parse date for display
   const date = new Date(dateParam)
   const dayName = date.toLocaleDateString('en-US', { weekday: 'long' })
   const month = date.toLocaleDateString('en-US', { month: 'short' })
   const dayNum = date.getDate()
-
-  const toggleRestriction = (id: string) => {
-    setRestrictions((prev) =>
-      prev.includes(id)
-        ? prev.filter((r) => r !== id)
-        : [...prev, id]
-    )
-  }
 
   const handleAddMustHave = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && mustHaveInput.trim()) {
@@ -136,30 +135,28 @@ export default function CreateFamilyMealPage() {
               <Icon name="spa" className="text-primary" />
               Dietary Restrictions
             </label>
-            <div className="flex flex-wrap gap-3">
-              {dietaryOptions.map((option) => (
-                <label key={option.id} className="cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    checked={restrictions.includes(option.id)}
-                    onChange={() => toggleRestriction(option.id)}
-                    className="peer sr-only"
-                  />
-                  <span
-                    className={cn(
-                      'inline-flex items-center px-5 py-2.5 rounded-full border font-bold text-sm transition-all',
-                      restrictions.includes(option.id)
-                        ? 'bg-primary text-white border-primary shadow-md'
-                        : 'border-border-light dark:border-border-dark bg-surface-light dark:bg-white/5 text-text-muted-light dark:text-text-muted-dark hover:border-primary/50 hover:text-primary'
-                    )}
+            <ChipInput
+              values={restrictions}
+              onChange={setRestrictions}
+              placeholder="Type a restriction and press Enter..."
+            />
+            {/* Suggested restrictions */}
+            <div className="flex flex-wrap gap-2">
+              <span className="text-xs text-text-muted-light dark:text-text-muted-dark py-1">
+                Suggestions:
+              </span>
+              {suggestedRestrictions
+                .filter((r) => !restrictions.includes(r))
+                .map((restriction) => (
+                  <button
+                    key={restriction}
+                    type="button"
+                    onClick={() => addSuggestedRestriction(restriction)}
+                    className="px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                   >
-                    {option.label}
-                    {restrictions.includes(option.id) && (
-                      <Icon name="check" size="sm" className="ml-2" />
-                    )}
-                  </span>
-                </label>
-              ))}
+                    {restriction}
+                  </button>
+                ))}
             </div>
           </div>
 

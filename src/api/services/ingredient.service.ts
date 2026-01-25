@@ -5,13 +5,25 @@ export interface IngredientConversionRequest {
   currentAmount: string
 }
 
+export type IngredientState = 'RAW' | 'COOKED' | 'DRIED'
+
+export interface StateConversion {
+  driedWeight: string | null
+  cookedWeight: string | null
+  conversionRatio: number
+  explanation: string
+}
+
 export interface IngredientConversionResponse {
   ingredient: string
   originalAmount: string
-  grams: string
-  milliliters: string
-  tablespoons: string
-  cups: string
+  detectedState: IngredientState
+  grams: string | null
+  milliliters: string | null
+  deciliters: string | null
+  tablespoons: string | null
+  cups: string | null
+  stateConversion: StateConversion | null
   explanation: string
 }
 

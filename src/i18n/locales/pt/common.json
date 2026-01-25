@@ -56,5 +56,27 @@
     "today": "HOJE",
     "yesterday": "Ontem",
     "tomorrow": "Amanhã"
+  },
+  "ingredientConversion": {
+    "title": "Conversão de Unidades",
+    "loading": "Calculando conversões...",
+    "error": "Falha ao obter conversão. Por favor, tente novamente.",
+    "units": {
+      "grams": "Gramas",
+      "milliliters": "Mililitros",
+      "deciliters": "Decilitros",
+      "tablespoons": "Colheres de Sopa",
+      "cups": "Xícaras"
+    },
+    "states": {
+      "raw": "Cru",
+      "cooked": "Cozido",
+      "dried": "Seco"
+    },
+    "stateConversion": {
+      "title": "Conversão Seco/Cozido",
+      "driedWeight": "Peso Seco",
+      "cookedWeight": "Peso Cozido"
+    }
   }
 }

@@ -56,5 +56,27 @@
     "today": "TODAY",
     "yesterday": "Yesterday",
     "tomorrow": "Tomorrow"
+  },
+  "ingredientConversion": {
+    "title": "Unit Conversion",
+    "loading": "Calculating conversions...",
+    "error": "Failed to get conversion. Please try again.",
+    "units": {
+      "grams": "Grams",
+      "milliliters": "Milliliters",
+      "deciliters": "Deciliters",
+      "tablespoons": "Tablespoons",
+      "cups": "Cups"
+    },
+    "states": {
+      "raw": "Raw",
+      "cooked": "Cooked",
+      "dried": "Dried"
+    },
+    "stateConversion": {
+      "title": "Dried/Cooked Conversion",
+      "driedWeight": "Dried Weight",
+      "cookedWeight": "Cooked Weight"
+    }
   }
 }

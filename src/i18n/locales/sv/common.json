@@ -56,5 +56,27 @@
     "today": "IDAG",
     "yesterday": "Igår",
     "tomorrow": "Imorgon"
+  },
+  "ingredientConversion": {
+    "title": "Enhetsomvandling",
+    "loading": "Beräknar omvandlingar...",
+    "error": "Kunde inte hämta omvandling. Försök igen.",
+    "units": {
+      "grams": "Gram",
+      "milliliters": "Milliliter",
+      "deciliters": "Deciliter",
+      "tablespoons": "Matskedar",
+      "cups": "Koppar"
+    },
+    "states": {
+      "raw": "Rå",
+      "cooked": "Tillagad",
+      "dried": "Torkad"
+    },
+    "stateConversion": {
+      "title": "Torkad/Tillagad Omvandling",
+      "driedWeight": "Torkad Vikt",
+      "cookedWeight": "Tillagad Vikt"
+    }
   }
 }

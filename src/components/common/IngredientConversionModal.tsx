@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { Icon } from './Icon'
 import { LoadingSpinner } from './LoadingSpinner'
 import { ingredientService } from '@/api/services'
+import type { IngredientState } from '@/api/services/ingredient.service'
 import type { RecipeIngredient } from '@/types'
 import { formatUnit } from '@/utils/recipe'
 
@@ -14,6 +16,7 @@ export function IngredientConversionModal({
   ingredient,
   onClose,
 }: IngredientConversionModalProps) {
+  const { t } = useTranslation('common')
   const currentAmount = `${ingredient.quantity} ${formatUnit(ingredient.unit)}`
 
   const { data, isLoading, error } = useQuery({
@@ -25,14 +28,21 @@ export function IngredientConversionModal({
       }),
   })
 
-  const conversions: { label: string; value: string }[] = data
+  const conversions = data
     ? [
-        { label: 'Grams', value: data.grams },
-        { label: 'Milliliters', value: data.milliliters },
-        { label: 'Tablespoons', value: data.tablespoons },
-        { label: 'Cups', value: data.cups },
-      ].filter((c) => c.value && c.value !== '0' && c.value !== '-')
+        { label: t('ingredientConversion.units.grams'), value: data.grams },
+        { label: t('ingredientConversion.units.milliliters'), value: data.milliliters },
+        { label: t('ingredientConversion.units.deciliters'), value: data.deciliters },
+        { label: t('ingredientConversion.units.tablespoons'), value: data.tablespoons },
+        { label: t('ingredientConversion.units.cups'), value: data.cups },
+      ].filter((c): c is { label: string; value: string } =>
+        c.value !== null && c.value !== '0' && c.value !== '-'
+      )
     : []
+
+  const getStateLabel = (state: IngredientState): string => {
+    return t(`ingredientConversion.states.${state.toLowerCase()}`)
+  }
 
   return (
     <div
@@ -63,10 +73,15 @@ export function IngredientConversionModal({
           </div>
           <div>
             <h3 className="text-lg font-bold text-text-main-light dark:text-white">
-              Unit Conversion
+              {t('ingredientConversion.title')}
             </h3>
             <p className="text-sm text-text-muted-light dark:text-text-muted-dark">
               {ingredient.quantity} {formatUnit(ingredient.unit)} {ingredient.name}
+              {data?.detectedState && (
+                <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                  {getStateLabel(data.detectedState)}
+                </span>
+              )}
             </p>
           </div>
         </div>
@@ -76,7 +91,7 @@ export function IngredientConversionModal({
           <div className="flex flex-col items-center justify-center py-8 gap-3">
             <LoadingSpinner size="lg" />
             <span className="text-sm text-text-muted-light dark:text-text-muted-dark">
-              Calculating conversions...
+              {t('ingredientConversion.loading')}
             </span>
           </div>
         )}
@@ -87,7 +102,7 @@ export function IngredientConversionModal({
               <Icon name="error" className="text-red-600 dark:text-red-400 text-[24px]" />
             </div>
             <p className="text-text-muted-light dark:text-text-muted-dark">
-              Failed to get conversion. Please try again.
+              {t('ingredientConversion.error')}
             </p>
           </div>
         )}
@@ -110,6 +125,48 @@ export function IngredientConversionModal({
                 </div>
               ))}
             </div>
+
+            {/* State Conversion */}
+            {data.stateConversion && (
+              <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 border border-amber-200 dark:border-amber-800 mb-4">
+                <div className="flex gap-3">
+                  <Icon
+                    name="swap_horiz"
+                    className="text-amber-600 dark:text-amber-400 text-[20px] flex-shrink-0 mt-0.5"
+                  />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-amber-800 dark:text-amber-200 mb-2">
+                      {t('ingredientConversion.stateConversion.title')}
+                    </p>
+                    <div className="grid grid-cols-2 gap-2 text-sm">
+                      {data.stateConversion.driedWeight && (
+                        <div className="bg-white/50 dark:bg-black/20 rounded-lg p-2">
+                          <span className="block text-xs text-amber-600 dark:text-amber-400">
+                            {t('ingredientConversion.stateConversion.driedWeight')}
+                          </span>
+                          <span className="font-semibold text-amber-800 dark:text-amber-200">
+                            {data.stateConversion.driedWeight}
+                          </span>
+                        </div>
+                      )}
+                      {data.stateConversion.cookedWeight && (
+                        <div className="bg-white/50 dark:bg-black/20 rounded-lg p-2">
+                          <span className="block text-xs text-amber-600 dark:text-amber-400">
+                            {t('ingredientConversion.stateConversion.cookedWeight')}
+                          </span>
+                          <span className="font-semibold text-amber-800 dark:text-amber-200">
+                            {data.stateConversion.cookedWeight}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <p className="mt-2 text-xs text-amber-700 dark:text-amber-300">
+                      {data.stateConversion.explanation}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Explanation */}
             {data.explanation && (

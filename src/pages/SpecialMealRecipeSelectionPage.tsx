@@ -228,7 +228,7 @@ export default function SpecialMealRecipeSelectionPage() {
 
   return (
     <>
-      <div className="max-w-[1280px] mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-12 pb-32">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-12 pb-40">
         {/* Back button */}
         <button
           onClick={() => navigate('/special-meals/create')}

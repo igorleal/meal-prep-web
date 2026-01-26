@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Recipe Detail Modal - ReceitAI</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f27f0d",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#221910",
+                        "card-dark": "#2A221C",
+                        "card-border": "#3E342B",
+                        "text-secondary": "#baab9c",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3E342B;
+            border-radius: 3px;
+        }
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-hidden">
+<div class="flex h-screen w-full blur-[2px] pointer-events-none">
+<aside class="hidden lg:flex w-72 flex-col border-r border-[#393028] bg-[#181411] h-full shrink-0">
+<div class="p-6">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" style="font-size: 32px;">restaurant_menu</span>
+<h1 class="text-white text-xl font-bold tracking-tight">ReceitAI</h1>
+</div>
+</div>
+<nav class="flex-1 px-4 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-secondary" href="#"><span class="material-symbols-outlined">home</span><span class="font-medium">Home</span></a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 text-primary border border-primary/20" href="#"><span class="material-symbols-outlined">calendar_month</span><span class="font-medium">Planner</span></a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-secondary" href="#"><span class="material-symbols-outlined">bookmark</span><span class="font-medium">Saved Recipes</span></a>
+</nav>
+</aside>
+<main class="flex-1 flex flex-col h-full bg-background-light dark:bg-background-dark">
+<header class="px-6 py-6 md:px-10 border-b border-[#393028] bg-background-dark/95">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 max-w-7xl mx-auto w-full">
+<h2 class="text-white text-2xl md:text-3xl font-bold">Post-Workout Dinner</h2>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-10">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="h-96 rounded-2xl bg-card-dark border border-card-border"></div>
+<div class="h-96 rounded-2xl bg-card-dark border border-card-border"></div>
+<div class="h-96 rounded-2xl bg-card-dark border border-card-border"></div>
+</div>
+</div>
+</main>
+</div>
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 modal-overlay">
+<div class="bg-[#1E1915] w-full max-w-3xl max-h-[90vh] rounded-3xl border border-[#3E342B] shadow-2xl overflow-hidden flex flex-col">
+<div class="relative h-64 md:h-80 shrink-0">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAb0qOsQf5UJKHtfs14ZkbS2qZTwbyWx4tOEs75_XgaQsYH3qASZ8OhWvKtH_Msl3uz0cUEmEawvkPwsD6h5m-GToKJTa5-xxFkGRu8u3zZcqSQiAVfUPL0eugNAXmkgm8s9dcuxbGfZvHnu8jyx1gSrhcvEKdnxfp5Is1ST52iVqpMTrUJl8WPNhM4P0J21_lPSyfO8mgCNa_lCkRyt2EA1pjmNbhB_wPuzb8vADKZszYiw8zVidjzEdP422fNBbiZOPK0EULjaJo');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1E1915] via-transparent to-transparent"></div>
+<button class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors backdrop-blur-md">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-6 md:p-10 -mt-12 relative">
+<div class="mb-8">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full border border-primary/30 uppercase tracking-wider">High Protein</span>
+<span class="px-3 py-1 bg-[#393028] text-white text-xs font-bold rounded-full border border-[#54473b] uppercase tracking-wider">Fast &amp; Easy</span>
+<span class="px-3 py-1 bg-[#393028] text-white text-xs font-bold rounded-full border border-[#54473b] uppercase tracking-wider">Dairy Free</span>
+</div>
+<h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Spicy Basil Chicken Stir-Fry</h2>
+<div class="flex items-center gap-6 text-text-secondary border-b border-[#3E342B] pb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<span class="text-sm font-semibold text-white">20 Mins</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">groups</span>
+<span class="text-sm font-semibold text-white">2 Servings</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-fill-1">star</span>
+<span class="text-sm font-semibold text-white">4.9 (124 reviews)</span>
+</div>
+</div>
+</div>
+<div class="mb-10">
+<h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                    Nutrition Facts
+                </h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="p-4 bg-card-dark rounded-2xl border border-card-border flex flex-col items-center">
+<span class="text-xs font-bold text-text-secondary uppercase mb-1">Protein</span>
+<span class="text-xl font-extrabold text-primary">38g</span>
+</div>
+<div class="p-4 bg-card-dark rounded-2xl border border-card-border flex flex-col items-center">
+<span class="text-xs font-bold text-text-secondary uppercase mb-1">Carbs</span>
+<span class="text-xl font-extrabold text-white">12g</span>
+</div>
+<div class="p-4 bg-card-dark rounded-2xl border border-card-border flex flex-col items-center">
+<span class="text-xs font-bold text-text-secondary uppercase mb-1">Fat</span>
+<span class="text-xl font-extrabold text-white">14g</span>
+</div>
+<div class="p-4 bg-card-dark rounded-2xl border border-card-border flex flex-col items-center">
+<span class="text-xs font-bold text-text-secondary uppercase mb-1">Calories</span>
+<span class="text-xl font-extrabold text-white">325</span>
+</div>
+</div>
+</div>
+<div class="mb-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">format_list_bulleted</span>
+                        Ingredients
+                    </h3>
+<div class="flex items-center bg-card-dark border border-card-border rounded-lg p-1">
+<button class="px-3 py-1 text-xs font-bold bg-primary text-white rounded-md">Metric</button>
+<button class="px-3 py-1 text-xs font-bold text-text-secondary hover:text-white transition-colors">US</button>
+</div>
+</div>
+<ul class="space-y-3">
+<li class="flex items-center justify-between p-3 bg-card-dark/50 rounded-xl border border-card-border/50">
+<span class="text-white text-sm">Chicken Breast, cubed</span>
+<span class="text-text-secondary text-sm font-medium">400g</span>
+</li>
+<li class="flex items-center justify-between p-3 bg-card-dark/50 rounded-xl border border-card-border/50">
+<span class="text-white text-sm">Fresh Thai Basil Leaves</span>
+<span class="text-text-secondary text-sm font-medium">1 cup</span>
+</li>
+<li class="flex items-center justify-between p-3 bg-card-dark/50 rounded-xl border border-card-border/50">
+<span class="text-white text-sm">Bird's Eye Chilies</span>
+<span class="text-text-secondary text-sm font-medium">3 pcs</span>
+</li>
+<li class="flex items-center justify-between p-3 bg-card-dark/50 rounded-xl border border-card-border/50">
+<span class="text-white text-sm">Garlic, minced</span>
+<span class="text-text-secondary text-sm font-medium">4 cloves</span>
+</li>
+<li class="flex items-center justify-between p-3 bg-card-dark/50 rounded-xl border border-card-border/50">
+<span class="text-white text-sm">Oyster Sauce</span>
+<span class="text-text-secondary text-sm font-medium">2 tbsp</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="p-6 md:px-10 border-t border-[#3E342B] bg-[#1E1915]">
+<button class="w-full py-4 bg-primary hover:bg-orange-600 text-white rounded-2xl font-extrabold text-lg transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">add_circle</span>
+                Select This Recipe
+            </button>
+</div>
+</div>
+</div>
+
+</body></html>

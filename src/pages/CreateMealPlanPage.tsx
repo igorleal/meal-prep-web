@@ -116,9 +116,10 @@ export default function CreateMealPlanPage() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 md:px-8 py-8">
-      {/* Weekly Limit Banner */}
-      {hasReachedLimit && <WeeklyLimitBanner />}
+    <div className="relative min-h-full pb-24">
+      <div className="max-w-3xl mx-auto px-4 md:px-8 py-8">
+          {/* Weekly Limit Banner */}
+          {hasReachedLimit && <WeeklyLimitBanner />}
 
       {/* Header */}
       <div className="mb-8">
@@ -164,30 +165,53 @@ export default function CreateMealPlanPage() {
         <Accordion number={3} title={t('create.sections.focusAreas.title')} subtitle={t('create.sections.focusAreas.subtitle')}>
           <div className="flex flex-col gap-4">
             {Object.entries(focusAreas).map(([key, { enabled, value }]) => (
-              <div key={key} className="flex items-start gap-3">
-                <input
-                  type="checkbox"
-                  checked={enabled}
-                  onChange={(e) =>
-                    setFocusAreas((prev) => ({
-                      ...prev,
-                      [key]: { ...prev[key], enabled: e.target.checked },
-                    }))
-                  }
-                  className="mt-1.5 w-4 h-4 accent-primary rounded"
-                />
-                <div className={cn('flex-1', !enabled && 'opacity-50')}>
-                  <RangeSlider
-                    label={focusAreaKeyToLabel[key] || key}
-                    value={value}
-                    onChange={(newValue) =>
+              <div
+                key={key}
+                className="p-4 rounded-lg bg-background-light dark:bg-[#181411] border border-border-light dark:border-border-dark"
+              >
+                <div className="flex items-start gap-3">
+                  <input
+                    type="checkbox"
+                    checked={enabled}
+                    onChange={(e) =>
                       setFocusAreas((prev) => ({
                         ...prev,
-                        [key]: { ...prev[key], value: newValue },
+                        [key]: { ...prev[key], enabled: e.target.checked },
                       }))
                     }
-                    disabled={!enabled}
+                    className="mt-1 w-5 h-5 accent-primary rounded border-border-light dark:border-border-dark bg-background-light dark:bg-[#27211b]"
                   />
+                  <div className={cn('flex-1', !enabled && 'opacity-50 pointer-events-none')}>
+                    <p className="text-text-main-light dark:text-white font-medium mb-3">
+                      {focusAreaKeyToLabel[key] || key}
+                    </p>
+                    <div className="flex items-center gap-4">
+                      <span className="text-text-muted-light dark:text-text-muted-dark text-xs">
+                        {t('create.sections.focusAreas.priority')}
+                      </span>
+                      <input
+                        type="range"
+                        min={1}
+                        max={5}
+                        step={1}
+                        value={value}
+                        onChange={(e) =>
+                          setFocusAreas((prev) => ({
+                            ...prev,
+                            [key]: { ...prev[key], value: Number(e.target.value) },
+                          }))
+                        }
+                        disabled={!enabled}
+                        className={cn(
+                          'flex-1 h-1 bg-gray-200 dark:bg-[#4b3e34] rounded-lg appearance-none accent-primary',
+                          !enabled ? 'cursor-not-allowed grayscale' : 'cursor-pointer'
+                        )}
+                      />
+                      <span className="text-text-main-light dark:text-white text-xs font-bold w-8 text-right">
+                        {value}/5
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -282,16 +306,27 @@ export default function CreateMealPlanPage() {
         </Accordion>
       </div>
 
-      {/* Action Bar */}
-      <div className="flex justify-end pt-8 pb-12">
-        <Button
-          icon="arrow_forward"
-          onClick={handleSubmit}
-          disabled={!planName.trim() || hasReachedLimit}
-          className="shadow-lg shadow-primary/30"
-        >
-          {t('create.nextButton')}
-        </Button>
+      </div>
+
+      {/* Fixed Footer */}
+      <div className="fixed bottom-0 left-0 right-0 md:left-64 border-t border-border-light dark:border-border-dark bg-surface-light/95 dark:bg-background-dark/95 backdrop-blur-sm p-6 z-10 h-[92px]">
+        <div className="flex justify-end items-center gap-4 h-full">
+          <Button
+            variant="secondary"
+            onClick={() => navigate('/meal-plans')}
+          >
+            {t('create.cancelButton')}
+          </Button>
+          <Button
+            icon="arrow_forward"
+            iconPosition="right"
+            onClick={handleSubmit}
+            disabled={!planName.trim() || hasReachedLimit}
+            className="shadow-lg shadow-primary/20"
+          >
+            {t('create.nextButton')}
+          </Button>
+        </div>
       </div>
     </div>
   )

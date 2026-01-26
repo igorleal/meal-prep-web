@@ -40,7 +40,8 @@
     "servings": "{{count}} Serving",
     "servings_other": "{{count}} Servings",
     "calories": "kcal",
-    "grams": "g"
+    "grams": "g",
+    "min": "min"
   },
   "macros": {
     "calories": "Calories",
@@ -87,5 +88,19 @@
       "driedWeight": "Dried Weight",
       "cookedWeight": "Cooked Weight"
     }
+  },
+  "recipe": {
+    "generatingImage": "Generating image...",
+    "servings": "Servings",
+    "nutritionFacts": "Nutrition Facts",
+    "perServing": "per serving",
+    "protein": "Protein",
+    "carbs": "Carbs",
+    "fat": "Fat",
+    "calories": "Calories",
+    "tags": "Tags",
+    "ingredients": "Ingredients",
+    "convertUnits": "Convert units",
+    "preparation": "Preparation"
   }
 }

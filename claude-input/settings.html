@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReceitAI - User Settings</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+            extend: {
+                colors: {
+                "primary": "#f27f0d",
+                "background-light": "#f8f7f5",
+                "background-dark": "#221910",
+                "surface-dark": "#2d241b", // Slightly lighter than background-dark for cards
+                "surface-dark-hover": "#3a3026",
+                "input-dark": "#181411",
+                "border-dark": "#443a32"
+                },
+                fontFamily: {
+                "display": ["Manrope", "sans-serif"]
+                },
+                borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #221910; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #443a32; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #554a40; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Sidebar -->
+<aside class="hidden lg:flex w-72 flex-col justify-between border-r border-border-dark/30 bg-background-dark p-6 overflow-y-auto">
+<div class="flex flex-col gap-8">
+<!-- Logo -->
+<div class="flex flex-col px-2">
+<h1 class="text-white text-2xl font-bold tracking-tight">ReceitAI</h1>
+<p class="text-[#baab9c] text-sm font-medium">Meal Planner</p>
+</div>
+<!-- Nav Menu -->
+<div class="flex flex-col gap-2">
+<a class="group flex items-center gap-3 rounded-lg px-3 py-3 text-[#baab9c] hover:bg-surface-dark hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-3 text-[#baab9c] hover:bg-surface-dark hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">book_2</span>
+<span class="text-sm font-medium">Meal Plans</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-3 text-[#baab9c] hover:bg-surface-dark hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="text-sm font-medium">Recipes</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-3 text-[#baab9c] hover:bg-surface-dark hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="text-sm font-medium">Grocery List</span>
+</a>
+<!-- Active Item -->
+<a class="group flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-3 text-primary transition-all" href="#">
+<span class="material-symbols-outlined icon-fill">settings</span>
+<span class="text-sm font-bold">Settings</span>
+</a>
+</div>
+</div>
+<!-- Bottom Action -->
+<div class="px-2">
+<button class="flex items-center gap-3 text-[#baab9c] hover:text-white transition-colors">
+<span class="material-symbols-outlined">help</span>
+<span class="text-sm font-medium">Help &amp; Support</span>
+</button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Mobile Header (Visible on small screens) -->
+<div class="lg:hidden flex items-center justify-between p-4 bg-background-dark border-b border-border-dark/30">
+<h1 class="text-white text-lg font-bold">ReceitAI</h1>
+<button class="text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<!-- Content Scroll Area -->
+<div class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-4 md:p-8 lg:px-12 lg:py-10">
+<div class="max-w-4xl mx-auto flex flex-col gap-8 pb-24">
+<!-- Page Heading -->
+<div class="flex flex-col gap-2">
+<h1 class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">Settings</h1>
+<p class="text-slate-500 dark:text-[#baab9c] text-lg">Manage your profile and preferences</p>
+</div>
+<!-- Profile Card -->
+<section class="flex flex-col gap-6 rounded-2xl bg-white dark:bg-surface-dark p-6 md:p-8 shadow-sm border border-slate-200 dark:border-border-dark/50">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white">Personal Information</h2>
+<span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary ring-1 ring-inset ring-primary/20">
+                                Premium Plan
+                            </span>
+</div>
+<div class="flex flex-col md:flex-row gap-8 items-start">
+<!-- Avatar -->
+<div class="relative group shrink-0">
+<div class="h-24 w-24 rounded-full bg-slate-200 dark:bg-[#3a3028] bg-cover bg-center border-4 border-white dark:border-[#443a32]" data-alt="User profile photo placeholder" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDh-Oq2cp_nemZ3WAdA_Xcr_yNmUca5MWE4-paKPzBG_ECJEUnHq61BgtB3ZEhgeiEMCJRTfeX8Ds8JPQBgD26SbhL3uYuMI5XlDLhKVnA4dU41e6gkjiC39jxtVPwvnOccPiZUIXlks_kVFfKFStrImynMi7ffC6eFotrwyAwovtcUdV1dxy72k2jsXEEeloFRHcpHlIRterZWptvGVoB1ogQtfBhiRwOadP94ksEmN1R1ilwvFBHaEIIT0MI4-QrEIsBEGJ1eSPo');">
+</div>
+<button class="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white shadow-lg hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+<!-- Fields -->
+<div class="grid w-full grid-cols-1 md:grid-cols-2 gap-6">
+<label class="flex flex-col gap-2">
+<span class="text-sm font-medium text-slate-700 dark:text-[#baab9c]">Full Name</span>
+<input class="h-12 w-full rounded-lg border-slate-300 dark:border-border-dark bg-transparent px-4 text-base text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#6a5f55] focus:border-primary focus:ring-1 focus:ring-primary dark:focus:border-primary dark:bg-input-dark transition-colors" type="text" value="John Doe"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-sm font-medium text-slate-700 dark:text-[#baab9c]">Email Address</span>
+<input class="h-12 w-full rounded-lg border-slate-300 dark:border-border-dark bg-transparent px-4 text-base text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#6a5f55] focus:border-primary focus:ring-1 focus:ring-primary dark:focus:border-primary dark:bg-input-dark transition-colors" type="email" value="john.doe@receitai.com"/>
+</label>
+</div>
+</div>
+</section>
+<!-- Preferences Card -->
+<section class="flex flex-col gap-6 rounded-2xl bg-white dark:bg-surface-dark p-6 md:p-8 shadow-sm border border-slate-200 dark:border-border-dark/50">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white">App Preferences</h2>
+<div class="grid grid-cols-1 gap-8">
+<!-- Language -->
+<div class="max-w-md">
+<label class="flex flex-col gap-2">
+<span class="text-sm font-medium text-slate-700 dark:text-[#baab9c]">Language</span>
+<div class="relative">
+<select class="h-12 w-full appearance-none rounded-lg border-slate-300 dark:border-border-dark bg-transparent px-4 text-base text-slate-900 dark:text-white focus:border-primary focus:ring-1 focus:ring-primary dark:bg-input-dark cursor-pointer">
+<option>English (United States)</option>
+<option>Spanish</option>
+<option>French</option>
+<option>German</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500 dark:text-[#baab9c]">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</label>
+</div>
+<!-- Dietary Restrictions -->
+<div class="flex flex-col gap-3">
+<label class="text-sm font-medium text-slate-700 dark:text-[#baab9c]">Dietary Restrictions &amp; Allergies</label>
+<div class="w-full rounded-lg border border-slate-300 dark:border-border-dark bg-white dark:bg-input-dark p-2 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-colors">
+<div class="flex flex-wrap gap-2">
+<!-- Chip 1 -->
+<div class="flex items-center gap-1 rounded-md bg-primary/20 px-2 py-1 text-sm font-medium text-primary">
+<span>Peanuts</span>
+<button class="flex items-center justify-center rounded-full p-0.5 hover:bg-primary/20">
+<span class="material-symbols-outlined text-[14px] font-bold">close</span>
+</button>
+</div>
+<!-- Chip 2 -->
+<div class="flex items-center gap-1 rounded-md bg-primary/20 px-2 py-1 text-sm font-medium text-primary">
+<span>Shellfish</span>
+<button class="flex items-center justify-center rounded-full p-0.5 hover:bg-primary/20">
+<span class="material-symbols-outlined text-[14px] font-bold">close</span>
+</button>
+</div>
+<!-- Input -->
+<input class="min-w-[120px] flex-1 border-0 bg-transparent p-1 text-base text-slate-900 dark:text-white placeholder-slate-400 focus:ring-0" placeholder="Add restriction..." type="text"/>
+</div>
+</div>
+<!-- Suggestions -->
+<div class="flex flex-wrap gap-2 pt-1">
+<button class="rounded-full border border-slate-300 dark:border-border-dark bg-transparent px-3 py-1 text-xs font-medium text-slate-600 dark:text-[#baab9c] hover:bg-slate-100 dark:hover:bg-surface-dark-hover dark:hover:text-white transition-colors">
+                                        + Vegan
+                                    </button>
+<button class="rounded-full border border-slate-300 dark:border-border-dark bg-transparent px-3 py-1 text-xs font-medium text-slate-600 dark:text-[#baab9c] hover:bg-slate-100 dark:hover:bg-surface-dark-hover dark:hover:text-white transition-colors">
+                                        + Gluten-Free
+                                    </button>
+<button class="rounded-full border border-slate-300 dark:border-border-dark bg-transparent px-3 py-1 text-xs font-medium text-slate-600 dark:text-[#baab9c] hover:bg-slate-100 dark:hover:bg-surface-dark-hover dark:hover:text-white transition-colors">
+                                        + Keto
+                                    </button>
+<button class="rounded-full border border-slate-300 dark:border-border-dark bg-transparent px-3 py-1 text-xs font-medium text-slate-600 dark:text-[#baab9c] hover:bg-slate-100 dark:hover:bg-surface-dark-hover dark:hover:text-white transition-colors">
+                                        + Paleo
+                                    </button>
+<button class="rounded-full border border-slate-300 dark:border-border-dark bg-transparent px-3 py-1 text-xs font-medium text-slate-600 dark:text-[#baab9c] hover:bg-slate-100 dark:hover:bg-surface-dark-hover dark:hover:text-white transition-colors">
+                                        + Dairy-Free
+                                    </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Legal Card -->
+<section class="flex flex-col overflow-hidden rounded-2xl bg-white dark:bg-surface-dark shadow-sm border border-slate-200 dark:border-border-dark/50">
+<button class="flex items-center justify-between p-5 md:px-8 text-left hover:bg-slate-50 dark:hover:bg-surface-dark-hover transition-colors border-b border-slate-100 dark:border-border-dark/30">
+<div>
+<p class="font-medium text-slate-900 dark:text-white">Terms of Service</p>
+<p class="text-sm text-slate-500 dark:text-[#baab9c]">Read our terms and conditions</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 dark:text-[#6a5f55]">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-5 md:px-8 text-left hover:bg-slate-50 dark:hover:bg-surface-dark-hover transition-colors">
+<div>
+<p class="font-medium text-slate-900 dark:text-white">Privacy Policy</p>
+<p class="text-sm text-slate-500 dark:text-[#baab9c]">View how we handle your data</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 dark:text-[#6a5f55]">chevron_right</span>
+</button>
+</section>
+<!-- Action Bar Placeholder to push content up if needed -->
+<div class="h-10"></div>
+</div>
+</div>
+<!-- Sticky Footer Action Bar -->
+<div class="absolute bottom-0 left-0 right-0 border-t border-slate-200 dark:border-border-dark bg-white/95 dark:bg-[#181411]/95 backdrop-blur-sm p-4 md:px-12 md:py-5 z-10">
+<div class="max-w-4xl mx-auto flex items-center justify-between">
+<button class="group flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-red-600 dark:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span>Log Out</span>
+</button>
+<button class="flex items-center gap-2 rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-white shadow-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-[#181411] transition-all">
+<span>Save Changes</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

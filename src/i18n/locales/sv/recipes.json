@@ -6,26 +6,26 @@
   "detail": {
     "ingredients": "Ingredienser",
     "instructions": "Instruktioner",
-    "nutrition": "Naringsfakta",
+    "nutrition": "Näringsfakta",
     "perServing": "Per portion",
     "cookTime": "Tillagningstid",
-    "prepTime": "Forberedtid",
+    "prepTime": "Förberedelsetid",
     "totalTime": "Total tid",
     "tags": "Taggar"
   },
   "weeklyLimit": {
-    "title": "Veckograns uppnadd",
-    "message": "Du har natt din veckograns for receptgenerering. Uppgradera till Pro for obegransade recept!",
-    "bannerTitle": "Veckograns uppnadd",
-    "bannerMessage": "Du har anvant alla dina gratis receptgenereringar den har veckan.",
+    "title": "Veckogräns uppnådd",
+    "message": "Du har nått din veckogräns för receptgenerering. Uppgradera till Pro för obegränsade recept!",
+    "bannerTitle": "Veckogräns uppnådd",
+    "bannerMessage": "Du har använt alla dina gratis receptgenereringar den här veckan.",
     "upgradeButton": "Uppgradera till Pro",
-    "waitMessage": "Din grans aterstalls den {{date}}"
+    "waitMessage": "Din gräns återställs den {{date}}"
   },
   "actions": {
-    "favorite": "Lagg till i favoriter",
-    "unfavorite": "Ta bort fran favoriter",
+    "favorite": "Lägg till i favoriter",
+    "unfavorite": "Ta bort från favoriter",
     "share": "Dela recept",
     "print": "Skriv ut recept",
-    "addToCalendar": "Lagg till i kalender"
+    "addToCalendar": "Lägg till i kalender"
   }
 }

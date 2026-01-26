@@ -64,6 +64,7 @@
         "placeholder": "Skriv en ingrediens och tryck Enter..."
       }
     },
+    "cancelButton": "Avbryt",
     "nextButton": "Generera receptförslag",
     "aiNote": "AI kommer att generera 3 personliga alternativ baserat på dina preferenser."
   },

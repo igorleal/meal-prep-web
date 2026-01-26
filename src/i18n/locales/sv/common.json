@@ -40,7 +40,8 @@
     "servings": "{{count}} Portion",
     "servings_other": "{{count}} Portioner",
     "calories": "kcal",
-    "grams": "g"
+    "grams": "g",
+    "min": "min"
   },
   "macros": {
     "calories": "Kalorier",
@@ -87,5 +88,19 @@
       "driedWeight": "Torkad Vikt",
       "cookedWeight": "Tillagad Vikt"
     }
+  },
+  "recipe": {
+    "generatingImage": "Genererar bild...",
+    "servings": "Portioner",
+    "nutritionFacts": "Näringsfakta",
+    "perServing": "per portion",
+    "protein": "Protein",
+    "carbs": "Kolhydrater",
+    "fat": "Fett",
+    "calories": "Kalorier",
+    "tags": "Taggar",
+    "ingredients": "Ingredienser",
+    "convertUnits": "Konvertera enheter",
+    "preparation": "Tillagning"
   }
 }

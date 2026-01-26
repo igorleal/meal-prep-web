@@ -1,44 +1,49 @@
 {
   "home": {
-    "dietReceitai": {
-      "title": "Kost & ReceitAI",
-      "description": "Skapa en perfekt balanserad veckoplan anpassad efter dina naringsbehov.",
-      "button": "Planera nu"
+    "greeting": {
+      "title": "God kväll, Chef",
+      "subtitle": "Välkommen tillbaka till ditt kök. Vad ska vi laga idag?"
+    },
+    "mealPlans": {
+      "title": "Måltidsplaner",
+      "description": "Organisera din veckonäring med AI-drivna förslag anpassade efter din smak.",
+      "button": "Gå till Planeraren"
     },
     "familyCalendar": {
       "title": "Familjekalender",
-      "description": "Se vad som lagas for hela familjen den har veckan.",
-      "button": "Visa schema"
+      "description": "Synkronisera scheman och middagstider för att se till att alla äter tillsammans.",
+      "button": "Visa Kalender"
     },
     "specialMeal": {
-      "title": "En specialmaltid",
-      "description": "Imponera pa dina gaster med en unik AI-skapelse.",
-      "button": "Generera"
+      "title": "Specialmåltider",
+      "description": "Hantera evenemang, helgdagar och komplexa kostrestriktioner med lätthet.",
+      "button": "Utforska Speciella"
     }
   },
   "list": {
-    "title": "Mina maltidsplaner",
-    "subtitle": "Blaadra och hantera dina AI-genererade maltidsplaner",
+    "title": "Mina måltidsplaner",
+    "subtitle": "Bläddra och hantera dina AI-genererade måltidsplaner",
     "createNew": "Skapa ny plan",
-    "loading": "Laddar maltidsplaner...",
+    "loading": "Laddar måltidsplaner...",
     "empty": {
-      "title": "Inga maltidsplaner annu",
-      "description": "Skapa din forsta AI-drivna maltidsplan for att borja",
-      "button": "Skapa din forsta plan"
+      "title": "Inga måltidsplaner ännu",
+      "description": "Skapa din första AI-drivna måltidsplan för att börja",
+      "button": "Skapa din första plan"
     },
     "card": {
       "aiGenerated": "AI-genererad",
-      "deletePlan": "Ta bort plan"
+      "deletePlan": "Ta bort plan",
+      "viewPlan": "Visa Plan"
     }
   },
   "create": {
-    "title": "Lat oss bygga din plan",
-    "subtitle": "Konfigurera dina maltidspreferenser och lat AI generera personliga recept.",
+    "title": "Låt oss bygga din plan",
+    "subtitle": "Konfigurera dina måltidspreferenser och låt AI generera personliga recept.",
     "sections": {
       "basicInfo": {
-        "title": "Grundlaggande info",
+        "title": "Grundläggande info",
         "planName": "Plannamn",
-        "placeholder": "t.ex. Sommartraning, Vinterbygge"
+        "placeholder": "t.ex. Sommarträning, Vinterbygge"
       },
       "restrictions": {
         "title": "Kostrestriktioner",
@@ -47,21 +52,22 @@
         "placeholder": "Skriv en restriktion och tryck Enter..."
       },
       "focusAreas": {
-        "title": "Fokusomraden",
-        "subtitle": "Satt prioriteringar",
-        "highProtein": "Hogt protein",
-        "lowCarb": "Lag kolhydrat",
+        "title": "Fokusområden",
+        "subtitle": "Sätt prioriteringar",
+        "priority": "Prioritet",
+        "highProtein": "Högt protein",
+        "lowCarb": "Låg kolhydrat",
         "keto": "Keto",
         "balanced": "Balanserad",
         "quickMeals": "Snabb tillagning",
-        "budgetFriendly": "Budgetvanlig",
-        "longLasting": "Langvarig",
-        "ecoFriendly": "Miljovanlig"
+        "budgetFriendly": "Budgetvänlig",
+        "longLasting": "Långvarig",
+        "ecoFriendly": "Miljövänlig"
       },
       "macros": {
-        "title": "Makron och naring (per maltid)",
-        "subtitle": "Mal satta",
-        "description": "Satt malmakron per maltid, inte dagliga totaler.",
+        "title": "Makron och näring (per måltid)",
+        "subtitle": "Mål satta",
+        "description": "Sätt målmakron per måltid, inte dagliga totaler.",
         "calories": "Kalorier",
         "protein": "Protein",
         "carbs": "Kolhydrater",
@@ -70,42 +76,43 @@
       "preferences": {
         "title": "Preferenser",
         "subtitle": "{{included}} inkluderade, {{excluded}} exkluderade",
-        "mustHaves": "Maste ha",
+        "mustHaves": "Måste ha",
         "excludes": "Exkludera"
       },
       "schedule": {
         "title": "Veckoschema",
-        "subtitle": "Konfigurera maltider",
-        "mealsPerDay": "Maltider per dag",
+        "subtitle": "Konfigurera måltider",
+        "mealsPerDay": "Måltider per dag",
         "numberOfDays": "Antal dagar"
       }
     },
-    "nextButton": "Nasta: Generera forhandsvisning"
+    "cancelButton": "Avbryt",
+    "nextButton": "Nästa: Generera förhandsvisning"
   },
   "selection": {
-    "title": "Valj dina recept",
-    "subtitle": "Valj recept du vill inkludera i din plan",
+    "title": "Välj dina recept",
+    "subtitle": "Välj recept du vill inkludera i din plan",
     "generating": "AI lagar dina recept...",
     "generatingSubtitle": "Detta kan ta en stund",
     "selected": "{{count}} av {{total}} valda",
-    "confirmPlan": "Bekrafta plan",
+    "confirmPlan": "Bekräfta plan",
     "regenerate": "Regenerera",
     "error": {
       "title": "Kunde inte generera recept",
-      "description": "Nagot gick fel. Forsok igen."
+      "description": "Något gick fel. Försök igen."
     }
   },
   "detail": {
     "loading": "Laddar recept...",
     "backToPlans": "Tillbaka till planer",
     "saveToFavorites": "Spara till favoriter",
-    "removeFromFavorites": "Ta bort fran favoriter",
+    "removeFromFavorites": "Ta bort från favoriter",
     "addedToFavorites": "Tillagd i favoriter!",
-    "removedFromFavorites": "Borttagen fran favoriter"
+    "removedFromFavorites": "Borttagen från favoriter"
   },
   "delete": {
     "title": "Ta bort plan",
-    "message": "Ar du saker pa att du vill ta bort",
-    "warning": "Denna atgard kan inte angras."
+    "message": "Är du säker på att du vill ta bort",
+    "warning": "Denna åtgärd kan inte ångras."
   }
 }

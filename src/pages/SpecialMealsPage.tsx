@@ -62,7 +62,7 @@ function EventCard({
             e.stopPropagation()
             onDelete(event)
           }}
-          className="w-8 h-8 rounded-full hover:bg-red-100 dark:hover:bg-red-900/30 text-text-muted-light dark:text-text-muted-dark hover:text-red-500 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all"
+          className="w-8 h-8 rounded-full hover:bg-red-100 dark:hover:bg-red-900/30 text-text-muted-light dark:text-text-muted-dark hover:text-red-500 flex items-center justify-center transition-colors"
           title="Delete event"
         >
           <Icon name="delete" size="sm" />

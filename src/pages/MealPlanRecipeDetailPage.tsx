@@ -62,14 +62,14 @@ export default function MealPlanRecipeDetailPage() {
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark">
       {/* Hero image */}
-      <div className="relative h-72 lg:h-96 w-full">
+      <div className="relative h-[400px] lg:h-[480px] w-full">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url("${getRecipeImageUrl(recipe.imageUrl, 'mealPlan')}")`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/60 to-transparent" />
 
         {/* Back button */}
         <div className="absolute top-4 left-4 z-20">
@@ -89,35 +89,25 @@ export default function MealPlanRecipeDetailPage() {
 
         {/* Title overlay */}
         <div className="absolute bottom-0 left-0 w-full p-6 lg:p-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-              <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-2">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+            <div className="max-w-2xl">
+              <h1 className="text-white text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-4">
                 {recipe!.name}
               </h1>
-              <div className="flex items-center gap-6 text-white/90 text-sm font-medium">
-                <div className="flex items-center gap-1.5">
-                  <Icon name="restaurant" className="text-[18px]" />
-                  <span>{request!.mealsPerDay * request!.days} Meals</span>
+              <div className="flex flex-wrap gap-3">
+                <div className="flex h-9 items-center gap-x-2 rounded-lg bg-surface-dark-highlight/80 backdrop-blur-sm px-4 border border-white/10">
+                  <Icon name="group" className="text-primary text-[20px]" />
+                  <p className="text-white text-sm font-semibold">{recipe!.servings} Servings</p>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <Icon name="calendar_today" className="text-[18px]" />
-                  <span>{request!.days} Days</span>
-                </div>
-                {recipe!.cookTime && (
-                  <div className="flex items-center gap-1.5">
-                    <Icon name="schedule" className="text-[18px]" />
-                    <span>{recipe!.cookTime}</span>
-                  </div>
-                )}
               </div>
             </div>
             <div className="flex gap-3">
               <button
                 onClick={handleToggleFavorite}
-                className={`size-10 flex items-center justify-center rounded-full backdrop-blur-md transition-all ${
+                className={`h-12 w-12 flex items-center justify-center rounded-xl backdrop-blur-md transition-all border border-white/10 ${
                   isFavorite
                     ? 'bg-primary text-white hover:bg-primary/80'
-                    : 'bg-white/20 text-white hover:bg-white hover:text-primary'
+                    : 'bg-surface-dark-highlight text-white hover:bg-white hover:text-black'
                 }`}
                 title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
               >
@@ -132,145 +122,105 @@ export default function MealPlanRecipeDetailPage() {
       <div className="max-w-6xl mx-auto p-6 lg:p-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Left column - Nutrition & Info */}
-          <div className="lg:col-span-4 space-y-6">
-            {/* Plan Name */}
-            <div className="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl border border-border-light dark:border-border-dark shadow-sm">
-              <div className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-none">
-                  <Icon name="auto_awesome" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-text-muted-light dark:text-text-muted-dark uppercase tracking-wide mb-1">
-                    Plan Name
-                  </p>
-                  <p className="font-bold text-text-main-light dark:text-white text-lg">
-                    {request.name}
-                  </p>
-                </div>
-              </div>
-            </div>
-
+          <div className="lg:col-span-4 flex flex-col gap-8">
             {/* Nutrition Facts */}
-            <div className="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl border border-border-light dark:border-border-dark shadow-sm">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-bold text-text-main-light dark:text-white">
-                  Nutrition Facts
-                </h3>
-                <span className="text-xs font-medium text-text-muted-light dark:text-text-muted-dark bg-background-light dark:bg-background-dark px-2 py-1 rounded">
-                  Per Serving
-                </span>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-white text-xl font-bold">Nutrition Facts</h3>
+                <span className="text-xs text-text-muted-light dark:text-text-muted-dark">per serving</span>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 bg-background-light dark:bg-background-dark rounded-xl text-center">
-                  <span className="block text-2xl font-extrabold text-primary">
-                    {recipe.macros.calories || '-'}
-                  </span>
-                  <span className="text-xs font-bold text-text-muted-light dark:text-text-muted-dark uppercase tracking-wide">
-                    Calories
-                  </span>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="flex flex-col gap-1 p-4 rounded-xl bg-surface-dark border border-border-dark">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="size-2 rounded-full bg-blue-500"></span>
+                    <p className="text-text-muted-dark text-sm font-medium">Protein</p>
+                  </div>
+                  <p className="text-white text-2xl font-bold">{recipe.macros.protein || '-'}g</p>
                 </div>
-                <div className="p-4 bg-background-light dark:bg-background-dark rounded-xl text-center">
-                  <span className="block text-2xl font-extrabold text-text-main-light dark:text-white">
-                    {recipe.macros.protein || '-'}g
-                  </span>
-                  <span className="text-xs font-bold text-text-muted-light dark:text-text-muted-dark uppercase tracking-wide">
-                    Protein
-                  </span>
+                <div className="flex flex-col gap-1 p-4 rounded-xl bg-surface-dark border border-border-dark">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="size-2 rounded-full bg-yellow-500"></span>
+                    <p className="text-text-muted-dark text-sm font-medium">Carbs</p>
+                  </div>
+                  <p className="text-white text-2xl font-bold">{recipe.macros.carbs || '-'}g</p>
                 </div>
-                <div className="p-4 bg-background-light dark:bg-background-dark rounded-xl text-center">
-                  <span className="block text-2xl font-extrabold text-text-main-light dark:text-white">
-                    {recipe.macros.carbs || '-'}g
-                  </span>
-                  <span className="text-xs font-bold text-text-muted-light dark:text-text-muted-dark uppercase tracking-wide">
-                    Carbs
-                  </span>
+                <div className="flex flex-col gap-1 p-4 rounded-xl bg-surface-dark border border-border-dark">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="size-2 rounded-full bg-red-500"></span>
+                    <p className="text-text-muted-dark text-sm font-medium">Fat</p>
+                  </div>
+                  <p className="text-white text-2xl font-bold">{recipe.macros.fats || '-'}g</p>
                 </div>
-                <div className="p-4 bg-background-light dark:bg-background-dark rounded-xl text-center">
-                  <span className="block text-2xl font-extrabold text-text-main-light dark:text-white">
-                    {recipe.macros.fats || '-'}g
-                  </span>
-                  <span className="text-xs font-bold text-text-muted-light dark:text-text-muted-dark uppercase tracking-wide">
-                    Fat
-                  </span>
+                <div className="flex flex-col gap-1 p-4 rounded-xl bg-surface-dark border border-border-dark">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="size-2 rounded-full bg-primary"></span>
+                    <p className="text-text-muted-dark text-sm font-medium">Calories</p>
+                  </div>
+                  <p className="text-white text-2xl font-bold">{recipe.macros.calories || '-'}</p>
                 </div>
               </div>
             </div>
 
-            {/* Servings info */}
-            <div className="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl border border-border-light dark:border-border-dark shadow-sm">
-              <div className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-none">
-                  <Icon name="group" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-text-muted-light dark:text-text-muted-dark uppercase tracking-wide mb-1">
-                    Servings
-                  </p>
-                  <p className="font-bold text-text-main-light dark:text-white text-lg">
-                    {recipe.servings}
-                  </p>
+            {/* Tags */}
+            {recipe.keywords && recipe.keywords.length > 0 && (
+              <div className="flex flex-col gap-4">
+                <h3 className="text-white text-xl font-bold">Tags</h3>
+                <div className="flex flex-wrap gap-2">
+                  {recipe.keywords.map((keyword, i) => (
+                    <span
+                      key={i}
+                      className="px-3 py-1.5 rounded-lg bg-surface-dark border border-border-dark text-text-muted-dark text-sm hover:text-primary hover:border-primary transition-colors cursor-pointer"
+                    >
+                      #{keyword}
+                    </span>
+                  ))}
                 </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Right column - Ingredients & Instructions */}
           <div className="lg:col-span-8 space-y-10">
             {/* Ingredients */}
-            <section>
-              <h3 className="text-2xl font-extrabold text-text-main-light dark:text-white mb-6 flex items-center gap-3">
-                Ingredients
-                <span className="h-px flex-1 bg-border-light dark:bg-border-dark ml-4" />
-              </h3>
-              <div className="bg-surface-light dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark shadow-sm p-6 lg:p-8">
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
-                  {recipe.ingredients.map((ing, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-3 text-text-main-light dark:text-white group"
+            <section className="flex flex-col gap-6">
+              <div className="flex items-center justify-between border-b border-border-dark pb-4">
+                <h3 className="text-white text-2xl font-bold">Ingredients</h3>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {recipe.ingredients.map((ing, i) => (
+                  <div
+                    key={i}
+                    className="group flex items-center justify-between p-3 rounded-xl bg-surface-dark/40 border border-border-dark hover:border-primary/50 transition-colors"
+                  >
+                    <span className="text-white font-medium">
+                      {ing.quantity} {formatUnit(ing.unit)} {ing.name}
+                    </span>
+                    <button
+                      onClick={() => setConversionIngredient(ing)}
+                      className="opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity bg-primary/20 hover:bg-primary/40 p-1.5 rounded-lg text-primary flex-shrink-0 ml-2"
+                      title="Convert units"
                     >
-                      <Icon
-                        name="radio_button_unchecked"
-                        className="text-border-light dark:text-border-dark text-[20px] mt-0.5"
-                      />
-                      <span className="flex-1">
-                        <strong className="font-bold">
-                          {ing.quantity} {formatUnit(ing.unit)}
-                        </strong>{' '}
-                        {ing.name}
-                      </span>
-                      <button
-                        onClick={() => setConversionIngredient(ing)}
-                        className="opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity h-6 w-6 flex items-center justify-center rounded-full hover:bg-primary/10 text-primary"
-                        title="Convert units"
-                      >
-                        <Icon name="scale" className="text-[16px]" />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                      <Icon name="auto_fix_high" className="text-[18px]" />
+                    </button>
+                  </div>
+                ))}
               </div>
             </section>
 
-            {/* Instructions */}
-            <section>
-              <h3 className="text-2xl font-extrabold text-text-main-light dark:text-white mb-6 flex items-center gap-3">
-                Preparation
-                <span className="h-px flex-1 bg-border-light dark:bg-border-dark ml-4" />
-              </h3>
-              <div className="space-y-6">
+            {/* Preparation */}
+            <section className="flex flex-col gap-6 pt-4">
+              <div className="flex items-center justify-between border-b border-border-dark pb-4">
+                <h3 className="text-white text-2xl font-bold">Preparation</h3>
+              </div>
+              <div className="flex flex-col gap-0 relative">
+                <div className="absolute left-[19px] top-4 bottom-10 w-0.5 bg-border-dark"></div>
                 {parseInstructions(recipe.instructions).map((step, i, steps) => (
-                  <div key={i} className="flex gap-4 md:gap-6 group">
-                    <div className="flex-none flex flex-col items-center">
-                      <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg shadow-md">
-                        {i + 1}
-                      </div>
-                      {i < steps.length - 1 && (
-                        <div className="w-0.5 h-full bg-border-light dark:bg-border-dark mt-2" />
-                      )}
+                  <div key={i} className={`flex gap-6 ${i < steps.length - 1 ? 'pb-10' : ''} relative`}>
+                    <div className="shrink-0 size-10 rounded-full bg-primary shadow-lg flex items-center justify-center text-white font-bold text-lg z-10 border-4 border-background-dark">
+                      {i + 1}
                     </div>
-                    <div className="pb-8">
-                      <MarkdownText className="text-text-main-light dark:text-white/80 leading-relaxed text-base">
+                    <div className="flex flex-col gap-3 pt-1">
+                      <MarkdownText className="text-text-muted-dark leading-relaxed">
                         {step}
                       </MarkdownText>
                     </div>

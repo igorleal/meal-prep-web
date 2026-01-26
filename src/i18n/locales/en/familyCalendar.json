@@ -64,6 +64,7 @@
         "placeholder": "Type an ingredient and press Enter..."
       }
     },
+    "cancelButton": "Cancel",
     "nextButton": "Generate Recipe Suggestions",
     "aiNote": "AI will generate 3 personalized options based on your preferences."
   },

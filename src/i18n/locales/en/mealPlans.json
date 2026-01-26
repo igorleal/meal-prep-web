@@ -1,19 +1,23 @@
 {
   "home": {
-    "dietReceitai": {
-      "title": "Diet & ReceitAI",
-      "description": "Create a perfectly balanced weekly plan tailored to your nutritional needs.",
-      "button": "Plan Now"
+    "greeting": {
+      "title": "Good evening, Chef",
+      "subtitle": "Welcome back to your kitchen. What are we cooking today?"
+    },
+    "mealPlans": {
+      "title": "Meal Plans",
+      "description": "Organize your weekly nutrition with AI-powered suggestions tailored to your taste.",
+      "button": "Go to Planner"
     },
     "familyCalendar": {
       "title": "Family Calendar",
-      "description": "See what's cooking for the whole family this week.",
-      "button": "View Schedule"
+      "description": "Sync schedules and dinner times to ensure everyone eats together happily.",
+      "button": "View Calendar"
     },
     "specialMeal": {
-      "title": "One Special Meal",
-      "description": "Impress your guests with a unique, one-off AI creation.",
-      "button": "Generate"
+      "title": "Special Meals",
+      "description": "Manage events, holidays, and complex dietary restrictions with ease.",
+      "button": "Explore Specials"
     }
   },
   "list": {
@@ -28,7 +32,8 @@
     },
     "card": {
       "aiGenerated": "AI Generated",
-      "deletePlan": "Delete plan"
+      "deletePlan": "Delete plan",
+      "viewPlan": "View Plan"
     }
   },
   "create": {
@@ -49,6 +54,7 @@
       "focusAreas": {
         "title": "Focus Areas",
         "subtitle": "Set priorities",
+        "priority": "Priority",
         "highProtein": "High Protein",
         "lowCarb": "Low Carb",
         "keto": "Keto",
@@ -80,6 +86,7 @@
         "numberOfDays": "Number of Days"
       }
     },
+    "cancelButton": "Cancel",
     "nextButton": "Next: Generate Preview"
   },
   "selection": {

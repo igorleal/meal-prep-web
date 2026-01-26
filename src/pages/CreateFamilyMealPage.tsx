@@ -136,8 +136,8 @@ export default function CreateFamilyMealPage() {
   const suggestedRestrictions = getSuggestedRestrictions()
 
   return (
-    <div className="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-6 lg:p-10 flex justify-center">
-      <div className="w-full max-w-3xl">
+    <div className="relative min-h-full pb-24">
+      <div className="w-full max-w-3xl mx-auto p-6 lg:p-10">
         {/* Back link */}
         <button
           onClick={() => navigate('/calendar')}
@@ -290,21 +290,28 @@ export default function CreateFamilyMealPage() {
             </p>
           </div>
 
-          {/* Submit */}
-          <div className="pt-8 pb-10">
-            <Button
-              type="submit"
-              className="w-full py-4 text-lg font-extrabold shadow-lg shadow-primary/30"
-              icon="auto_awesome"
-              disabled={hasReachedLimit}
-            >
-              {t('create.nextButton')}
-            </Button>
-            <p className="text-center text-xs text-text-muted-light dark:text-text-muted-dark mt-4">
-              {t('create.aiNote')}
-            </p>
-          </div>
         </form>
+      </div>
+
+      {/* Fixed Footer */}
+      <div className="fixed bottom-0 left-0 right-0 md:left-64 border-t border-border-light dark:border-border-dark bg-surface-light/95 dark:bg-background-dark/95 backdrop-blur-sm p-6 z-10 h-[92px]">
+        <div className="flex justify-end items-center gap-4 h-full">
+          <Button
+            variant="secondary"
+            onClick={() => navigate('/calendar')}
+          >
+            {t('create.cancelButton')}
+          </Button>
+          <Button
+            icon="arrow_forward"
+            iconPosition="right"
+            onClick={handleSubmit}
+            disabled={hasReachedLimit}
+            className="shadow-lg shadow-primary/20"
+          >
+            {t('create.nextButton')}
+          </Button>
+        </div>
       </div>
     </div>
   )

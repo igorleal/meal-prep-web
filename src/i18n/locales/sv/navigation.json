@@ -1,20 +1,20 @@
 {
   "sidebar": {
-    "dashboard": "Oversikt",
-    "mealPlanner": "Maltidsplanerare",
+    "dashboard": "Översikt",
+    "mealPlanner": "Måltidsplanerare",
     "familyCalendar": "Familjekalender",
-    "specialMeals": "Specialmaltider",
+    "specialMeals": "Specialmåltider",
     "favorites": "Favoritrecept",
-    "profile": "Profil",
+    "profile": "Inställningar",
     "pantry": "Skafferi",
-    "shoppingList": "Inkopslista"
+    "shoppingList": "Inköpslista"
   },
   "header": {
-    "openMenu": "Oppna meny"
+    "openMenu": "Öppna meny"
   },
   "theme": {
-    "darkMode": "Morkt lage",
-    "lightMode": "Ljust lage"
+    "darkMode": "Mörkt läge",
+    "lightMode": "Ljust läge"
   },
   "auth": {
     "logout": "Logga ut"

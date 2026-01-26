@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReceitAI Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f27f0d",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#181411",
+                        "card-dark": "#27211b",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #181411; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #393028; 
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #504439; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#181411] dark:text-white font-display overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<aside class="hidden md:flex flex-col w-64 h-full border-r border-[#393028] bg-background-dark shrink-0">
+<div class="p-6">
+<div class="flex items-center gap-2">
+<div class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined text-[20px]">restaurant_menu</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-white">ReceitAI</h1>
+</div>
+</div>
+<nav class="flex-1 px-4 overflow-y-auto">
+<ul class="flex flex-col gap-2">
+<li>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary text-white group transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#baab9c] hover:bg-[#393028] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px]">restaurant</span>
+<span class="text-sm font-medium">Meal Planner</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#baab9c] hover:bg-[#393028] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px]">calendar_month</span>
+<span class="text-sm font-medium">Family Calendar</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#baab9c] hover:bg-[#393028] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px]">auto_awesome</span>
+<span class="text-sm font-medium">Special Meals</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#baab9c] hover:bg-[#393028] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px]">favorite</span>
+<span class="text-sm font-medium">Favorites</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#baab9c] hover:bg-[#393028] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="text-sm font-medium">Profile</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-4 border-t border-[#393028]">
+<ul class="flex flex-col gap-2">
+<li>
+<button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#baab9c] hover:bg-[#393028] hover:text-white transition-colors text-left">
+<span class="material-symbols-outlined text-[24px]">light_mode</span>
+<span class="text-sm font-medium">Theme</span>
+</button>
+</li>
+<li>
+<button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#baab9c] hover:bg-[#393028] hover:text-white transition-colors text-left">
+<span class="material-symbols-outlined text-[24px]">logout</span>
+<span class="text-sm font-medium">Logout</span>
+</button>
+</li>
+</ul>
+<div class="mt-4 flex items-center gap-3 px-3">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-orange-400"></div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-white">Chef Gordon</span>
+<span class="text-[10px] text-[#baab9c]">Premium Plan</span>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark relative">
+<header class="md:hidden flex items-center justify-between p-4 bg-background-dark border-b border-[#393028] sticky top-0 z-10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">restaurant_menu</span>
+<h1 class="text-lg font-bold text-white">ReceitAI</h1>
+</div>
+<button class="text-white p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<div class="max-w-[1200px] mx-auto px-4 md:px-8 py-8 md:py-12 flex flex-col gap-8">
+<div class="flex flex-col gap-2">
+<h2 class="text-3xl md:text-4xl font-black tracking-tight text-[#181411] dark:text-white">Good evening, Chef</h2>
+<p class="text-[#baab9c] text-base md:text-lg">Welcome back to your kitchen. What are we cooking today?</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br from-orange-500 to-amber-600 p-8 shadow-lg transition-transform hover:-translate-y-1 duration-300 min-h-[340px]">
+<div class="relative z-10 flex flex-col gap-4 h-full">
+<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 text-white backdrop-blur-sm shadow-inner">
+<span class="material-symbols-outlined text-[28px]">lunch_dining</span>
+</div>
+<div>
+<h2 class="text-2xl font-bold text-white mb-3">Meal Plans</h2>
+<p class="text-orange-50 font-medium leading-relaxed opacity-90 text-sm md:text-base">Organize your weekly nutrition with AI-powered suggestions tailored to your taste.</p>
+</div>
+<div class="mt-auto pt-6">
+<button class="flex items-center justify-between w-full rounded-xl bg-white/20 py-4 px-6 text-sm font-bold text-white transition-colors hover:bg-white/30 backdrop-blur-md border border-white/10">
+<span>Go to Planner</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 p-8 shadow-lg transition-transform hover:-translate-y-1 duration-300 min-h-[340px]">
+<div class="relative z-10 flex flex-col gap-4 h-full">
+<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 text-white backdrop-blur-sm shadow-inner">
+<span class="material-symbols-outlined text-[28px]">calendar_clock</span>
+</div>
+<div>
+<h2 class="text-2xl font-bold text-white mb-3">Family Calendar</h2>
+<p class="text-rose-50 font-medium leading-relaxed opacity-90 text-sm md:text-base">Sync schedules and dinner times to ensure everyone eats together happily.</p>
+</div>
+<div class="mt-auto pt-6">
+<button class="flex items-center justify-between w-full rounded-xl bg-white/20 py-4 px-6 text-sm font-bold text-white transition-colors hover:bg-white/30 backdrop-blur-md border border-white/10">
+<span>View Calendar</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 p-8 shadow-lg transition-transform hover:-translate-y-1 duration-300 min-h-[340px]">
+<div class="relative z-10 flex flex-col gap-4 h-full">
+<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 text-white backdrop-blur-sm shadow-inner">
+<span class="material-symbols-outlined text-[28px]">celebration</span>
+</div>
+<div>
+<h2 class="text-2xl font-bold text-white mb-3">Special Meals</h2>
+<p class="text-emerald-50 font-medium leading-relaxed opacity-90 text-sm md:text-base">Manage events, holidays, and complex dietary restrictions with ease.</p>
+</div>
+<div class="mt-auto pt-6">
+<button class="flex items-center justify-between w-full rounded-xl bg-white/20 py-4 px-6 text-sm font-bold text-white transition-colors hover:bg-white/30 backdrop-blur-md border border-white/10">
+<span>Explore Specials</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold dark:text-white">Recent Activity</h3>
+<a class="text-primary text-sm font-bold hover:underline" href="#">View All</a>
+</div>
+<div class="bg-white dark:bg-[#211d19] rounded-2xl shadow-sm border border-gray-100 dark:border-[#393028] overflow-hidden">
+<div class="flex items-center gap-4 p-5 border-b border-gray-100 dark:border-[#393028] hover:bg-gray-50 dark:hover:bg-[#2a241f] transition-colors cursor-pointer group/item">
+<div class="h-14 w-14 rounded-xl bg-cover bg-center shrink-0 shadow-sm" data-alt="Avocado toast breakfast plate" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBukzU_6w0GNk34zOew9O_MQMVGKE_b6CQVPsFIOpNXCHUhSXxENW6E7-pYn7Cp_UoMeKOR47f8l2pNRFQLkYE4RhNh2E2SCWjReuyfcwqFPWqn-oXzGIHufLUzWZr0HBPVcwCGnXDPPPo13nEEBCdrOl-W9DAeDojElYKsCS65QVVDvr42oviomH4qyxaGoNgiiWb8PScQqgaBHnOzTeIZ-oCb4gMMFwAxU-0_arptJhEdICdU_lFQVV4kB--k-6YEn2h3YySoxEI');"></div>
+<div class="flex-1">
+<h4 class="font-bold dark:text-white text-base">Added "Avocado Toast" to Breakfast</h4>
+<p class="text-sm text-[#baab9c]">Today, 8:30 AM</p>
+</div>
+<span class="material-symbols-outlined text-[#baab9c] group-hover/item:text-primary transition-colors">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 p-5 border-b border-gray-100 dark:border-[#393028] hover:bg-gray-50 dark:hover:bg-[#2a241f] transition-colors cursor-pointer group/item">
+<div class="h-14 w-14 rounded-xl bg-cover bg-center shrink-0 shadow-sm" data-alt="Homemade tomato soup in a bowl" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuALMTeK2LrSryq3YeEcmToEZ_8k6gKEcV7X1kCa8Do6mjayWN-IYMAD8tlh0d1opROX76LZKS0-hC5k5t9SZ4mwOasu6KM5wSR6vaeydbb4s7pj5CppauESYm1eGt6Z_fv6XdQOCYus_xKawtL9QFs9MVnvNkx2ZcY9gse5K3aL5gXv5Cgo1gndFKli5oh5cWM8Zx_mrdGF1HgrLST63xWOJMxa3wRWyqjKuAHsn0yvjDRmRXS80xnrHooMXYC76G2QHzlJiInnNjA');"></div>
+<div class="flex-1">
+<h4 class="font-bold dark:text-white text-base">Completed "Tomato Soup" Recipe</h4>
+<p class="text-sm text-[#baab9c]">Yesterday, 7:15 PM</p>
+</div>
+<span class="material-symbols-outlined text-[#baab9c] group-hover/item:text-primary transition-colors">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 p-5 hover:bg-gray-50 dark:hover:bg-[#2a241f] transition-colors cursor-pointer group/item">
+<div class="h-14 w-14 rounded-xl bg-[#312a24] flex items-center justify-center text-primary shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-2xl">shopping_bag</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold dark:text-white text-base">Grocery List Updated</h4>
+<p class="text-sm text-[#baab9c]">Yesterday, 5:00 PM</p>
+</div>
+<span class="material-symbols-outlined text-[#baab9c] group-hover/item:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

@@ -6,7 +6,12 @@ import {
   mockFamilyPlans,
   mockFoodFriends,
   generateMockRecipes,
+  mockRecipes,
 } from './data'
+import type { Recipe } from '@/types'
+
+// In-memory store for favorite recipe IDs
+const favoriteRecipeIds = new Set<string>()
 
 export const handlers = [
   // Config handlers
@@ -130,6 +135,29 @@ export const handlers = [
 
   http.delete('/api/food-friends/:planId', async () => {
     await delay(300)
+    return new HttpResponse(null, { status: 204 })
+  }),
+
+  // Favorites handlers
+  http.get('/api/recipe/favorite', async () => {
+    await delay(300)
+    const favorites: Recipe[] = mockRecipes.filter((recipe) =>
+      favoriteRecipeIds.has(recipe.id)
+    )
+    return HttpResponse.json(favorites)
+  }),
+
+  http.post('/api/recipe/:recipeId/favorite', async ({ params }) => {
+    await delay(200)
+    const { recipeId } = params
+    favoriteRecipeIds.add(recipeId as string)
+    return new HttpResponse(null, { status: 204 })
+  }),
+
+  http.delete('/api/recipe/:recipeId/favorite', async ({ params }) => {
+    await delay(200)
+    const { recipeId } = params
+    favoriteRecipeIds.delete(recipeId as string)
     return new HttpResponse(null, { status: 204 })
   }),
 ]

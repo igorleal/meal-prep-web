@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Meal Plans - ReceitAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f27f0d",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#181411", // Keeping the dark bg from components
+                        "surface-dark": "#27211b", // Keeping card bg from components
+                        "border-dark": "#54473b", // Keeping border color from components
+                        "text-secondary": "#baab9c", // Muted text color
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white overflow-x-hidden">
+<div class="relative flex h-screen w-full overflow-hidden">
+<!-- Sidebar -->
+<aside class="flex w-64 flex-col border-r border-[#29221c] bg-background-dark hidden md:flex shrink-0">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-4">
+<div class="flex gap-3 px-2 py-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Abstract orange and brown gradient logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD7M2lsyV_Vjoj0quCTKpOhL3GqJesqcl4H0qdJqQ-eXO2HOMGNjjuTpUhVT_TDVO-fPCbNduHJYpifX2oBGoWzOJvUGh_8xm2t7A6kXQcyb7mnSmnOfgLOuaN8sRmjRpTicv2FzO4UbLqhl-tAmQRCWqt59jfSVz3_5cK30-LiTzRRgJLyk3Oln-GIebYGzymEsQqn30ecnjcSP4UCc-QtDO7iQCgX_DyB-AX2_CkT7XFWbLrL2moD-pfI7kbq6A6HgNdZgnfbYEo");'></div>
+<div class="flex flex-col">
+<h1 class="text-white text-base font-bold leading-normal">ReceitAI</h1>
+<p class="text-text-secondary text-xs font-normal leading-normal">Meal Planning</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-4">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-dark transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white">dashboard</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-dark transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white">auto_awesome</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium leading-normal">Generator</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-surface-dark border border-[#393028]" href="#">
+<span class="material-symbols-outlined text-primary">book_2</span>
+<p class="text-white text-sm font-bold leading-normal">My Meal Plans</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-dark transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white">person</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium leading-normal">Profile</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-dark transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white">settings</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium leading-normal">Settings</p>
+</a>
+</nav>
+</div>
+<div class="px-3 py-2">
+<div class="flex items-center gap-3 text-text-secondary hover:text-white cursor-pointer">
+<span class="material-symbols-outlined">logout</span>
+<p class="text-sm font-medium leading-normal">Log Out</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-y-auto relative z-10">
+<!-- Top Bar for Mobile (Visible only on small screens) -->
+<div class="md:hidden flex items-center justify-between p-4 border-b border-[#29221c] bg-background-dark sticky top-0 z-20">
+<div class="flex gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8" data-alt="ReceitAI mobile logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDZsxVMw95yYtNfs-S4t27vTVbeF9Vuqu0GuKAx-Ukx8GtLfxpohkRBCJLvQ5nbhVzouLFE8flzznUUnaG4G67gWt5vPPaEOHqeyn_PQYfMQSVRTS_fXddtQzXyBsQFwy4AqcqXwHuhxRzx7Sw58z6VpDGfJ6JMbHVXOlNn7HEsAqEWxjH9UQyQerbnJIvCIpdpNtIs_vtjY_po65voPlbK2suxVATC0Xws0WSdlv9JuFVG-m3kFX3cc8fcHaXFFQLJasggmdK9OBk");'></div>
+<h1 class="text-white text-lg font-bold">ReceitAI</h1>
+</div>
+<span class="material-symbols-outlined text-white cursor-pointer">menu</span>
+</div>
+<div class="flex-1 p-4 md:p-8 lg:p-12 w-full max-w-[1400px] mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+<div>
+<h1 class="text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">My Meal Plans</h1>
+<p class="text-text-secondary mt-1 text-sm">Manage your saved recipes and weekly schedules.</p>
+</div>
+<button class="flex items-center justify-center gap-2 rounded-lg h-10 px-5 bg-primary hover:bg-[#d9720b] transition-colors text-[#181411] text-sm font-bold leading-normal tracking-[0.015em] shrink-0">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Create New Plan</span>
+</button>
+</div>
+<!-- Search and Filter -->
+<div class="flex flex-col sm:flex-row gap-4 mb-8">
+<div class="relative flex-1 max-w-md">
+<input class="w-full h-12 pl-12 pr-4 rounded-lg bg-surface-dark border border-border-dark text-white placeholder-text-secondary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Search saved plans, ingredients..." type="text"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary">search</span>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-4 h-12 rounded-lg bg-surface-dark border border-border-dark text-text-secondary hover:text-white hover:border-white/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+<span class="text-sm font-medium">Filters</span>
+</button>
+<button class="flex items-center gap-2 px-4 h-12 rounded-lg bg-surface-dark border border-border-dark text-text-secondary hover:text-white hover:border-white/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">sort</span>
+<span class="text-sm font-medium">Sort</span>
+</button>
+</div>
+</div>
+<!-- Grid Content -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="flex flex-col bg-surface-dark rounded-xl overflow-hidden shadow-lg border border-[#393028] hover:border-primary/50 transition-all duration-300 group">
+<div class="relative w-full h-48 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Fresh grilled salmon bowl with vegetables" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBUO6Oy5yf9fa_70Vqsz02frOHonGfoVVUO9U_AUTvmmW_2q2j47_YzlZw4vKunSIs43EHZGBtvBC4Eawp9ijiG_DUBwYdWb_L_7JWTWE-9nLhgwrFuknCWz2k-tqQD3q1yNCGBUYRyIALO63aEzMKlaJVrjomfhh9IdOZPU4KsRB5qaeH1mD9T1O2dGPnC6ppI4ZJUDFfxg-GKgv5vkpTbliY6LAZzGWgeIPFbwHG2gEtnBWN7CglYov01RioZawW_S05nIuGJyzU");'></div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">schedule</span>
+                            20 min
+                        </div>
+</div>
+<div class="flex flex-col flex-1 p-5">
+<div class="flex justify-between items-start mb-2">
+<span class="text-primary text-xs font-bold uppercase tracking-wider">Weight Loss Week 1</span>
+<div class="relative group/menu">
+<button class="text-text-secondary hover:text-white">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+</div>
+<h3 class="text-white text-lg font-bold leading-tight mb-3 group-hover:text-primary transition-colors">Spicy Grilled Salmon Bowl</h3>
+<div class="flex gap-2 mb-6">
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">450 kcal</div>
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">32g Protein</div>
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">Low Carb</div>
+</div>
+<div class="mt-auto flex gap-3 pt-4 border-t border-[#393028]">
+<button class="flex-1 h-9 rounded-lg bg-white/5 hover:bg-white/10 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2">
+                                View Plan
+                            </button>
+<button class="size-9 rounded-lg flex items-center justify-center border border-[#393028] text-text-secondary hover:text-red-400 hover:border-red-400/30 hover:bg-red-400/10 transition-colors" title="Delete Plan">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex flex-col bg-surface-dark rounded-xl overflow-hidden shadow-lg border border-[#393028] hover:border-primary/50 transition-all duration-300 group">
+<div class="relative w-full h-48 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Lemon herb chicken breast with avocado salad" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBZObD8CjoYR-MqhDX1T4rzRDSk-tXj6VZImpB78BBr1BhkE17RxQHgHlund8cqvaEG57d8bOmOGmik8sQzzQmc3E5q1HCaAZtLQOVrjFD-7MsFIIR4SpMYhMy9XfsUx1eyqVgjMK32Cgp38QMQK5VC8YcrhIw0Mbq4NQc3YJKAQOPBFf_DIZuEQVpPLJThTxm8-XVXveUWNLfgD6E9NMWN3RoP13oM0D47GyNhZqcVfONW6s4l7Zq0cDkILNJ6ABUxT30KLbu0qOQ");'></div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">schedule</span>
+                            35 min
+                        </div>
+</div>
+<div class="flex flex-col flex-1 p-5">
+<div class="flex justify-between items-start mb-2">
+<span class="text-primary text-xs font-bold uppercase tracking-wider">Keto Week 2</span>
+<button class="text-text-secondary hover:text-white">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<h3 class="text-white text-lg font-bold leading-tight mb-3 group-hover:text-primary transition-colors">Lemon Herb Chicken &amp; Avocado</h3>
+<div class="flex gap-2 mb-6">
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">520 kcal</div>
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">45g Protein</div>
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">Keto</div>
+</div>
+<div class="mt-auto flex gap-3 pt-4 border-t border-[#393028]">
+<button class="flex-1 h-9 rounded-lg bg-white/5 hover:bg-white/10 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2">
+                                View Plan
+                            </button>
+<button class="size-9 rounded-lg flex items-center justify-center border border-[#393028] text-text-secondary hover:text-red-400 hover:border-red-400/30 hover:bg-red-400/10 transition-colors" title="Delete Plan">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex flex-col bg-surface-dark rounded-xl overflow-hidden shadow-lg border border-[#393028] hover:border-primary/50 transition-all duration-300 group">
+<div class="relative w-full h-48 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Bowl of oatmeal with blueberries and bananas" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuApucLlgRi3yimilwqT__S6d3baZ74l7N5CO8onNP_c07L78PdbzHG1AEBMdtr9oyhX82oEi7WgZ3voPFrXLUvf9aMaFLDXcbfd6WVdM8EMuQQqO0f-GO1nTx-rUx83qBuPynHIFnv7CPeVqhRgtcIoYd8Vkig7utFoDYmatfR-BtuQXG0XahDc3MFOAMYMwznoyUD1R5Ct5KvDpdcliuuESAa7TG_LfZhSAddw1VbRSLOHP5uTV8j6nELhfUl6sM-Z46Eo_9qyexs");'></div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">schedule</span>
+                            10 min
+                        </div>
+</div>
+<div class="flex flex-col flex-1 p-5">
+<div class="flex justify-between items-start mb-2">
+<span class="text-primary text-xs font-bold uppercase tracking-wider">Muscle Gain Phase</span>
+<button class="text-text-secondary hover:text-white">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<h3 class="text-white text-lg font-bold leading-tight mb-3 group-hover:text-primary transition-colors">Protein Oats &amp; Berries</h3>
+<div class="flex gap-2 mb-6">
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">600 kcal</div>
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">30g Protein</div>
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">High Fiber</div>
+</div>
+<div class="mt-auto flex gap-3 pt-4 border-t border-[#393028]">
+<button class="flex-1 h-9 rounded-lg bg-white/5 hover:bg-white/10 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2">
+                                View Plan
+                            </button>
+<button class="size-9 rounded-lg flex items-center justify-center border border-[#393028] text-text-secondary hover:text-red-400 hover:border-red-400/30 hover:bg-red-400/10 transition-colors" title="Delete Plan">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="flex flex-col bg-surface-dark rounded-xl overflow-hidden shadow-lg border border-[#393028] hover:border-primary/50 transition-all duration-300 group">
+<div class="relative w-full h-48 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Vegan buddha bowl with quinoa and chickpeas" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA1InVcjR67veYoTOxsBOg-m7JVZKDiIX-XAySn2d7ACQFji52nFC_ZFFr_dzTeHzd16OjT8_cU57ekJtbANKGHAklCjGAtr6gU65AQvauDFG3xl7o-8FGB-uAV39TN052YmLIH3yYfojS_mjXOVgSS_d0KuGHvZn6Uees67q686pSPK6CypiQEY9Z8myyJ3hkgM1TuGaiGKTeH1DS1W5ZuXZ3v7qtMDrWWXPWUVpVkwwCrWl-0wl9o3JuglOmvuKRWOFM7U4MlKcA");'></div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">schedule</span>
+                            25 min
+                        </div>
+</div>
+<div class="flex flex-col flex-1 p-5">
+<div class="flex justify-between items-start mb-2">
+<span class="text-primary text-xs font-bold uppercase tracking-wider">Vegan Cleanse</span>
+<button class="text-text-secondary hover:text-white">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<h3 class="text-white text-lg font-bold leading-tight mb-3 group-hover:text-primary transition-colors">Rainbow Buddha Bowl</h3>
+<div class="flex gap-2 mb-6">
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">380 kcal</div>
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">18g Protein</div>
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">Vegan</div>
+</div>
+<div class="mt-auto flex gap-3 pt-4 border-t border-[#393028]">
+<button class="flex-1 h-9 rounded-lg bg-white/5 hover:bg-white/10 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2">
+                                View Plan
+                            </button>
+<button class="size-9 rounded-lg flex items-center justify-center border border-[#393028] text-text-secondary hover:text-red-400 hover:border-red-400/30 hover:bg-red-400/10 transition-colors" title="Delete Plan">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="flex flex-col bg-surface-dark rounded-xl overflow-hidden shadow-lg border border-[#393028] hover:border-primary/50 transition-all duration-300 group">
+<div class="relative w-full h-48 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Steak and asparagus dinner plate" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC1QhSGuxc7RGb1TFplLT7yoywdS5lLIthMUsF5Pz_tuD40YM_SJkNqXZ9eFc0zu2jE3hDF5KfJ9OhxmJ7-jerDQ88URh58Cq_wROt-OfSfdUoqA-71GN7DK_Za4kf4-creLP5pZVKlMRGIVXVpsde4tD-4LgeqELFoa2NpWilWe_BPe9EtJMTFuiIkBpWvzJXiLlXQVWhgpgivgUindw8l7WAbNCDPjKKYRgWR9jzqXNXFl9KzF6Bhi82mrSSQcVQRn2ZTZYXTR1M");'></div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">schedule</span>
+                            45 min
+                        </div>
+</div>
+<div class="flex flex-col flex-1 p-5">
+<div class="flex justify-between items-start mb-2">
+<span class="text-primary text-xs font-bold uppercase tracking-wider">Paleo Mix</span>
+<button class="text-text-secondary hover:text-white">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<h3 class="text-white text-lg font-bold leading-tight mb-3 group-hover:text-primary transition-colors">Garlic Butter Steak &amp; Asparagus</h3>
+<div class="flex gap-2 mb-6">
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">580 kcal</div>
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">48g Protein</div>
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">Paleo</div>
+</div>
+<div class="mt-auto flex gap-3 pt-4 border-t border-[#393028]">
+<button class="flex-1 h-9 rounded-lg bg-white/5 hover:bg-white/10 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2">
+                                View Plan
+                            </button>
+<button class="size-9 rounded-lg flex items-center justify-center border border-[#393028] text-text-secondary hover:text-red-400 hover:border-red-400/30 hover:bg-red-400/10 transition-colors" title="Delete Plan">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="flex flex-col bg-surface-dark rounded-xl overflow-hidden shadow-lg border border-[#393028] hover:border-primary/50 transition-all duration-300 group">
+<div class="relative w-full h-48 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Mediterranean pasta salad with feta and olives" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDILJP6i5RKzv2J7G3T585l06tX1KCz9ay-H9UOjkQq4AnqUn8PYkMb-bVFV7h3qqw2mSYi0t7ERgdKSsnfo-sQhvgctY1BLITx2LAL7wOQwhQtoNFm8bUIX3myPTmOEiW8g-BzAyCPJUKyqfskqc2CzTATL8Dn7O8gyYocolhgDvN53jvHv6RnMvtzzC7okn8KdZ5nlsFUYruM-ukqZU6Zn7M71AyN5X7P9L0fODIvLyRglCHfy8S0lOuGJw2HuZ7MBhtyxLeDRbY");'></div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">schedule</span>
+                            15 min
+                        </div>
+</div>
+<div class="flex flex-col flex-1 p-5">
+<div class="flex justify-between items-start mb-2">
+<span class="text-primary text-xs font-bold uppercase tracking-wider">Mediterranean Diet</span>
+<button class="text-text-secondary hover:text-white">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<h3 class="text-white text-lg font-bold leading-tight mb-3 group-hover:text-primary transition-colors">Greek Pasta Salad</h3>
+<div class="flex gap-2 mb-6">
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">410 kcal</div>
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">12g Protein</div>
+<div class="bg-[#393028] px-2 py-1 rounded text-xs text-text-secondary font-medium">Vegetarian</div>
+</div>
+<div class="mt-auto flex gap-3 pt-4 border-t border-[#393028]">
+<button class="flex-1 h-9 rounded-lg bg-white/5 hover:bg-white/10 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2">
+                                View Plan
+                            </button>
+<button class="size-9 rounded-lg flex items-center justify-center border border-[#393028] text-text-secondary hover:text-red-400 hover:border-red-400/30 hover:bg-red-400/10 transition-colors" title="Delete Plan">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination / Load More -->
+<div class="mt-12 flex justify-center">
+<button class="text-text-secondary hover:text-white text-sm font-medium flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-surface-dark transition-colors">
+<span>Load More Plans</span>
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

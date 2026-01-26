@@ -8,6 +8,11 @@
   },
   "preferences": {
     "title": "Preferências",
+    "theme": {
+      "label": "Aparência",
+      "light": "Claro",
+      "dark": "Escuro"
+    },
     "language": {
       "label": "Preferência de Idioma",
       "placeholder": "Selecione o idioma"

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
-import { Button, Icon, Card, Badge, LoadingOverlay, MobileCarousel } from '@/components/common'
+import { Button, Icon, Card, LoadingOverlay, MobileCarousel } from '@/components/common'
 import { receitaiPlanService } from '@/api/services'
 import { getRecipeImageUrl } from '@/utils/placeholders'
 import type { ReceitAIPlanResponse } from '@/types'
@@ -22,46 +22,51 @@ function MealPlanCard({
 
   return (
     <Card padding="none" hover className="overflow-hidden group cursor-pointer" onClick={() => onClick(plan)}>
-      <div className="aspect-video relative overflow-hidden">
+      {/* Image Section */}
+      <div className="relative w-full h-48 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
           style={{
             backgroundImage: `url("${getRecipeImageUrl(recipe.imageUrl, 'mealPlan')}")`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-        <Badge
-          variant="primary"
-          icon="auto_awesome"
-          className="absolute top-3 left-3"
-        >
-          {t('list.card.aiGenerated')}
-        </Badge>
       </div>
-      <div className="p-5">
-        <h3 className="text-lg font-bold text-text-main-light dark:text-white mb-2">
-          {request.name}
+
+      {/* Content Section */}
+      <div className="flex flex-col flex-1 p-5">
+        {/* Plan Name */}
+        <div className="mb-2">
+          <span className="text-primary text-xs font-bold uppercase tracking-wider">
+            {request.name}
+          </span>
+        </div>
+
+        {/* Recipe Name */}
+        <h3 className="text-text-main-light dark:text-white text-lg font-bold leading-tight mb-3 group-hover:text-primary transition-colors">
+          {recipe.name}
         </h3>
-        <p className="text-text-muted-light dark:text-text-muted-dark text-sm mb-4 line-clamp-2">
-          {recipe.description}
-        </p>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4 text-sm text-text-muted-light dark:text-text-muted-dark">
-            <span className="flex items-center gap-1">
-              <Icon name="restaurant" size="sm" />
+
+        {/* Tags and Delete */}
+        <div className="mt-auto flex items-center gap-2">
+          <div className="flex flex-wrap gap-2 flex-1">
+            <div className="bg-gray-100 dark:bg-[#393028] px-2 py-1 rounded text-xs text-text-muted-light dark:text-text-muted-dark font-medium">
               {tCommon('units.meals', { count: request.mealsPerDay * request.days })}
-            </span>
-            <span className="flex items-center gap-1">
-              <Icon name="calendar_today" size="sm" />
+            </div>
+            <div className="bg-gray-100 dark:bg-[#393028] px-2 py-1 rounded text-xs text-text-muted-light dark:text-text-muted-dark font-medium">
               {tCommon('units.days', { count: request.days })}
-            </span>
+            </div>
+            {request.restrictions && request.restrictions.length > 0 && (
+              <div className="bg-gray-100 dark:bg-[#393028] px-2 py-1 rounded text-xs text-text-muted-light dark:text-text-muted-dark font-medium">
+                {request.restrictions[0]}
+              </div>
+            )}
           </div>
           <button
             onClick={(e) => {
               e.stopPropagation()
               onDelete(plan)
             }}
-            className="w-8 h-8 rounded-full hover:bg-red-100 dark:hover:bg-red-900/30 text-text-muted-light dark:text-text-muted-dark hover:text-red-500 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all"
+            className="size-9 rounded-lg flex items-center justify-center text-text-muted-light dark:text-text-muted-dark hover:text-red-400 hover:bg-red-400/10 transition-colors"
             title={t('list.card.deletePlan')}
           >
             <Icon name="delete" size="sm" />

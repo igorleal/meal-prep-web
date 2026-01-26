@@ -64,6 +64,7 @@
         "placeholder": "Digite um ingrediente e pressione Enter..."
       }
     },
+    "cancelButton": "Cancelar",
     "nextButton": "Gerar Sugestões de Receitas",
     "aiNote": "A IA gerará 3 opções personalizadas com base nas suas preferências."
   },

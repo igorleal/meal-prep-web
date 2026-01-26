@@ -1,28 +1,33 @@
 {
   "page": {
-    "title": "Profil och installningar",
-    "subtitle": "Hantera dina kontouppgifter och anpassa dina AI-maltidspreferenser."
+    "title": "Profil och inställningar",
+    "subtitle": "Hantera dina kontouppgifter och anpassa dina AI-måltidspreferenser."
   },
   "profile": {
     "proPlan": "Pro-plan aktiv"
   },
   "preferences": {
     "title": "Preferenser",
+    "theme": {
+      "label": "Utseende",
+      "light": "Ljust",
+      "dark": "Mörkt"
+    },
     "language": {
-      "label": "Sprakpreferens",
-      "placeholder": "Valj sprak"
+      "label": "Språkpreferens",
+      "placeholder": "Välj språk"
     },
     "restrictions": {
       "label": "Kostrestriktioner",
-      "description": "Lagg till kostrestriktioner for att hjalpa var AI att valja battre recept at dig.",
+      "description": "Lägg till kostrestriktioner för att hjälpa vår AI att välja bättre recept åt dig.",
       "placeholder": "Skriv en restriktion och tryck Enter...",
-      "suggestions": "Forslag:"
+      "suggestions": "Förslag:"
     }
   },
   "actions": {
     "logOut": "Logga ut",
-    "saveChanges": "Spara andringar",
-    "allSaved": "Alla andringar sparade automatiskt"
+    "saveChanges": "Spara ändringar",
+    "allSaved": "Alla ändringar sparade automatiskt"
   },
-  "loading": "Laddar installningar..."
+  "loading": "Laddar inställningar..."
 }

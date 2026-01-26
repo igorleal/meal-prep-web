@@ -40,7 +40,8 @@
     "servings": "{{count}} Porção",
     "servings_other": "{{count}} Porções",
     "calories": "kcal",
-    "grams": "g"
+    "grams": "g",
+    "min": "min"
   },
   "macros": {
     "calories": "Calorias",
@@ -87,5 +88,19 @@
       "driedWeight": "Peso Seco",
       "cookedWeight": "Peso Cozido"
     }
+  },
+  "recipe": {
+    "generatingImage": "Gerando imagem...",
+    "servings": "Porções",
+    "nutritionFacts": "Informações Nutricionais",
+    "perServing": "por porção",
+    "protein": "Proteína",
+    "carbs": "Carboidratos",
+    "fat": "Gordura",
+    "calories": "Calorias",
+    "tags": "Tags",
+    "ingredients": "Ingredientes",
+    "convertUnits": "Converter unidades",
+    "preparation": "Preparo"
   }
 }

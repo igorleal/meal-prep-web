@@ -6,6 +6,7 @@ import { Button, Icon, Card, ChipInput, LoadingOverlay } from '@/components/comm
 import { userService } from '@/api/services'
 import { useAuth } from '@/context/AuthContext'
 import { useLanguage } from '@/context/LanguageContext'
+import { useTheme } from '@/context/ThemeContext'
 import { LANGUAGE_LABELS } from '@/i18n/types'
 import type { SupportedLanguage } from '@/types'
 
@@ -16,6 +17,7 @@ export default function SettingsPage() {
   const queryClient = useQueryClient()
   const { logout, updateUser } = useAuth()
   const { currentLanguage, changeLanguage, supportedLanguages } = useLanguage()
+  const { theme, setTheme } = useTheme()
   const { t } = useTranslation('settings')
   const { t: tLegal } = useTranslation('legal')
   const [restrictions, setRestrictions] = useState<string[]>([])
@@ -69,7 +71,8 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="max-w-4xl w-full mx-auto p-8 md:p-12">
+    <div className="relative min-h-full pb-24">
+      <div className="max-w-4xl w-full mx-auto p-8 md:p-12">
           {/* Page heading */}
           <div className="mb-10">
             <h1 className="text-3xl md:text-4xl font-extrabold text-text-main-light dark:text-white mb-3">
@@ -106,6 +109,39 @@ export default function SettingsPage() {
             </div>
 
             <div className="space-y-6">
+              {/* Theme selector */}
+              <div className="max-w-md">
+                <label className="block text-sm font-semibold text-text-main-light dark:text-gray-200 mb-2">
+                  {t('preferences.theme.label')}
+                </label>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setTheme('light')}
+                    className={`flex-1 flex items-center justify-center gap-2 h-12 px-4 rounded-xl border font-medium transition-colors ${
+                      theme === 'light'
+                        ? 'bg-primary/10 border-primary text-primary'
+                        : 'bg-gray-50 dark:bg-gray-800 border-border-light dark:border-border-dark text-text-main-light dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
+                    }`}
+                  >
+                    <Icon name="light_mode" size="sm" />
+                    {t('preferences.theme.light')}
+                  </button>
+                  <button
+                    onClick={() => setTheme('dark')}
+                    className={`flex-1 flex items-center justify-center gap-2 h-12 px-4 rounded-xl border font-medium transition-colors ${
+                      theme === 'dark'
+                        ? 'bg-primary/10 border-primary text-primary'
+                        : 'bg-gray-50 dark:bg-gray-800 border-border-light dark:border-border-dark text-text-main-light dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
+                    }`}
+                  >
+                    <Icon name="dark_mode" size="sm" />
+                    {t('preferences.theme.dark')}
+                  </button>
+                </div>
+              </div>
+
+              <hr className="border-border-light dark:border-border-dark" />
+
               {/* Language selector */}
               <div className="max-w-md">
                 <label className="block text-sm font-semibold text-text-main-light dark:text-gray-200 mb-2">
@@ -208,38 +244,41 @@ export default function SettingsPage() {
             </div>
           </Card>
 
-          {/* Action area */}
-          <div className="flex flex-col-reverse sm:flex-row justify-between items-center gap-4 pt-4 pb-20">
+      </div>
+
+      {/* Sticky Footer Action Bar */}
+      <div className="fixed bottom-0 left-0 right-0 md:left-64 border-t border-border-light dark:border-border-dark bg-surface-light/95 dark:bg-background-dark/95 backdrop-blur-sm p-6 z-10 h-[92px]">
+        <div className="flex items-center justify-between h-full">
+          <Button
+            variant="ghost"
+            className="text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20"
+            icon="logout"
+            iconPosition="left"
+            onClick={() => {
+              logout()
+              navigate('/login')
+            }}
+          >
+            {t('actions.logOut')}
+          </Button>
+          <div className="flex items-center gap-4">
+            {!hasChanges && (
+              <span className="text-sm text-accent-green font-medium hidden sm:inline-block">
+                {t('actions.allSaved')}
+              </span>
+            )}
             <Button
-              variant="ghost"
-              className="w-full sm:w-auto text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20"
-              icon="logout"
+              icon="save"
               iconPosition="left"
-              onClick={() => {
-                logout()
-                navigate('/login')
-              }}
+              onClick={handleSave}
+              loading={updateMutation.isPending}
+              disabled={!hasChanges}
             >
-              {t('actions.logOut')}
+              {t('actions.saveChanges')}
             </Button>
-            <div className="w-full sm:w-auto flex items-center gap-4">
-              {!hasChanges && (
-                <span className="text-sm text-accent-green font-medium hidden sm:inline-block">
-                  {t('actions.allSaved')}
-                </span>
-              )}
-              <Button
-                className="w-full sm:w-auto"
-                icon="save"
-                iconPosition="left"
-                onClick={handleSave}
-                loading={updateMutation.isPending}
-                disabled={!hasChanges}
-              >
-                {t('actions.saveChanges')}
-              </Button>
           </div>
         </div>
+      </div>
     </div>
   )
 }

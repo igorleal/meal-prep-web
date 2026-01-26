@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Create Meal Plan Configuration</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f27f0d",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#221910",
+                        "surface-dark": "#2c241b",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        input[type=range] {
+            -webkit-appearance: none; 
+            background: transparent; 
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #f27f0d;
+            cursor: pointer;
+            margin-top: -8px; 
+            box-shadow: 0 0 0 2px #221910;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #4b3e34;
+            border-radius: 2px;
+        }
+        input[type=range]:focus::-webkit-slider-runnable-track {
+            background: #5e4d41;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .form-checkbox:checked {
+            background-color: #f27f0d;
+            border-color: #f27f0d;
+        }details[open] summary ~ * {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-hidden">
+<div class="flex h-screen w-full">
+<aside class="hidden lg:flex w-72 flex-col border-r border-[#393028] bg-background-dark p-4">
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-orange-400 to-orange-600"></div>
+</div>
+<div class="flex flex-col">
+<h1 class="text-white text-lg font-bold leading-tight">ReceitAI</h1>
+<p class="text-[#baab9c] text-xs font-normal">Meal Planner</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 flex-1">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#baab9c] hover:bg-[#393028] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/20 text-primary border border-primary/20" href="#">
+<span class="material-symbols-outlined fill-1">edit_note</span>
+<span class="text-sm font-bold">Create Plan</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#baab9c] hover:bg-[#393028] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">book_2</span>
+<span class="text-sm font-medium">My Plans</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#baab9c] hover:bg-[#393028] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="text-sm font-medium">Recipes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#baab9c] hover:bg-[#393028] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-[#393028]">
+<div class="flex items-center gap-3 px-3 py-2">
+<div class="size-8 rounded-full bg-slate-700 bg-center bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB5AnLmSZO9GOZtF9FWLwpNZgIH9MB9xteGxfTr70Md2qvzQEp0l3OOsBuBHma7R6zgGAUZWLpcGXg8Dli63ENNSgo-ukDJcDirTPtkHp-FvNbTUcVRX3o9mZ7gNY2NJmgtq9xZlUmreWh5ogFR4jfBbla1pM5VoFZ-kgz7HCqrau3HWpnJ3Dlwf8lBVewx1IIGNDD1xMQ3QQpBz_TwVbaY4VCZlUUO1YuCOsjM678Ts3tMqjBwvq-J8GsmFh11TEdJ77Z-J91xwXo");'></div>
+<div>
+<p class="text-white text-sm font-medium">Alex Johnson</p>
+<p class="text-[#baab9c] text-xs">Pro Member</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<header class="flex-none px-6 py-6 lg:px-12 lg:py-8 border-b border-[#393028] bg-background-dark z-10">
+<div class="max-w-3xl mx-auto w-full">
+<h1 class="text-3xl lg:text-4xl font-black tracking-tight text-white mb-2">Create New Plan</h1>
+<p class="text-[#baab9c] text-base font-normal">Configure your preferences to generate a personalized weekly menu.</p>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-6 lg:px-12 pb-24 scroll-smooth">
+<div class="max-w-3xl mx-auto w-full flex flex-col gap-4">
+<div class="flex flex-col rounded-xl border border-[#393028] bg-surface-dark overflow-hidden">
+<details class="group" open="">
+<summary class="flex cursor-pointer items-center justify-between gap-4 p-5 hover:bg-[#393028]/50 transition-colors list-none select-none">
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center size-6 rounded-full bg-primary/20 text-primary text-xs font-bold">1</span>
+<h3 class="text-white text-base font-bold">Basic Information</h3>
+</div>
+<span class="material-symbols-outlined text-[#baab9c] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-6 pt-0 border-t border-[#393028]/50">
+<label class="block mt-4">
+<span class="text-[#baab9c] text-sm font-medium mb-2 block">Plan Name</span>
+<input class="w-full rounded-lg bg-[#181411] border border-[#54473b] text-white px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary placeholder-[#54473b] transition-all outline-none" placeholder="e.g., Summer Cut 2024" type="text" value="Weekly Healthy Mix"/>
+</label>
+</div>
+</details>
+</div>
+<div class="flex flex-col rounded-xl border border-[#393028] bg-surface-dark overflow-hidden">
+<details class="group" open="">
+<summary class="flex cursor-pointer items-center justify-between gap-4 p-5 hover:bg-[#393028]/50 transition-colors list-none select-none">
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center size-6 rounded-full bg-[#393028] text-[#baab9c] text-xs font-bold group-open:bg-primary/20 group-open:text-primary">2</span>
+<h3 class="text-white text-base font-bold">Dietary Restrictions</h3>
+</div>
+<span class="material-symbols-outlined text-[#baab9c] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-6 pt-0 border-t border-[#393028]/50 mt-0">
+<p class="text-[#baab9c] text-sm py-4">Select all that apply:</p>
+<div class="flex flex-wrap gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary text-primary hover:bg-primary/30 transition-colors">
+<span class="text-sm font-medium">Gluten-Free</span>
+<span class="material-symbols-outlined text-sm">check</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#181411] border border-[#54473b] text-[#baab9c] hover:border-[#baab9c] hover:text-white transition-colors">
+<span class="text-sm font-medium">Vegan</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#181411] border border-[#54473b] text-[#baab9c] hover:border-[#baab9c] hover:text-white transition-colors">
+<span class="text-sm font-medium">Vegetarian</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#181411] border border-[#54473b] text-[#baab9c] hover:border-[#baab9c] hover:text-white transition-colors">
+<span class="text-sm font-medium">Keto</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#181411] border border-[#54473b] text-[#baab9c] hover:border-[#baab9c] hover:text-white transition-colors">
+<span class="text-sm font-medium">Paleo</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#181411] border border-[#54473b] text-[#baab9c] hover:border-[#baab9c] hover:text-white transition-colors">
+<span class="text-sm font-medium">Dairy-Free</span>
+</button>
+</div>
+</div>
+</details>
+</div>
+<div class="flex flex-col rounded-xl border border-[#393028] bg-surface-dark overflow-hidden">
+<details class="group" open="">
+<summary class="flex cursor-pointer items-center justify-between gap-4 p-5 hover:bg-[#393028]/50 transition-colors list-none select-none">
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center size-6 rounded-full bg-[#393028] text-[#baab9c] text-xs font-bold group-open:bg-primary/20 group-open:text-primary">3</span>
+<h3 class="text-white text-base font-bold">Focus Areas</h3>
+</div>
+<span class="material-symbols-outlined text-[#baab9c] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-6 pt-0 border-t border-[#393028]/50">
+<div class="flex flex-col gap-6 mt-4">
+<div class="p-4 rounded-lg bg-[#181411] border border-[#393028]">
+<div class="flex items-start gap-3">
+<input checked="" class="mt-1 size-5 rounded border-[#54473b] bg-[#27211b] text-primary focus:ring-offset-background-dark focus:ring-primary" type="checkbox"/>
+<div class="flex-1">
+<p class="text-white font-medium">High Protein</p>
+<p class="text-[#baab9c] text-xs mt-1">Focus on muscle building meals.</p>
+<div class="mt-4 flex items-center gap-4">
+<span class="text-[#baab9c] text-xs">Priority</span>
+<input class="w-full" max="10" min="1" type="range" value="8"/>
+<span class="text-white text-xs font-bold w-6">8/10</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 rounded-lg bg-[#181411] border border-[#393028]">
+<div class="flex items-start gap-3">
+<input class="mt-1 size-5 rounded border-[#54473b] bg-[#27211b] text-primary focus:ring-offset-background-dark focus:ring-primary" type="checkbox"/>
+<div class="flex-1">
+<p class="text-white font-medium">Budget Friendly</p>
+<p class="text-[#baab9c] text-xs mt-1">Cost effective ingredients.</p>
+<div class="mt-4 flex items-center gap-4 opacity-50 pointer-events-none">
+<span class="text-[#baab9c] text-xs">Priority</span>
+<input class="w-full grayscale" max="10" min="1" type="range" value="5"/>
+<span class="text-white text-xs font-bold w-6">5/10</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</details>
+</div>
+<div class="flex flex-col rounded-xl border border-[#393028] bg-surface-dark overflow-hidden">
+<details class="group" open="">
+<summary class="flex cursor-pointer items-center justify-between gap-4 p-5 hover:bg-[#393028]/50 transition-colors list-none select-none">
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center size-6 rounded-full bg-[#393028] text-[#baab9c] text-xs font-bold group-open:bg-primary/20 group-open:text-primary">4</span>
+<h3 class="text-white text-base font-bold">Macros &amp; Nutrition</h3>
+</div>
+<span class="material-symbols-outlined text-[#baab9c] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-6 pt-0 border-t border-[#393028]/50 mt-2">
+<p class="text-[#baab9c] text-sm py-4">Daily targets per person.</p>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+<label class="flex flex-col gap-2">
+<span class="text-[#baab9c] text-xs uppercase tracking-wider font-bold">Calories</span>
+<div class="relative">
+<input class="w-full rounded-lg bg-[#181411] border border-[#54473b] text-white px-3 py-2.5 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-right pr-12" type="number" value="2200"/>
+<span class="absolute right-3 top-2.5 text-[#54473b] text-sm">kcal</span>
+</div>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-[#baab9c] text-xs uppercase tracking-wider font-bold">Protein</span>
+<div class="relative">
+<input class="w-full rounded-lg bg-[#181411] border border-[#54473b] text-white px-3 py-2.5 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-right pr-8" type="number" value="160"/>
+<span class="absolute right-3 top-2.5 text-[#54473b] text-sm">g</span>
+</div>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-[#baab9c] text-xs uppercase tracking-wider font-bold">Carbs</span>
+<div class="relative">
+<input class="w-full rounded-lg bg-[#181411] border border-[#54473b] text-white px-3 py-2.5 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-right pr-8" type="number" value="200"/>
+<span class="absolute right-3 top-2.5 text-[#54473b] text-sm">g</span>
+</div>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-[#baab9c] text-xs uppercase tracking-wider font-bold">Fats</span>
+<div class="relative">
+<input class="w-full rounded-lg bg-[#181411] border border-[#54473b] text-white px-3 py-2.5 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-right pr-8" type="number" value="70"/>
+<span class="absolute right-3 top-2.5 text-[#54473b] text-sm">g</span>
+</div>
+</label>
+</div>
+</div>
+</details>
+</div>
+<div class="flex flex-col rounded-xl border border-[#393028] bg-surface-dark overflow-hidden">
+<details class="group" open="">
+<summary class="flex cursor-pointer items-center justify-between gap-4 p-5 hover:bg-[#393028]/50 transition-colors list-none select-none">
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center size-6 rounded-full bg-[#393028] text-[#baab9c] text-xs font-bold group-open:bg-primary/20 group-open:text-primary">5</span>
+<h3 class="text-white text-base font-bold">Preferences</h3>
+</div>
+<span class="material-symbols-outlined text-[#baab9c] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-6 pt-0 border-t border-[#393028]/50 mt-2">
+<div class="mt-4 space-y-6">
+<div>
+<label class="text-[#baab9c] text-sm font-medium mb-2 block">Must-have Ingredients</label>
+<div class="w-full rounded-lg bg-[#181411] border border-[#54473b] p-2 flex flex-wrap gap-2 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+<span class="inline-flex items-center gap-1 rounded bg-[#393028] px-2 py-1 text-xs text-white">
+                                            Chicken Breast
+                                            <button class="hover:text-primary"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 rounded bg-[#393028] px-2 py-1 text-xs text-white">
+                                            Avocado
+                                            <button class="hover:text-primary"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<input class="flex-1 bg-transparent text-white text-sm outline-none min-w-[120px] placeholder-[#54473b]" placeholder="Type and press Enter" type="text"/>
+</div>
+</div>
+<div>
+<label class="text-[#baab9c] text-sm font-medium mb-2 block">Ingredients to Exclude</label>
+<div class="w-full rounded-lg bg-[#181411] border border-[#54473b] p-2 flex flex-wrap gap-2 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+<span class="inline-flex items-center gap-1 rounded bg-[#393028] px-2 py-1 text-xs text-white">
+                                            Cilantro
+                                            <button class="hover:text-primary"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<input class="flex-1 bg-transparent text-white text-sm outline-none min-w-[120px] placeholder-[#54473b]" placeholder="Type and press Enter" type="text"/>
+</div>
+</div>
+</div>
+</div>
+</details>
+</div>
+<div class="flex flex-col rounded-xl border border-[#393028] bg-surface-dark overflow-hidden">
+<details class="group" open="">
+<summary class="flex cursor-pointer items-center justify-between gap-4 p-5 hover:bg-[#393028]/50 transition-colors list-none select-none">
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center size-6 rounded-full bg-[#393028] text-[#baab9c] text-xs font-bold group-open:bg-primary/20 group-open:text-primary">6</span>
+<h3 class="text-white text-base font-bold">Weekly Schedule</h3>
+</div>
+<span class="material-symbols-outlined text-[#baab9c] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-6 pt-0 border-t border-[#393028]/50 mt-2">
+<div class="grid lg:grid-cols-2 gap-8 mt-4">
+<div>
+<div class="flex justify-between items-center mb-4">
+<label class="text-[#baab9c] text-sm font-medium">Meals per day</label>
+<span class="text-white text-sm font-bold bg-[#393028] px-2 py-0.5 rounded">3</span>
+</div>
+<input class="w-full" max="6" min="1" type="range" value="3"/>
+<div class="flex justify-between mt-2 text-[#54473b] text-xs">
+<span>1</span>
+<span>6</span>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-4">
+<label class="text-[#baab9c] text-sm font-medium">Days to plan</label>
+<span class="text-white text-sm font-bold bg-[#393028] px-2 py-0.5 rounded">7</span>
+</div>
+<input class="w-full" max="7" min="1" type="range" value="7"/>
+<div class="flex justify-between mt-2 text-[#54473b] text-xs">
+<span>1</span>
+<span>7</span>
+</div>
+</div>
+</div>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="absolute bottom-0 w-full p-4 lg:px-12 lg:py-6 bg-background-dark/95 backdrop-blur-sm border-t border-[#393028] z-20">
+<div class="max-w-3xl mx-auto flex justify-end items-center gap-4">
+<button class="px-6 py-3 rounded-lg border border-[#54473b] text-white text-sm font-medium hover:bg-[#393028] transition-colors">
+                    Cancel
+                </button>
+<button class="px-6 py-3 rounded-lg bg-primary text-white text-sm font-bold hover:bg-orange-600 transition-colors shadow-lg shadow-primary/20 flex items-center gap-2">
+                    Next: Review Plan
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

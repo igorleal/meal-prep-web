@@ -16,6 +16,7 @@ export const mockRecipes: Recipe[] = [
     ],
     instructions: '1. Cook quinoa according to package directions.\n2. Season chicken with spices and grill until cooked through.\n3. Slice chicken and arrange over quinoa with vegetables.\n4. Drizzle with lime dressing and serve.',
     macros: { calories: 420, protein: 45, carbs: 35, fats: 12 },
+    keywords: ['Spicy', 'HighProtein', 'GlutenFree', 'QuickMeal'],
     createdAt: '2026-01-15T10:30:00Z',
   },
   {
@@ -33,6 +34,7 @@ export const mockRecipes: Recipe[] = [
     ],
     instructions: '1. Spiralize zucchini into noodles.\n2. Blend basil, pine nuts, parmesan, and olive oil for pesto.\n3. Toss zucchini noodles with pesto.\n4. Top with cherry tomatoes and serve.',
     macros: { calories: 280, protein: 12, carbs: 15, fats: 22 },
+    keywords: ['Vegetarian', 'LowCarb', 'Italian', 'Healthy'],
     createdAt: '2026-01-15T10:30:00Z',
   },
   {
@@ -50,6 +52,7 @@ export const mockRecipes: Recipe[] = [
     ],
     instructions: '1. Preheat oven to 200°C.\n2. Place salmon on baking sheet with asparagus.\n3. Season with garlic, lemon juice, and dill.\n4. Bake for 15-20 minutes until salmon flakes easily.',
     macros: { calories: 380, protein: 42, carbs: 8, fats: 20 },
+    keywords: ['Seafood', 'HighProtein', 'Keto', 'GlutenFree'],
     createdAt: '2026-01-15T10:30:00Z',
   },
   {
@@ -67,6 +70,7 @@ export const mockRecipes: Recipe[] = [
     ],
     instructions: '1. Form turkey into meatballs and brown in a skillet.\n2. Add marinara sauce and simmer for 15 minutes.\n3. Stir in spinach until wilted.\n4. Top with mozzarella and broil until melted.',
     macros: { calories: 350, protein: 38, carbs: 12, fats: 18 },
+    keywords: ['Italian', 'HighProtein', 'Comfort', 'FamilyFriendly'],
     createdAt: '2026-01-15T10:30:00Z',
   },
   {
@@ -84,6 +88,7 @@ export const mockRecipes: Recipe[] = [
     ],
     instructions: '1. Preheat oven to 220°C.\n2. Halve avocados and remove some flesh to create a larger well.\n3. Crack an egg into each avocado half.\n4. Bake for 12-15 minutes. Top with bacon and chives.',
     macros: { calories: 320, protein: 18, carbs: 8, fats: 26 },
+    keywords: ['Keto', 'LowCarb', 'Breakfast', 'QuickMeal'],
     createdAt: '2026-01-15T10:30:00Z',
   },
   {
@@ -101,6 +106,7 @@ export const mockRecipes: Recipe[] = [
     ],
     instructions: '1. Drain and rinse chickpeas.\n2. Chop cucumber and halve tomatoes.\n3. Combine all ingredients in a large bowl.\n4. Drizzle with olive oil and season to taste.',
     macros: { calories: 290, protein: 14, carbs: 32, fats: 14 },
+    keywords: ['Vegetarian', 'Mediterranean', 'Healthy', 'Vegan'],
     createdAt: '2026-01-15T10:30:00Z',
   },
 ]

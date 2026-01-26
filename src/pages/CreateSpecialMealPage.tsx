@@ -156,7 +156,8 @@ export default function CreateSpecialMealPage() {
   }
 
   return (
-    <div className="max-w-[1000px] mx-auto px-6 py-8 lg:px-10 lg:py-12">
+    <div className="relative min-h-full pb-24">
+      <div className="max-w-[1000px] mx-auto px-6 py-8 lg:px-10 lg:py-12">
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 mb-8 text-sm font-medium text-text-muted-light dark:text-text-muted-dark">
         <button
@@ -360,26 +361,6 @@ export default function CreateSpecialMealPage() {
             </div>
           </form>
 
-          {/* Navigation */}
-          <div className="flex items-center justify-end pt-4">
-            <div className="flex items-center gap-4">
-              <button
-                type="button"
-                onClick={() => navigate('/special-meals')}
-                className="px-6 py-2.5 text-text-muted-light dark:text-text-muted-dark font-bold hover:text-text-main-light dark:hover:text-white transition-colors"
-              >
-                {t('create.cancelButton')}
-              </button>
-              <Button
-                onClick={handleSubmit}
-                icon="arrow_forward"
-                iconPosition="right"
-                disabled={!name.trim() || hasReachedLimit}
-              >
-                {t('create.nextButton')}
-              </Button>
-            </div>
-          </div>
         </div>
 
         {/* Sidebar */}
@@ -409,7 +390,28 @@ export default function CreateSpecialMealPage() {
               </p>
             </div>
           </Card>
+        </div>
+      </div>
+      </div>
 
+      {/* Fixed Footer */}
+      <div className="fixed bottom-0 left-0 right-0 md:left-64 border-t border-border-light dark:border-border-dark bg-surface-light/95 dark:bg-background-dark/95 backdrop-blur-sm p-6 z-10 h-[92px]">
+        <div className="flex justify-end items-center gap-4 h-full">
+          <Button
+            variant="secondary"
+            onClick={() => navigate('/special-meals')}
+          >
+            {t('create.cancelButton')}
+          </Button>
+          <Button
+            icon="arrow_forward"
+            iconPosition="right"
+            onClick={handleSubmit}
+            disabled={!name.trim() || hasReachedLimit}
+            className="shadow-lg shadow-primary/20"
+          >
+            {t('create.nextButton')}
+          </Button>
         </div>
       </div>
     </div>

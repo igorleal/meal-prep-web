@@ -1,19 +1,23 @@
 {
   "home": {
-    "dietReceitai": {
-      "title": "Dieta & ReceitAI",
-      "description": "Crie um plano semanal perfeitamente equilibrado, adaptado às suas necessidades nutricionais.",
-      "button": "Planejar Agora"
+    "greeting": {
+      "title": "Boa noite, Chef",
+      "subtitle": "Bem-vindo de volta à sua cozinha. O que vamos cozinhar hoje?"
+    },
+    "mealPlans": {
+      "title": "Planos de Refeição",
+      "description": "Organize sua nutrição semanal com sugestões de IA adaptadas ao seu gosto.",
+      "button": "Ir para o Planejador"
     },
     "familyCalendar": {
       "title": "Calendário Familiar",
-      "description": "Veja o que está preparado para toda a família esta semana.",
-      "button": "Ver Agenda"
+      "description": "Sincronize horários e jantas para garantir que todos comam juntos felizes.",
+      "button": "Ver Calendário"
     },
     "specialMeal": {
-      "title": "Uma Refeição Especial",
-      "description": "Impressione seus convidados com uma criação única da IA.",
-      "button": "Gerar"
+      "title": "Refeições Especiais",
+      "description": "Gerencie eventos, feriados e restrições alimentares complexas com facilidade.",
+      "button": "Explorar Especiais"
     }
   },
   "list": {
@@ -28,7 +32,8 @@
     },
     "card": {
       "aiGenerated": "Gerado por IA",
-      "deletePlan": "Excluir plano"
+      "deletePlan": "Excluir plano",
+      "viewPlan": "Ver Plano"
     }
   },
   "create": {
@@ -49,6 +54,7 @@
       "focusAreas": {
         "title": "Áreas de Foco",
         "subtitle": "Defina prioridades",
+        "priority": "Prioridade",
         "highProtein": "Alta Proteína",
         "lowCarb": "Baixo Carb",
         "keto": "Keto",
@@ -80,6 +86,7 @@
         "numberOfDays": "Número de Dias"
       }
     },
+    "cancelButton": "Cancelar",
     "nextButton": "Próximo: Gerar Preview"
   },
   "selection": {

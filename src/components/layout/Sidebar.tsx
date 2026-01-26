@@ -2,8 +2,6 @@ import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/utils/cn'
 import { Icon } from '@/components/common'
-import { useTheme } from '@/context/ThemeContext'
-import { useAuth } from '@/context/AuthContext'
 
 interface SidebarProps {
   isOpen: boolean
@@ -16,19 +14,11 @@ const navItemKeys = [
   { id: 'calendar', path: '/calendar', icon: 'event', labelKey: 'sidebar.familyCalendar' },
   { id: 'special', path: '/special-meals', icon: 'local_dining', labelKey: 'sidebar.specialMeals' },
   { id: 'favorites', path: '/favorites', icon: 'favorite', labelKey: 'sidebar.favorites' },
-  { id: 'profile', path: '/settings', icon: 'person', labelKey: 'sidebar.profile' },
 ]
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const location = useLocation()
-  const { theme, toggleTheme } = useTheme()
-  const { logout } = useAuth()
   const { t } = useTranslation('navigation')
-
-  const handleLogout = () => {
-    logout()
-    onClose()
-  }
 
   return (
     <>
@@ -43,7 +33,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed md:static inset-y-0 left-0 z-50 w-56 md:w-64 flex-shrink-0 flex flex-col justify-between',
+          'fixed md:static inset-y-0 left-0 z-50 w-56 md:w-64 h-screen flex-shrink-0 flex flex-col justify-between overflow-hidden',
           'border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark',
           'transform transition-transform duration-300 ease-in-out',
           'md:transform-none md:translate-x-0',
@@ -91,24 +81,23 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           </nav>
         </div>
 
-        {/* Theme toggle */}
-        <div className="p-6 border-t border-border-light dark:border-border-dark">
-          <button
-            onClick={toggleTheme}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg w-full text-text-muted-light dark:text-gray-400 hover:text-text-main-light dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+        {/* Settings link - fixed footer */}
+        <div className="p-6 h-[92px]">
+          <Link
+            to="/settings"
+            onClick={onClose}
+            className={cn(
+              'flex items-center gap-3 px-3 py-2.5 rounded-lg w-full transition-colors',
+              location.pathname === '/settings'
+                ? 'bg-primary/10 text-primary'
+                : 'text-text-muted-light dark:text-gray-400 hover:text-text-main-light dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800'
+            )}
           >
-            <Icon name={theme === 'light' ? 'dark_mode' : 'light_mode'} />
-            <span className="text-sm font-medium">
-              {theme === 'light' ? t('theme.darkMode') : t('theme.lightMode')}
+            <Icon name="person" className={location.pathname === '/settings' ? 'text-primary' : ''} />
+            <span className={cn('text-sm', location.pathname === '/settings' ? 'font-bold' : 'font-medium')}>
+              {t('sidebar.profile')}
             </span>
-          </button>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg w-full text-text-muted-light dark:text-gray-400 hover:text-text-main-light dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-          >
-            <Icon name="logout" />
-            <span className="text-sm font-medium">{t('auth.logout')}</span>
-          </button>
+          </Link>
         </div>
       </aside>
     </>

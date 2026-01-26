@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon, WeeklyLimitBanner, WeeklyLimitModal, MobileCarousel, ContentValidationErrorModal } from '@/components/common'
 import { isContentValidationError } from '@/utils/errors'
-import { RecipeCard, RecipeDetailModal } from '@/components/features'
+import { RecipeCard, RecipeDetailModal, SkeletonRecipeCard } from '@/components/features'
 import { receitaiPlanService, favoriteService, userService } from '@/api/services'
 import type { Recipe, GenerateReceitAIPlanRequest } from '@/types'
 
@@ -15,31 +15,6 @@ interface PendingMealPlan {
 interface PendingRequest {
   planName: string
   request: GenerateReceitAIPlanRequest
-}
-
-function LoadingCard() {
-  return (
-    <div className="relative flex flex-col overflow-hidden rounded-2xl bg-surface-light dark:bg-surface-dark shadow-xl animate-pulse">
-      <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-primary/30 z-30" />
-      <div className="h-48 md:h-64 w-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-600 border-t-primary animate-spin" />
-          <span className="text-sm text-text-muted-light dark:text-text-muted-dark font-medium">
-            Generating recipe...
-          </span>
-        </div>
-      </div>
-      <div className="flex flex-1 flex-col p-4 md:p-8 pt-4 md:pt-6">
-        <div className="h-7 bg-gray-200 dark:bg-gray-700 rounded-lg w-3/4 mb-3" />
-        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2" />
-        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-6" />
-        <div className="mt-auto">
-          <div className="mb-6 h-16 bg-gray-200 dark:bg-gray-700 rounded-xl" />
-          <div className="h-14 bg-gray-200 dark:bg-gray-700 rounded-xl" />
-        </div>
-      </div>
-    </div>
-  )
 }
 
 function ErrorState({ onRetry, onBack }: { onRetry: () => void; onBack: () => void }) {
@@ -239,22 +214,22 @@ export default function RecipeSelectionPage() {
   }
 
   return (
-    <div className="max-w-[1280px] mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-12">
-      {/* Back button */}
-      <button
-        onClick={() => navigate('/meal-plans/create')}
-        className="flex items-center gap-2 text-sm font-medium text-text-muted-light dark:text-text-muted-dark hover:text-primary transition-colors mb-6"
-      >
-        <Icon name="arrow_back" size="sm" />
-        Back to Plan Configuration
-      </button>
+    <>
+      <div className="max-w-[1280px] mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-12 pb-32">
+        {/* Back button */}
+        <button
+          onClick={() => navigate('/meal-plans/create')}
+          className="flex items-center gap-2 text-sm font-medium text-text-muted-light dark:text-text-muted-dark hover:text-primary transition-colors mb-6"
+        >
+          <Icon name="arrow_back" size="sm" />
+          Back to Plan Configuration
+        </button>
 
-      {/* Weekly Limit Banner */}
-      {hasReachedLimit && <WeeklyLimitBanner />}
+        {/* Weekly Limit Banner */}
+        {hasReachedLimit && <WeeklyLimitBanner />}
 
-      {/* Header */}
-      <div className="mb-6 md:mb-12 flex flex-col gap-4 md:gap-6 md:flex-row md:items-end md:justify-between">
-        <div className="flex flex-col gap-3">
+        {/* Header */}
+        <div className="mb-6 md:mb-12 flex flex-col gap-3">
           <div className="flex items-center gap-2 text-primary text-sm font-bold uppercase tracking-widest">
             <Icon name="auto_awesome" className="text-lg" />
             AI Recommended For You
@@ -268,49 +243,43 @@ export default function RecipeSelectionPage() {
               : `We've analyzed your preferences to create these options for "${planName}". Select your favorite to continue.`}
           </p>
         </div>
-        <div className="flex flex-wrap gap-3">
-          <Button
-            variant="secondary"
-            icon="refresh"
-            iconPosition="left"
-            className="rounded-xl"
-            loading={regenerateMutation.isPending}
-            disabled={hasReachedLimit || isGenerating || !pendingPlan}
-            onClick={() => regenerateMutation.mutate()}
-          >
-            Refresh Suggestions
-          </Button>
-          <Button
-            icon="bookmark"
-            iconPosition="left"
-            disabled={!selectedRecipeId || isGenerating}
-            loading={saveMutation.isPending}
-            onClick={() => saveMutation.mutate()}
-            className="rounded-xl"
-          >
-            Save Selected
-          </Button>
-        </div>
-      </div>
 
-      {/* Recipe grid - Loading state */}
-      {(isGenerating || regenerateMutation.isPending) && (
-        <div className="grid gap-4 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <LoadingCard />
-          <LoadingCard />
-          <LoadingCard />
-        </div>
-      )}
+        {/* Recipe grid - Loading state */}
+        {(isGenerating || regenerateMutation.isPending) && (
+          <div className="grid gap-4 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <SkeletonRecipeCard />
+            <SkeletonRecipeCard />
+            <SkeletonRecipeCard />
+          </div>
+        )}
 
-      {/* Recipe grid - Mobile carousel */}
-      {!isGenerating && !regenerateMutation.isPending && pendingPlan?.recipes && (
-        <>
-          <div className="md:hidden">
-            <MobileCarousel
-              items={pendingPlan.recipes}
-              keyExtractor={(recipe) => recipe.id}
-              renderItem={(recipe) => (
+        {/* Recipe grid - Mobile carousel */}
+        {!isGenerating && !regenerateMutation.isPending && pendingPlan?.recipes && (
+          <>
+            <div className="md:hidden">
+              <MobileCarousel
+                items={pendingPlan.recipes}
+                keyExtractor={(recipe) => recipe.id}
+                renderItem={(recipe) => (
+                  <RecipeCard
+                    recipe={recipe}
+                    isSelected={selectedRecipeId === recipe.id}
+                    isFavorite={favoriteIds.has(recipe.id)}
+                    imageType="mealPlan"
+                    onSelect={() => setSelectedRecipeId(prev => prev === recipe.id ? null : recipe.id)}
+                    onViewDetails={() => setViewingRecipe(recipe)}
+                    onFavorite={() => handleToggleFavorite(recipe.id)}
+                    onImageLoaded={handleRecipeImageLoaded}
+                  />
+                )}
+              />
+            </div>
+
+            {/* Recipe grid - Desktop */}
+            <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {pendingPlan.recipes.map((recipe) => (
                 <RecipeCard
+                  key={recipe.id}
                   recipe={recipe}
                   isSelected={selectedRecipeId === recipe.id}
                   isFavorite={favoriteIds.has(recipe.id)}
@@ -320,51 +289,66 @@ export default function RecipeSelectionPage() {
                   onFavorite={() => handleToggleFavorite(recipe.id)}
                   onImageLoaded={handleRecipeImageLoaded}
                 />
-              )}
-            />
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* Recipe Detail Modal */}
+        {viewingRecipe && (
+          <RecipeDetailModal
+            recipe={viewingRecipe}
+            imageType="mealPlan"
+            onClose={() => setViewingRecipe(null)}
+            onImageLoaded={handleRecipeImageLoaded}
+          />
+        )}
+
+        {/* Weekly Limit Modal */}
+        {showLimitModal && (
+          <WeeklyLimitModal onClose={() => setShowLimitModal(false)} />
+        )}
+
+        {/* Content Validation Error Modal */}
+        {showContentValidationModal && (
+          <ContentValidationErrorModal
+            onClose={() => setShowContentValidationModal(false)}
+            onGoBack={() => navigate('/meal-plans/create')}
+          />
+        )}
+      </div>
+
+      {/* Fixed Footer */}
+      <div className="fixed bottom-0 left-0 right-0 md:left-64 bg-surface-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-t border-border-light dark:border-border-dark p-6 z-30">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <Button
+            variant="ghost"
+            icon="refresh"
+            iconPosition="left"
+            className="w-full sm:w-auto"
+            loading={regenerateMutation.isPending}
+            disabled={hasReachedLimit || isGenerating || !pendingPlan}
+            onClick={() => regenerateMutation.mutate()}
+          >
+            Regenerate Options
+          </Button>
+          <div className="flex items-center gap-4 w-full sm:w-auto">
+            <span className="hidden sm:inline-block text-sm text-text-muted-light dark:text-text-muted-dark">
+              {selectedRecipeId ? '1 of 3 options selected' : 'No option selected'}
+            </span>
+            <Button
+              icon="check"
+              iconPosition="left"
+              disabled={!selectedRecipeId || isGenerating}
+              loading={saveMutation.isPending}
+              onClick={() => saveMutation.mutate()}
+              className="w-full sm:w-auto"
+            >
+              Save Selected
+            </Button>
           </div>
-
-          {/* Recipe grid - Desktop */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {pendingPlan.recipes.map((recipe) => (
-              <RecipeCard
-                key={recipe.id}
-                recipe={recipe}
-                isSelected={selectedRecipeId === recipe.id}
-                isFavorite={favoriteIds.has(recipe.id)}
-                imageType="mealPlan"
-                onSelect={() => setSelectedRecipeId(prev => prev === recipe.id ? null : recipe.id)}
-                onViewDetails={() => setViewingRecipe(recipe)}
-                onFavorite={() => handleToggleFavorite(recipe.id)}
-                onImageLoaded={handleRecipeImageLoaded}
-              />
-            ))}
-          </div>
-        </>
-      )}
-
-      {/* Recipe Detail Modal */}
-      {viewingRecipe && (
-        <RecipeDetailModal
-          recipe={viewingRecipe}
-          imageType="mealPlan"
-          onClose={() => setViewingRecipe(null)}
-          onImageLoaded={handleRecipeImageLoaded}
-        />
-      )}
-
-      {/* Weekly Limit Modal */}
-      {showLimitModal && (
-        <WeeklyLimitModal onClose={() => setShowLimitModal(false)} />
-      )}
-
-      {/* Content Validation Error Modal */}
-      {showContentValidationModal && (
-        <ContentValidationErrorModal
-          onClose={() => setShowContentValidationModal(false)}
-          onGoBack={() => navigate('/meal-plans/create')}
-        />
-      )}
-    </div>
+        </div>
+      </div>
+    </>
   )
 }

@@ -1,109 +1,124 @@
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Icon, Button } from '@/components/common'
-import { cn } from '@/utils/cn'
+import { Icon } from '@/components/common'
+import { MobileCarousel } from '@/components/common/MobileCarousel'
 
-interface PanelConfig {
+interface CardConfig {
   titleKey: string
   descriptionKey: string
   icon: string
   path: string
   buttonTextKey: string
   gradient: string
-  buttonStyle: 'solid' | 'outline'
+  textColor: string
 }
 
-const panels: PanelConfig[] = [
+const cards: CardConfig[] = [
   {
-    titleKey: 'home.dietReceitai.title',
-    descriptionKey: 'home.dietReceitai.description',
-    icon: 'restaurant_menu',
+    titleKey: 'home.mealPlans.title',
+    descriptionKey: 'home.mealPlans.description',
+    icon: 'lunch_dining',
     path: '/meal-plans',
-    buttonTextKey: 'home.dietReceitai.button',
-    gradient: 'linear-gradient(135deg, #ec4913 0%, #ff6b3d 100%)',
-    buttonStyle: 'solid',
+    buttonTextKey: 'home.mealPlans.button',
+    gradient: 'from-orange-500 to-amber-600',
+    textColor: 'text-orange-50',
   },
   {
     titleKey: 'home.familyCalendar.title',
     descriptionKey: 'home.familyCalendar.description',
-    icon: 'calendar_month',
+    icon: 'calendar_clock',
     path: '/calendar',
     buttonTextKey: 'home.familyCalendar.button',
-    gradient: 'linear-gradient(135deg, #F08E66 0%, #f4a585 100%)',
-    buttonStyle: 'outline',
+    gradient: 'from-rose-500 to-pink-600',
+    textColor: 'text-rose-50',
   },
   {
     titleKey: 'home.specialMeal.title',
     descriptionKey: 'home.specialMeal.description',
-    icon: 'temp_preferences_custom',
+    icon: 'celebration',
     path: '/special-meals',
     buttonTextKey: 'home.specialMeal.button',
-    gradient: 'linear-gradient(135deg, #5DAE63 0%, #81c786 100%)',
-    buttonStyle: 'outline',
+    gradient: 'from-emerald-500 to-teal-600',
+    textColor: 'text-emerald-50',
   },
 ]
 
-function HomePanel({ panel, index }: { panel: PanelConfig; index: number }) {
+function HomeCard({ card }: { card: CardConfig }) {
   const navigate = useNavigate()
   const { t } = useTranslation('mealPlans')
 
   return (
     <div
-      className={cn(
-        'panel-item relative flex-1 flex flex-col justify-center items-center overflow-hidden cursor-pointer',
-        'min-h-[200px] lg:min-h-0',
-        index < panels.length - 1 && 'border-b lg:border-b-0 lg:border-r border-white/20'
-      )}
-      onClick={() => navigate(panel.path)}
+      className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br ${card.gradient} p-8 shadow-lg transition-transform lg:hover:-translate-y-1 duration-300 min-h-[340px] cursor-pointer`}
+      onClick={() => navigate(card.path)}
     >
-      {/* Background */}
-      <div
-        className="panel-bg absolute inset-0 z-0 transition-transform duration-700 ease-out"
-        style={{ backgroundImage: panel.gradient }}
-      />
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/5 z-0 pointer-events-none" />
+      <div className="relative z-10 flex flex-col gap-4 h-full">
+        {/* Icon */}
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 text-white backdrop-blur-sm shadow-inner">
+          <Icon name={card.icon} className="text-[28px]" />
+        </div>
 
-      {/* Content */}
-      <div className="relative z-10 p-4 md:p-8 flex flex-col items-center text-center max-w-md panel-transition">
-        <Icon
-          name={panel.icon}
-          className="text-white text-7xl mb-6 opacity-90"
-          size="xl"
-        />
-        <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight mb-3">
-          {t(panel.titleKey)}
-        </h2>
-        <p className="text-white/90 text-base md:text-lg font-medium leading-relaxed mb-6 md:mb-8">
-          {t(panel.descriptionKey)}
-        </p>
-        <Button
-          variant={panel.buttonStyle === 'solid' ? 'secondary' : 'outline'}
-          className={cn(
-            'rounded-full uppercase tracking-wide',
-            panel.buttonStyle === 'solid'
-              ? 'bg-white text-primary hover:bg-white/90'
-              : 'bg-white/20 backdrop-blur-sm border-2 border-white text-white hover:bg-white hover:text-[#5DAE63]'
-          )}
-          icon="arrow_forward"
-          onClick={(e) => {
-            e.stopPropagation()
-            navigate(panel.path)
-          }}
-        >
-          {t(panel.buttonTextKey)}
-        </Button>
+        {/* Content */}
+        <div>
+          <h2 className="text-2xl font-bold text-white mb-3">
+            {t(card.titleKey)}
+          </h2>
+          <p className={`${card.textColor} font-medium leading-relaxed opacity-90 text-sm md:text-base`}>
+            {t(card.descriptionKey)}
+          </p>
+        </div>
+
+        {/* Button */}
+        <div className="mt-auto pt-6">
+          <button
+            className="flex items-center justify-between w-full rounded-xl bg-white/20 py-4 px-6 text-sm font-bold text-white transition-colors hover:bg-white/30 backdrop-blur-md border border-white/10"
+            onClick={(e) => {
+              e.stopPropagation()
+              navigate(card.path)
+            }}
+          >
+            <span>{t(card.buttonTextKey)}</span>
+            <Icon
+              name="arrow_forward"
+              className="group-hover:translate-x-1 transition-transform"
+            />
+          </button>
+        </div>
       </div>
     </div>
   )
 }
 
 export default function HomePage() {
+  const { t } = useTranslation('mealPlans')
+
   return (
-    <div className="flex-1 flex flex-col lg:flex-row h-[calc(100vh-4rem)] md:h-[calc(100vh-4rem)]">
-      {panels.map((panel, index) => (
-        <HomePanel key={panel.titleKey} panel={panel} index={index} />
-      ))}
+    <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-8 md:py-12 flex flex-col gap-8">
+      {/* Greeting Section */}
+      <div className="flex flex-col gap-2">
+        <h2 className="text-3xl md:text-4xl font-black tracking-tight text-[#181411] dark:text-white">
+          {t('home.greeting.title')}
+        </h2>
+        <p className="text-[#baab9c] text-base md:text-lg">
+          {t('home.greeting.subtitle')}
+        </p>
+      </div>
+
+      {/* Desktop Grid */}
+      <div className="hidden lg:grid grid-cols-3 gap-6">
+        {cards.map((card) => (
+          <HomeCard key={card.path} card={card} />
+        ))}
+      </div>
+
+      {/* Mobile Carousel */}
+      <div className="lg:hidden">
+        <MobileCarousel
+          items={cards}
+          keyExtractor={(card) => card.path}
+          renderItem={(card) => <HomeCard card={card} />}
+        />
+      </div>
     </div>
   )
 }

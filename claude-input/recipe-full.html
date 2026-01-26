@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Recipe Detail View - ReceitAI</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f27f0d",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#221910",
+                        "surface-dark": "#2a221b",
+                        "surface-dark-highlight": "#393028",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<aside class="hidden lg:flex flex-col w-64 h-full border-r border-[#393028] bg-background-dark pt-6 pb-6 px-4 shrink-0">
+<div class="flex items-center gap-3 px-2 mb-10">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 shadow-lg ring-2 ring-primary/20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCuUJKVnjtDWq-nkOygEUjEx-FfUucxaFmZmyBAJrJT4hAG7rs9a4jNtRUF4Vh1Da8DBhI7eW7GBIOyfgoDZsxFeTGTuJ7icvoTpw2H5_QW7bxHfrgVZ3VOEjC8pwc1_3IT7iBVWP2gj225_A5p0ht5fytlAsc3QbopxZ-m96SucI7Vtxd8491qnvK_JO9OR3BQRSMwFpeY-cXwA3CjMGIJJPbWK_lKxNa2NWVoXGKHiNovKp7V5DWKKCawCOnThSNJYlrzoOn6gxA");'></div>
+<div class="flex flex-col">
+<h1 class="text-white text-lg font-bold leading-none tracking-tight">ReceitAI</h1>
+<p class="text-primary text-xs font-medium mt-1">Premium Plan</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 flex-1">
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-surface-dark-highlight text-[#baab9c] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="text-sm font-medium">Home</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-surface-dark-highlight text-[#baab9c] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">search</span>
+<span class="text-sm font-medium">Search</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl bg-primary/10 text-primary hover:bg-primary/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px] fill-1">calendar_today</span>
+<span class="text-sm font-bold">Meal Plan</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-surface-dark-highlight text-[#baab9c] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">favorite</span>
+<span class="text-sm font-medium">Favorites</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-surface-dark-highlight text-[#baab9c] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">shopping_cart</span>
+<span class="text-sm font-medium">Grocery List</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-[#393028]">
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-surface-dark-highlight text-[#baab9c] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</div>
+</aside>
+<main class="flex-1 h-full overflow-y-auto relative scroll-smooth">
+<div class="lg:hidden flex items-center justify-between p-4 bg-background-dark sticky top-0 z-20 border-b border-[#393028]">
+<span class="material-symbols-outlined text-white text-[28px]">menu</span>
+<h1 class="text-white text-lg font-bold">ReceitAI</h1>
+<div class="size-8 bg-primary rounded-full" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAEJXpeXaT2NAFMlXmANKoOypCxs7T_R8ihWWbXkvm-s5B3vw0xxYunMxQ7OqlFhbTGQErgpd5UdQ2UCkaXBp-6rmTOlk3FWmqGKxZJ459FMC1hQxPqTqoOSu0KiWJoPec8drhFW9XO8_uqdbc4Aa5EV6f8cxfI_cCfuHs03YKfH45gpaWWcH7y14rWNqR6s6fHHJ6nLeTs0whuJNPVJUXkNs8mR9RD924eyx6OXh39s2FwiIh7ltGtCYfH-_GmD20HAwzkfYSQD5Q"); background-size: cover;'></div>
+</div>
+<div class="w-full max-w-[1200px] mx-auto pb-10">
+<div class="relative w-full h-[400px] lg:h-[480px] group">
+<div class="absolute inset-0 bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA9zT9j7wbvJSROhAE_IC9PvxC-ZOSteSr8CjVlvq6GBLBIlTwNf5zw3pKV-6J5SV0jC5OmFoiHo8DnN7CvjxQMpPU96z70umjD3hltnLCOkb-pZXqoKXvqEBH1HBv5zH7NP6Q_2w_iLQHAGUd1qoJRx6u8idRuZOU703_AdeF-kNDLJ7BN9gvBO5kITaFf_BiblLjcMX0-5IHgstfmJkzsqmmCR8_j1Y_GUOkG6WRubNw4tTN9OsbGCEACwwxzOtUhxrAt1Sl7Itw");'>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/60 to-transparent"></div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-6 lg:p-10 flex flex-col gap-4">
+<div class="flex flex-wrap gap-2 mb-1">
+<span class="px-3 py-1 rounded-full bg-primary text-white text-xs font-bold uppercase tracking-wide">Dinner</span>
+<span class="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-bold uppercase tracking-wide border border-white/20">Asian Fusion</span>
+</div>
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+<div class="max-w-2xl">
+<h1 class="text-white text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-4 shadow-sm">Spicy Basil Chicken Stir-Fry</h1>
+<div class="flex flex-wrap gap-3">
+<div class="flex h-9 items-center gap-x-2 rounded-lg bg-surface-dark-highlight/80 backdrop-blur-sm px-4 border border-white/10">
+<span class="text-primary material-symbols-outlined text-[20px]">timer</span>
+<p class="text-white text-sm font-semibold">25 min</p>
+</div>
+<div class="flex h-9 items-center gap-x-2 rounded-lg bg-surface-dark-highlight/80 backdrop-blur-sm px-4 border border-white/10">
+<span class="text-primary material-symbols-outlined text-[20px]">group</span>
+<p class="text-white text-sm font-semibold">4 Servings</p>
+</div>
+<div class="flex h-9 items-center gap-x-2 rounded-lg bg-surface-dark-highlight/80 backdrop-blur-sm px-4 border border-white/10">
+<span class="text-primary material-symbols-outlined text-[20px]">local_fire_department</span>
+<p class="text-white text-sm font-semibold">Medium Heat</p>
+</div>
+<div class="flex h-9 items-center gap-x-2 rounded-lg bg-surface-dark-highlight/80 backdrop-blur-sm px-4 border border-white/10">
+<span class="text-[#22c55e] material-symbols-outlined text-[20px]">eco</span>
+<p class="text-white text-sm font-semibold">Healthy Choice</p>
+</div>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="h-12 w-12 flex items-center justify-center rounded-xl bg-surface-dark-highlight text-white hover:bg-white hover:text-black transition-colors border border-white/10">
+<span class="material-symbols-outlined filled">favorite</span>
+</button>
+<button class="h-12 w-12 flex items-center justify-center rounded-xl bg-surface-dark-highlight text-white hover:bg-white hover:text-black transition-colors border border-white/10">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="h-12 px-6 flex items-center justify-center gap-2 rounded-xl bg-primary text-white font-bold hover:bg-orange-600 transition-colors shadow-lg shadow-primary/25">
+<span class="material-symbols-outlined">calendar_add_on</span>
+<span>Add to Plan</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="px-4 lg:px-10 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+<div class="lg:col-span-4 flex flex-col gap-8">
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="text-white text-xl font-bold">Nutrition Facts</h3>
+<span class="text-xs text-[#baab9c]">per serving</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex flex-col gap-1 p-4 rounded-xl bg-surface-dark border border-[#393028]">
+<div class="flex items-center gap-2 mb-2">
+<span class="size-2 rounded-full bg-blue-500"></span>
+<p class="text-[#baab9c] text-sm font-medium">Protein</p>
+</div>
+<p class="text-white text-2xl font-bold">32g</p>
+<div class="w-full bg-[#393028] h-1.5 rounded-full mt-1">
+<div class="bg-blue-500 h-1.5 rounded-full" style="width: 70%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1 p-4 rounded-xl bg-surface-dark border border-[#393028]">
+<div class="flex items-center gap-2 mb-2">
+<span class="size-2 rounded-full bg-yellow-500"></span>
+<p class="text-[#baab9c] text-sm font-medium">Carbs</p>
+</div>
+<p class="text-white text-2xl font-bold">12g</p>
+<div class="w-full bg-[#393028] h-1.5 rounded-full mt-1">
+<div class="bg-yellow-500 h-1.5 rounded-full" style="width: 30%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1 p-4 rounded-xl bg-surface-dark border border-[#393028]">
+<div class="flex items-center gap-2 mb-2">
+<span class="size-2 rounded-full bg-red-500"></span>
+<p class="text-[#baab9c] text-sm font-medium">Fat</p>
+</div>
+<p class="text-white text-2xl font-bold">18g</p>
+<div class="w-full bg-[#393028] h-1.5 rounded-full mt-1">
+<div class="bg-red-500 h-1.5 rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1 p-4 rounded-xl bg-surface-dark border border-[#393028]">
+<div class="flex items-center gap-2 mb-2">
+<span class="size-2 rounded-full bg-primary"></span>
+<p class="text-[#baab9c] text-sm font-medium">Calories</p>
+</div>
+<p class="text-white text-2xl font-bold">450</p>
+<div class="w-full bg-[#393028] h-1.5 rounded-full mt-1">
+<div class="bg-primary h-1.5 rounded-full" style="width: 60%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h3 class="text-white text-xl font-bold">Tags</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-lg bg-surface-dark border border-[#393028] text-[#baab9c] text-sm hover:text-primary hover:border-primary transition-colors cursor-pointer">#GlutenFree</span>
+<span class="px-3 py-1.5 rounded-lg bg-surface-dark border border-[#393028] text-[#baab9c] text-sm hover:text-primary hover:border-primary transition-colors cursor-pointer">#HighProtein</span>
+<span class="px-3 py-1.5 rounded-lg bg-surface-dark border border-[#393028] text-[#baab9c] text-sm hover:text-primary hover:border-primary transition-colors cursor-pointer">#QuickDinner</span>
+<span class="px-3 py-1.5 rounded-lg bg-surface-dark border border-[#393028] text-[#baab9c] text-sm hover:text-primary hover:border-primary transition-colors cursor-pointer">#Spicy</span>
+<span class="px-3 py-1.5 rounded-lg bg-surface-dark border border-[#393028] text-[#baab9c] text-sm hover:text-primary hover:border-primary transition-colors cursor-pointer">#AsianCuisine</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-8 flex flex-col gap-10">
+<div class="flex flex-col gap-6">
+<div class="flex items-center justify-between border-b border-[#393028] pb-4">
+<h3 class="text-white text-2xl font-bold">Ingredients</h3>
+<button class="flex items-center gap-2 text-primary text-sm font-medium hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+                                Metric / US
+                            </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="group relative flex flex-col p-3 rounded-xl bg-surface-dark/40 border border-[#393028] hover:border-primary/50 transition-colors">
+<span class="text-white font-medium">500g Chicken Breast</span>
+<span class="text-[#baab9c] text-sm">Sliced into thin strips</span>
+<button class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-primary/20 hover:bg-primary/40 p-1.5 rounded-lg text-primary">
+<span class="material-symbols-outlined text-[18px]">auto_fix_high</span>
+</button>
+</div>
+<div class="group relative flex flex-col p-3 rounded-xl bg-surface-dark/40 border border-[#393028] hover:border-primary/50 transition-colors">
+<span class="text-white font-medium">2 tbsp Soy Sauce</span>
+<span class="text-[#baab9c] text-sm">Low sodium preferred</span>
+<button class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-primary/20 hover:bg-primary/40 p-1.5 rounded-lg text-primary">
+<span class="material-symbols-outlined text-[18px]">auto_fix_high</span>
+</button>
+</div>
+<div class="group relative flex flex-col p-3 rounded-xl bg-surface-dark/40 border border-[#393028] hover:border-primary/50 transition-colors">
+<span class="text-white font-medium">1 cup Fresh Basil</span>
+<span class="text-[#baab9c] text-sm">Ideally Holy Basil</span>
+<button class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-primary/20 hover:bg-primary/40 p-1.5 rounded-lg text-primary">
+<span class="material-symbols-outlined text-[18px]">auto_fix_high</span>
+</button>
+</div>
+<div class="group relative flex flex-col p-3 rounded-xl bg-surface-dark/40 border border-[#393028] hover:border-primary/50 transition-colors">
+<span class="text-white font-medium">3 cloves Garlic</span>
+<span class="text-[#baab9c] text-sm">Minced</span>
+<button class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-primary/20 hover:bg-primary/40 p-1.5 rounded-lg text-primary">
+<span class="material-symbols-outlined text-[18px]">auto_fix_high</span>
+</button>
+</div>
+<div class="group relative flex flex-col p-3 rounded-xl bg-surface-dark/40 border border-[#393028] hover:border-primary/50 transition-colors">
+<span class="text-white font-medium">2 Bird's Eye Chilies</span>
+<span class="text-[#baab9c] text-sm">Adjust for heat</span>
+<button class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-primary/20 hover:bg-primary/40 p-1.5 rounded-lg text-primary">
+<span class="material-symbols-outlined text-[18px]">auto_fix_high</span>
+</button>
+</div>
+<div class="group relative flex flex-col p-3 rounded-xl bg-surface-dark/40 border border-[#393028] hover:border-primary/50 transition-colors">
+<span class="text-white font-medium">1 tbsp Oyster Sauce</span>
+<span class="text-[#baab9c] text-sm">Or mushroom sauce</span>
+<button class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-primary/20 hover:bg-primary/40 p-1.5 rounded-lg text-primary">
+<span class="material-symbols-outlined text-[18px]">auto_fix_high</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-6 pt-4">
+<div class="flex items-center justify-between border-b border-[#393028] pb-4">
+<h3 class="text-white text-2xl font-bold">Preparation</h3>
+<button class="flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-lg font-bold hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-[20px]">play_circle</span>
+                                Start Cooking Mode
+                            </button>
+</div>
+<div class="flex flex-col gap-0 relative">
+<div class="absolute left-[19px] top-4 bottom-10 w-0.5 bg-[#393028]"></div>
+<div class="flex gap-6 pb-10 relative">
+<div class="shrink-0 size-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-lg shadow-lg z-10 border-4 border-background-dark">1</div>
+<div class="flex flex-col gap-3 pt-1">
+<h4 class="text-white text-lg font-bold">Prep the Chicken &amp; Sauce</h4>
+<p class="text-[#baab9c] leading-relaxed">Slice the chicken breast into thin bite-sized pieces. In a small bowl, whisk together the soy sauce, oyster sauce, and a pinch of sugar. Set aside.</p>
+<div class="flex gap-3 mt-1">
+<div class="h-20 w-32 rounded-lg bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDuE6aRG2pFd6wA_7R_WbrcL80EUd3Ihe6VE397Mym_Zhkg0eh1UtnM9aVd2iwlcD5vpn7l_-lTMw0_r8RhKeK0WiwZykAZBNqyLssUd0PrpH8d1TFmZv4KwVVVEq7uU3E9czJi9LdnNX4MMu1I_Pft_p1Wzk_u73qybDzj6K1JhcP1hw3fvnixU907N33X7uv5HxW91pAp0-H888V3e-a0w3Mdra9rIN-mhL2-8ruVyKa723oJEVLnA188ijBGCtLEjFEYDcnmso8");'></div>
+</div>
+</div>
+</div>
+<div class="flex gap-6 pb-10 relative">
+<div class="shrink-0 size-10 rounded-full bg-surface-dark-highlight flex items-center justify-center text-white font-bold text-lg z-10 border-4 border-background-dark">2</div>
+<div class="flex flex-col gap-3 pt-1">
+<h4 class="text-white text-lg font-bold">Aromatize the Wok</h4>
+<p class="text-[#baab9c] leading-relaxed">Heat oil in a wok over medium-high heat. Add the minced garlic and sliced chilies. Stir-fry for 30 seconds until fragrant, being careful not to burn the garlic.</p>
+</div>
+</div>
+<div class="flex gap-6 pb-10 relative">
+<div class="shrink-0 size-10 rounded-full bg-surface-dark-highlight flex items-center justify-center text-white font-bold text-lg z-10 border-4 border-background-dark">3</div>
+<div class="flex flex-col gap-3 pt-1">
+<h4 class="text-white text-lg font-bold">Cook the Chicken</h4>
+<p class="text-[#baab9c] leading-relaxed">Increase heat to high. Add the chicken slices and stir-fry vigorously for 3-4 minutes until the chicken is cooked through and slightly browned on the edges.</p>
+</div>
+</div>
+<div class="flex gap-6 relative">
+<div class="shrink-0 size-10 rounded-full bg-surface-dark-highlight flex items-center justify-center text-white font-bold text-lg z-10 border-4 border-background-dark">4</div>
+<div class="flex flex-col gap-3 pt-1">
+<h4 class="text-white text-lg font-bold">Finish with Basil</h4>
+<p class="text-[#baab9c] leading-relaxed">Pour in the sauce mixture and toss to coat. Turn off the heat immediately and fold in the fresh basil leaves. The residual heat will wilt the basil perfectly. Serve hot over jasmine rice.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

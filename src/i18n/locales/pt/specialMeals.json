@@ -2,12 +2,12 @@
   "list": {
     "title": "Suas Ocasiões Especiais",
     "subtitle": "Planeje refeições memoráveis para as pessoas que mais importam",
-    "createNew": "Planejar Novo Encontro",
+    "createNew": "Planejar Nova refeicão especial",
     "loading": "Carregando eventos...",
     "empty": {
       "title": "Nenhuma ocasião especial planejada",
-      "description": "Crie seu primeiro encontro para começar",
-      "button": "Planejar Seu Primeiro Encontro"
+      "description": "Crie sua primeira refeicão especial para começar",
+      "button": "Planejar sua primeira refeicão especial"
     }
   },
   "create": {

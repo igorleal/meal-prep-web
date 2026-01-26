@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Button, Icon, WeeklyLimitBanner, WeeklyLimitModal, MobileCarousel } from '@/components/common'
+import { Button, Icon, WeeklyLimitBanner, WeeklyLimitModal, MobileCarousel, ContentValidationErrorModal } from '@/components/common'
+import { isContentValidationError } from '@/utils/errors'
 import { RecipeCard, RecipeDetailModal } from '@/components/features'
 import { foodFriendsService, favoriteService, userService } from '@/api/services'
 import type { Recipe, GenerateFoodFriendsRequest } from '@/types'
@@ -83,6 +84,7 @@ export default function SpecialMealRecipeSelectionPage() {
   const [isGenerating, setIsGenerating] = useState(false)
   const [hasError, setHasError] = useState(false)
   const [showLimitModal, setShowLimitModal] = useState(false)
+  const [showContentValidationModal, setShowContentValidationModal] = useState(false)
   const [eventName, setEventName] = useState('')
 
   // Fetch current user to check weekly limit
@@ -111,6 +113,10 @@ export default function SpecialMealRecipeSelectionPage() {
       sessionStorage.removeItem('pendingSpecialMealRequest')
       queryClient.invalidateQueries({ queryKey: ['currentUser'] })
     } catch (error: unknown) {
+      if (isContentValidationError(error)) {
+        setShowContentValidationModal(true)
+        return
+      }
       const err = error as { response?: { status?: number } }
       if (err.response?.status === 429) {
         setShowLimitModal(true)
@@ -363,6 +369,14 @@ export default function SpecialMealRecipeSelectionPage() {
       {/* Weekly Limit Modal */}
       {showLimitModal && (
         <WeeklyLimitModal onClose={() => setShowLimitModal(false)} />
+      )}
+
+      {/* Content Validation Error Modal */}
+      {showContentValidationModal && (
+        <ContentValidationErrorModal
+          onClose={() => setShowContentValidationModal(false)}
+          onGoBack={() => navigate('/special-meals/create')}
+        />
       )}
     </div>
   )

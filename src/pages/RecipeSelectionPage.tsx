@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Button, Icon, WeeklyLimitBanner, WeeklyLimitModal, MobileCarousel } from '@/components/common'
+import { Button, Icon, WeeklyLimitBanner, WeeklyLimitModal, MobileCarousel, ContentValidationErrorModal } from '@/components/common'
+import { isContentValidationError } from '@/utils/errors'
 import { RecipeCard, RecipeDetailModal } from '@/components/features'
 import { receitaiPlanService, favoriteService, userService } from '@/api/services'
 import type { Recipe, GenerateReceitAIPlanRequest } from '@/types'
@@ -76,6 +77,7 @@ export default function RecipeSelectionPage() {
   const [isGenerating, setIsGenerating] = useState(false)
   const [hasError, setHasError] = useState(false)
   const [showLimitModal, setShowLimitModal] = useState(false)
+  const [showContentValidationModal, setShowContentValidationModal] = useState(false)
   const [planName, setPlanName] = useState('')
 
   // Fetch current user to check weekly limit
@@ -98,6 +100,10 @@ export default function RecipeSelectionPage() {
       sessionStorage.removeItem('pendingMealPlanRequest')
       queryClient.invalidateQueries({ queryKey: ['currentUser'] })
     } catch (error: unknown) {
+      if (isContentValidationError(error)) {
+        setShowContentValidationModal(true)
+        return
+      }
       const err = error as { response?: { status?: number } }
       if (err.response?.status === 429) {
         setShowLimitModal(true)
@@ -350,6 +356,14 @@ export default function RecipeSelectionPage() {
       {/* Weekly Limit Modal */}
       {showLimitModal && (
         <WeeklyLimitModal onClose={() => setShowLimitModal(false)} />
+      )}
+
+      {/* Content Validation Error Modal */}
+      {showContentValidationModal && (
+        <ContentValidationErrorModal
+          onClose={() => setShowContentValidationModal(false)}
+          onGoBack={() => navigate('/meal-plans/create')}
+        />
       )}
     </div>
   )

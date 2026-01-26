@@ -57,6 +57,15 @@
     "yesterday": "Yesterday",
     "tomorrow": "Tomorrow"
   },
+  "contentValidation": {
+    "title": "Please Check Your Input",
+    "message": "We couldn't generate recipes because some of your input wasn't recognized as valid food-related content.",
+    "examplesTitle": "Try using terms like:",
+    "example1": "Ingredient names: chicken, rice, broccoli, pasta",
+    "example2": "Dish types: salad, soup, stir-fry, casserole",
+    "example3": "Dietary needs: gluten-free, vegetarian, low-carb",
+    "editInput": "Edit Input"
+  },
   "ingredientConversion": {
     "title": "Unit Conversion",
     "loading": "Calculating conversions...",

@@ -57,6 +57,15 @@
     "yesterday": "Igår",
     "tomorrow": "Imorgon"
   },
+  "contentValidation": {
+    "title": "Vänligen Kontrollera Din Inmatning",
+    "message": "Vi kunde inte generera recept eftersom en del av din inmatning inte kändes igen som giltigt matrelaterat innehåll.",
+    "examplesTitle": "Försök använda termer som:",
+    "example1": "Ingrediensnamn: kyckling, ris, broccoli, pasta",
+    "example2": "Rättyper: sallad, soppa, wok, gratäng",
+    "example3": "Kostbehov: glutenfri, vegetarisk, lågkolhydrat",
+    "editInput": "Redigera Inmatning"
+  },
   "ingredientConversion": {
     "title": "Enhetsomvandling",
     "loading": "Beräknar omvandlingar...",

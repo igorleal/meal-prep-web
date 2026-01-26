@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Button, Icon, WeeklyLimitBanner, WeeklyLimitModal, MobileCarousel } from '@/components/common'
+import { Button, Icon, WeeklyLimitBanner, WeeklyLimitModal, MobileCarousel, ContentValidationErrorModal } from '@/components/common'
+import { isContentValidationError } from '@/utils/errors'
 import { RecipeCard, RecipeDetailModal } from '@/components/features'
 import { familyPlanService, favoriteService, userService } from '@/api/services'
 import type { Recipe, GenerateFamilyPlanRequest } from '@/types'
@@ -84,6 +85,7 @@ export default function FamilyCalendarRecipeSelectionPage() {
   const [isGenerating, setIsGenerating] = useState(false)
   const [hasError, setHasError] = useState(false)
   const [showLimitModal, setShowLimitModal] = useState(false)
+  const [showContentValidationModal, setShowContentValidationModal] = useState(false)
   const [mealInfo, setMealInfo] = useState<{ date: string; mealType: string } | null>(null)
 
   // Fetch current user to check weekly limit
@@ -113,6 +115,10 @@ export default function FamilyCalendarRecipeSelectionPage() {
       sessionStorage.removeItem('pendingFamilyMealRequest')
       queryClient.invalidateQueries({ queryKey: ['currentUser'] })
     } catch (error: unknown) {
+      if (isContentValidationError(error)) {
+        setShowContentValidationModal(true)
+        return
+      }
       const err = error as { response?: { status?: number } }
       if (err.response?.status === 429) {
         setShowLimitModal(true)
@@ -372,6 +378,14 @@ export default function FamilyCalendarRecipeSelectionPage() {
       {/* Weekly Limit Modal */}
       {showLimitModal && (
         <WeeklyLimitModal onClose={() => setShowLimitModal(false)} />
+      )}
+
+      {/* Content Validation Error Modal */}
+      {showContentValidationModal && (
+        <ContentValidationErrorModal
+          onClose={() => setShowContentValidationModal(false)}
+          onGoBack={() => navigate(`/calendar/create?date=${mealInfo?.date || ''}&meal=${mealInfo?.mealType || ''}`)}
+        />
       )}
     </div>
   )

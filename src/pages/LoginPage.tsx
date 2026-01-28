@@ -3,16 +3,20 @@ import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Icon } from '@/components/common'
 import { useAuth } from '@/context/AuthContext'
+import { useLanguage } from '@/context/LanguageContext'
 import { authService } from '@/api/services'
 import { getApiMode, getBaseUrl } from '@/api/config'
+import { LANGUAGE_LABELS } from '@/i18n/types'
 
 export default function LoginPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const { login } = useAuth()
   const { t } = useTranslation('auth')
+  const { currentLanguage, changeLanguage, supportedLanguages } = useLanguage()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false)
 
   const from = location.state?.from?.pathname || '/'
 
@@ -23,9 +27,9 @@ export default function LoginPage() {
     const apiMode = getApiMode()
 
     if (apiMode === 'local' || apiMode === 'production') {
-      // Redirect to backend OAuth endpoint
+      // Redirect to backend OAuth endpoint with language parameter
       const baseUrl = getBaseUrl()
-      window.location.href = `${baseUrl}/oauth2/authorization/google`
+      window.location.href = `${baseUrl}/oauth2/authorization/google?lang=${currentLanguage}`
     } else {
       // Mock mode only: simulate login
       try {
@@ -87,9 +91,44 @@ export default function LoginPage() {
           <h2 className="text-3xl font-extrabold text-text-main-light dark:text-white mb-2">
             {t('login.title')}
           </h2>
-          <p className="text-text-muted-light dark:text-text-muted-dark mb-8">
+          <p className="text-text-muted-light dark:text-text-muted-dark mb-6">
             {t('login.subtitle')}
           </p>
+
+          {/* Language Selector */}
+          <div className="relative mb-6">
+            <button
+              type="button"
+              onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+              className="flex items-center gap-2 px-3 py-2 text-sm text-text-main-light dark:text-white border border-border-light dark:border-border-dark rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
+            >
+              <Icon name="language" className="text-lg" />
+              <span>{LANGUAGE_LABELS[currentLanguage]}</span>
+              <Icon name="expand_more" className="text-lg" />
+            </button>
+
+            {isLanguageDropdownOpen && (
+              <div className="absolute top-full left-0 mt-1 bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg z-10">
+                {supportedLanguages.map((lang) => (
+                  <button
+                    key={lang}
+                    type="button"
+                    onClick={() => {
+                      changeLanguage(lang)
+                      setIsLanguageDropdownOpen(false)
+                    }}
+                    className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-50 dark:hover:bg-white/5 first:rounded-t-lg last:rounded-b-lg ${
+                      lang === currentLanguage
+                        ? 'text-primary font-medium'
+                        : 'text-text-main-light dark:text-white'
+                    }`}
+                  >
+                    {LANGUAGE_LABELS[lang]}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
           {error && (
             <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">

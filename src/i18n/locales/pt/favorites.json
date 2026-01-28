@@ -1,7 +1,8 @@
 {
   "page": {
     "title": "Receitas Favoritas",
-    "subtitle": "Sua coleção de receitas salvas para acesso rápido"
+    "subtitle": "Sua coleção de receitas salvas para acesso rápido",
+    "addRecipe": "Adicionar Receita"
   },
   "loading": "Carregando favoritos...",
   "empty": {
@@ -11,5 +12,25 @@
   },
   "card": {
     "removeFromFavorites": "Remover dos favoritos"
+  },
+  "loadRecipe": {
+    "title": "Carregar Receita",
+    "urlTab": "Da URL",
+    "textTab": "Colar Texto",
+    "urlPlaceholder": "https://exemplo.com/receita",
+    "textPlaceholder": "Cole sua receita aqui...",
+    "characterCount": "{{count}} / {{max}} caracteres",
+    "loadButton": "Carregar Receita",
+    "loading": "Processando receita...",
+    "urlFetching": "Buscando receita da URL...",
+    "success": "Receita carregada com sucesso!",
+    "error": "Falha ao carregar receita. Verifique o conteúdo e tente novamente.",
+    "quotaExceeded": "Limite semanal de receitas atingido",
+    "urlSupportedSites": "Suporta sites de receitas, YouTube e Instagram",
+    "urlInvalid": "Por favor, insira uma URL válida",
+    "urlNoContent": "Nenhuma receita encontrada nesta URL",
+    "urlTimeout": "Tempo limite ao buscar URL. Tente novamente.",
+    "urlBlocked": "Esta URL não é permitida",
+    "urlNotConfigured": "Importação de URL temporariamente indisponível"
   }
 }

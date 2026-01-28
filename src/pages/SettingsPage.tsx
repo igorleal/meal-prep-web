@@ -8,6 +8,7 @@ import { useAuth } from '@/context/AuthContext'
 import { useLanguage } from '@/context/LanguageContext'
 import { useTheme } from '@/context/ThemeContext'
 import { LANGUAGE_LABELS } from '@/i18n/types'
+import { storage } from '@/utils/storage'
 import type { SupportedLanguage } from '@/types'
 
 const suggestedRestrictions = ['Vegan', 'Gluten-Free', 'Paleo', 'Low-Sodium']
@@ -242,6 +243,38 @@ export default function SettingsPage() {
                 <Icon name="chevron_right" className="text-text-muted-light dark:text-text-muted-dark group-hover:text-primary transition-colors" />
               </Link>
             </div>
+          </Card>
+
+          {/* Help */}
+          <Card className="mb-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-primary/10 rounded-lg text-primary">
+                <Icon name="help" />
+              </div>
+              <h3 className="text-xl font-bold text-text-main-light dark:text-white">
+                {t('help.title')}
+              </h3>
+            </div>
+            <button
+              onClick={() => {
+                storage.clearOnboardingCompleted()
+                navigate('/')
+              }}
+              className="flex items-center justify-between w-full p-4 rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors group"
+            >
+              <div className="flex items-center gap-3">
+                <Icon name="lightbulb" className="text-text-muted-light dark:text-text-muted-dark" />
+                <div className="text-left">
+                  <span className="font-medium text-text-main-light dark:text-white block">
+                    {t('help.replayTips')}
+                  </span>
+                  <span className="text-sm text-text-muted-light dark:text-text-muted-dark">
+                    {t('help.replayTipsDescription')}
+                  </span>
+                </div>
+              </div>
+              <Icon name="chevron_right" className="text-text-muted-light dark:text-text-muted-dark group-hover:text-primary transition-colors" />
+            </button>
           </Card>
 
       </div>

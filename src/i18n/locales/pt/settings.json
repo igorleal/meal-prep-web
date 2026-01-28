@@ -29,5 +29,10 @@
     "saveChanges": "Salvar Alterações",
     "allSaved": "Todas as alterações salvas automaticamente"
   },
-  "loading": "Carregando configurações..."
+  "loading": "Carregando configurações...",
+  "help": {
+    "title": "Ajuda",
+    "replayTips": "Mostrar Dicas Novamente",
+    "replayTipsDescription": "Veja o tour de boas-vindas e dicas de recursos"
+  }
 }

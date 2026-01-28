@@ -29,5 +29,10 @@
     "saveChanges": "Save Changes",
     "allSaved": "All changes saved automatically"
   },
-  "loading": "Loading settings..."
+  "loading": "Loading settings...",
+  "help": {
+    "title": "Help",
+    "replayTips": "Show Tips Again",
+    "replayTipsDescription": "View the welcome tour and feature tips"
+  }
 }

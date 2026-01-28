@@ -29,5 +29,10 @@
     "saveChanges": "Spara ändringar",
     "allSaved": "Alla ändringar sparade automatiskt"
   },
-  "loading": "Laddar inställningar..."
+  "loading": "Laddar inställningar...",
+  "help": {
+    "title": "Hjälp",
+    "replayTips": "Visa Tips Igen",
+    "replayTipsDescription": "Se välkomstturen och funktions­tips"
+  }
 }

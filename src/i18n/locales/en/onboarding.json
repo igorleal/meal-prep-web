@@ -1,0 +1,38 @@
+{
+  "modal": {
+    "dismissAll": "Skip all",
+    "previous": "Previous",
+    "next": "Next",
+    "finish": "Get Started"
+  },
+  "tips": {
+    "dietaryRestrictions": {
+      "title": "Dietary Restrictions",
+      "description": "Head to Settings to add your dietary needs like gluten-free or vegan. Our AI will automatically filter recipes to match your requirements."
+    },
+    "mealPlanner": {
+      "title": "Meal Planner",
+      "description": "Create weekly meal plans with AI-generated recipes. Set the number of meals, servings, and let our AI do the rest."
+    },
+    "familyCalendar": {
+      "title": "Family Calendar",
+      "description": "Plan meals for the whole family on specific dates. Perfect for coordinating weekly dinners or special occasions."
+    },
+    "specialMeals": {
+      "title": "Special Meals",
+      "description": "Create unique recipes for holidays, parties, or themed dinners. Get custom AI suggestions based on your event."
+    },
+    "favorites": {
+      "title": "Favorite Recipes",
+      "description": "Save recipes you love for quick access later. Build your personal cookbook with your best discoveries."
+    },
+    "loadRecipes": {
+      "title": "Import Recipes",
+      "description": "Paste recipe text or a website URL to import recipes. We extract ingredients and instructions automatically."
+    },
+    "unitConverter": {
+      "title": "Unit Converter",
+      "description": "Tap any ingredient to convert between cups, grams, tablespoons, and more. No more guessing measurements."
+    }
+  }
+}

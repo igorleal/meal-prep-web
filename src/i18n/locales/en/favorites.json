@@ -1,7 +1,8 @@
 {
   "page": {
     "title": "Favorite Recipes",
-    "subtitle": "Your collection of saved recipes for quick access"
+    "subtitle": "Your collection of saved recipes for quick access",
+    "addRecipe": "Add Recipe"
   },
   "loading": "Loading favorites...",
   "empty": {
@@ -11,5 +12,25 @@
   },
   "card": {
     "removeFromFavorites": "Remove from favorites"
+  },
+  "loadRecipe": {
+    "title": "Load Recipe",
+    "urlTab": "From URL",
+    "textTab": "Paste Text",
+    "urlPlaceholder": "https://example.com/recipe",
+    "textPlaceholder": "Paste your recipe here...",
+    "characterCount": "{{count}} / {{max}} characters",
+    "loadButton": "Load Recipe",
+    "loading": "Processing recipe...",
+    "urlFetching": "Fetching recipe from URL...",
+    "success": "Recipe loaded successfully!",
+    "error": "Failed to load recipe. Please check the content and try again.",
+    "quotaExceeded": "Weekly recipe limit reached",
+    "urlSupportedSites": "Supports recipe websites, YouTube, and Instagram",
+    "urlInvalid": "Please enter a valid URL",
+    "urlNoContent": "No recipe found at this URL",
+    "urlTimeout": "URL fetch timed out. Please try again.",
+    "urlBlocked": "This URL is not allowed",
+    "urlNotConfigured": "URL import is temporarily unavailable"
   }
 }

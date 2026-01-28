@@ -1,0 +1,38 @@
+{
+  "modal": {
+    "dismissAll": "Hoppa över allt",
+    "previous": "Föregående",
+    "next": "Nästa",
+    "finish": "Kom igång"
+  },
+  "tips": {
+    "dietaryRestrictions": {
+      "title": "Kostrestriktioner",
+      "description": "Gå till Inställningar för att lägga till dina kostbehov som glutenfritt eller veganskt. Vår AI filtrerar automatiskt recept för att matcha dina krav."
+    },
+    "mealPlanner": {
+      "title": "Måltidsplanerare",
+      "description": "Skapa veckovisa måltidsplaner med AI-genererade recept. Ange antal måltider, portioner och låt vår AI göra resten."
+    },
+    "familyCalendar": {
+      "title": "Familjekalender",
+      "description": "Planera måltider för hela familjen på specifika datum. Perfekt för att samordna veckans middagar eller speciella tillfällen."
+    },
+    "specialMeals": {
+      "title": "Speciella Måltider",
+      "description": "Skapa unika recept för helgdagar, fester eller temamiddagar. Få anpassade AI-förslag baserade på ditt evenemang."
+    },
+    "favorites": {
+      "title": "Favoritrecept",
+      "description": "Spara recept du älskar för snabb åtkomst senare. Bygg din personliga kokbok med dina bästa upptäckter."
+    },
+    "loadRecipes": {
+      "title": "Importera Recept",
+      "description": "Klistra in recepttext eller en webbadress för att importera recept. Vi extraherar ingredienser och instruktioner automatiskt."
+    },
+    "unitConverter": {
+      "title": "Enhetsomvandlare",
+      "description": "Tryck på valfri ingrediens för att konvertera mellan koppar, gram, matskedar och mer. Inga fler gissningar om mått."
+    }
+  }
+}

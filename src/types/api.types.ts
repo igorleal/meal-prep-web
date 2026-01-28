@@ -77,3 +77,11 @@ export interface UpdateUserRequest {
   preferences?: Record<string, unknown>
   language?: SupportedLanguage
 }
+
+// Load Recipe types
+export type LoadRecipeRequestType = 'URL' | 'TEXT'
+
+export interface LoadRecipeRequest {
+  type: LoadRecipeRequestType
+  content: string
+}

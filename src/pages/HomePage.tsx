@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Icon } from '@/components/common'
+import { Icon, OnboardingTipsModal } from '@/components/common'
 import { MobileCarousel } from '@/components/common/MobileCarousel'
+import { storage } from '@/utils/storage'
 
 interface CardConfig {
   titleKey: string
@@ -91,6 +93,18 @@ function HomeCard({ card }: { card: CardConfig }) {
 
 export default function HomePage() {
   const { t } = useTranslation('mealPlans')
+  const [showOnboarding, setShowOnboarding] = useState(false)
+
+  useEffect(() => {
+    if (!storage.getOnboardingCompleted()) {
+      setShowOnboarding(true)
+    }
+  }, [])
+
+  const handleOnboardingClose = () => {
+    storage.setOnboardingCompleted()
+    setShowOnboarding(false)
+  }
 
   return (
     <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-8 md:py-12 flex flex-col gap-8">
@@ -119,6 +133,8 @@ export default function HomePage() {
           renderItem={(card) => <HomeCard card={card} />}
         />
       </div>
+
+      {showOnboarding && <OnboardingTipsModal onClose={handleOnboardingClose} />}
     </div>
   )
 }

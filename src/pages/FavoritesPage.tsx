@@ -1,9 +1,12 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { Button, Icon, LoadingOverlay, MobileCarousel } from '@/components/common'
-import { favoriteService } from '@/api/services'
+import LoadRecipeModal from '@/components/features/LoadRecipeModal'
+import { favoriteService, userService } from '@/api/services'
 import { getRecipeImageUrl } from '@/utils/placeholders'
+import { isBetaUser } from '@/utils/beta'
 import type { Recipe } from '@/types'
 
 function FavoriteRecipeCard({
@@ -124,6 +127,12 @@ export default function FavoritesPage() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const { t } = useTranslation('favorites')
+  const [isLoadModalOpen, setIsLoadModalOpen] = useState(false)
+
+  const { data: user } = useQuery({
+    queryKey: ['currentUser'],
+    queryFn: userService.getMe,
+  })
 
   const { data: favorites = [], isLoading } = useQuery({
     queryKey: ['favorites'],
@@ -152,7 +161,29 @@ export default function FavoritesPage() {
             {t('page.subtitle')}
           </p>
         </div>
+        {isBetaUser(user) && (
+          <Button
+            variant="primary"
+            icon="add"
+            onClick={() => setIsLoadModalOpen(true)}
+            disabled={user?.hasReachedWeeklyLimit}
+          >
+            {t('page.addRecipe')}
+          </Button>
+        )}
       </div>
+
+      {/* Load Recipe Modal */}
+      <LoadRecipeModal
+        isOpen={isLoadModalOpen}
+        onClose={() => setIsLoadModalOpen(false)}
+        onSuccess={() => {
+          queryClient.invalidateQueries({ queryKey: ['favorites'] })
+          queryClient.invalidateQueries({ queryKey: ['currentUser'] })
+          setIsLoadModalOpen(false)
+        }}
+        hasReachedWeeklyLimit={user?.hasReachedWeeklyLimit ?? false}
+      />
 
       {/* Content */}
       {isLoading ? (

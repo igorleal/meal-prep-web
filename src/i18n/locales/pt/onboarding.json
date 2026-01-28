@@ -1,0 +1,38 @@
+{
+  "modal": {
+    "dismissAll": "Pular tudo",
+    "previous": "Anterior",
+    "next": "Próximo",
+    "finish": "Começar"
+  },
+  "tips": {
+    "dietaryRestrictions": {
+      "title": "Restrições Alimentares",
+      "description": "Vá para Configurações para adicionar suas necessidades alimentares como sem glúten ou vegano. Nossa IA filtrará automaticamente as receitas para atender seus requisitos."
+    },
+    "mealPlanner": {
+      "title": "Planejador de Refeições",
+      "description": "Crie planos semanais de refeições com receitas geradas por IA. Defina o número de refeições, porções e deixe nossa IA fazer o resto."
+    },
+    "familyCalendar": {
+      "title": "Calendário Familiar",
+      "description": "Planeje refeições para toda a família em datas específicas. Perfeito para coordenar jantares semanais ou ocasiões especiais."
+    },
+    "specialMeals": {
+      "title": "Refeições Especiais",
+      "description": "Crie receitas únicas para feriados, festas ou jantares temáticos. Receba sugestões personalizadas de IA baseadas no seu evento."
+    },
+    "favorites": {
+      "title": "Receitas Favoritas",
+      "description": "Salve receitas que você ama para acesso rápido depois. Construa seu livro de receitas pessoal com suas melhores descobertas."
+    },
+    "loadRecipes": {
+      "title": "Importar Receitas",
+      "description": "Cole texto de receita ou URL de um site para importar receitas. Extraímos ingredientes e instruções automaticamente."
+    },
+    "unitConverter": {
+      "title": "Conversor de Unidades",
+      "description": "Toque em qualquer ingrediente para converter entre xícaras, gramas, colheres e mais. Sem mais adivinhações de medidas."
+    }
+  }
+}

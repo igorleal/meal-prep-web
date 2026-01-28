@@ -1,7 +1,8 @@
 {
   "page": {
     "title": "Favoritrecept",
-    "subtitle": "Din samling av sparade recept för snabb åtkomst"
+    "subtitle": "Din samling av sparade recept för snabb åtkomst",
+    "addRecipe": "Lägg till recept"
   },
   "loading": "Laddar favoriter...",
   "empty": {
@@ -11,5 +12,25 @@
   },
   "card": {
     "removeFromFavorites": "Ta bort från favoriter"
+  },
+  "loadRecipe": {
+    "title": "Ladda recept",
+    "urlTab": "Från URL",
+    "textTab": "Klistra in text",
+    "urlPlaceholder": "https://exempel.se/recept",
+    "textPlaceholder": "Klistra in ditt recept här...",
+    "characterCount": "{{count}} / {{max}} tecken",
+    "loadButton": "Ladda recept",
+    "loading": "Bearbetar recept...",
+    "urlFetching": "Hämtar recept från URL...",
+    "success": "Receptet har laddats!",
+    "error": "Kunde inte ladda receptet. Kontrollera innehållet och försök igen.",
+    "quotaExceeded": "Veckogräns för recept uppnådd",
+    "urlSupportedSites": "Stöder receptwebbplatser, YouTube och Instagram",
+    "urlInvalid": "Ange en giltig URL",
+    "urlNoContent": "Inget recept hittades på denna URL",
+    "urlTimeout": "URL-hämtning tog för lång tid. Försök igen.",
+    "urlBlocked": "Denna URL är inte tillåten",
+    "urlNotConfigured": "URL-import är tillfälligt otillgänglig"
   }
 }

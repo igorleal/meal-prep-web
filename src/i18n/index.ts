@@ -15,6 +15,7 @@ import enFamilyCalendar from './locales/en/familyCalendar.json'
 import enFavorites from './locales/en/favorites.json'
 import enRecipes from './locales/en/recipes.json'
 import enLegal from './locales/en/legal.json'
+import enOnboarding from './locales/en/onboarding.json'
 
 // Portuguese translations
 import ptCommon from './locales/pt/common.json'
@@ -27,6 +28,7 @@ import ptFamilyCalendar from './locales/pt/familyCalendar.json'
 import ptFavorites from './locales/pt/favorites.json'
 import ptRecipes from './locales/pt/recipes.json'
 import ptLegal from './locales/pt/legal.json'
+import ptOnboarding from './locales/pt/onboarding.json'
 
 // Swedish translations
 import svCommon from './locales/sv/common.json'
@@ -39,6 +41,7 @@ import svFamilyCalendar from './locales/sv/familyCalendar.json'
 import svFavorites from './locales/sv/favorites.json'
 import svRecipes from './locales/sv/recipes.json'
 import svLegal from './locales/sv/legal.json'
+import svOnboarding from './locales/sv/onboarding.json'
 
 export const resources = {
   en: {
@@ -52,6 +55,7 @@ export const resources = {
     favorites: enFavorites,
     recipes: enRecipes,
     legal: enLegal,
+    onboarding: enOnboarding,
   },
   pt: {
     common: ptCommon,
@@ -64,6 +68,7 @@ export const resources = {
     favorites: ptFavorites,
     recipes: ptRecipes,
     legal: ptLegal,
+    onboarding: ptOnboarding,
   },
   sv: {
     common: svCommon,
@@ -76,6 +81,7 @@ export const resources = {
     favorites: svFavorites,
     recipes: svRecipes,
     legal: svLegal,
+    onboarding: svOnboarding,
   },
 }
 
@@ -97,6 +103,7 @@ i18n
       'favorites',
       'recipes',
       'legal',
+      'onboarding',
     ],
     interpolation: {
       escapeValue: false,

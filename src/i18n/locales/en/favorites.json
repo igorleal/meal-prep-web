@@ -7,8 +7,8 @@
   "loading": "Loading favorites...",
   "empty": {
     "title": "No favorite recipes yet",
-    "description": "Start exploring and save recipes you love",
-    "button": "Browse Meal Plans"
+    "description": "Start building your collection! Load recipes from your favorite cooking websites or save recipes from your meal plans.",
+    "button": "Load a Recipe"
   },
   "card": {
     "removeFromFavorites": "Remove from favorites"

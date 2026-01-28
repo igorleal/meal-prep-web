@@ -1,5 +1,5 @@
 {
-  "backToSettings": "Tillbaka till Inställningar",
+  "back": "Tillbaka",
   "terms": {
     "title": "Användarvillkor",
     "lastUpdated": "Senast uppdaterad: {{date}}",

@@ -43,6 +43,15 @@ const cards: CardConfig[] = [
     gradient: 'from-emerald-500 to-teal-600',
     textColor: 'text-emerald-50',
   },
+  {
+    titleKey: 'home.favorites.title',
+    descriptionKey: 'home.favorites.description',
+    icon: 'favorite',
+    path: '/favorites',
+    buttonTextKey: 'home.favorites.button',
+    gradient: 'from-purple-500 to-violet-600',
+    textColor: 'text-purple-50',
+  },
 ]
 
 function HomeCard({ card }: { card: CardConfig }) {
@@ -51,7 +60,7 @@ function HomeCard({ card }: { card: CardConfig }) {
 
   return (
     <div
-      className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br ${card.gradient} p-8 shadow-lg transition-transform lg:hover:-translate-y-1 duration-300 min-h-[340px] cursor-pointer`}
+      className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br ${card.gradient} p-8 shadow-lg transition-transform lg:hover:-translate-y-1 duration-300 min-h-[300px] cursor-pointer`}
       onClick={() => navigate(card.path)}
     >
       <div className="relative z-10 flex flex-col gap-4 h-full">
@@ -119,7 +128,7 @@ export default function HomePage() {
       </div>
 
       {/* Desktop Grid */}
-      <div className="hidden lg:grid grid-cols-3 gap-6">
+      <div className="hidden lg:grid grid-cols-4 gap-6">
         {cards.map((card) => (
           <HomeCard key={card.path} card={card} />
         ))}

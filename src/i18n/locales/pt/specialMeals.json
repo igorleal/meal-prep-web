@@ -6,8 +6,8 @@
     "loading": "Carregando eventos...",
     "empty": {
       "title": "Nenhuma ocasião especial planejada",
-      "description": "Crie sua primeira refeicão especial para começar",
-      "button": "Planejar sua primeira refeicão especial"
+      "description": "Planejando uma reunião com amigos ou família? Crie seu primeiro evento para obter sugestões de receitas personalizadas para qualquer ocasião.",
+      "button": "Planejar Sua Primeira Reunião"
     }
   },
   "create": {

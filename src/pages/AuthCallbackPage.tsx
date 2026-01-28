@@ -27,7 +27,7 @@ export default function AuthCallbackPage() {
       .getMe()
       .then((user) => {
         login(token, user)
-        navigate('/', { replace: true })
+        navigate('/home', { replace: true })
       })
       .catch(() => {
         storage.removeToken()

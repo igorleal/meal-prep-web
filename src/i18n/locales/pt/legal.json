@@ -1,5 +1,5 @@
 {
-  "backToSettings": "Voltar para Configurações",
+  "back": "Voltar",
   "terms": {
     "title": "Termos de Serviço",
     "lastUpdated": "Última atualização: {{date}}",

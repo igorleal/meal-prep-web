@@ -46,6 +46,14 @@ export default {
         xl: '0.75rem',
         '2xl': '1rem',
       },
+      animation: {
+        shimmer: 'shimmer 1.5s infinite',
+      },
+      keyframes: {
+        shimmer: {
+          '100%': { transform: 'translateX(100%)' },
+        },
+      },
     },
   },
   plugins: [

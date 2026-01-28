@@ -18,6 +18,11 @@
       "title": "Refeições Especiais",
       "description": "Gerencie eventos, feriados e restrições alimentares complexas com facilidade.",
       "button": "Explorar Especiais"
+    },
+    "favorites": {
+      "title": "Receitas Favoritas",
+      "description": "Acesse suas receitas salvas e carregue novas de seus sites de culinária favoritos.",
+      "button": "Ver Favoritos"
     }
   },
   "list": {
@@ -27,7 +32,7 @@
     "loading": "Carregando planos de refeição...",
     "empty": {
       "title": "Nenhum plano de refeição ainda",
-      "description": "Crie seu primeiro plano de refeição com IA para começar",
+      "description": "Pronto para organizar sua semana? Crie seu primeiro plano de refeição personalizado para economizar tempo e gerar sua lista de compras instantaneamente.",
       "button": "Criar Seu Primeiro Plano"
     },
     "card": {

@@ -18,7 +18,7 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false)
 
-  const from = location.state?.from?.pathname || '/'
+  const from = location.state?.from?.pathname || '/home'
 
   const handleGoogleLogin = async () => {
     setError('')

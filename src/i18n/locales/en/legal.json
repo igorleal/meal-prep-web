@@ -1,5 +1,5 @@
 {
-  "backToSettings": "Back to Settings",
+  "back": "Back",
   "terms": {
     "title": "Terms of Service",
     "lastUpdated": "Last updated: {{date}}",

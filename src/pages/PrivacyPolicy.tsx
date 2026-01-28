@@ -13,7 +13,7 @@ export default function PrivacyPolicy() {
         className="inline-flex items-center gap-2 text-text-muted-light dark:text-text-muted-dark hover:text-primary mb-8 transition-colors"
       >
         <Icon name="arrow_back" size="sm" />
-        <span>{t('backToSettings')}</span>
+        <span>{t('back')}</span>
       </Link>
 
       {/* Header */}

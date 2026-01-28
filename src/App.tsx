@@ -28,6 +28,7 @@ import ComingSoonPage from '@/pages/ComingSoonPage'
 import AuthCallbackPage from '@/pages/AuthCallbackPage'
 import TermsOfService from '@/pages/TermsOfService'
 import PrivacyPolicy from '@/pages/PrivacyPolicy'
+import PublicLandingPage from '@/pages/PublicLandingPage'
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Routes>
             {/* Public routes */}
             <Route element={<AuthLayout />}>
+              <Route path="/" element={<PublicLandingPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/terms" element={<TermsOfService />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
@@ -47,7 +49,7 @@ function App() {
             {/* Protected routes */}
             <Route element={<ProtectedRoute />}>
               <Route element={<AppLayout />}>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/home" element={<HomePage />} />
 
                 {/* Meal Plans */}
                 <Route path="/meal-plans" element={<MealPlansPage />} />

@@ -7,8 +7,8 @@
   "loading": "Laddar favoriter...",
   "empty": {
     "title": "Inga favoritrecept ännu",
-    "description": "Börja utforska och spara recept du älskar",
-    "button": "Bläddra måltidsplaner"
+    "description": "Börja bygga din samling! Ladda recept från dina favoritmatlagningssajter eller spara recept från dina måltidsplaner.",
+    "button": "Ladda ett recept"
   },
   "card": {
     "removeFromFavorites": "Ta bort från favoriter"

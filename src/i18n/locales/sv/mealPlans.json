@@ -18,6 +18,11 @@
       "title": "Specialmåltider",
       "description": "Hantera evenemang, helgdagar och komplexa kostrestriktioner med lätthet.",
       "button": "Utforska Speciella"
+    },
+    "favorites": {
+      "title": "Favoritrecept",
+      "description": "Få tillgång till dina sparade recept och ladda nya från dina favoritmatlagningssajter.",
+      "button": "Visa Favoriter"
     }
   },
   "list": {
@@ -27,7 +32,7 @@
     "loading": "Laddar måltidsplaner...",
     "empty": {
       "title": "Inga måltidsplaner ännu",
-      "description": "Skapa din första AI-drivna måltidsplan för att börja",
+      "description": "Redo att organisera din vecka? Skapa din första anpassade måltidsplan för att spara tid och generera din inköpslista direkt.",
       "button": "Skapa din första plan"
     },
     "card": {

@@ -7,8 +7,8 @@
   "loading": "Carregando favoritos...",
   "empty": {
     "title": "Nenhuma receita favorita ainda",
-    "description": "Comece a explorar e salve as receitas que você ama",
-    "button": "Explorar Planos de Refeição"
+    "description": "Comece a construir sua coleção! Carregue receitas dos seus sites de culinária favoritos ou salve receitas dos seus planos de refeição.",
+    "button": "Carregar uma Receita"
   },
   "card": {
     "removeFromFavorites": "Remover dos favoritos"

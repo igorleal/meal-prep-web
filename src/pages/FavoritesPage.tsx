@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
-import { Button, Icon, LoadingOverlay, MobileCarousel } from '@/components/common'
+import { Button, Icon, LoadingOverlay, MobileCarousel, EmptyState } from '@/components/common'
 import LoadRecipeModal from '@/components/features/LoadRecipeModal'
 import { favoriteService, userService } from '@/api/services'
 import { getRecipeImageUrl } from '@/utils/placeholders'
@@ -221,22 +221,13 @@ export default function FavoritesPage() {
           </div>
         </>
       ) : (
-        <div className="text-center py-16">
-          <Icon
-            name="favorite_border"
-            className="text-gray-300 dark:text-gray-600 mb-4"
-            size="xl"
-          />
-          <h3 className="text-lg font-semibold text-text-main-light dark:text-white mb-2">
-            {t('empty.title')}
-          </h3>
-          <p className="text-text-muted-light dark:text-text-muted-dark mb-6">
-            {t('empty.description')}
-          </p>
-          <Button onClick={() => navigate('/meal-plans')}>
-            {t('empty.button')}
-          </Button>
-        </div>
+        <EmptyState
+          imageUrl="https://lh3.googleusercontent.com/aida-public/AB6AXuADZhlrl3_VduGQRkep0nSPNCK6hNBkGAfvFEoJvAeEKZYkBXNJ_mxlmyG4bac3oHkK3av1o_6_Xl52ePeTcN5sHL10Ctrlzm_RkugE0ysPLtkfSflWiBy19rFS6iOfjg1ku_TZEtqYZ17RBiEI-dUxWeSGtSqKoIVj9LOqFIyjZi0uk4K6sEARx8Mbv_4MokqDC316qSuRgog3053TjJA2RA-2SkGlDxUWRz3n1_XuHVRV4fJfni4Bg1q9xvszcajTjw46Ol2WMeY"
+          title={t('empty.title')}
+          description={t('empty.description')}
+          buttonText={t('empty.button')}
+          onButtonClick={() => setIsLoadModalOpen(true)}
+        />
       )}
     </div>
   )

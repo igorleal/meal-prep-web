@@ -6,7 +6,7 @@
     "loading": "Laddar evenemang...",
     "empty": {
       "title": "Inga specialtillfällen planerade",
-      "description": "Skapa din första sammankomst för att börja",
+      "description": "Planerar du en sammankomst med vänner eller familj? Skapa ditt första evenemang för att få personliga receptförslag för alla tillfällen.",
       "button": "Planera din första sammankomst"
     }
   },

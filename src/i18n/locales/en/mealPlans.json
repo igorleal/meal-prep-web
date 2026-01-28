@@ -18,6 +18,11 @@
       "title": "Special Meals",
       "description": "Manage events, holidays, and complex dietary restrictions with ease.",
       "button": "Explore Specials"
+    },
+    "favorites": {
+      "title": "Favorite Recipes",
+      "description": "Access your saved recipes and load new ones from your favorite cooking websites.",
+      "button": "View Favorites"
     }
   },
   "list": {
@@ -27,7 +32,7 @@
     "loading": "Loading meal plans...",
     "empty": {
       "title": "No meal plans yet",
-      "description": "Create your first AI-powered meal plan to get started",
+      "description": "Ready to organize your week? Create your first custom meal plan to save time and generate your shopping list instantly.",
       "button": "Create Your First Plan"
     },
     "card": {

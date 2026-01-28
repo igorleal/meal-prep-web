@@ -10,7 +10,9 @@
     "shoppingList": "Shopping List"
   },
   "header": {
-    "openMenu": "Open menu"
+    "openMenu": "Open menu",
+    "features": "Features",
+    "login": "Log In"
   },
   "theme": {
     "darkMode": "Dark Mode",

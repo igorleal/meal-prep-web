@@ -1,0 +1,32 @@
+{
+  "hero": {
+    "title": "Domine Suas Refeições com IA",
+    "subtitle": "Planejamento de refeições sem esforço e descoberta de receitas com inteligência artificial.",
+    "cta": "Comece Grátis"
+  },
+  "features": {
+    "title": "Ferramentas Poderosas para Cozinheiros Modernos",
+    "subtitle": "Tudo o que você precisa para gerenciar sua cozinha e impressionar seus convidados todas as noites.",
+    "aiPlanner": {
+      "title": "Planejador de Refeições IA",
+      "description": "Planos semanais personalizados gerados para suas necessidades dietéticas e gostos."
+    },
+    "familyCalendar": {
+      "title": "Calendário Familiar",
+      "description": "Sincronize com toda a família para garantir que todos estejam na mesma página para o jantar."
+    },
+    "specialOccasions": {
+      "title": "Ocasiões Especiais",
+      "description": "Planeje o menu complexo perfeito para impressionar seus amigos na próxima festa."
+    },
+    "smartImport": {
+      "title": "Importação Inteligente",
+      "description": "Cole uma URL de receita ou texto para importar instantaneamente ingredientes e instruções."
+    }
+  },
+  "footer": {
+    "copyright": "Todos os direitos reservados.",
+    "privacyPolicy": "Política de Privacidade",
+    "termsOfService": "Termos de Serviço"
+  }
+}

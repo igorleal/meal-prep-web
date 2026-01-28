@@ -10,7 +10,9 @@
     "shoppingList": "Inköpslista"
   },
   "header": {
-    "openMenu": "Öppna meny"
+    "openMenu": "Öppna meny",
+    "features": "Funktioner",
+    "login": "Logga in"
   },
   "theme": {
     "darkMode": "Mörkt läge",

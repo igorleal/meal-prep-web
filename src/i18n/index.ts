@@ -16,6 +16,7 @@ import enFavorites from './locales/en/favorites.json'
 import enRecipes from './locales/en/recipes.json'
 import enLegal from './locales/en/legal.json'
 import enOnboarding from './locales/en/onboarding.json'
+import enLanding from './locales/en/landing.json'
 
 // Portuguese translations
 import ptCommon from './locales/pt/common.json'
@@ -29,6 +30,7 @@ import ptFavorites from './locales/pt/favorites.json'
 import ptRecipes from './locales/pt/recipes.json'
 import ptLegal from './locales/pt/legal.json'
 import ptOnboarding from './locales/pt/onboarding.json'
+import ptLanding from './locales/pt/landing.json'
 
 // Swedish translations
 import svCommon from './locales/sv/common.json'
@@ -42,6 +44,7 @@ import svFavorites from './locales/sv/favorites.json'
 import svRecipes from './locales/sv/recipes.json'
 import svLegal from './locales/sv/legal.json'
 import svOnboarding from './locales/sv/onboarding.json'
+import svLanding from './locales/sv/landing.json'
 
 export const resources = {
   en: {
@@ -56,6 +59,7 @@ export const resources = {
     recipes: enRecipes,
     legal: enLegal,
     onboarding: enOnboarding,
+    landing: enLanding,
   },
   pt: {
     common: ptCommon,
@@ -69,6 +73,7 @@ export const resources = {
     recipes: ptRecipes,
     legal: ptLegal,
     onboarding: ptOnboarding,
+    landing: ptLanding,
   },
   sv: {
     common: svCommon,
@@ -82,6 +87,7 @@ export const resources = {
     recipes: svRecipes,
     legal: svLegal,
     onboarding: svOnboarding,
+    landing: svLanding,
   },
 }
 
@@ -104,6 +110,7 @@ i18n
       'recipes',
       'legal',
       'onboarding',
+      'landing',
     ],
     interpolation: {
       escapeValue: false,

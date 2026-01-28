@@ -1,0 +1,32 @@
+{
+  "hero": {
+    "title": "Bemästra Dina Måltider med AI",
+    "subtitle": "Enkel måltidsplanering och receptupptäckt med artificiell intelligens.",
+    "cta": "Kom Igång Gratis"
+  },
+  "features": {
+    "title": "Kraftfulla Verktyg för Moderna Kockar",
+    "subtitle": "Allt du behöver för att hantera ditt kök och imponera på dina gäster varje kväll.",
+    "aiPlanner": {
+      "title": "AI Måltidsplanerare",
+      "description": "Personliga veckoscheman genererade just för dina kostbehov och smaker."
+    },
+    "familyCalendar": {
+      "title": "Familjekalender",
+      "description": "Synkronisera med hela hushållet för att säkerställa att alla är på samma sida inför middagen."
+    },
+    "specialOccasions": {
+      "title": "Speciella Tillfällen",
+      "description": "Planera den perfekta komplexa menyn för att imponera på dina vänner på nästa fest."
+    },
+    "smartImport": {
+      "title": "Smart Import",
+      "description": "Klistra in en recept-URL eller text för att omedelbart importera ingredienser och instruktioner."
+    }
+  },
+  "footer": {
+    "copyright": "Alla rättigheter förbehållna.",
+    "privacyPolicy": "Integritetspolicy",
+    "termsOfService": "Användarvillkor"
+  }
+}

@@ -10,7 +10,9 @@
     "shoppingList": "Lista de Compras"
   },
   "header": {
-    "openMenu": "Abrir menu"
+    "openMenu": "Abrir menu",
+    "features": "Funcionalidades",
+    "login": "Entrar"
   },
   "theme": {
     "darkMode": "Modo Escuro",

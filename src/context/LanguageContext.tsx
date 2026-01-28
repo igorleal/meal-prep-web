@@ -13,6 +13,18 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
+// Storage key for language preference (matches i18next config)
+const LANGUAGE_STORAGE_KEY = 'i18nextLng'
+
+// Get stored language from localStorage
+function getStoredLanguage(): SupportedLanguage | null {
+  const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY)
+  if (stored && SUPPORTED_LANGUAGES.includes(stored as SupportedLanguage)) {
+    return stored as SupportedLanguage
+  }
+  return null
+}
+
 // Detect browser language and return matching supported language
 function detectBrowserLanguage(): SupportedLanguage {
   const browserLang = navigator.language.split('-')[0]
@@ -22,18 +34,23 @@ function detectBrowserLanguage(): SupportedLanguage {
   return DEFAULT_LANGUAGE
 }
 
+// Get initial language: localStorage > browser > default
+function getInitialLanguage(): SupportedLanguage {
+  return getStoredLanguage() ?? detectBrowserLanguage()
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const { i18n } = useTranslation()
   const { user, updateUser } = useAuth()
   const hasSetBrowserLanguage = useRef(false)
 
-  // For public pages (no user), use browser locale
+  // For public pages (no user), use stored language or browser locale
   // This runs once on mount when there's no user
   useEffect(() => {
     if (!user && !hasSetBrowserLanguage.current) {
-      const browserLang = detectBrowserLanguage()
-      if (browserLang !== i18n.language) {
-        i18n.changeLanguage(browserLang)
+      const initialLang = getInitialLanguage()
+      if (initialLang !== i18n.language) {
+        i18n.changeLanguage(initialLang)
       }
       hasSetBrowserLanguage.current = true
     }
@@ -49,6 +66,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const changeLanguage = async (language: SupportedLanguage) => {
     // Update i18n immediately for instant UI feedback
     await i18n.changeLanguage(language)
+
+    // Always persist to localStorage for public pages
+    localStorage.setItem(LANGUAGE_STORAGE_KEY, language)
 
     // Persist to backend if user is authenticated
     if (user) {

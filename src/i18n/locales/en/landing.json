@@ -1,0 +1,32 @@
+{
+  "hero": {
+    "title": "Master Your Meals with AI",
+    "subtitle": "Effortless meal planning and recipe discovery powered by artificial intelligence.",
+    "cta": "Get Started for Free"
+  },
+  "features": {
+    "title": "Powerful Tools for Modern Cooks",
+    "subtitle": "Everything you need to manage your kitchen and impress your guests every single night.",
+    "aiPlanner": {
+      "title": "AI Meal Planner",
+      "description": "Personalized weekly plans generated just for your dietary needs and tastes."
+    },
+    "familyCalendar": {
+      "title": "Family Calendar",
+      "description": "Sync with the whole household to ensure everyone is on the same page for dinner."
+    },
+    "specialOccasions": {
+      "title": "Special Occasions",
+      "description": "Plan the perfect complex menu to impress your friends at your next party."
+    },
+    "smartImport": {
+      "title": "Smart Import",
+      "description": "Paste a recipe URL or raw text to instantly import ingredients and instructions."
+    }
+  },
+  "footer": {
+    "copyright": "All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
+  }
+}

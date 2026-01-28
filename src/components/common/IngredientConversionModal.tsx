@@ -5,7 +5,7 @@ import { LoadingSpinner } from './LoadingSpinner'
 import { ingredientService } from '@/api/services'
 import type { IngredientState } from '@/api/services/ingredient.service'
 import type { RecipeIngredient } from '@/types'
-import { formatUnit } from '@/utils/recipe'
+import { useFormatUnit } from '@/hooks'
 
 interface IngredientConversionModalProps {
   ingredient: RecipeIngredient
@@ -17,6 +17,7 @@ export function IngredientConversionModal({
   onClose,
 }: IngredientConversionModalProps) {
   const { t } = useTranslation('common')
+  const { formatUnit } = useFormatUnit()
   const currentAmount = `${ingredient.quantity} ${formatUnit(ingredient.unit)}`
 
   const { data, isLoading, error } = useQuery({

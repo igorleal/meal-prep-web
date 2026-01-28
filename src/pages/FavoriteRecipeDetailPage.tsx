@@ -4,10 +4,12 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon, IngredientConversionModal, MarkdownText } from '@/components/common'
 import { favoriteService } from '@/api/services'
 import { getRecipeImageUrl } from '@/utils/placeholders'
-import { formatUnit, parseInstructions } from '@/utils/recipe'
+import { parseInstructions } from '@/utils/recipe'
+import { useFormatUnit } from '@/hooks'
 import type { Recipe, RecipeIngredient } from '@/types'
 
 export default function FavoriteRecipeDetailPage() {
+  const { formatUnit } = useFormatUnit()
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const [recipe, setRecipe] = useState<Recipe | null>(null)

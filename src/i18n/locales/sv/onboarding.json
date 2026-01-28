@@ -28,7 +28,7 @@
     },
     "loadRecipes": {
       "title": "Importera Recept",
-      "description": "Klistra in recepttext eller en webbadress för att importera recept. Vi extraherar ingredienser och instruktioner automatiskt."
+      "description": "Klistra in en receptlänk på valfritt språk så sparar vi det på ditt valda språk."
     },
     "unitConverter": {
       "title": "Enhetsomvandlare",

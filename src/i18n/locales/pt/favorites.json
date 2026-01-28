@@ -15,7 +15,7 @@
   },
   "loadRecipe": {
     "title": "Carregar Receita",
-    "urlTab": "Da URL",
+    "urlTab": "De uma URL",
     "textTab": "Colar Texto",
     "urlPlaceholder": "https://exemplo.com/receita",
     "textPlaceholder": "Cole sua receita aqui...",

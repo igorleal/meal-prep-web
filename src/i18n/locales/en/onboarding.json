@@ -28,7 +28,7 @@
     },
     "loadRecipes": {
       "title": "Import Recipes",
-      "description": "Paste recipe text or a website URL to import recipes. We extract ingredients and instructions automatically."
+      "description": "Paste a recipe link in any language and we'll save it in your selected language."
     },
     "unitConverter": {
       "title": "Unit Converter",

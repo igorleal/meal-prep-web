@@ -28,7 +28,7 @@
     },
     "loadRecipes": {
       "title": "Importar Receitas",
-      "description": "Cole texto de receita ou URL de um site para importar receitas. Extraímos ingredientes e instruções automaticamente."
+      "description": "Cole um link de receita em qualquer idioma e salvaremos no seu idioma selecionado."
     },
     "unitConverter": {
       "title": "Conversor de Unidades",

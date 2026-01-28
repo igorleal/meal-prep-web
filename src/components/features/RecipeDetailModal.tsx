@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Icon, LoadingSpinner, IngredientConversionModal, MarkdownText } from '@/components/common'
 import { getRecipeImageUrl } from '@/utils/placeholders'
-import { formatUnit, parseInstructions } from '@/utils/recipe'
-import { useRecipeImagePolling } from '@/hooks'
+import { parseInstructions } from '@/utils/recipe'
+import { useRecipeImagePolling, useFormatUnit } from '@/hooks'
 import type { Recipe, RecipeIngredient } from '@/types'
 
 type ImageType = 'mealPlan' | 'familyMeal' | 'specialMeal'
@@ -22,6 +22,7 @@ export function RecipeDetailModal({
   onImageLoaded,
 }: RecipeDetailModalProps) {
   const { t } = useTranslation('common')
+  const { formatUnit } = useFormatUnit()
   const [conversionIngredient, setConversionIngredient] = useState<RecipeIngredient | null>(null)
   const { imageUrl, isPolling } = useRecipeImagePolling({
     recipe,

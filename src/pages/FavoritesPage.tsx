@@ -6,7 +6,6 @@ import { Button, Icon, LoadingOverlay, MobileCarousel } from '@/components/commo
 import LoadRecipeModal from '@/components/features/LoadRecipeModal'
 import { favoriteService, userService } from '@/api/services'
 import { getRecipeImageUrl } from '@/utils/placeholders'
-import { isBetaUser } from '@/utils/beta'
 import type { Recipe } from '@/types'
 
 function FavoriteRecipeCard({
@@ -161,7 +160,6 @@ export default function FavoritesPage() {
             {t('page.subtitle')}
           </p>
         </div>
-        {isBetaUser(user) && (
           <Button
             variant="primary"
             icon="add"
@@ -170,7 +168,6 @@ export default function FavoritesPage() {
           >
             {t('page.addRecipe')}
           </Button>
-        )}
       </div>
 
       {/* Load Recipe Modal */}

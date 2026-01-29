@@ -31,4 +31,8 @@ export const familyPlanService = {
     const { data } = await apiClient.post<Recipe[]>(`/family-plan/regenerate-recipes/${requestId}`)
     return data
   },
+
+  createPlanFromRecipe: async (params: { date: string; recipeId: string }): Promise<void> => {
+    await apiClient.post('/family-plan/from-recipe', params)
+  },
 }

@@ -103,6 +103,53 @@
     "convertUnits": "Convert units",
     "preparation": "Preparation"
   },
+  "recipeSource": {
+    "ai": {
+      "title": "Generate with AI",
+      "description": "Let our AI create personalized recipes based on your preferences and dietary needs.",
+      "badge": "Uses 1 credit"
+    },
+    "favorite": {
+      "title": "Load from Favorites",
+      "description": "Choose from recipes you've already saved to your favorites collection.",
+      "badge": "Free"
+    },
+    "loaded": {
+      "title": "Load from URL/Text",
+      "description": "Import a recipe from a website URL or paste the recipe text directly.",
+      "badge": "Uses 1 credit"
+    },
+    "quotaExceeded": "Weekly limit reached"
+  },
+  "favoritePicker": {
+    "title": "Choose from Favorites",
+    "subtitle": "Select a recipe from your saved favorites",
+    "empty": {
+      "title": "No Favorites Yet",
+      "description": "Save recipes to your favorites to use them here."
+    },
+    "searchPlaceholder": "Search favorites...",
+    "selectButton": "Select Recipe"
+  },
+  "steps": {
+    "step": "Step"
+  },
+  "aiOptions": {
+    "title": "AI Generation Options",
+    "subtitle": "Customize how the AI generates your recipes",
+    "restrictions": "Dietary Restrictions",
+    "restrictionsPlaceholder": "Type a restriction and press Enter...",
+    "mustHaves": "Must Have Ingredients",
+    "mustHavesPlaceholder": "Type an ingredient and press Enter...",
+    "exclusions": "Exclude Ingredients",
+    "exclusionsPlaceholder": "Type an ingredient to exclude...",
+    "preferences": "Preferences",
+    "noneSelected": "None selected",
+    "included": "included",
+    "excluded": "excluded",
+    "selected": "selected",
+    "goalsSet": "goals set"
+  },
   "ingredientUnits": {
     "grams": "g",
     "gram": "g",

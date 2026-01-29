@@ -29,4 +29,8 @@ export const receitaiPlanService = {
     const { data } = await apiClient.post<Recipe[]>(`/meal-prep-plan/regenerate-recipes/${requestId}`)
     return data
   },
+
+  createPlanFromRecipe: async (params: { name: string; recipeId: string }): Promise<void> => {
+    await apiClient.post('/meal-prep-plan/from-recipe', params)
+  },
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Button, Icon, WeeklyLimitBanner, WeeklyLimitModal, MobileCarousel, ContentValidationErrorModal } from '@/components/common'
 import { isContentValidationError } from '@/utils/errors'
@@ -45,6 +45,7 @@ function ErrorState({ onRetry, onBack }: { onRetry: () => void; onBack: () => vo
 
 export default function RecipeSelectionPage() {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const queryClient = useQueryClient()
   const [pendingPlan, setPendingPlan] = useState<PendingMealPlan | null>(null)
   const [selectedRecipeId, setSelectedRecipeId] = useState<string | null>(null)
@@ -54,6 +55,11 @@ export default function RecipeSelectionPage() {
   const [showLimitModal, setShowLimitModal] = useState(false)
   const [showContentValidationModal, setShowContentValidationModal] = useState(false)
   const [planName, setPlanName] = useState('')
+
+  // Check if we're using a pre-selected recipe source
+  const recipeSource = searchParams.get('source') as 'favorite' | 'loaded' | null
+  const isPreSelectedSource = recipeSource === 'favorite' || recipeSource === 'loaded'
+  const [preSelectedRecipe, setPreSelectedRecipe] = useState<Recipe | null>(null)
 
   // Fetch current user to check weekly limit
   const { data: currentUser } = useQuery({
@@ -91,6 +97,23 @@ export default function RecipeSelectionPage() {
   }, [queryClient])
 
   useEffect(() => {
+    // Check if we're using a pre-selected recipe source (favorite or loaded)
+    if (isPreSelectedSource) {
+      const storedRecipe = sessionStorage.getItem('selectedRecipe')
+      const storedRequest = sessionStorage.getItem('pendingMealPlanRequest')
+      if (storedRecipe && storedRequest) {
+        const recipe = JSON.parse(storedRecipe) as Recipe
+        const { planName: name } = JSON.parse(storedRequest) as PendingRequest
+        setPreSelectedRecipe(recipe)
+        setSelectedRecipeId(recipe.id)
+        setPlanName(name)
+        return
+      }
+      // No data - redirect back
+      navigate('/meal-plans/source')
+      return
+    }
+
     // First check if we have recipes already
     const storedPlan = sessionStorage.getItem('pendingMealPlan')
     if (storedPlan) {
@@ -110,7 +133,7 @@ export default function RecipeSelectionPage() {
 
     // No data - redirect back
     navigate('/meal-plans/create')
-  }, [navigate, generateRecipes])
+  }, [navigate, generateRecipes, isPreSelectedSource])
 
   // Fetch favorites to check which recipes are favorited
   const { data: favorites = [] } = useQuery({
@@ -131,6 +154,23 @@ export default function RecipeSelectionPage() {
     onSuccess: () => {
       sessionStorage.removeItem('pendingMealPlan')
       sessionStorage.removeItem('pendingMealPlanRequest')
+      queryClient.invalidateQueries({ queryKey: ['mealPlans'] })
+      navigate('/meal-plans')
+    },
+  })
+
+  // Mutation for saving plan from pre-selected recipe (favorite/loaded)
+  const saveFromRecipeMutation = useMutation({
+    mutationFn: () => {
+      return receitaiPlanService.createPlanFromRecipe({
+        name: planName,
+        recipeId: preSelectedRecipe!.id,
+      })
+    },
+    onSuccess: () => {
+      sessionStorage.removeItem('pendingMealPlanRequest')
+      sessionStorage.removeItem('selectedRecipe')
+      sessionStorage.removeItem('recipeSource')
       queryClient.invalidateQueries({ queryKey: ['mealPlans'] })
       navigate('/meal-plans')
     },
@@ -213,39 +253,75 @@ export default function RecipeSelectionPage() {
     )
   }
 
+  // Determine header content based on source
+  const getHeaderContent = () => {
+    if (isPreSelectedSource) {
+      const sourceLabel = recipeSource === 'favorite' ? 'From Favorites' : 'Loaded Recipe'
+      return {
+        badge: sourceLabel,
+        icon: recipeSource === 'favorite' ? 'favorite' : 'upload',
+        title: 'Confirm Your Recipe',
+        description: `You've selected this recipe for "${planName}". Review and save to create your plan.`,
+      }
+    }
+    return {
+      badge: 'AI Recommended For You',
+      icon: 'auto_awesome',
+      title: 'Personalized Menu Selection',
+      description: isGenerating
+        ? `Generating personalized recipes for "${planName}"...`
+        : `We've analyzed your preferences to create these options for "${planName}". Select your favorite to continue.`,
+    }
+  }
+
+  const headerContent = getHeaderContent()
+
   return (
     <>
       <div className="max-w-[1280px] mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-12 pb-40">
         {/* Back button */}
         <button
-          onClick={() => navigate('/meal-plans/create')}
+          onClick={() => navigate(isPreSelectedSource ? '/meal-plans/source' : '/meal-plans/create')}
           className="flex items-center gap-2 text-sm font-medium text-text-muted-light dark:text-text-muted-dark hover:text-primary transition-colors mb-6"
         >
           <Icon name="arrow_back" size="sm" />
-          Back to Plan Configuration
+          {isPreSelectedSource ? 'Back to Source Selection' : 'Back to Plan Configuration'}
         </button>
 
         {/* Weekly Limit Banner */}
-        {hasReachedLimit && <WeeklyLimitBanner />}
+        {hasReachedLimit && !isPreSelectedSource && <WeeklyLimitBanner />}
 
         {/* Header */}
         <div className="mb-6 md:mb-12 flex flex-col gap-3">
           <div className="flex items-center gap-2 text-primary text-sm font-bold uppercase tracking-widest">
-            <Icon name="auto_awesome" className="text-lg" />
-            AI Recommended For You
+            <Icon name={headerContent.icon} className="text-lg" />
+            {headerContent.badge}
           </div>
           <h1 className="text-text-main-light dark:text-white text-2xl md:text-4xl lg:text-5xl font-black leading-tight tracking-tight">
-            Personalized Menu Selection
+            {headerContent.title}
           </h1>
           <p className="text-text-muted-light dark:text-text-muted-dark text-lg max-w-2xl">
-            {isGenerating
-              ? `Generating personalized recipes for "${planName}"...`
-              : `We've analyzed your preferences to create these options for "${planName}". Select your favorite to continue.`}
+            {headerContent.description}
           </p>
         </div>
 
-        {/* Recipe grid - Loading state */}
-        {(isGenerating || regenerateMutation.isPending) && (
+        {/* Pre-selected recipe display (favorite/loaded) */}
+        {isPreSelectedSource && preSelectedRecipe && (
+          <div className="max-w-lg mx-auto">
+            <RecipeCard
+              recipe={preSelectedRecipe}
+              isSelected={true}
+              isFavorite={favoriteIds.has(preSelectedRecipe.id)}
+              imageType="mealPlan"
+              onSelect={() => {}}
+              onViewDetails={() => setViewingRecipe(preSelectedRecipe)}
+              onFavorite={() => handleToggleFavorite(preSelectedRecipe.id)}
+            />
+          </div>
+        )}
+
+        {/* Recipe grid - Loading state (AI generation only) */}
+        {!isPreSelectedSource && (isGenerating || regenerateMutation.isPending) && (
           <div className="grid gap-4 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
             <SkeletonRecipeCard />
             <SkeletonRecipeCard />
@@ -253,8 +329,8 @@ export default function RecipeSelectionPage() {
           </div>
         )}
 
-        {/* Recipe grid - Mobile carousel */}
-        {!isGenerating && !regenerateMutation.isPending && pendingPlan?.recipes && (
+        {/* Recipe grid - Mobile carousel (AI generation only) */}
+        {!isPreSelectedSource && !isGenerating && !regenerateMutation.isPending && pendingPlan?.recipes && (
           <>
             <div className="md:hidden">
               <MobileCarousel
@@ -312,7 +388,7 @@ export default function RecipeSelectionPage() {
         {/* Content Validation Error Modal */}
         {showContentValidationModal && (
           <ContentValidationErrorModal
-            onClose={() => setShowContentValidationModal(false)}
+            onClose={() => navigate('/meal-plans/create')}
             onGoBack={() => navigate('/meal-plans/create')}
           />
         )}
@@ -321,30 +397,37 @@ export default function RecipeSelectionPage() {
       {/* Fixed Footer */}
       <div className="fixed bottom-0 left-0 right-0 md:left-64 bg-surface-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-t border-border-light dark:border-border-dark p-6 z-30">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <Button
-            variant="ghost"
-            icon="refresh"
-            iconPosition="left"
-            className="w-full sm:w-auto"
-            loading={regenerateMutation.isPending}
-            disabled={hasReachedLimit || isGenerating || !pendingPlan}
-            onClick={() => regenerateMutation.mutate()}
-          >
-            Regenerate Options
-          </Button>
+          {/* Regenerate button - only show for AI generation */}
+          {!isPreSelectedSource && (
+            <Button
+              variant="ghost"
+              icon="refresh"
+              iconPosition="left"
+              className="w-full sm:w-auto"
+              loading={regenerateMutation.isPending}
+              disabled={hasReachedLimit || isGenerating || !pendingPlan}
+              onClick={() => regenerateMutation.mutate()}
+            >
+              Regenerate Options
+            </Button>
+          )}
+          {/* Spacer for pre-selected source */}
+          {isPreSelectedSource && <div />}
           <div className="flex items-center gap-4 w-full sm:w-auto">
-            <span className="hidden sm:inline-block text-sm text-text-muted-light dark:text-text-muted-dark">
-              {selectedRecipeId ? '1 of 3 options selected' : 'No option selected'}
-            </span>
+            {!isPreSelectedSource && (
+              <span className="hidden sm:inline-block text-sm text-text-muted-light dark:text-text-muted-dark">
+                {selectedRecipeId ? '1 of 3 options selected' : 'No option selected'}
+              </span>
+            )}
             <Button
               icon="check"
               iconPosition="left"
-              disabled={!selectedRecipeId || isGenerating}
-              loading={saveMutation.isPending}
-              onClick={() => saveMutation.mutate()}
+              disabled={isPreSelectedSource ? !preSelectedRecipe : (!selectedRecipeId || isGenerating)}
+              loading={isPreSelectedSource ? saveFromRecipeMutation.isPending : saveMutation.isPending}
+              onClick={() => isPreSelectedSource ? saveFromRecipeMutation.mutate() : saveMutation.mutate()}
               className="w-full sm:w-auto"
             >
-              Save Selected
+              {isPreSelectedSource ? 'Save Plan' : 'Save Selected'}
             </Button>
           </div>
         </div>

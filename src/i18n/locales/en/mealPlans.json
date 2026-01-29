@@ -119,5 +119,10 @@
     "title": "Delete Plan",
     "message": "Are you sure you want to delete",
     "warning": "This action cannot be undone."
+  },
+  "source": {
+    "title": "Choose Recipe Source",
+    "subtitle": "How would you like to get recipes for your meal plan?",
+    "backButton": "Back to details"
   }
 }

@@ -4,15 +4,6 @@ import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { Button, Icon, Card, DatePicker, WeeklyLimitBanner } from '@/components/common'
 import { userService } from '@/api/services'
-import { cn } from '@/utils/cn'
-
-const dietaryOptionKeys = [
-  { id: 'vegetarian', icon: 'eco' },
-  { id: 'vegan', icon: 'spa' },
-  { id: 'glutenFree', icon: 'grain' },
-  { id: 'dairyFree', icon: 'egg_alt' },
-  { id: 'nutFree', icon: 'hide_source' },
-] as const
 
 export default function CreateSpecialMealPage() {
   const navigate = useNavigate()
@@ -28,21 +19,8 @@ export default function CreateSpecialMealPage() {
   const [name, setName] = useState('')
   const [eventDate, setEventDate] = useState('')
   const [dateError, setDateError] = useState('')
-  const [restrictions, setRestrictions] = useState<string[]>([])
-  const [customRestriction, setCustomRestriction] = useState('')
-  const [mustHaves, setMustHaves] = useState<string[]>([])
-  const [mustHaveInput, setMustHaveInput] = useState('')
-  const [exclusions, setExclusions] = useState<string[]>([])
-  const [exclusionInput, setExclusionInput] = useState('')
 
   const hasReachedLimit = currentUser?.hasReachedWeeklyLimit ?? false
-
-  // Get translated dietary options
-  const dietaryOptions = dietaryOptionKeys.map((option) => ({
-    id: option.id,
-    label: t(`create.sections.restrictions.options.${option.id}`),
-    icon: option.icon,
-  }))
 
   const isValidDate = (dateString: string): boolean => {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
@@ -71,56 +49,6 @@ export default function CreateSpecialMealPage() {
     }
   }
 
-  const toggleRestriction = (label: string) => {
-    setRestrictions((prev) =>
-      prev.includes(label)
-        ? prev.filter((r) => r !== label)
-        : [...prev, label]
-    )
-  }
-
-  const handleAddCustomRestriction = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && customRestriction.trim()) {
-      e.preventDefault()
-      if (!restrictions.includes(customRestriction.trim())) {
-        setRestrictions([...restrictions, customRestriction.trim()])
-      }
-      setCustomRestriction('')
-    }
-  }
-
-  const removeRestriction = (item: string) => {
-    setRestrictions(restrictions.filter((r) => r !== item))
-  }
-
-  const handleAddMustHave = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && mustHaveInput.trim()) {
-      e.preventDefault()
-      if (!mustHaves.includes(mustHaveInput.trim())) {
-        setMustHaves([...mustHaves, mustHaveInput.trim()])
-      }
-      setMustHaveInput('')
-    }
-  }
-
-  const removeMustHave = (item: string) => {
-    setMustHaves(mustHaves.filter((h) => h !== item))
-  }
-
-  const handleAddExclusion = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && exclusionInput.trim()) {
-      e.preventDefault()
-      if (!exclusions.includes(exclusionInput.trim())) {
-        setExclusions([...exclusions, exclusionInput.trim()])
-      }
-      setExclusionInput('')
-    }
-  }
-
-  const removeExclusion = (item: string) => {
-    setExclusions(exclusions.filter((e) => e !== item))
-  }
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -130,29 +58,19 @@ export default function CreateSpecialMealPage() {
       return
     }
 
-    const request = {
-      name,
-      eventDate,
-      mustHaves,
-      restrictions,
-      exclusions,
-    }
-
-    // Store request and navigate immediately - the selection page will make the API call
+    // Store only required fields - AI options will be collected on the source page
     sessionStorage.setItem(
       'pendingSpecialMealRequest',
       JSON.stringify({
         name,
         eventDate,
-        restrictions,
-        mustHaves,
-        exclusions,
-        request,
       })
     )
-    // Clear any previous recipes
+    // Clear any previous recipes and source selection
     sessionStorage.removeItem('pendingSpecialMeal')
-    navigate('/special-meals/recipes')
+    sessionStorage.removeItem('selectedRecipe')
+    sessionStorage.removeItem('recipeSource')
+    navigate('/special-meals/source')
   }
 
   return (
@@ -230,134 +148,6 @@ export default function CreateSpecialMealPage() {
                 error={dateError}
                 required
               />
-            </div>
-
-            {/* Dietary Restrictions */}
-            <div className="space-y-4">
-              <label className="block text-sm font-bold text-text-main-light dark:text-white">
-                {t('create.sections.restrictions.title')}
-              </label>
-              <div className="flex flex-wrap gap-3">
-                {dietaryOptions.map((option) => (
-                  <label key={option.id} className="cursor-pointer group relative">
-                    <input
-                      type="checkbox"
-                      checked={restrictions.includes(option.label)}
-                      onChange={() => toggleRestriction(option.label)}
-                      className="peer sr-only"
-                    />
-                    <span
-                      className={cn(
-                        'flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium transition-all',
-                        restrictions.includes(option.label)
-                          ? 'bg-primary text-white border-primary'
-                          : 'border-border-light dark:border-border-dark bg-background-light dark:bg-white/5 text-text-muted-light dark:text-text-muted-dark hover:bg-gray-100 dark:hover:bg-white/10'
-                      )}
-                    >
-                      <Icon name={option.icon} size="sm" />
-                      {option.label}
-                    </span>
-                  </label>
-                ))}
-                {/* Custom restrictions as chips */}
-                {restrictions
-                  .filter((r) => !dietaryOptions.some((opt) => opt.label === r))
-                  .map((item) => (
-                    <span
-                      key={item}
-                      className="inline-flex items-center gap-1.5 bg-primary text-white border border-primary px-4 py-2 rounded-full text-sm font-medium"
-                    >
-                      {item}
-                      <button
-                        type="button"
-                        onClick={() => removeRestriction(item)}
-                        className="hover:bg-white/20 rounded-full p-0.5 transition-colors"
-                      >
-                        <Icon name="close" size="sm" />
-                      </button>
-                    </span>
-                  ))}
-              </div>
-              <div className="bg-surface-light dark:bg-white/5 p-4 rounded-xl border border-border-light dark:border-border-dark focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all shadow-sm">
-                <input
-                  type="text"
-                  value={customRestriction}
-                  onChange={(e) => setCustomRestriction(e.target.value)}
-                  onKeyDown={handleAddCustomRestriction}
-                  placeholder={t('create.sections.restrictions.placeholder')}
-                  className="w-full bg-transparent border-none p-0 text-text-main-light dark:text-white placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:ring-0 text-sm"
-                />
-              </div>
-            </div>
-
-            {/* Must-haves and Excludes */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-              <div className="space-y-2">
-                <label className="block text-sm font-bold text-text-main-light dark:text-white flex items-center gap-2">
-                  <Icon name="check_circle" className="text-primary" size="sm" />
-                  {t('create.sections.preferences.mustHaves')}
-                </label>
-                <div className="bg-surface-light dark:bg-white/5 p-3 rounded-xl border border-border-light dark:border-border-dark focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all shadow-sm min-h-[100px]">
-                  <div className="flex flex-wrap gap-2 mb-2">
-                    {mustHaves.map((item) => (
-                      <span
-                        key={item}
-                        className="inline-flex items-center gap-1.5 bg-primary/10 text-primary border border-primary/20 px-3 py-1 rounded-full text-sm font-bold"
-                      >
-                        {item}
-                        <button
-                          type="button"
-                          onClick={() => removeMustHave(item)}
-                          className="hover:bg-primary/20 rounded-full p-0.5 transition-colors"
-                        >
-                          <Icon name="close" size="sm" />
-                        </button>
-                      </span>
-                    ))}
-                  </div>
-                  <input
-                    type="text"
-                    value={mustHaveInput}
-                    onChange={(e) => setMustHaveInput(e.target.value)}
-                    onKeyDown={handleAddMustHave}
-                    placeholder={t('create.sections.preferences.inputPlaceholder')}
-                    className="w-full bg-transparent border-none p-0 text-text-main-light dark:text-white placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:ring-0 text-sm"
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label className="block text-sm font-bold text-text-main-light dark:text-white flex items-center gap-2">
-                  <Icon name="block" className="text-red-500" size="sm" />
-                  {t('create.sections.preferences.excludes')}
-                </label>
-                <div className="bg-surface-light dark:bg-white/5 p-3 rounded-xl border border-border-light dark:border-border-dark focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all shadow-sm min-h-[100px]">
-                  <div className="flex flex-wrap gap-2 mb-2">
-                    {exclusions.map((item) => (
-                      <span
-                        key={item}
-                        className="inline-flex items-center gap-1.5 bg-primary/10 text-primary border border-primary/20 px-3 py-1 rounded-full text-sm font-bold"
-                      >
-                        {item}
-                        <button
-                          type="button"
-                          onClick={() => removeExclusion(item)}
-                          className="hover:bg-primary/20 rounded-full p-0.5 transition-colors"
-                        >
-                          <Icon name="close" size="sm" />
-                        </button>
-                      </span>
-                    ))}
-                  </div>
-                  <input
-                    type="text"
-                    value={exclusionInput}
-                    onChange={(e) => setExclusionInput(e.target.value)}
-                    onKeyDown={handleAddExclusion}
-                    placeholder={t('create.sections.preferences.inputPlaceholder')}
-                    className="w-full bg-transparent border-none p-0 text-text-main-light dark:text-white placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:ring-0 text-sm"
-                  />
-                </div>
-              </div>
             </div>
           </form>
 

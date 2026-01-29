@@ -64,7 +64,7 @@ function CalendarDay({
           {format(date, 'd')}
         </span>
         {isTodayDate && (
-          <Badge variant="primary" className="text-xs">
+          <Badge variant="primary" className="hidden md:inline-flex text-xs">
             {tCommon('time.today')}
           </Badge>
         )}
@@ -77,12 +77,14 @@ function CalendarDay({
             key={meal.plan.id}
             onClick={() => onViewMeal(meal)}
             className={cn(
-              'w-full px-2 py-1 rounded text-xs truncate text-left',
+              'w-full px-2 py-1 rounded text-xs text-left',
               'bg-primary/10 text-primary border-l-2 border-primary',
-              'hover:bg-primary/20 transition-colors cursor-pointer'
+              'hover:bg-primary/20 transition-colors cursor-pointer',
+              'flex items-center md:block'
             )}
           >
-            {meal.recipe.name}
+            <Icon name="restaurant" size="sm" className="md:hidden" />
+            <span className="hidden md:inline truncate">{meal.recipe.name}</span>
           </button>
         ))}
       </div>

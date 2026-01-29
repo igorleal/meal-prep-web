@@ -29,4 +29,8 @@ export const foodFriendsService = {
     const { data } = await apiClient.post<Recipe[]>(`/food-friends/regenerate-recipes/${requestId}`)
     return data
   },
+
+  createEventFromRecipe: async (params: { name: string; eventDate?: string; recipeId: string }): Promise<void> => {
+    await apiClient.post('/food-friends/from-recipe', params)
+  },
 }

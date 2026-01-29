@@ -103,6 +103,53 @@
     "convertUnits": "Konvertera enheter",
     "preparation": "Tillagning"
   },
+  "recipeSource": {
+    "ai": {
+      "title": "Generera med AI",
+      "description": "Låt vår AI skapa personliga recept baserade på dina preferenser och kostbehov.",
+      "badge": "Använder 1 kredit"
+    },
+    "favorite": {
+      "title": "Ladda från Favoriter",
+      "description": "Välj bland recept du redan har sparat i din favoritsamling.",
+      "badge": "Gratis"
+    },
+    "loaded": {
+      "title": "Ladda från URL/Text",
+      "description": "Importera ett recept från en webbplats-URL eller klistra in recepttexten direkt.",
+      "badge": "Använder 1 kredit"
+    },
+    "quotaExceeded": "Veckovisa gränsen nådd"
+  },
+  "favoritePicker": {
+    "title": "Välj från Favoriter",
+    "subtitle": "Välj ett recept från dina sparade favoriter",
+    "empty": {
+      "title": "Inga Favoriter Än",
+      "description": "Spara recept till dina favoriter för att använda dem här."
+    },
+    "searchPlaceholder": "Sök favoriter...",
+    "selectButton": "Välj Recept"
+  },
+  "steps": {
+    "step": "Steg"
+  },
+  "aiOptions": {
+    "title": "AI-genereringsalternativ",
+    "subtitle": "Anpassa hur AI genererar dina recept",
+    "restrictions": "Kostrestriktioner",
+    "restrictionsPlaceholder": "Skriv en restriktion och tryck Enter...",
+    "mustHaves": "Måste ha ingredienser",
+    "mustHavesPlaceholder": "Skriv en ingrediens och tryck Enter...",
+    "exclusions": "Exkludera ingredienser",
+    "exclusionsPlaceholder": "Skriv en ingrediens att exkludera...",
+    "preferences": "Preferenser",
+    "noneSelected": "Ingen vald",
+    "included": "inkluderade",
+    "excluded": "exkluderade",
+    "selected": "valda",
+    "goalsSet": "mål satta"
+  },
   "ingredientUnits": {
     "grams": "g",
     "gram": "g",

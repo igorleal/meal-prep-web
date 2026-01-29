@@ -103,6 +103,53 @@
     "convertUnits": "Converter unidades",
     "preparation": "Preparo"
   },
+  "recipeSource": {
+    "ai": {
+      "title": "Gerar com IA",
+      "description": "Deixe nossa IA criar receitas personalizadas com base em suas preferências e necessidades alimentares.",
+      "badge": "Consome 1 crédito"
+    },
+    "favorite": {
+      "title": "Carregar dos Favoritos",
+      "description": "Escolha entre as receitas que você já salvou na sua coleção de favoritos.",
+      "badge": "Ilimitado"
+    },
+    "loaded": {
+      "title": "Carregar de URL/Texto",
+      "description": "Importe uma receita de um site ou cole o texto da receita diretamente.",
+      "badge": "Consome 1 crédito"
+    },
+    "quotaExceeded": "Limite semanal atingido"
+  },
+  "favoritePicker": {
+    "title": "Escolher dos Favoritos",
+    "subtitle": "Selecione uma receita dos seus favoritos salvos",
+    "empty": {
+      "title": "Nenhum Favorito Ainda",
+      "description": "Salve receitas nos seus favoritos para usá-las aqui."
+    },
+    "searchPlaceholder": "Buscar favoritos...",
+    "selectButton": "Selecionar Receita"
+  },
+  "steps": {
+    "step": "Passo"
+  },
+  "aiOptions": {
+    "title": "Opções de Geração por IA",
+    "subtitle": "Personalize como a IA gera suas receitas",
+    "restrictions": "Restrições Alimentares",
+    "restrictionsPlaceholder": "Digite uma restrição e pressione Enter...",
+    "mustHaves": "Ingredientes Obrigatórios",
+    "mustHavesPlaceholder": "Digite um ingrediente e pressione Enter...",
+    "exclusions": "Excluir Ingredientes",
+    "exclusionsPlaceholder": "Digite um ingrediente para excluir...",
+    "preferences": "Preferências",
+    "noneSelected": "Nenhum selecionado",
+    "included": "incluídos",
+    "excluded": "excluídos",
+    "selected": "selecionados",
+    "goalsSet": "metas definidas"
+  },
   "ingredientUnits": {
     "grams": "g",
     "gram": "g",

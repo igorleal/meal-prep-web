@@ -1,0 +1,18 @@
+{
+  "home": {
+    "title": "ReceitAI - Planejamento de Refeições e Gerador de Receitas com IA",
+    "description": "Crie planos de refeições personalizados com IA. Gere receitas baseadas nas suas preferências, restrições alimentares e necessidades familiares. Planejamento inteligente de refeições."
+  },
+  "login": {
+    "title": "Entrar - ReceitAI",
+    "description": "Entre no ReceitAI para acessar seus planos de refeições personalizados, receitas salvas e recursos de planejamento com IA."
+  },
+  "terms": {
+    "title": "Termos de Serviço - ReceitAI",
+    "description": "Leia os Termos de Serviço do ReceitAI. Saiba mais sobre nossas políticas de uso, avisos sobre conteúdo gerado por IA e responsabilidades do usuário."
+  },
+  "privacy": {
+    "title": "Política de Privacidade - ReceitAI",
+    "description": "Leia a Política de Privacidade do ReceitAI. Saiba como coletamos, usamos e protegemos seus dados. Conformidade com GDPR e controle total dos dados."
+  }
+}

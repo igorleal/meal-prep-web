@@ -1,0 +1,18 @@
+{
+  "home": {
+    "title": "ReceitAI - AI-driven Måltidsplanering och Receptgenerator",
+    "description": "Skapa personliga måltidsplaner med AI. Generera recept baserat på dina preferenser, kostbegränsningar och familjens behov. Smart måltidsplanering gjort enkelt."
+  },
+  "login": {
+    "title": "Logga in - ReceitAI",
+    "description": "Logga in på ReceitAI för att komma åt dina personliga måltidsplaner, sparade recept och AI-drivna måltidsplaneringsfunktioner."
+  },
+  "terms": {
+    "title": "Användarvillkor - ReceitAI",
+    "description": "Läs ReceitAIs användarvillkor. Lär dig om våra användningspolicyer, AI-genererat innehåll och användaransvar."
+  },
+  "privacy": {
+    "title": "Integritetspolicy - ReceitAI",
+    "description": "Läs ReceitAIs integritetspolicy. Lär dig hur vi samlar in, använder och skyddar dina data. GDPR-kompatibel med full datakontroll."
+  }
+}

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Icon } from '@/components/common'
+import { Icon, SEO } from '@/components/common'
 import { useAuth } from '@/context/AuthContext'
 import { useLanguage } from '@/context/LanguageContext'
 import { authService } from '@/api/services'
@@ -46,6 +46,8 @@ export default function LoginPage() {
 
   return (
     <div className="flex w-full min-h-screen">
+      <SEO titleKey="login.title" descriptionKey="login.description" />
+
       {/* Left Panel - Hero Image */}
       <div className="hidden lg:block flex-1 relative overflow-hidden">
         <img

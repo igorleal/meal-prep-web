@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Icon } from '@/components/common'
+import { Icon, SEO } from '@/components/common'
 
 export default function PrivacyPolicy() {
   const { t } = useTranslation('legal')
 
   return (
     <div className="max-w-4xl w-full mx-auto px-4 md:px-8 py-8 md:py-12">
+      <SEO titleKey="privacy.title" descriptionKey="privacy.description" />
+
       {/* Back link */}
       <Link
         to="/settings"

@@ -1,8 +1,44 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Icon, LanguageSelector } from '@/components/common'
+import { Icon, LanguageSelector, SEO, JsonLd } from '@/components/common'
 import { LoginModal } from '@/components/common/LoginModal'
+
+const ORGANIZATION_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'ReceitAI',
+  url: 'https://receitai.app',
+  logo: 'https://receitai.app/favicon.png',
+  sameAs: [],
+}
+
+const WEBSITE_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'ReceitAI',
+  url: 'https://receitai.app',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://receitai.app/search?q={search_term_string}',
+    'query-input': 'required name=search_term_string',
+  },
+}
+
+const SOFTWARE_APPLICATION_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'ReceitAI',
+  applicationCategory: 'LifestyleApplication',
+  operatingSystem: 'Web',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  description:
+    'AI-powered meal planning and recipe generator. Create personalized meal plans based on your preferences and dietary restrictions.',
+}
 
 export default function PublicLandingPage() {
   const { t } = useTranslation('landing')
@@ -38,6 +74,9 @@ export default function PublicLandingPage() {
 
   return (
     <div className="relative flex w-full flex-col overflow-x-hidden">
+      <SEO titleKey="home.title" descriptionKey="home.description" />
+      <JsonLd data={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, SOFTWARE_APPLICATION_SCHEMA]} />
+
       {/* Top Navigation Bar */}
       <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-background-dark/80 backdrop-blur-md px-6 md:px-20 lg:px-40 py-4">
         <div className="flex items-center justify-between max-w-[1200px] mx-auto">

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://receitai.app/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://receitai.app/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://receitai.app/" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://receitai.app/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://receitai.app/" />
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Login Page -->
+  <url>
+    <loc>https://receitai.app/login</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://receitai.app/login" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://receitai.app/login" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://receitai.app/login" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://receitai.app/login" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Terms of Service -->
+  <url>
+    <loc>https://receitai.app/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://receitai.app/terms" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://receitai.app/terms" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://receitai.app/terms" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://receitai.app/terms" />
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://receitai.app/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://receitai.app/privacy" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://receitai.app/privacy" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://receitai.app/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://receitai.app/privacy" />
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>

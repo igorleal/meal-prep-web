@@ -1,0 +1,18 @@
+{
+  "home": {
+    "title": "ReceitAI - AI-Powered Meal Planning & Recipe Generator",
+    "description": "Create personalized meal plans with AI. Generate recipes based on your preferences, dietary restrictions, and family needs. Smart meal planning made easy."
+  },
+  "login": {
+    "title": "Sign In - ReceitAI",
+    "description": "Sign in to ReceitAI to access your personalized meal plans, saved recipes, and AI-powered meal planning features."
+  },
+  "terms": {
+    "title": "Terms of Service - ReceitAI",
+    "description": "Read ReceitAI's Terms of Service. Learn about our service usage policies, AI-generated content disclaimers, and user responsibilities."
+  },
+  "privacy": {
+    "title": "Privacy Policy - ReceitAI",
+    "description": "Read ReceitAI's Privacy Policy. Learn how we collect, use, and protect your data. GDPR compliant with full data control rights."
+  }
+}

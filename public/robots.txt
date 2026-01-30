@@ -1,0 +1,23 @@
+# ReceitAI robots.txt
+# https://receitai.app
+
+User-agent: *
+
+# Allow public pages
+Allow: /
+Allow: /login
+Allow: /terms
+Allow: /privacy
+
+# Disallow authenticated routes
+Disallow: /home
+Disallow: /meal-plans
+Disallow: /calendar
+Disallow: /special-meals
+Disallow: /favorites
+Disallow: /settings
+Disallow: /onboarding
+Disallow: /recipes
+
+# Sitemap
+Sitemap: https://receitai.app/sitemap.xml

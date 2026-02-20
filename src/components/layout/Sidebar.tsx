@@ -14,6 +14,7 @@ const navItemKeys = [
   { id: 'calendar', path: '/calendar', icon: 'event', labelKey: 'sidebar.familyCalendar' },
   { id: 'special', path: '/special-meals', icon: 'local_dining', labelKey: 'sidebar.specialMeals' },
   { id: 'favorites', path: '/favorites', icon: 'favorite', labelKey: 'sidebar.favorites' },
+  { id: 'settings', path: '/settings', icon: 'person', labelKey: 'sidebar.profile' },
 ]
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
@@ -33,7 +34,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed md:static inset-y-0 left-0 z-50 w-56 md:w-64 h-screen flex-shrink-0 flex flex-col justify-between overflow-hidden',
+          'fixed md:static inset-y-0 left-0 z-50 w-56 md:w-64 h-screen flex-shrink-0 flex flex-col overflow-hidden',
           'border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark',
           'transform transition-transform duration-300 ease-in-out',
           'md:transform-none md:translate-x-0',
@@ -79,25 +80,6 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               )
             })}
           </nav>
-        </div>
-
-        {/* Settings link - fixed footer */}
-        <div className="p-6 h-[92px]">
-          <Link
-            to="/settings"
-            onClick={onClose}
-            className={cn(
-              'flex items-center gap-3 px-3 py-2.5 rounded-lg w-full transition-colors',
-              location.pathname === '/settings'
-                ? 'bg-primary/10 text-primary'
-                : 'text-text-muted-light dark:text-gray-400 hover:text-text-main-light dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800'
-            )}
-          >
-            <Icon name="person" className={location.pathname === '/settings' ? 'text-primary' : ''} />
-            <span className={cn('text-sm', location.pathname === '/settings' ? 'font-bold' : 'font-medium')}>
-              {t('sidebar.profile')}
-            </span>
-          </Link>
         </div>
       </aside>
     </>
